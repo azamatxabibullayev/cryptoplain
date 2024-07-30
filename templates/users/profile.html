@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h1>{{ user.username }}'s Profile</h1>
+<p>Email: {{ user.email }}</p>
+<p>Name: {{ user.name }} {{ user.surname }}</p>
+<p>ID: {{ user_id }}</p>
+{% if premium_user %}
+<h2>Subscription Details</h2>
+<p>Premium Type: {{ premium_user.premium_type }}</p>
+<p>Subscription Start: {{ premium_user.subscription_start }}</p>
+<p>Subscription End: {{ premium_user.subscription_end }}</p>
+{% else %}
+<p>You are currently a normal user.</p>
+{% endif %}
+{% endblock %}
