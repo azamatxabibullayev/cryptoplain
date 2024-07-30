@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import CustomUserCreationForm, CustomUserChangeForm, PremiumUserForm
+from .forms import CustomUserCreationForm
 from .models import CustomUser, PremiumUser
 
 
@@ -13,8 +13,8 @@ def register(request):
         form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
-            request.session['user_data'] = form.cleaned_data  # Save form data in session
-            return redirect('warning')  # Redirect to warning page
+            request.session['user_data'] = form.cleaned_data
+            return redirect('warning')
     else:
         form = CustomUserCreationForm()
     return render(request, 'users/register.html', {'form': form})
@@ -23,14 +23,13 @@ def register(request):
 def warning(request):
     if request.method == 'POST':
         if 'accept' in request.POST:
-            # Retrieve user data from session and create user
             user_data = request.session.pop('user_data', None)
             if user_data:
                 form = CustomUserCreationForm(user_data)
                 user = form.save()
                 login(request, user)
                 return redirect('profile')
-        return redirect('register')  # Redirect back to register if declined
+        return redirect('register')
     return render(request, 'users/warning.html')
 
 
@@ -70,6 +69,11 @@ def user_logout(request):
 
 
 def handle_payment(user_id, premium_type):
+    now = timezone.now()
+    expired_users = PremiumUser.objects.filter(subscription_end__lt=now)
+    for premium_user in expired_users:
+        premium_user.delete()
+
     user = get_object_or_404(CustomUser, id=user_id)
     subscription_start = timezone.now()
     subscription_end = subscription_start + timedelta(days=30)
