@@ -12,12 +12,26 @@ def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('profile')
+            user = form.save(commit=False)
+            request.session['user_data'] = form.cleaned_data  # Save form data in session
+            return redirect('warning')  # Redirect to warning page
     else:
         form = CustomUserCreationForm()
     return render(request, 'users/register.html', {'form': form})
+
+
+def warning(request):
+    if request.method == 'POST':
+        if 'accept' in request.POST:
+            # Retrieve user data from session and create user
+            user_data = request.session.pop('user_data', None)
+            if user_data:
+                form = CustomUserCreationForm(user_data)
+                user = form.save()
+                login(request, user)
+                return redirect('profile')
+        return redirect('register')  # Redirect back to register if declined
+    return render(request, 'users/warning.html')
 
 
 @login_required
@@ -67,5 +81,4 @@ def handle_payment(user_id, premium_type):
             'subscription_end': subscription_end,
         }
     )
-
     return premium_user

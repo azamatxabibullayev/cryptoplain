@@ -1,5 +1,4 @@
-from random import random
-
+from random import randint
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from datetime import timedelta
@@ -16,7 +15,8 @@ class CustomUser(AbstractUser):
     email = models.EmailField(unique=True, blank=True, null=True)
     name = models.CharField(max_length=50, blank=True)
     surname = models.CharField(max_length=50, blank=True)
-    profile_pic = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
+    profile_pic = models.ImageField(upload_to='media/users', default='media/default_img/user_image.png',
+                                    null=True, blank=True)
     id = models.CharField(max_length=12, primary_key=True, unique=True, editable=False)
 
     def save(self, *args, **kwargs):
@@ -26,7 +26,7 @@ class CustomUser(AbstractUser):
 
     def generate_unique_id(self):
         while True:
-            new_id = ''.join([str(random.randint(0, 9)) for _ in range(12)])
+            new_id = ''.join([str(randint(0, 9)) for _ in range(12)])
             if not CustomUser.objects.filter(id=new_id).exists():
                 return new_id
 
@@ -36,7 +36,7 @@ class CustomUser(AbstractUser):
 
 class PremiumUser(models.Model):
     PREMIUM_TYPES = (
-        ('standart', 'Standart'),
+        ('standard', 'Standard'),
         ('pro', 'Pro'),
     )
 
@@ -46,8 +46,9 @@ class PremiumUser(models.Model):
     subscription_end = models.DateTimeField()
 
     def save(self, *args, **kwargs):
-        if not self.pk:
+        if not self.pk and not self.subscription_start:
             self.subscription_start = timezone.now()
+        if not self.pk and not self.subscription_end:
             self.subscription_end = timezone.now() + timedelta(days=30)
         super().save(*args, **kwargs)
 

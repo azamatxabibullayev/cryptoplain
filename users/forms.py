@@ -12,7 +12,7 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'name', 'surname', 'profile_pic',)
+        fields = ('username', 'email', 'name', 'surname', 'profile_pic', 'user_type')
 
 
 class PremiumUserForm(forms.ModelForm):
@@ -20,9 +20,8 @@ class PremiumUserForm(forms.ModelForm):
         model = PremiumUser
         fields = ['user', 'premium_type', 'subscription_start', 'subscription_end']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def clean(self):
-        cleaned_data = super().clean()
-        return cleaned_data
+    def clean_user(self):
+        user = self.cleaned_data.get('user')
+        if not CustomUser.objects.filter(id=user.id).exists():
+            raise forms.ValidationError('Selected user does not exist.')
+        return user
