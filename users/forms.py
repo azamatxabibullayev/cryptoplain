@@ -25,3 +25,7 @@ class PremiumUserForm(forms.ModelForm):
         if not CustomUser.objects.filter(id=user.id).exists():
             raise forms.ValidationError('Selected user does not exist.')
         return user
+
+
+class PasswordResetRequestForm(forms.Form):
+    email = forms.EmailField(max_length=254)
