@@ -14,5 +14,6 @@
 <p>Subscription End: {{ premium_user.subscription_end }}</p>
 {% else %}
 <p>You are currently a normal user.</p>
+<p><a href="{% url 'update_profile' %}">Edit Profile</a></p>
 {% endif %}
 {% endblock %}

@@ -9,9 +9,11 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, ProfileUpdateForm
 from .models import CustomUser, PremiumUser
 from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
 
 
 def register(request):
@@ -106,12 +108,12 @@ def password_reset_request(request):
                     email_template_name = "users/password_reset_email.html"
                     c = {
                         "email": user.email,
-                        'domain': '127.0.0.1:8000',  # Development server address
+                        'domain': '127.0.0.1:8000',
                         'site_name': 'Website',
                         "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                         "user": user,
                         'token': default_token_generator.make_token(user),
-                        'protocol': 'http',  # Protocol for local development
+                        'protocol': 'http',
                     }
                     email = render_to_string(email_template_name, c)
                     send_mail(subject, email, settings.DEFAULT_FROM_EMAIL, [user.email], fail_silently=False)
@@ -139,3 +141,23 @@ def password_reset_confirm(request, uidb64=None, token=None):
         return render(request, 'users/password_reset_confirm.html', {'form': form})
     else:
         return render(request, 'users/password_reset_invalid.html')
+
+
+class UpdateProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+        update_form = ProfileUpdateForm(instance=request.user)
+        context = {
+            'form': update_form
+        }
+        return render(request, 'users/update_profile.html', context=context)
+
+    def post(self, request):
+        update_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
+        if update_form.is_valid():
+            update_form.save()
+            return redirect('profile')
+        else:
+            context = {
+                'form': update_form
+            }
+            return render(request, 'users/update_profile.html', context=context)
