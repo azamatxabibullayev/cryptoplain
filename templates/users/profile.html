@@ -4,9 +4,17 @@
 
 {% block content %}
 <h1>{{ user.username }}'s Profile</h1>
+
+{% if user.profile_pic %}
+<img src="{{ user.profile_pic.url }}" alt="{{ user.username }}'s Profile Picture"
+     style="max-width: 150px; max-height: 150px;">
+{% else %}
+<p>No profile picture available.</p>
+{% endif %}
 <p>Email: {{ user.email }}</p>
 <p>Name: {{ user.name }} {{ user.surname }}</p>
 <p>ID: {{ user_id }}</p>
+
 {% if premium_user %}
 <h2>Subscription Details</h2>
 <p>Premium Type: {{ premium_user.premium_type }}</p>
