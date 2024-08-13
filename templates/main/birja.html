@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birja List</title>
+</head>
+<body>
+<h1>Birjalar Bilan Ishlash</h1>
+<div class="birja-list">
+    {% for item in birja %}
+    <div class="birja-item">
+
+        <img src="{{ item.birja_photo.url }}" alt="{{ item.birja_name }} Logo" style="width:200px; height:auto;">
+
+        {% with url=item.birja_link %}
+        {% if url|slice:":12" == "https://www."%}
+        <a href="{{ url }}" target="_blank">{{ url|slice:"12:" }}</a>
+        {% elif url|slice:":11" == "http://www."%}
+        <a href="{{ url }}" target="_blank">{{ url|slice:"11:" }}</a>
+        {% else %}
+        <a href="{{ url }}" target="_blank">{{ url }}</a>
+        {% endif %}
+        {% endwith %}
+
+        <hr>
+        {% endfor %}
+    </div>
+</body>
+</html>
+{% endblock %}

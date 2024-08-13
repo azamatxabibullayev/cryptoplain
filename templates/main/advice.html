@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Maslahatlar</h1>
+<ul>
+    {% for item in advice %}
+    <li>{{ item.advice_text }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
