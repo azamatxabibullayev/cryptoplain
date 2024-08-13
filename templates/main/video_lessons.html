@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Video darslar</h1>
+<ul>
+    {% for lesson in video_lessons %}
+    <li>
+        <h2>{{ lesson.title }}</h2>
+        <a href="{{ lesson.youtube_link }}" target="_blank">You tube da ko'rish</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

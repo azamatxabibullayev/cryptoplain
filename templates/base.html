@@ -8,6 +8,8 @@
     <nav>
         <ul>
             <li><a href="{% url 'landing_page' %}">Home</a></li>
+            <li><a href="{% url 'video_lessons' %}">Video darslar</a></li>
+            <li><a href="{% url 'information' %}">Ma'lumotlar</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'profile' %}">Profile</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Kerakli ma'lumotlar</h1>
+
+<div class="information-list">
+    {% for info in information_list %}
+    <div class="information-item">
+        <h2>{{ info.title }}</h2>
+        <img src="{{ info.info_photo.url }}" alt="{{ info.title }}" class="info-photo">
+        <p>{{ info.short_info }}</p>
+        <a href="{% url 'information_detail' info.id %}">Batafsil o'qish</a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

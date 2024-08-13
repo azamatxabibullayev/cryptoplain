@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ information.title }}</h1>
+<img src="{{ information.info_photo.url }}" alt="{{ information.title }}" style="width:300px; height:auto;">
+<p>{{ information.info_text }}</p>
+<a href="{% url 'information' %}">Orqaga qaytish</a>
+{% endblock %}
