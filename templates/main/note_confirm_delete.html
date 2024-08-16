@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>O'chirishni tasdiqlash</h1>
+<p>Siz rostan ham "{{ note.title }}" ni o'chirmoqchimisiz ?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Ha, o'chirilsin</button>
+    <a href="{% url 'note_list' %}">Orqaga</a>
+</form>
+{% endblock %}

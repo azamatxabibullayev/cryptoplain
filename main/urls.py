@@ -9,4 +9,10 @@ urlpatterns = [
     path('advice/', views.advices_view, name='advice'),
     path('signal/', views.signals_view, name='signal'),
     path('news/', views.news_view, name='news'),
+    path('analyses/', views.analysis_view, name='analyses'),
+    path('notes/', views.note_list, name='note_list'),
+    path('notes/create/', views.note_create, name='note_create'),
+    path('notes/<int:pk>/edit/', views.note_edit, name='note_edit'),
+    path('notes/<int:pk>/delete/', views.note_delete, name='note_delete'),
+    path('notes/<int:pk>/', views.note_details, name='note_details')
 ]

@@ -1,5 +1,10 @@
-from django.shortcuts import render, get_object_or_404
-from .models import VideoLesson, Information, Birja, Advice, Signal, News
+from collections import defaultdict
+from .models import Note
+from .forms import NoteForm
+from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.timezone import localdate
+
+from .models import VideoLesson, Information, Birja, Advice, Signal, News, Analysis
 
 
 def video_lessons_view(request):
@@ -56,3 +61,70 @@ def news_view(request):
         'news': news
     }
     return render(request, 'main/news.html', context)
+
+
+def analysis_view(request):
+    user = request.user
+    analyses = Analysis.objects.none()
+
+    if user.is_authenticated:
+        if hasattr(user, 'premium_user'):
+            user_type = user.premium_user.premium_type
+            analyses = Analysis.objects.filter(analysis_type__in=['normal', user_type])
+        else:
+            analyses = Analysis.objects.filter(analysis_type='normal')
+    else:
+        analyses = Analysis.objects.filter(analysis_type='normal')
+
+    grouped_analyses = defaultdict(list)
+    for analysis in analyses:
+        date = localdate(analysis.created_at)
+        grouped_analyses[date].append(analysis)
+
+    context = {
+        'analyses': dict(grouped_analyses),
+    }
+    return render(request, 'main/analyses.html', context)
+
+
+def note_list(request):
+    notes = Note.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'main/note_list.html', {'notes': notes})
+
+
+def note_create(request):
+    if request.method == 'POST':
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.user = request.user
+            note.save()
+            return redirect('note_list')
+    else:
+        form = NoteForm()
+    return render(request, 'main/note_form.html', {'form': form})
+
+
+def note_edit(request, pk):
+    note = get_object_or_404(Note, pk=pk, user=request.user)
+    if request.method == 'POST':
+        form = NoteForm(request.POST, instance=note)
+        if form.is_valid():
+            form.save()
+            return redirect('note_list')
+    else:
+        form = NoteForm(instance=note)
+    return render(request, 'main/note_form.html', {'form': form})
+
+
+def note_delete(request, pk):
+    note = get_object_or_404(Note, pk=pk, user=request.user)
+    if request.method == 'POST':
+        note.delete()
+        return redirect('note_list')
+    return render(request, 'main/note_confirm_delete.html', {'note': note})
+
+
+def note_details(request, pk):
+    note = get_object_or_404(Note, pk=pk, user=request.user)
+    return render(request, 'main/note_details.html', {'note': note})

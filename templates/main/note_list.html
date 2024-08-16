@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Zametkalar</h1>
+<a href="{% url 'note_create' %}">Yangi zametka qo'shish</a>
+<ul>
+    {% for note in notes %}
+    <li>
+        <a href="{% url 'note_details' note.pk %}">{{ note.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

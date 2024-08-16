@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import CustomUser
+
 
 class VideoLesson(models.Model):
     title = models.CharField(max_length=255)
@@ -69,6 +71,41 @@ class News(models.Model):
 
     class Meta:
         db_table = 'news'
+
+    def __str__(self):
+        return self.title
+
+
+class Analysis(models.Model):
+    ANALYSIS_TYPE_CHOICES = [
+        ('normal', 'Normal'),
+        ('standart', 'Standart'),
+        ('pro', 'Pro'),
+    ]
+
+    title = models.CharField(max_length=255)
+    analysis_text = models.TextField()
+    analysis_photo = models.ImageField(upload_to='main/analyses/')
+    analysis_type = models.CharField(max_length=20, choices=ANALYSIS_TYPE_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'analysis'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.title
+
+
+class Note(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'note'
 
     def __str__(self):
         return self.title

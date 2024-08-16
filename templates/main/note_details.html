@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ note.title }}</h1>
+<p>{{ note.content }}</p>
+<p>Yaratilgan vaqt: {{ note.created_at }}</p>
+<p>Tahrirlangan vaqt: {{ note.updated_at }}</p>
+<a href="{% url 'note_edit' note.pk %}">Zametkani tahrirlash</a>
+<form action="{% url 'note_delete' note.pk %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit">Zametkani o'chirish</button>
+</form>
+{% endblock %}

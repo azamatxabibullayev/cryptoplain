@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Tex-Analizlar</h1>
+
+{% for date, day_analyses in analyses.items %}
+<h2>{{ date }}</h2>
+{% for analysis in day_analyses %}
+<div class="analysis-entry">
+    <div class="image-container">
+        <img src="{{ analysis.analysis_photo.url }}" alt="{{ analysis.title }}" class="protected-image">
+        <div class="image-overlay"></div>
+    </div>
+    <p>{{ analysis.analysis_text }}</p>
+</div>
+{% endfor %}
+{% endfor %}
+
+{% endblock %}
+
+<style>
+    .image-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    img.protected-image {
+        display: block;
+        pointer-events: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0); /* Transparent overlay */
+        pointer-events: none; /* Prevent interaction with the overlay */
+    }
+</style>
+
+<script>
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+        }
+    }, false);
+</script>
