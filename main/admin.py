@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import VideoLesson, Information, Birja, Advice, Signal, News, Analysis, Note
+from .models import VideoLesson, Information, Birja, Advice, Signal, News, Analysis, Note, Lesson, Indicator, Book
 
 
 @admin.register(VideoLesson)
@@ -12,6 +12,9 @@ admin.site.register(Birja)
 admin.site.register(Advice)
 admin.site.register(Signal)
 admin.site.register(News)
+admin.site.register(Lesson)
+admin.site.register(Indicator)
+admin.site.register(Book)
 
 
 @admin.register(Analysis)

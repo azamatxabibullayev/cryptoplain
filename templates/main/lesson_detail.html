@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ lesson.title }}</h1>
+
+<div class="lesson-detail">
+    <img src="{{ lesson.lesson_photo_1.url }}" alt="{{ lesson.title }}" draggable="false" class="protected-image">
+    <img src="{{ lesson.lesson_photo_2.url }}" alt="{{ lesson.title }}" draggable="false" class="protected-image">
+    <p>{{ lesson.lesson_text }}</p>
+</div>
+
+<a href="{% url 'lessons' %}" class="btn btn-primary"> < Orqaga</a>
+
+{% endblock %}
+
+<style>
+    img.protected-image {
+        pointer-events: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<script>
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+        }
+    }, false);
+</script>

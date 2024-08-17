@@ -14,5 +14,11 @@ urlpatterns = [
     path('notes/create/', views.note_create, name='note_create'),
     path('notes/<int:pk>/edit/', views.note_edit, name='note_edit'),
     path('notes/<int:pk>/delete/', views.note_delete, name='note_delete'),
-    path('notes/<int:pk>/', views.note_details, name='note_details')
+    path('notes/<int:pk>/', views.note_details, name='note_details'),
+    path('lessons/', views.lesson_view, name='lessons'),
+    path('lessons/<int:id>/', views.lesson_detail, name='lesson_detail'),
+    path('indicators/', views.indicator_view, name='indicators'),
+    path('indicators/<int:id>/', views.indicator_detail, name='indicator_detail'),
+    path('books/', views.books_view, name='books'),
+    path('books/<int:book_id>/', views.book_view, name='book_view'),
 ]

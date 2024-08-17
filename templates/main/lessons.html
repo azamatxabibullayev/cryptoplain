@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Darsliklar va Pattern turlari</h1>
+
+{% for lesson in lessons %}
+<div class="lesson-entry">
+    <h3>{{ lesson.title }}</h3>
+    <img src="{{ lesson.lesson_photo_1.url }}" alt="{{ lesson.title }}" draggable="false" class="protected-image">
+    <img src="{{ lesson.lesson_photo_2.url }}" alt="{{ lesson.title }}" draggable="false" class="protected-image">
+    <p>{{ lesson.lesson_text|truncatewords:100 }}</p>
+    <a href="{% url 'lesson_detail' lesson.id %}">Batafsil o'qish</a>
+</div>
+{% endfor %}
+
+{% endblock %}
+
+<style>
+    img.protected-image {
+        pointer-events: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+</style>
+
+<script>
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+        }
+    }, false);
+</script>

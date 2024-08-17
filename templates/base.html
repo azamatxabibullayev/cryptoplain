@@ -15,7 +15,10 @@
             <li><a href="{% url 'advice' %}">Maslahatlar</a></li>
             <li><a href="{% url 'signal' %}">Signallar</a></li>
             <li><a href="{% url 'news' %}">Yangiliklar</a></li>
+            <li><a href="{% url 'lessons' %}">Darsliklar</a></li>
+            <li><a href="{% url 'books' %}">Kitoblar</a></li>
             <li><a href="{% url 'note_list' %}">Zametkalar</a></li>
+            <li><a href="{% url 'indicators' %}">Indikatorlar</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'profile' %}">Profile</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>

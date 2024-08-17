@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ indicator.title }}</h1>
+
+<div class="indicator-detail">
+    <img src="{{ indicator.indicator_photo.url }}" alt="{{ indicator.title }}" draggable="false"
+         class="protected-image">
+    <p>{{ indicator.indicator_text }}</p>
+</div>
+
+<a href="{% url 'indicators' %}" class="btn btn-primary"> < Orqaga</a>
+
+{% endblock %}
+
+<style>
+    img.protected-image {
+        pointer-events: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<script>
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+        }
+    }, false);
+</script>

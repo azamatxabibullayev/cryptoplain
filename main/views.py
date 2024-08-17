@@ -1,10 +1,8 @@
 from collections import defaultdict
-from .models import Note
 from .forms import NoteForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.timezone import localdate
-
-from .models import VideoLesson, Information, Birja, Advice, Signal, News, Analysis
+from .models import VideoLesson, Information, Birja, Advice, Signal, News, Analysis, Lesson, Note, Indicator, Book
 
 
 def video_lessons_view(request):
@@ -128,3 +126,83 @@ def note_delete(request, pk):
 def note_details(request, pk):
     note = get_object_or_404(Note, pk=pk, user=request.user)
     return render(request, 'main/note_details.html', {'note': note})
+
+
+def lesson_view(request):
+    user = request.user
+    lessons = Lesson.objects.none()
+
+    if user.is_authenticated:
+        if hasattr(user, 'premium_user'):
+            user_type = user.premium_user.premium_type
+            lessons = Lesson.objects.filter(lesson_type__in=['normal', user_type])
+        else:
+            lessons = Lesson.objects.filter(lesson_type='normal')
+    else:
+        lessons = Lesson.objects.filter(lesson_type='normal')
+
+    context = {
+        'lessons': lessons,
+    }
+    return render(request, 'main/lessons.html', context)
+
+
+def lesson_detail(request, id):
+    lesson = Lesson.objects.get(id=id)
+    context = {
+        'lesson': lesson,
+    }
+    return render(request, 'main/lesson_detail.html', context)
+
+
+def indicator_view(request):
+    user = request.user
+    indicators = Indicator.objects.none()
+    if user.is_authenticated:
+        if hasattr(user, 'premium_user'):
+            user_type = user.premium_user.premium_type
+            indicators = Indicator.objects.filter(indicator_type__in=['normal', user_type])
+        else:
+            indicators = Indicator.objects.filter(indicator_type='normal')
+    else:
+        indicators = Indicator.objects.filter(indicator_type='normal')
+
+    context = {
+        'indicators': indicators,
+    }
+    return render(request, 'main/indicators.html', context)
+
+
+def indicator_detail(request, id):
+    indicator = Indicator.objects.get(id=id)
+    context = {
+        'indicator': indicator,
+    }
+    return render(request, 'main/indicator_detail.html', context)
+
+
+def books_view(request):
+    user = request.user
+    books = Book.objects.none()
+
+    if user.is_authenticated:
+        if hasattr(user, 'premium_user'):
+            user_type = user.premium_user.premium_type
+            books = Book.objects.filter(book_type__in=['normal', user_type])
+        else:
+            books = Book.objects.filter(book_type='normal')
+    else:
+        books = Book.objects.filter(book_type='normal')
+
+    context = {
+        'books': books,
+    }
+    return render(request, 'main/books.html', context)
+
+
+def book_view(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    context = {
+        'book': book,
+    }
+    return render(request, 'main/book_view.html', context)
