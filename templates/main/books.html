@@ -1,14 +1,8 @@
 {% extends 'base.html' %}
-
+<title>Kitoblar</title>
 {% block content %}
-<h1>Books</h1>
+
 <ul>
-    {% for book in books %}
-    <li>
-        <a href="{% url 'book_view' book.id %}">{{ book.name }}</a>
-    </li>
-    {% empty %}
-    <p>No books available.</p>
-    {% endfor %}
+    <p>Coming soon...</p>
 </ul>
 {% endblock %}
