@@ -1,36 +1,250 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}CryptoIndex{% endblock %}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('/media/bg.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav {
+            background-color: #2b004e;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-right: 15px;
+        }
+
+        header nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            background-color: #461078;
+        }
+
+        main {
+            display: flex;
+            min-height: 100vh;
+            margin-top: 117px;
+            margin-left: 0px;
+            margin-right: 70px;
+            margin-bottom: 30px;
+            background-color:2C2449;
+            border-radius: 0 10px 10px 0 ;
+        }
+
+        .sidebar {
+            background-color: #352E5A;
+            width: 250px;
+            padding: 20px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 10px;
+            margin-right: 0px;
+            margin-left: 70px;
+        }
+
+        .sidebar img {
+            margin: 0;
+            width: 100px;
+            height: 100px;
+
+        }
+
+        .sidebar h2, .sidebar p {
+            text-align: center;
+            margin: 5px 0;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            font-size: 23px
+        }
+
+        .sidebar ul li a:hover, .sidebar ul li.active a {
+        color: #FB8B5D;
+        background-color: #181B3A;
+        border: 1px solid #FB8B5D;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: rgba(43, 0, 78, 0.8); /* Slightly transparent background */
+            border-radius: 10px;
+            overflow-y: auto;
+        }
+
+        .profile-pic {
+            border-radius: 0
+        }
+
+                /* Special styles for individual sidebar images */
+        .sidebar .home-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar .video-lessons-icon {
+            width: 20px;
+            height:20px;
+        }
+
+        .sidebar .analyses-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar .information-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar .birja-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar .advice-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar .signal-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar .news-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar .lessons-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar .books-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar .notes-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar .indicators-icon {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
 </head>
 <body>
 <header>
-    <nav>
-        <ul>
-            <li><a href="{% url 'landing_page' %}">Home</a></li>
-            <li><a href="{% url 'video_lessons' %}">Video darslar</a></li>
-            <li><a href="{% url 'analyses' %}">Tex-Analizlar</a></li>
-            <li><a href="{% url 'information' %}">Ma'lumotlar</a></li>
-            <li><a href="{% url 'birja' %}">Birjalar bilan ishlash</a></li>
-            <li><a href="{% url 'advice' %}">Maslahatlar</a></li>
-            <li><a href="{% url 'signal' %}">Signallar</a></li>
-            <li><a href="{% url 'news' %}">Yangiliklar</a></li>
-            <li><a href="{% url 'lessons' %}">Darsliklar</a></li>
-            <li><a href="{% url 'books' %}">Kitoblar</a></li>
-            <li><a href="{% url 'note_list' %}">Zametkalar</a></li>
-            <li><a href="{% url 'indicators' %}">Indikatorlar</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'profile' %}">Profile</a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
-            {% else %}
-            <li><a href="{% url 'register' %}">Register</a></li>
-            <li><a href="{% url 'login' %}">Login</a></li>
-            {% endif %}
-        </ul>
-    </nav>
+    <!-- You can add a navbar or other header content here -->
 </header>
 <main>
-    {% block content %}{% endblock %}
+    <div class="sidebar">
+        {% if user.is_authenticated %}
+        {% if user.profile_pic %}
+        <img src="{{ user.profile_pic.url }}" alt="{{ user.name }}" class="profile-pic">
+        {% else %}
+        <img src="/media/default_img/user_image.png" alt="{{ user.name }}" class="profile-pic">
+        {% endif %}
+        <h2>Salom, {{ user.name }}</h2>
+        <p>{{ user.email }}</p>
+        <p>ID:{{ user.id }}</p>
+        {% else %}
+        <p><a href="{% url 'login' %}">Login</a></p>
+        <p><a href="{% url 'register' %}">Register</a></p>
+        {% endif %}
+        <ul>
+            <li><a href="{% url 'landing_page' %}"><img src="/media/sidebar_images/home.png" alt="Home Icon"
+                                                        class="home-icon"> Bosh Sahifa</a></li>
+            <li><a href="{% url 'video_lessons' %}"><img src="/media/sidebar_images/video_lessons.png"
+                                                         alt="Video Lessons Icon" class="video-lessons-icon"> Video
+                darslar</a></li>
+            <li><a href="{% url 'analyses' %}"><img src="/media/sidebar_images/analyses.png" alt="Analyses Icon"
+                                                    class="analyses-icon"> Tex-Analizlar</a></li>
+            <li><a href="{% url 'information' %}"><img src="/media/sidebar_images/information.png"
+                                                       alt="Information Icon" class="information-icon"> Ma'lumotlar</a>
+            </li>
+            <li><a href="{% url 'birja' %}"><img src="/media/sidebar_images/birja.png" alt="Birja Icon"
+                                                 class="birja-icon"> Birjalar bilan ishlash</a></li>
+            <li><a href="{% url 'advice' %}"><img src="/media/sidebar_images/advice.png" alt="Advice Icon"
+                                                  class="advice-icon"> Maslahatlar</a></li>
+            <li><a href="{% url 'signal' %}"><img src="/media/sidebar_images/signal.png" alt="Signal Icon"
+                                                  class="signal-icon"> Signallar</a></li>
+            <li><a href="{% url 'news' %}"><img src="/media/sidebar_images/news.png" alt="News Icon" class="news-icon">
+                Yangiliklar</a></li>
+            <li><a href="{% url 'lessons' %}"><img src="/media/sidebar_images/lessons.png" alt="Lessons Icon"
+                                                   class="lessons-icon"> Darsliklar</a></li>
+            <li><a href="{% url 'books' %}"><img src="/media/sidebar_images/books.png" alt="Books Icon"
+                                                 class="books-icon"> Kitoblar</a></li>
+            <li><a href="{% url 'note_list' %}"><img src="/media/sidebar_images/notes.png" alt="Notes Icon"
+                                                     class="notes-icon"> Zametkalar</a></li>
+            <li><a href="{% url 'indicators' %}"><img src="/media/sidebar_images/indicators.png" alt="Indicators Icon"
+                                                      class="indicators-icon"> Indikatorlar</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' %}"><img src="/media/sidebar_images/profile.png" alt="Profile Icon"
+                                                   class="profile-icon"> Profile</a></li>
+            <li><a href="{% url 'logout' %}"><img src="/media/sidebar_images/logout.png" alt="Logout Icon"
+                                                  class="logout-icon"> Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'register' %}"><img src="/media/sidebar_images/register.png" alt="Register Icon"
+                                                    class="register-icon"> Register</a></li>
+            <li><a href="{% url 'login' %}"><img src="/media/sidebar_images/login.png" alt="Login Icon"
+                                                 class="login-icon"> Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
 </main>
 </body>
 </html>
