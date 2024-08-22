@@ -112,7 +112,7 @@
         .content {
             flex-grow: 1;
             padding: 20px;
-            background-color: rgba(43, 0, 78, 0.8); /* Slightly transparent background */
+            background-color: #2C2449;
             border-radius: 10px;
             overflow-y: auto;
         }
@@ -189,19 +189,26 @@
 </header>
 <main>
     <div class="sidebar">
+        <a href="{% url 'landing_page' %}">
+            <p style="margin-left:0; text-align:left; justify-content: left; color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom:35px;">Sayt Nomi</p>
+        </a>
         {% if user.is_authenticated %}
         {% if user.profile_pic %}
-        <img src="{{ user.profile_pic.url }}" alt="{{ user.name }}" class="profile-pic">
+        <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; margin-bottom: 15px; height: 100px; weight:100px;">
+            <img src="{{ user.profile_pic.url }}" alt="{{ user.name }}" class="profile-pic"></a>
         {% else %}
-        <img src="/media/default_img/user_image.png" alt="{{ user.name }}" class="profile-pic">
+        <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; margin-bottom: 15px;">
+            <img src="/media/default_img/user_image.png" alt="{{ user.name }}" class="profile-pic"></a>
         {% endif %}
-        <h2>Salom, {{ user.name }}</h2>
-        <p>{{ user.email }}</p>
-        <p>ID:{{ user.id }}</p>
+        <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom: 10px;"><h2>Salom, {{ user.name }}</h2></a>
+        <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 10px;"><p>{{ user.email }}</p></a>
+        <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; font-size: 12px; margin-bottom: 35px;"><p>ID:{{ user.id }}</p></a>
         {% else %}
-        <p><a href="{% url 'login' %}">Login</a></p>
-        <p><a href="{% url 'register' %}">Register</a></p>
+        <p><a href="{% url 'login' %}" style="color:#FFFFFF; text-decoration:none;">Login</a></p>
+        <p><a href="{% url 'register' %}" style="color:#FFFFFF; text-decoration:none;">Registratsiya</a></p>
         {% endif %}
+
+
         <ul>
             <li><a href="{% url 'landing_page' %}"><img src="/media/sidebar_images/home.png" alt="Home Icon"
                                                         class="home-icon"> Bosh Sahifa</a></li>
@@ -230,15 +237,7 @@
             <li><a href="{% url 'indicators' %}"><img src="/media/sidebar_images/indicators.png" alt="Indicators Icon"
                                                       class="indicators-icon"> Indikatorlar</a></li>
             {% if user.is_authenticated %}
-            <li><a href="{% url 'profile' %}"><img src="/media/sidebar_images/profile.png" alt="Profile Icon"
-                                                   class="profile-icon"> Profile</a></li>
-            <li><a href="{% url 'logout' %}"><img src="/media/sidebar_images/logout.png" alt="Logout Icon"
-                                                  class="logout-icon"> Logout</a></li>
-            {% else %}
-            <li><a href="{% url 'register' %}"><img src="/media/sidebar_images/register.png" alt="Register Icon"
-                                                    class="register-icon"> Register</a></li>
-            <li><a href="{% url 'login' %}"><img src="/media/sidebar_images/login.png" alt="Login Icon"
-                                                 class="login-icon"> Login</a></li>
+            <li><a href="{% url 'logout' %}">Chiqish</a></li>
             {% endif %}
         </ul>
     </div>
@@ -248,3 +247,4 @@
 </main>
 </body>
 </html>
+
