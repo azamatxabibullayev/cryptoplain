@@ -11,7 +11,10 @@
             background-size: cover;
             color: #ffffff;
             margin: 0;
-            padding: 0;
+            padding-right:0
+            padding-top:0
+            padding-bottom:0
+            padding-left: 70px;
         }
 
         header nav {
@@ -44,6 +47,33 @@
 
         header nav ul li a:hover {
             background-color: #461078;
+        }
+
+
+        .logo {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .title-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title {
+            font-family: 'Regular', sans-serif;
+            font-size: 35px;
+            color: white;
+            text-decoration: none;
+            margin: 0;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: white;
+            margin: 0;
+            margin-top: 5px;
         }
 
         main {
@@ -185,24 +215,37 @@
 </head>
 <body>
 <header>
-    <!-- You can add a navbar or other header content here -->
+    <div class="header">
+        <div class="title-container">
+            <a href="{% url 'landing_page' %}" class="title"><img src="media/logo.png" alt="Logo" class="logo">EasyCrypto</a>
+            <span class="subtitle">Your success is only with us</span>
+        </div>
+    </div>
 </header>
 <main>
     <div class="sidebar">
         <a href="{% url 'landing_page' %}">
-            <p style="margin-left:0; text-align:left; justify-content: left; color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom:35px;">Sayt Nomi</p>
+            <p style="margin-left:0; text-align:left; justify-content: left; color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom:35px;">
+                EasyCrypto</p>
         </a>
         {% if user.is_authenticated %}
         {% if user.profile_pic %}
-        <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; margin-bottom: 15px; height: 100px; weight:100px;">
+        <a href="{% url 'profile' %}"
+           style="color:#FFFFFF; text-decoration:none; margin-bottom: 15px; height: 100px; weight:100px;">
             <img src="{{ user.profile_pic.url }}" alt="{{ user.name }}" class="profile-pic"></a>
         {% else %}
         <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; margin-bottom: 15px;">
             <img src="/media/default_img/user_image.png" alt="{{ user.name }}" class="profile-pic"></a>
         {% endif %}
-        <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom: 10px;"><h2>Salom, {{ user.name }}</h2></a>
-        <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 10px;"><p>{{ user.email }}</p></a>
-        <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; font-size: 12px; margin-bottom: 35px;"><p>ID:{{ user.id }}</p></a>
+        <a href="{% url 'profile' %}"
+           style="color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom: 10px;"><h2>Salom,
+            {{user.name}}</h2></a>
+        <a href="{% url 'profile' %}"
+           style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 10px;"><p>{{ user.email }}</p>
+        </a>
+        <a href="{% url 'profile' %}"
+           style="color:#FFFFFF; text-decoration:none; font-size: 12px; margin-bottom: 35px;"><p>ID:{{ user.id }}</p>
+        </a>
         {% else %}
         <p><a href="{% url 'login' %}" style="color:#FFFFFF; text-decoration:none;">Login</a></p>
         <p><a href="{% url 'register' %}" style="color:#FFFFFF; text-decoration:none;">Registratsiya</a></p>
@@ -247,4 +290,3 @@
 </main>
 </body>
 </html>
-
