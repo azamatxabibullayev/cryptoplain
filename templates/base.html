@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}CryptoIndex{% endblock %}</title>
+    <title>{% block title %}CryptoPlain{% endblock %}</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: url('/media/bg.png') no-repeat center center fixed;
+            background: url('/media/bg.png');
             background-size: cover;
             color: #ffffff;
             margin: 0;
-            padding-right:0
-            padding-top:0
-            padding-bottom:0
+            padding-right: 0;
+            padding-top: 0;
+            padding-bottom: 0;
             padding-left: 70px;
         }
 
@@ -23,6 +23,11 @@
             display: flex;
             justify-content: flex-end;
             align-items: center;
+            margin-left: 0px;
+            margin-right: 70px;
+            margin-left: 70px;
+            background-color: #2C2449;
+            border-radius: 10px 10px 0 0;
         }
 
         header nav ul {
@@ -41,50 +46,59 @@
             text-decoration: none;
             font-weight: bold;
             padding: 8px 12px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
         }
 
         header nav ul li a:hover {
             background-color: #461078;
         }
 
+        .header {
+            display: flex;
+            align-items: left;
+            justify-content: left;
+            padding: 0 70px 0 70px;
+            margin-bottom: 0px;
+            margin-top: 0px;
+        }
+
+        .logo-container {
+            margin-right: 30px;
+        }
 
         .logo {
-            height: 50px;
-            margin-right: 15px;
+            height: 120px;
+            width: 55px;
         }
 
         .title-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            text-align: left;
         }
 
         .title {
             font-family: 'Regular', sans-serif;
             font-size: 35px;
             color: white;
-            text-decoration: none;
             margin: 0;
         }
 
         .subtitle {
-            font-size: 20px;
+            font-family: 'Regular', sans-serif;
+            font-size: 10px;
             color: white;
             margin: 0;
-            margin-top: 5px;
         }
 
         main {
-            display: flex;
-            min-height: 100vh;
-            margin-top: 117px;
-            margin-left: 0px;
-            margin-right: 70px;
-            margin-bottom: 30px;
-            background-color:2C2449;
-            border-radius: 0 10px 10px 0 ;
+        display: flex;
+        min-height: 100vh;
+        margin-left: 70px;
+        margin-right: 70px;
+        margin-bottom: 30px;
+        background-color: #2C2449;
+        border-radius: 10px  0 10px 10px;
         }
 
         .sidebar {
@@ -97,14 +111,14 @@
             align-items: center;
             border-radius: 10px;
             margin-right: 0px;
-            margin-left: 70px;
+            margin-left: 0px;
+            margin-top: -38px;
         }
 
         .sidebar img {
             margin: 0;
             width: 100px;
             height: 100px;
-
         }
 
         .sidebar h2, .sidebar p {
@@ -120,6 +134,9 @@
 
         .sidebar ul li {
             margin-bottom: 10px;
+            display: flex; /* Make the list item a flex container */
+            align-items: left; /* Align items vertically in the center */
+            padding:10px
         }
 
         .sidebar ul li a {
@@ -128,15 +145,18 @@
             display: block;
             padding: 10px;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
-            text-align: center;
-            font-size: 23px
+            text-align: left;
+            font-size: 20px;
+            width: 100%;
+            font-family: medium;
+            margin: 0px;
+            padding: 5px;
         }
 
         .sidebar ul li a:hover, .sidebar ul li.active a {
-        color: #FB8B5D;
-        background-color: #181B3A;
-        border: 1px solid #FB8B5D;
+            color: #FB8B5D;
+            background-color: #181B3A;
+            border: 1px solid #FB8B5D;
         }
 
         .content {
@@ -148,109 +168,81 @@
         }
 
         .profile-pic {
-            border-radius: 0
+            border-radius: 0;
         }
 
-                /* Special styles for individual sidebar images */
-        .sidebar .home-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        .sidebar .video-lessons-icon {
-            width: 20px;
-            height:20px;
-        }
-
-        .sidebar .analyses-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        .sidebar .information-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        .sidebar .birja-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        .sidebar .advice-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        .sidebar .signal-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        .sidebar .news-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        .sidebar .lessons-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        .sidebar .books-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        .sidebar .notes-icon {
-            width: 20px;
-            height: 20px;
-        }
-
+        /* Special styles for individual sidebar images */
+        .sidebar .home-icon,
+        .sidebar .video-lessons-icon,
+        .sidebar .analyses-icon,
+        .sidebar .information-icon,
+        .sidebar .birja-icon,
+        .sidebar .advice-icon,
+        .sidebar .signal-icon,
+        .sidebar .news-icon,
+        .sidebar .lessons-icon,
+        .sidebar .books-icon,
+        .sidebar .notes-icon,
         .sidebar .indicators-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
+            margin-right: 20px;
         }
     </style>
 </head>
 <body>
 <header>
     <div class="header">
+        <div class="logo-container">
+            <a href="{% url 'landing_page' %}">
+                <img src="media/logo.png" alt="Logo" class="logo">
+            </a>
+        </div>
         <div class="title-container">
-            <a href="{% url 'landing_page' %}" class="title"><img src="media/logo.png" alt="Logo" class="logo">EasyCrypto</a>
-            <span class="subtitle">Your success is only with us</span>
+            <div class="title">CryptoPlain</div>
+            <div class="subtitle">Your success is only with us</div>
         </div>
     </div>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="comingSoon()">Chat</a></li>
+            <li><a href="{% url 'birja' %}">Birjalar</a></li>
+            <li><a href="{% url 'news' %}">Yangiliklar</a></li>
+            <li><a href="#" onclick="comingSoon()">Notification</a></li>
+            <li><a href="#" onclick="comingSoon()">Gift</a></li>
+            <li><a href="#" onclick="comingSoon()">Settings</a></li>
+        </ul>
+    </nav>
 </header>
 <main>
     <div class="sidebar">
         <a href="{% url 'landing_page' %}">
-            <p style="margin-left:0; text-align:left; justify-content: left; color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom:35px;">
-                EasyCrypto</p>
+            <p style="color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom:35px;">CryptoPlain</p>
         </a>
         {% if user.is_authenticated %}
         {% if user.profile_pic %}
-        <a href="{% url 'profile' %}"
-           style="color:#FFFFFF; text-decoration:none; margin-bottom: 15px; height: 100px; weight:100px;">
+        <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; margin-bottom: 15px;">
             <img src="{{ user.profile_pic.url }}" alt="{{ user.name }}" class="profile-pic"></a>
         {% else %}
         <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; margin-bottom: 15px;">
             <img src="/media/default_img/user_image.png" alt="{{ user.name }}" class="profile-pic"></a>
         {% endif %}
         <a href="{% url 'profile' %}"
-           style="color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom: 10px;"><h2>Salom,
-            {{user.name}}</h2></a>
-        <a href="{% url 'profile' %}"
-           style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 10px;"><p>{{ user.email }}</p>
+           style="color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom: 10px;">
+            <h2>Salom, {{user.name}}</h2>
         </a>
         <a href="{% url 'profile' %}"
-           style="color:#FFFFFF; text-decoration:none; font-size: 12px; margin-bottom: 35px;"><p>ID:{{ user.id }}</p>
+           style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 10px;">
+            <p>{{ user.email }}</p>
+        </a>
+        <a href="{% url 'profile' %}"
+           style="color:#FFFFFF; text-decoration:none; font-size: 12px; margin-bottom: 35px;">
+            <p>ID:{{ user.id }}</p>
         </a>
         {% else %}
         <p><a href="{% url 'login' %}" style="color:#FFFFFF; text-decoration:none;">Login</a></p>
         <p><a href="{% url 'register' %}" style="color:#FFFFFF; text-decoration:none;">Registratsiya</a></p>
         {% endif %}
-
 
         <ul>
             <li><a href="{% url 'landing_page' %}"><img src="/media/sidebar_images/home.png" alt="Home Icon"
@@ -288,5 +280,11 @@
         {% block content %}{% endblock %}
     </div>
 </main>
+
+<script>
+    function comingSoon() {
+        alert("Coming soon...");
+    }
+</script>
 </body>
 </html>
