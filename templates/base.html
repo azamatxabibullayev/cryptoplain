@@ -32,13 +32,15 @@
 
         header nav ul {
             list-style-type: none;
-            margin: 0;
+            margin: 30px;
             padding: 0;
             display: flex;
         }
 
         header nav ul li {
-            margin-right: 15px;
+            margin-right: 60px;
+            margin-top: 0;
+            margin-bottom:0;
         }
 
         header nav ul li a {
@@ -112,7 +114,7 @@
             border-radius: 10px;
             margin-right: 0px;
             margin-left: 0px;
-            margin-top: -38px;
+            margin-top: -124px;
         }
 
         .sidebar img {
@@ -122,7 +124,7 @@
         }
 
         .sidebar h2, .sidebar p {
-            text-align: center;
+            text-align: left;
             margin: 5px 0;
         }
 
@@ -134,8 +136,8 @@
 
         .sidebar ul li {
             margin-bottom: 10px;
-            display: flex; /* Make the list item a flex container */
-            align-items: left; /* Align items vertically in the center */
+            display: flex;
+            align-items: left;
             padding:10px
         }
 
@@ -143,7 +145,7 @@
             color: #ffffff;
             text-decoration: none;
             display: block;
-            padding: 10px;
+            padding: 5px;
             border-radius: 5px;
             text-align: left;
             font-size: 20px;
@@ -184,9 +186,10 @@
         .sidebar .books-icon,
         .sidebar .notes-icon,
         .sidebar .indicators-icon {
-            width: 18px;
-            height: 18px;
-            margin-right: 20px;
+            width: 17px;
+            height: 17px;
+            margin-right: 10px;
+            margin-left: 14px;
         }
     </style>
 </head>
@@ -208,16 +211,31 @@
             <li><a href="#" onclick="comingSoon()">Chat</a></li>
             <li><a href="{% url 'birja' %}">Birjalar</a></li>
             <li><a href="{% url 'news' %}">Yangiliklar</a></li>
-            <li><a href="#" onclick="comingSoon()">Notification</a></li>
-            <li><a href="#" onclick="comingSoon()">Gift</a></li>
-            <li><a href="#" onclick="comingSoon()">Settings</a></li>
+            <li>
+                <a href="#" onclick="comingSoon()">
+                    <img src="/media/notification.png" alt="Notification"
+                         style="width: 40px; height: 40px; height: 40px; margin:0; padding:0;">
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="comingSoon()">
+                    <img src="/media/gift.png" alt="Gift" style="width: 40px; height: 40px; margin:0; padding:0;">
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="comingSoon()">
+                    <img src="/media/settings.png" alt="Settings"
+                         style="width: 40px; height: 40px; height: 40px; margin:0; padding:0;">
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
 <main>
     <div class="sidebar">
         <a href="{% url 'landing_page' %}">
-            <p style="color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom:35px;">CryptoPlain</p>
+            <p style="color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom:35px; padding-right: 110px;">
+                CryptoPlain</p>
         </a>
         {% if user.is_authenticated %}
         {% if user.profile_pic %}
@@ -228,15 +246,15 @@
             <img src="/media/default_img/user_image.png" alt="{{ user.name }}" class="profile-pic"></a>
         {% endif %}
         <a href="{% url 'profile' %}"
-           style="color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom: 10px;">
+           style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 8px;">
             <h2>Salom, {{user.name}}</h2>
         </a>
         <a href="{% url 'profile' %}"
-           style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 10px;">
+           style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 8px;">
             <p>{{ user.email }}</p>
         </a>
         <a href="{% url 'profile' %}"
-           style="color:#FFFFFF; text-decoration:none; font-size: 12px; margin-bottom: 35px;">
+           style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 30px;">
             <p>ID:{{ user.id }}</p>
         </a>
         {% else %}
