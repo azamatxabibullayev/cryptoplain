@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}CryptoPlain{% endblock %}</title>
+    <title>CryptoPlain</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -11,23 +12,36 @@
             background-size: cover;
             color: #ffffff;
             margin: 0;
-            padding-right: 0;
-            padding-top: 0;
-            padding-bottom: 0;
             padding-left: 70px;
         }
 
+        /* Custom scrollbar styles */
+        body::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: #352E5A;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #FB8B5D;
+            border-radius: 10px;
+        }
+
+        body::-webkit-scrollbar-thumb:hover {
+            background-color: #FF9C6E;
+        }
+
         header nav {
-            background-color: #2b004e;
+            background-color: #2C2449;
             padding: 10px;
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            margin-left: 0px;
-            margin-right: 70px;
-            margin-left: 70px;
-            background-color: #2C2449;
+            margin: 0 70px;
             border-radius: 10px 10px 0 0;
+            margin-bottom: -10px;
         }
 
         header nav ul {
@@ -39,8 +53,10 @@
 
         header nav ul li {
             margin-right: 60px;
-            margin-top: 0;
-            margin-bottom:0;
+        }
+
+        .nav_img {
+            margin-right: 30px;
         }
 
         header nav ul li a {
@@ -50,17 +66,10 @@
             padding: 8px 12px;
         }
 
-        header nav ul li a:hover {
-            background-color: #461078;
-        }
-
         .header {
             display: flex;
             align-items: left;
-            justify-content: left;
-            padding: 0 70px 0 70px;
-            margin-bottom: 0px;
-            margin-top: 0px;
+            padding: 0 70px;
         }
 
         .logo-container {
@@ -80,52 +89,34 @@
         }
 
         .title {
-            font-family: 'Regular', sans-serif;
             font-size: 35px;
             color: white;
             margin: 0;
         }
 
         .subtitle {
-            font-family: 'Regular', sans-serif;
             font-size: 10px;
             color: white;
             margin: 0;
         }
 
         main {
-        display: flex;
-        min-height: 100vh;
-        margin-left: 70px;
-        margin-right: 70px;
-        margin-bottom: 30px;
-        background-color: #2C2449;
-        border-radius: 10px  0 10px 10px;
+            display: flex;
+            min-height: 100vh;
+            margin: 0 70px 30px;
+            background-color: #2C2449;
+            border-radius: 10px;
         }
 
         .sidebar {
             background-color: #352E5A;
             width: 250px;
             padding: 20px;
-            height: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             border-radius: 10px;
-            margin-right: 0px;
-            margin-left: 0px;
-            margin-top: -124px;
-        }
-
-        .sidebar img {
-            margin: 0;
-            width: 100px;
-            height: 100px;
-        }
-
-        .sidebar h2, .sidebar p {
-            text-align: left;
-            margin: 5px 0;
+            margin-top: -115px;
         }
 
         .sidebar ul {
@@ -137,28 +128,43 @@
         .sidebar ul li {
             margin-bottom: 10px;
             display: flex;
-            align-items: left;
-            padding:10px
+            align-items: center;
+            padding: 10px;
         }
 
         .sidebar ul li a {
             color: #ffffff;
             text-decoration: none;
-            display: block;
+            display: flex;
+            align-items: center;
             padding: 5px;
             border-radius: 5px;
             text-align: left;
             font-size: 20px;
             width: 100%;
-            font-family: medium;
-            margin: 0px;
-            padding: 5px;
+            transition: all 0.3s;
+            font-family: regular;
         }
 
-        .sidebar ul li a:hover, .sidebar ul li.active a {
+        .sidebar ul li a:hover {
             color: #FB8B5D;
             background-color: #181B3A;
-            border: 1px solid #FB8B5D;
+            border : 1px solid #FB8B5D;
+            border-left : 11px solid #FB8B5D;
+        }
+
+        .sidebar ul li.active a{
+            color: #FB8B5D;
+            background-color: #181B3A;
+            border : 1px solid #FB8B5D;
+            border-left : 11px solid #FB8B5D;
+        }
+
+        .material-icons {
+            font-size: 20 px;
+            vertical-align: middle;
+            margin-right: 15px;
+            margin-left: 10px;
         }
 
         .content {
@@ -171,26 +177,40 @@
 
         .profile-pic {
             border-radius: 0;
+            height: 100px;
+            width: 100px;
         }
 
-        /* Special styles for individual sidebar images */
-        .sidebar .home-icon,
-        .sidebar .video-lessons-icon,
-        .sidebar .analyses-icon,
-        .sidebar .information-icon,
-        .sidebar .birja-icon,
-        .sidebar .advice-icon,
-        .sidebar .signal-icon,
-        .sidebar .news-icon,
-        .sidebar .lessons-icon,
-        .sidebar .books-icon,
-        .sidebar .notes-icon,
-        .sidebar .indicators-icon {
-            width: 17px;
-            height: 17px;
-            margin-right: 10px;
-            margin-left: 14px;
+        .coming-soon {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            margin-left: -5px;
+            margin-top: -15px;
+
         }
+
+        .coming-soon::after {
+            content: "Coming soon...";
+            position: absolute;
+            left: 50%;
+            bottom: 100%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 3px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .coming-soon:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
     </style>
 </head>
 <body>
@@ -208,24 +228,24 @@
     </div>
     <nav>
         <ul>
-            <li><a href="#" onclick="comingSoon()">Chat</a></li>
+            <li><a href="#" class="coming-soon">Chat</a></li>
             <li><a href="{% url 'birja' %}">Birjalar</a></li>
             <li><a href="{% url 'news' %}">Yangiliklar</a></li>
-            <li>
-                <a href="#" onclick="comingSoon()">
+            <li class="nav_img">
+                <a href="#" class="coming-soon">
                     <img src="/media/notification.png" alt="Notification"
-                         style="width: 40px; height: 40px; height: 40px; margin:0; padding:0;">
+                         style="width: 40px; height: 40px;  border-radius: 8px;">
                 </a>
             </li>
-            <li>
-                <a href="#" onclick="comingSoon()">
-                    <img src="/media/gift.png" alt="Gift" style="width: 40px; height: 40px; margin:0; padding:0;">
+            <li class="nav_img">
+                <a href="#" class="coming-soon">
+                    <img src="/media/gift.png" alt="Gift" style="width: 40px; height: 40px; border-radius: 8px;">
                 </a>
             </li>
-            <li>
-                <a href="#" onclick="comingSoon()">
+            <li class="nav_img">
+                <a href="#">
                     <img src="/media/settings.png" alt="Settings"
-                         style="width: 40px; height: 40px; height: 40px; margin:0; padding:0;">
+                         style="width: 40px; height: 38px; border-radius: 8px; margin-top: -7px;">
                 </a>
             </li>
         </ul>
@@ -234,8 +254,11 @@
 <main>
     <div class="sidebar">
         <a href="{% url 'landing_page' %}">
-            <p style="color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom:35px; padding-right: 110px;">
-                CryptoPlain</p>
+            <p style="color:#FFFFFF; text-decoration:none; font-size: 15px; margin-bottom:35px;">
+                CryptoPlain<span class="material-icons"
+                                 style="margin-left: 100px; margin-right: 0; padding: 0; color: #D9D9D9; width: 28px; height: 15px; margin-top: -15px;">menu</span>
+            </p>
+
         </a>
         {% if user.is_authenticated %}
         {% if user.profile_pic %}
@@ -245,12 +268,10 @@
         <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; margin-bottom: 15px;">
             <img src="/media/default_img/user_image.png" alt="{{ user.name }}" class="profile-pic"></a>
         {% endif %}
-        <a href="{% url 'profile' %}"
-           style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 8px;">
+        <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 8px;">
             <h2>Salom, {{user.name}}</h2>
         </a>
-        <a href="{% url 'profile' %}"
-           style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 8px;">
+        <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 8px;">
             <p>{{ user.email }}</p>
         </a>
         <a href="{% url 'profile' %}"
@@ -263,46 +284,81 @@
         {% endif %}
 
         <ul>
-            <li><a href="{% url 'landing_page' %}"><img src="/media/sidebar_images/home.png" alt="Home Icon"
-                                                        class="home-icon"> Bosh Sahifa</a></li>
-            <li><a href="{% url 'video_lessons' %}"><img src="/media/sidebar_images/video_lessons.png"
-                                                         alt="Video Lessons Icon" class="video-lessons-icon"> Video
-                darslar</a></li>
-            <li><a href="{% url 'analyses' %}"><img src="/media/sidebar_images/analyses.png" alt="Analyses Icon"
-                                                    class="analyses-icon"> Tex-Analizlar</a></li>
-            <li><a href="{% url 'information' %}"><img src="/media/sidebar_images/information.png"
-                                                       alt="Information Icon" class="information-icon"> Ma'lumotlar</a>
+            <li class="{% if request.path == '/' %}active{% endif %}">
+                <a href="{% url 'landing_page' %}">
+                    <span class="material-icons" style="margin-top: -8px;">A</span> Bosh Sahifa
+                </a>
             </li>
-            <li><a href="{% url 'birja' %}"><img src="/media/sidebar_images/birja.png" alt="Birja Icon"
-                                                 class="birja-icon"> Birjalar bilan ishlash</a></li>
-            <li><a href="{% url 'advice' %}"><img src="/media/sidebar_images/advice.png" alt="Advice Icon"
-                                                  class="advice-icon"> Maslahatlar</a></li>
-            <li><a href="{% url 'signal' %}"><img src="/media/sidebar_images/signal.png" alt="Signal Icon"
-                                                  class="signal-icon"> Signallar</a></li>
-            <li><a href="{% url 'news' %}"><img src="/media/sidebar_images/news.png" alt="News Icon" class="news-icon">
-                Yangiliklar</a></li>
-            <li><a href="{% url 'lessons' %}"><img src="/media/sidebar_images/lessons.png" alt="Lessons Icon"
-                                                   class="lessons-icon"> Darsliklar</a></li>
-            <li><a href="{% url 'books' %}"><img src="/media/sidebar_images/books.png" alt="Books Icon"
-                                                 class="books-icon"> Kitoblar</a></li>
-            <li><a href="{% url 'note_list' %}"><img src="/media/sidebar_images/notes.png" alt="Notes Icon"
-                                                     class="notes-icon"> Zametkalar</a></li>
-            <li><a href="{% url 'indicators' %}"><img src="/media/sidebar_images/indicators.png" alt="Indicators Icon"
-                                                      class="indicators-icon"> Indikatorlar</a></li>
+            <li class="{% if request.path == '/main/video-lessons/' %}active{% endif %}">
+                <a href="{% url 'video_lessons' %}">
+                    <span class="material-icons">play_circle</span> Video darslar
+                </a>
+            </li>
+            <li class="{% if request.path == '/main/analyses/' %}active{% endif %}">
+                <a href="{% url 'analyses' %}">
+                    <span class="material-icons">analytics</span> Tex-Analizlar
+                </a>
+            </li>
+            <li class="{% if request.path == '/main/informations/' %}active{% endif %}">
+                <a href="{% url 'information' %}">
+                    <span class="material-icons">info</span> Ma'lumotlar
+                </a>
+            </li>
+            <li class="{% if request.path == '/main/birja/' %}active{% endif %}">
+                <a href="{% url 'birja' %}">
+                    <span class="material-icons" style="font-size: 15px;">show_chart</span> Birjalar bilan ishlash
+                </a>
+            </li>
+            <li class="{% if request.path == '/main/advice/' %}active{% endif %}">
+                <a href="{% url 'advice' %}">
+                    <span class="material-icons" style="margin-top: -8px;">T</span> Maslahatlar
+                </a>
+            </li>
+            <li class="{% if request.path == '/main/signal/' %}active{% endif %}">
+                <a href="{% url 'signal' %}">
+                    <span class="material-icons">lightbulb</span> Signallar
+                </a>
+            </li>
+            <li class="{% if request.path == '/main/news/' %}active{% endif %}">
+                <a href="{% url 'news' %}">
+                    <span class="material-icons">article</span> Yangiliklar
+                </a>
+            </li>
+            <li class="{% if request.path == '/main/lessons/' %}active{% endif %}">
+                <a href="{% url 'lessons' %}">
+                    <span class="material-icons" style="margin-top: -2px;">menu_book</span> Darsliklar
+                </a>
+            </li>
+            <li class="{% if request.path == '/main/books/' %}active{% endif %}">
+                <a href="{% url 'books' %}">
+                    <span class="material-icons">book</span> Kitoblar
+                </a>
+            </li>
+            <li class="{% if request.path == '/main/notes/' %}active{% endif %}">
+                <a href="{% url 'note_list' %}">
+                    <span class="material-icons">note</span> Zametkalar
+                </a>
+            </li>
+            <li class="{% if request.path == '/main/indicators/' %}active{% endif %}">
+                <a href="{% url 'indicators' %}">
+                    <span class="material-icons">insights</span> Indikatorlar
+                </a>
+            </li>
             {% if user.is_authenticated %}
-            <li><a href="{% url 'logout' %}">Chiqish</a></li>
+            <li class="{% if request.path == '/main/logout/' %}active{% endif %}">
+                <a href="{% url 'logout' %}">
+                    <span class="material-icons">logout</span> Chiqish
+                </a>
+            </li>
             {% endif %}
         </ul>
+
+
     </div>
     <div class="content">
         {% block content %}{% endblock %}
     </div>
 </main>
-
-<script>
-    function comingSoon() {
-        alert("Coming soon...");
-    }
-</script>
 </body>
 </html>
+
