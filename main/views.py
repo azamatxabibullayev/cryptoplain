@@ -68,7 +68,10 @@ def analysis_view(request):
     if user.is_authenticated:
         if hasattr(user, 'premium_user'):
             user_type = user.premium_user.premium_type
-            analyses = Analysis.objects.filter(analysis_type__in=['normal', user_type])
+            if user_type == 'pro':
+                analyses = Analysis.objects.filter(analysis_type__in=['normal', 'standard', 'pro'])
+            else:
+                analyses = Analysis.objects.filter(analysis_type__in=['normal', 'standard'])
         else:
             analyses = Analysis.objects.filter(analysis_type='normal')
     else:
@@ -135,7 +138,10 @@ def lesson_view(request):
     if user.is_authenticated:
         if hasattr(user, 'premium_user'):
             user_type = user.premium_user.premium_type
-            lessons = Lesson.objects.filter(lesson_type__in=['normal', user_type])
+            if user_type == 'pro':
+                lessons = Lesson.objects.filter(lesson_type__in=['normal', 'standard', 'pro'])
+            else:
+                lessons = Lesson.objects.filter(lesson_type__in=['normal', 'standard'])
         else:
             lessons = Lesson.objects.filter(lesson_type='normal')
     else:
@@ -158,10 +164,14 @@ def lesson_detail(request, id):
 def indicator_view(request):
     user = request.user
     indicators = Indicator.objects.none()
+
     if user.is_authenticated:
         if hasattr(user, 'premium_user'):
             user_type = user.premium_user.premium_type
-            indicators = Indicator.objects.filter(indicator_type__in=['normal', user_type])
+            if user_type == 'pro':
+                indicators = Indicator.objects.filter(indicator_type__in=['normal', 'standard', 'pro'])
+            else:
+                indicators = Indicator.objects.filter(indicator_type__in=['normal', 'standard'])
         else:
             indicators = Indicator.objects.filter(indicator_type='normal')
     else:
@@ -188,7 +198,10 @@ def books_view(request):
     if user.is_authenticated:
         if hasattr(user, 'premium_user'):
             user_type = user.premium_user.premium_type
-            books = Book.objects.filter(book_type__in=['normal', user_type])
+            if user_type == 'pro':
+                books = Book.objects.filter(book_type__in=['normal', 'standard', 'pro'])
+            else:
+                books = Book.objects.filter(book_type__in=['normal', 'standard'])
         else:
             books = Book.objects.filter(book_type='normal')
     else:

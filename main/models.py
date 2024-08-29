@@ -79,7 +79,7 @@ class News(models.Model):
 class Analysis(models.Model):
     ANALYSIS_TYPE_CHOICES = [
         ('normal', 'Normal'),
-        ('standart', 'Standart'),
+        ('standard', 'Standard'),
         ('pro', 'Pro'),
     ]
 
@@ -114,7 +114,7 @@ class Note(models.Model):
 class Lesson(models.Model):
     LESSON_TYPE_CHOICES = [
         ('normal', 'Normal'),
-        ('standart', 'Standart'),
+        ('standard', 'Standard'),
         ('pro', 'Pro'),
     ]
 
@@ -134,7 +134,7 @@ class Lesson(models.Model):
 class Indicator(models.Model):
     INDICATOR_TYPE_CHOICES = [
         ('normal', 'Normal'),
-        ('standart', 'Standart'),
+        ('standard', 'Standard'),
         ('pro', 'Pro'),
     ]
 
@@ -153,7 +153,7 @@ class Indicator(models.Model):
 class Book(models.Model):
     BOOK_TYPE_CHOICES = [
         ('normal', 'Normal'),
-        ('standart', 'Standart'),
+        ('standard', 'Standard'),
         ('pro', 'Pro'),
     ]
 
