@@ -3,10 +3,18 @@ from .forms import NoteForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.timezone import localdate
 from .models import VideoLesson, Information, Birja, Advice, Signal, News, Analysis, Lesson, Note, Indicator, Book
+from django.db.models import Q
 
 
 def video_lessons_view(request):
-    video_lessons = VideoLesson.objects.all()
+    query = request.GET.get('q')
+    if query:
+        video_lessons = VideoLesson.objects.filter(
+            Q(title__icontains=query)
+        )
+    else:
+        video_lessons = VideoLesson.objects.all()
+
     context = {
         'video_lessons': video_lessons
     }
@@ -14,7 +22,14 @@ def video_lessons_view(request):
 
 
 def information(request):
-    information_list = Information.objects.all()
+    query = request.GET.get('q')
+    if query:
+        information_list = Information.objects.filter(
+            Q(title__icontains=query) | Q(info_text__icontains=query)
+        )
+    else:
+        information_list = Information.objects.all()
+
     context = {
         'information_list': information_list
     }
@@ -162,6 +177,7 @@ def lesson_detail(request, id):
 
 
 def indicator_view(request):
+    query = request.GET.get('q')
     user = request.user
     indicators = Indicator.objects.none()
 
@@ -169,13 +185,29 @@ def indicator_view(request):
         if hasattr(user, 'premium_user'):
             user_type = user.premium_user.premium_type
             if user_type == 'pro':
-                indicators = Indicator.objects.filter(indicator_type__in=['normal', 'standard', 'pro'])
+                indicators = Indicator.objects.filter(
+                    Q(indicator_type__in=['normal', 'standard', 'pro']) &
+                    (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
+                    Q(indicator_type__in=['normal', 'standard', 'pro'])
+                )
             else:
-                indicators = Indicator.objects.filter(indicator_type__in=['normal', 'standard'])
+                indicators = Indicator.objects.filter(
+                    Q(indicator_type__in=['normal', 'standard']) &
+                    (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
+                    Q(indicator_type__in=['normal', 'standard'])
+                )
         else:
-            indicators = Indicator.objects.filter(indicator_type='normal')
+            indicators = Indicator.objects.filter(
+                Q(indicator_type='normal') &
+                (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
+                Q(indicator_type='normal')
+            )
     else:
-        indicators = Indicator.objects.filter(indicator_type='normal')
+        indicators = Indicator.objects.filter(
+            Q(indicator_type='normal') &
+            (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
+            Q(indicator_type='normal')
+        )
 
     context = {
         'indicators': indicators,

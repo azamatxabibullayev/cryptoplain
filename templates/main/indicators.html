@@ -2,6 +2,23 @@
 {% block content %}
 <h1>Indikatorlar</h1>
 
+
+<form method="GET" action="{% url 'indicator_view' %}">
+    <input type="text" name="q" placeholder="Search indicators..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+</form>
+
+{% if indicators %}
+<ul>
+    {% for indicator in indicators %}
+    <li>{{ indicator.name }} - {{ indicator.description }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No results found.</p>
+{% endif %}
+
+
 {% for indicator in indicators %}
 <div class="indicator-entry">
     <h3>{{ indicator.title }}</h3>

@@ -3,15 +3,26 @@
 {% block content %}
 <h1>Kerakli ma'lumotlar</h1>
 
+<form method="GET" action="{% url 'information' %}">
+    <input type="text" name="q" placeholder="Search information..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+</form>
+
+{% if information_list %}
 <div class="information-list">
     {% for info in information_list %}
     <div class="information-item">
         <h2>{{ info.title }}</h2>
+        {% if info.info_photo %}
         <img src="{{ info.info_photo.url }}" alt="{{ info.title }}" class="info-photo">
+        {% endif %}
         <p>{{ info.short_info }}</p>
         <a href="{% url 'information_detail' info.id %}">Batafsil o'qish</a>
     </div>
     {% endfor %}
 </div>
+{% else %}
+<p>No results found.</p>
+{% endif %}
 
 {% endblock %}

@@ -2,12 +2,26 @@
 
 {% block content %}
 <h1>Video darslar</h1>
-<ul>
-    {% for lesson in video_lessons %}
-    <li>
-        <h2>{{ lesson.title }}</h2>
-        <a href="{{ lesson.youtube_link }}" target="_blank">You tube da ko'rish</a>
-    </li>
-    {% endfor %}
-</ul>
+
+<!-- Search Form -->
+<form method="GET" action="{% url 'video_lessons' %}">
+    <input type="text" name="q" placeholder="Search video lessons..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+</form>
+
+<!-- Video Lessons List -->
+{% if video_lessons %}
+    <ul>
+        {% for lesson in video_lessons %}
+        <li>
+            <h2>{{ lesson.title }}</h2>
+            <p>{{ lesson.description }}</p>
+            <a href="{{ lesson.youtube_link }}" target="_blank">YouTube da ko'rish</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No results found.</p>
+{% endif %}
+
 {% endblock %}
