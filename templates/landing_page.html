@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="fear-greed-index-box">
+    <img src="{{ fear_greed_index_image.image.url }}" alt="Fear & Greed Index">
+</div>
+
+<div class="buttons-container">
+    <a href="#" class="button">Biz bilan aloqa</a>
+    <a href="#" class="button">Padpiska muddati</a>
+    <a href="#" class="button">Sizning faolligingiz</a>
+</div>
+
 <div class="padpiska-turlari">
     <a href="#" class="subscription-plan">
         <img src="media/main/home/tekin_padpiska.png" alt="Tekin Plan">
@@ -21,11 +31,47 @@
         <img src="media/main/home/cryptobubles.png" alt="Crypto Bubbles">
     </a>
 </div>
-
-
-<div class="fear-greed-index-box">
-    <img src="{{ fear_greed_index_image.image.url }}" alt="Fear & Greed Index">
-</div>
-
-
 {% endblock %}
+
+
+.fear-greed-index-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #4a4a4a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.padpiska-turlari,
+.analiz-qiling {
+    display: inline-block;
+    vertical-align: top;
+    width: 48%;
+}
+
+.padpiska-turlari {
+    margin-right: 4%;
+}
+
+.subscription-plan img,
+.analiz-qiling img {
+    width: 100%;
+    border-radius: 10px;
+}
