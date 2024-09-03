@@ -1,77 +1,129 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    .pricing-container { max-width: 920px; overflow: hidden; }
+    .pricing-layout { gap: 20px; display: flex; }
+    .pricing-column { display: flex; flex-direction: column; line-height: normal; width: 32%; margin-left: 0; }
+    .pricing-card { display: flex; margin-top: 9px; flex-grow: 1; flex-direction: column; color: #fff; font: 500 10px/1 Poppins, sans-serif; }
+    .pricing-image { aspect-ratio: 1.57; object-fit: contain; object-position: center; width: 100%; border-radius: 0; }
+    .pricing-details { border-radius: 15px; background-color: #3384ed; display: flex; margin-top: 20px; width: 100%; flex-direction: column; align-items: start; padding: 7px 4px 13px 32px; }
+    .pricing-plan { font-size: 20px; align-self: center; }
+    .pricing-price { font-size: 15px; font-weight: 400; line-height: 1; text-align: center; align-self: center; margin-top: 7px; }
+    .pricing-divider { border-radius: 5px; background-color: #fff; display: flex; margin-top: 7px; width: 221px; height: 2px; }
+    .feature-list { display: flex; gap: 39px; line-height: 14px; margin: 14px 0 0 16px; }
+    .feature-item { display: flex; gap: 9px; }
+    .feature-icon { aspect-ratio: 1; object-fit: contain; object-position: center; width: 14px; margin: auto 0; }
+    .feature-indicator { border-radius: 5px; background-color: #fb8b5d; display: flex; width: 6px; height: 20px; margin: auto 0; }
+    .analysis-column { display: flex; flex-direction: column; line-height: normal; width: 68%; margin-left: 20px; }
+    .analysis-content { display: flex; flex-direction: column; color: #fff; font: 400 25px Poppins, sans-serif; margin-top: 30px;}
+    .analysis-title { align-self: start; }
+    .analysis-image { aspect-ratio: 2.52; object-fit: contain; object-position: center; width: 100%; border-radius: 15px; margin-top: 7px; }
+
+    .fear-greed-index-box { margin-top: -20px; margin-bottom: 20px; }
+
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 30px; /* Space between buttons */
+        border-top: -60px;
+
+    }
+
+    .styled-button {
+        border: 1px solid white;
+        background-color: transparent; /* Transparent background */
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 10px; /* Rounded corners */
+        font-family: inherit; /* Inherit font from parent */
+        display: flex;
+        align-items: center;
+        text-transform: uppercase; /* Makes text uppercase */
+        letter-spacing: 1px; /* Adds spacing between letters */
+        height: 55px;
+        width: 240px;
+        font-size: 15px;
+    }
+
+    .button-link {
+        text-decoration: none;
+        color: white; /* White text color */
+        display: flex;
+        align-items: center;
+    }
+
+    .material-icons-outlined {
+        font-size: 20px;
+        margin-right: 8px;
+        color: white; /* Ensures the icon is white */
+    }
+
+    /* Optional: Add hover effect */
+    .styled-button:hover {
+        background-color: rgba(255, 255, 255, 0.1); /* Slightly changes background on hover */
+    }
+
+
+    @media (max-width: 991px) {
+        .pricing-layout { flex-direction: column; align-items: stretch; gap: 0; }
+        .pricing-column, .analysis-column { width: 100%; }
+        .pricing-card { margin-top: 39px; }
+        .pricing-details { padding-left: 20px; }
+        .feature-list { margin-left: 10px; }
+        .analysis-content { max-width: 100%; margin-top: 110px; }
+        .analysis-image { max-width: 100%; }
+    }
+</style>
+
 <div class="fear-greed-index-box">
     <img src="{{ fear_greed_index_image.image.url }}" alt="Fear & Greed Index">
 </div>
 
-<div class="buttons-container">
-    <a href="#" class="button">Biz bilan aloqa</a>
-    <a href="#" class="button">Padpiska muddati</a>
-    <a href="#" class="button">Sizning faolligingiz</a>
+<!-- Link to Google Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+<div class="button-container">
+    <button class="styled-button">
+        <a href="#" class="button-link">
+            <span>Biz bilan bo'g'lanish</span>
+        </a>
+    </button>
+    <button class="styled-button">
+        <a href="#" class="button-link">
+            <span class="material-icons-outlined">calendar_month</span>
+            <span>Padpiska muddati</span>
+        </a>
+    </button>
+    <button class="styled-button" style="border: none; background-color: #352E5A;">
+        <a href="#" class="button-link">
+            <span>Sizning faolligingiz</span>
+        </a>
+    </button>
 </div>
 
-<div class="padpiska-turlari">
-    <a href="#" class="subscription-plan">
-        <img src="media/main/home/tekin_padpiska.png" alt="Tekin Plan">
-    </a>
-    <a href="#" class="subscription-plan">
-        <img src="media/main/home/standart_padpiska.png" alt="Standart Plan">
-    </a>
-    <a href="#" class="subscription-plan">
-        <img src="media/main/home/pro_padpiska.png" alt="Pro Plan">
-    </a>
-</div>
 
-<div class="analiz-qiling">
-    <a href="https://tradingview.com">
-        <img src="media/main/home/tradingview.png" alt="TradingView">
-    </a>
-    <a href="https://cryptobubbles.net/">
-        <img src="media/main/home/cryptobubles.png" alt="Crypto Bubbles">
-    </a>
-</div>
+<section class="pricing-container">
+    <div class="pricing-layout">
+        <div class="pricing-column">
+            <article class="pricing-card">
+                <h3 style="display: flex; flex-direction: column; line-height: normal; margin-top: -10px; margin-left: 10px; margin-top: 47px; font-size: 30px;">
+                    Padpiska turlari</h3>
+                <a href="#" style="margin-bottom: 20px;"><img src="media/main/home/tekin_padpiska.png"
+                                                              class="pricing-image"/></a>
+                <a href="#" style="margin-bottom: 20px;"><img src="media/main/home/standart_padpiska.png"
+                                                              class="pricing-image"/></a>
+                <a href="#" style="margin-bottom: 20px;"><img src="media/main/home/pro_padpiska.png"
+                                                              class="pricing-image"/></a>
+            </article>
+        </div>
+        <div class="analysis-column">
+            <div class="analysis-content">
+                <h3 class="analysis-title">Analiz qiling</h3>
+                <img src="media/main/home/tradingview.png" class="analysis-image"/>
+                <img src="media/main/home/cryptobubles.png" class="analysis-image"/>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
-
-
-.fear-greed-index-box {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.buttons-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.button {
-    padding: 10px 20px;
-    background-color: #4a4a4a;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-}
-
-.padpiska-turlari,
-.analiz-qiling {
-    display: inline-block;
-    vertical-align: top;
-    width: 48%;
-}
-
-.padpiska-turlari {
-    margin-right: 4%;
-}
-
-.subscription-plan img,
-.analiz-qiling img {
-    width: 100%;
-    border-radius: 10px;
-}
