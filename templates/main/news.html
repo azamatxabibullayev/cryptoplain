@@ -1,11 +1,58 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Yangiliklar</h1>
-<ul>
-    {% for item in news %}
-    <img src="{{ item.news_photo.url }}" alt="{{ item.news_title }}" style="width:200px; height:auto;">
-    <li>{{ item.news_text }}</li>
-    {% endfor %}
-</ul>
+<style>
+    .news-container { display: flex; max-width: 908px; flex-direction: column; overflow: hidden; }
+    .news-header { align-self: start; display: flex; gap: 6px; font-family: Poppins, sans-serif; color: #fff; }
+    .news-title-wrapper { display: flex; flex-direction: column; }
+    .news-title { font-size: 40px; font-weight: 700; }
+    .news-underline { border-radius: 5px; background-color: #fff; width: 177px; height: 5px; }
+    .news-subtitle { font-size: 30px; font-weight: 400; text-align: center; margin-top: 7px; }
+    .news-icon { aspect-ratio: 1; object-fit: contain; object-position: center; width: 45px; align-self: end; margin-top: 75px; }
+    .news-content { border-radius: 10px; background-color: #fff; margin-top: 50px; }
+    .news-article { display: flex; gap: 20px; padding: 5px;}
+    .news-image-wrapper { width: 32%; }
+    .news-image { aspect-ratio: 1.86; object-fit: contain; object-position: center; width: 100%; border-radius: 10px; margin-left: 0px; padding-left: 0px}
+    .news-text-wrapper { width: 68%; }
+    .news-text { color: #000; align-self: stretch; margin: auto 0; font: 400 15px/21px Roboto, sans-serif; }
+
+    @media (max-width: 991px) {
+      .news-header { white-space: initial; }
+      .news-title-wrapper { white-space: initial; }
+      .news-title { margin-right: 9px; }
+      .news-icon { margin-top: 40px; }
+      .news-content { max-width: 100%; margin-top: 40px; }
+      .news-article { flex-direction: column; align-items: stretch; gap: 0; }
+      .news-image-wrapper, .news-text-wrapper { width: 100%; }
+      .news-image { margin-top: 18px; }
+      .news-text { max-width: 100%; margin-top: 40px; }
+    }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+
+<section class="news-container">
+    <header class="news-header">
+        <div class="news-title-wrapper">
+            <h1 class="news-title">Yangiliklar</h1>
+            <div class="news-underline" aria-hidden="true"></div>
+            <span class="news-subtitle">Recommended</span>
+        </div>
+        <img loading="lazy"
+             src="https://cdn.builder.io/api/v1/image/assets/TEMP/71161e96051714ee01217a75aaa927288eadce9b6c59522a9642f6f707599828?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+             class="news-icon" alt=""/>
+    </header>
+    <article class="news-content">
+        {% for item in news %}
+        <div class="news-article">
+            <div class="news-image-wrapper">
+                <img src="{{ item.news_photo.url }}" class="news-image" alt="{{ item.news_title }}"/>
+            </div>
+            <div class="news-text-wrapper">
+                <p class="news-text">{{ item.news_text }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </article>
+</section>
 {% endblock %}

@@ -1,27 +1,188 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Video darslar</h1>
 
-<!-- Search Form -->
-<form method="GET" action="{% url 'video_lessons' %}">
-    <input type="text" name="q" placeholder="Search video lessons..." value="{{ request.GET.q }}">
-    <button type="submit">Search</button>
-</form>
+<style>
+    .video-lessons {
+      display: flex;
+      max-width: 939px;
+      flex-direction: column;
+      overflow: hidden;
+      align-items: flex-start;
+      color: #fff;
+    }
 
-<!-- Video Lessons List -->
-{% if video_lessons %}
-    <ul>
-        {% for lesson in video_lessons %}
-        <li>
-            <h2>{{ lesson.title }}</h2>
-            <p>{{ lesson.description }}</p>
-            <a href="{{ lesson.youtube_link }}" target="_blank">YouTube da ko'rish</a>
-        </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No results found.</p>
-{% endif %}
+    .section-title {
+      font: 700 40px Poppins, sans-serif;
+    }
 
+    .title-underline {
+      border-radius: 5px;
+      background-color: #fff;
+      width: 177px;
+      height: 5px;
+    }
+
+    .search-container {
+      align-self: stretch;
+      display: flex;
+      margin-top: 7px;
+      width: 100%;
+      align-items: center; /* Ensures the input and button align properly */
+      gap: 10px; /* Adds space between the input and button */
+      font-weight: 400;
+      flex-wrap: nowrap; /* Makes sure input and button stay on the same line */
+    }
+
+    .recommended-wrapper {
+      display: flex;
+      gap: 6px;
+      text-align: center;
+      font: 30px Poppins, sans-serif;
+    }
+
+    .recommended-text {
+      flex-grow: 1;
+    }
+
+    .material-symbols-outlined {
+       aspect-ratio: 1;
+       object-fit: contain;
+       object-position: center;
+       width: 45px;
+    }
+
+    .search-button {
+      border-radius: 15px;
+      background-color: #fb8b5d;
+      padding: 8px 20px;
+      font: 20px/1 Roboto, sans-serif;
+      cursor: pointer;
+      white-space: nowrap;
+      color: white;
+      height: 40 px;
+      width: 125px;
+
+    }
+
+    .search-input {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #fb8b5d;
+      border-radius: 5px;
+      flex-grow: 1; /* This ensures the input takes up the available space */
+      color: #000;
+      margin-left: 100px;
+    }
+
+    .content-wrapper {
+      display: flex;
+      margin-top: 5px;
+      align-items: flex-start;
+      gap: 17px;
+      font: 500 15px Roboto, sans-serif;
+    }
+
+    .content-container {
+      align-self: flex-start;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex-grow: 1;
+      width: fit-content;
+    }
+
+    .language-selector {
+      gap: 32px;
+      color: #FFFFFF;
+      margin-right: 30px;
+    }
+
+    .lesson-title {
+      font-size: 20px;
+      margin-top: 9px;
+    }
+
+    .lesson-link {
+      border-radius: 5px;
+      align-self: stretch;
+      white-space: nowrap;
+      padding: 6px 14px;
+      border: 2px solid #fff;
+      text-decoration: none !important;
+    }
+
+    .lesson-link:hover,
+    .lesson-link:visited {
+      text-decoration: none !important;
+    }
+
+
+    @media (max-width: 991px) {
+      .search-container {
+        max-width: 100%;
+        white-space: initial;
+        flex-wrap: wrap; /* Allows wrapping on smaller screens */
+      }
+
+      .recommended-wrapper {
+        white-space: initial;
+      }
+
+      .search-button {
+        white-space: initial;
+        padding: 8px 20px;
+      }
+
+      .content-container {
+        max-width: 100%;
+      }
+
+      .language-selector {
+        white-space: initial;
+      }
+
+      .lesson-link {
+        max-width: 100%;
+        white-space: initial;
+      }
+    }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+<section class="video-lessons">
+    <h1 class="section-title">Video darslar</h1>
+    <div class="title-underline" aria-hidden="true"></div>
+
+    <div class="search-container">
+        <div class="recommended-wrapper">
+            <p class="recommended-text">Recommended</p>
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/eb65ba11352ea2bdfbe7a9f8b77a9d9430759dc26e0d51944acab142b20f2917?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                 alt="" class="material-symbols-outlined"/>
+        </div>
+        <form method="GET" action="{% url 'video_lessons' %}">
+            <input type="text" id="search-field" name="q" placeholder="Search video lessons..." class="search-input"
+                   value="{{ request.GET.q }}">
+            <button type="submit" class="search-button" onclick="toggleSearch()">Search</button>
+        </form>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="content-container">
+            <nav>
+                <text class="language-selector">UZ</text>
+                <text class="language-selector">RU</text>
+            </nav>
+            {% if video_lessons %}
+            {% for lesson in video_lessons %}
+            <h2 class="lesson-title">{{ lesson.title }}</h2>
+            <a href="{{ lesson.youtube_link }}" class="lesson-link">{{ lesson.youtube_link }}</a>
+            {% endfor %}
+            {% else %}
+            <p>No results found.</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
 {% endblock %}

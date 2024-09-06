@@ -1,33 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birja List</title>
-</head>
-<body>
-<h1>Birjalar Bilan Ishlash</h1>
-<div class="birja-list">
-    {% for item in birja %}
-    <div class="birja-item">
+<style>
+    .exchange-section { display: flex; max-width: 547px; flex-direction: column; overflow: hidden; align-items: start; }
+    .section-title { color: #fff; font: 700 40px Poppins, sans-serif; }
+    .title-underline { border-radius: 5px; background-color: #fff; width: 177px; height: 5px; }
+    .recommended-wrapper { display: flex; margin-top: 7px; gap: 6px; color: #fff; text-align: center; font: 400 30px Poppins, sans-serif; }
+    .recommended-text { flex-grow: 1; }
+    .recommended-icon { aspect-ratio: 1; object-fit: contain; object-position: center; width: 45px; }
+    .exchange-list { align-self: stretch; display: flex; margin-top: 47px; width: 100%; padding-left: 44px; flex-direction: column; align-items: start; }
+    .exchange-item { display: flex; gap: 12px; color: #fff; font: 500 35px Poppins, sans-serif; margin-bottom: 20px;}
+    .exchange-logo { aspect-ratio: 1; object-fit: contain; object-position: center; width: 125px; max-width: 100%; }
+    .exchange-name { flex-basis: auto; margin: auto 0; text-decoration: none; color: #fff;}
+    .wrapper { display: flex; flex-direction: column; margin: auto 0; }
+    .underline { background-color: #fff; height: 2px; }
 
-        <img src="{{ item.birja_photo.url }}" alt="{{ item.birja_name }} Logo" style="width:200px; height:auto;">
+    @media (max-width: 991px) {
+      .section-title { max-width: 100%; }
+      .recommended-wrapper { white-space: initial; }
+      .exchange-list { max-width: 100%; padding-left: 20px; margin-top: 40px; }
+      .exchange-item { white-space: initial; }
+      .logo-column, .name-column { width: 100%; }
+      .exchange-logo { margin-top: 12px; }
+    }
+</style>
 
-        {% with url=item.birja_link %}
-        {% if url|slice:":12" == "https://www."%}
-        <a href="{{ url }}" target="_blank">{{ url|slice:"12:" }}</a>
-        {% elif url|slice:":11" == "http://www."%}
-        <a href="{{ url }}" target="_blank">{{ url|slice:"11:" }}</a>
-        {% else %}
-        <a href="{{ url }}" target="_blank">{{ url }}</a>
-        {% endif %}
-        {% endwith %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
 
-        <hr>
+<section class="exchange-section">
+    <h2 class="section-title">Birjalar bilan ishlash</h2>
+    <div class="title-underline"></div>
+    <div class="recommended-wrapper">
+        <span class="recommended-text">Recommended</span>
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/01001574dc06d3c4f220508c32eff92df0a1f3c65bf72986a87282457db0d38c?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+             alt="" class="recommended-icon"/>
+    </div>
+    <div class="exchange-list">
+        {% for item in birja %}
+        <div class="exchange-item">
+            <img src="{{ item.birja_photo.url }}" alt="logo" class="exchange-logo"/>
+            <div class="wrapper">
+                <a href="{{ item.birja_link }}" class="exchange-name">{{ item.birja_name }}</a>
+                <div class="underline"></div>
+            </div>
+        </div>
         {% endfor %}
     </div>
-</body>
-</html>
+</section>
 {% endblock %}

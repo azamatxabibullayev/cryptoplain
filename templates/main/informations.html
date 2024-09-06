@@ -1,28 +1,237 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Kerakli ma'lumotlar</h1>
+<style>
+    .crypto-info {
+        display: flex;
+        max-width: 937px;
+        flex-direction: column;
+        overflow: hidden;
+    }
 
-<form method="GET" action="{% url 'information' %}">
-    <input type="text" name="q" placeholder="Search information..." value="{{ request.GET.q }}">
-    <button type="submit">Search</button>
-</form>
+    .section-title {
+        color: #fff;
+        align-self: start;
+        font: 700 40px Poppins, sans-serif;
+    }
 
-{% if information_list %}
-<div class="information-list">
-    {% for info in information_list %}
-    <div class="information-item">
-        <h2>{{ info.title }}</h2>
-        {% if info.info_photo %}
-        <img src="{{ info.info_photo.url }}" alt="{{ info.title }}" class="info-photo">
+    @media (max-width: 991px) {
+        .section-title {
+            max-width: 100%;
+        }
+    }
+
+    .title-underline {
+        border-radius: 5px;
+        background-color: #fff;
+        width: 177px;
+        height: 5px;
+    }
+
+    .header-container {
+        display: flex;
+        margin-top: 7px;
+        width: 100%;
+        align-items: flex-start;
+        gap: 20px;
+        color: #fff;
+        font-weight: 400;
+        white-space: nowrap;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    @media (max-width: 991px) {
+        .header-container {
+            max-width: 100%;
+            white-space: initial;
+        }
+    }
+
+    .recommended-container {
+        align-self: start;
+        display: flex;
+        gap: 6px;
+        text-align: center;
+        font: 30px Poppins, sans-serif;
+    }
+
+    @media (max-width: 991px) {
+        .recommended-container {
+            white-space: initial;
+        }
+    }
+
+    .recommended-text {
+        flex-grow: 1;
+    }
+
+    .recommended-icon {
+        aspect-ratio: 1;
+        object-fit: contain;
+        object-position: center;
+        width: 45px;
+    }
+
+    .search-button {
+        border-radius: 15px;
+        background-color: #fb8b5d;
+        padding: 8px 20px;
+        font: 20px/1 Roboto, sans-serif;
+        cursor: pointer;
+        white-space: nowrap;
+        color: white;
+        height: 40px;
+        width: 125px;
+    }
+
+    .search-input {
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #fb8b5d;
+        border-radius: 5px;
+        flex-grow: 1;
+        color: #000;
+        margin-left: 100px;
+    }
+
+    @media (max-width: 991px) {
+        .search-button {
+            white-space: initial;
+            padding: 0 20px;
+        }
+    }
+
+    .content-container {
+        display: flex;
+        margin-top: 19px;
+        gap: 11px;
+        flex-wrap: wrap;
+    }
+
+    .info-card {
+        border-radius: 15px;
+        background-color: #fff;
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.25);
+        display: flex;
+        padding: 20px;
+        padding-left: 0px;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: nowrap;
+        flex-grow: 1;
+        flex-basis: auto;
+    }
+
+    @media (max-width: 991px) {
+        .info-card {
+            max-width: 100%;
+        }
+    }
+
+    .card-indicator {
+        border-radius: 15px;
+        background-color: #213f7b;
+        width: 43px;
+        height: 100%;
+        padding: 20px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .crypto-logo {
+        aspect-ratio: 1;
+        object-fit: contain;
+        object-position: center;
+        width: 125px;
+        align-self: stretch;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .crypto-details {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+    }
+
+    @media (max-width: 991px) {
+        .crypto-details {
+            max-width: 100%;
+        }
+    }
+
+    .crypto-name {
+        color: #213f7b;
+        align-self: start;
+        font: 600 25px Poppins, sans-serif;
+    }
+
+    .crypto-description {
+        color: #000;
+        margin-top: 6px;
+        font: 400 15px/23px Roboto, sans-serif;
+    }
+
+    @media (max-width: 991px) {
+        .crypto-description {
+            max-width: 100%;
+        }
+    }
+
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+<section class="crypto-info">
+    <h1 class="section-title">Barcha narsalar haqida kerakli ma'lumotlar </h1>
+    <div class="title-underline"></div>
+    <header class="header-container">
+        <div class="recommended-container">
+            <span class="recommended-text">Recommended</span>
+            <img loading="lazy"
+                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f0d5669761e856e049189f5570778cca2ced5004760b31590751e3ffb45514e?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                 class="recommended-icon" alt=""/>
+        </div>
+        <form method="GET" action="{% url 'information' %}">
+            <input type="text" id="search-field" name="q" placeholder="Search..." class="search-input"
+                   value="{{ request.GET.q }}">
+            <button type="submit" class="search-button" onclick="toggleSearch()">Search</button>
+        </form>
+    </header>
+    <div class="content-container">
+        {% if information_list %}
+        <article class="info-card">
+            {% for info in information_list %}
+            <div class="card-indicator"></div>
+            {% if info.info_photo %}
+            <img loading="lazy"
+                 src="{{ info.info_photo.url }}"
+                 class="crypto-logo" alt="{{ info.title }}"/>
+            {% endif %}
+            <div class="crypto-details">
+                <h2 class="crypto-name">{{ info.title }}</h2>
+                <p class="crypto-description">{{ info.short_info }}</p>
+                <a href="{% url 'information_detail' info.id %}">Read more</a>
+            </div>
+            {% endfor %}
+        </article>
+        {% else %}
+        <p>No results found.</p>
         {% endif %}
-        <p>{{ info.short_info }}</p>
-        <a href="{% url 'information_detail' info.id %}">Batafsil o'qish</a>
     </div>
-    {% endfor %}
-</div>
-{% else %}
-<p>No results found.</p>
-{% endif %}
+</section>
 
 {% endblock %}

@@ -1,8 +1,132 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ information.title }}</h1>
-<img src="{{ information.info_photo.url }}" alt="{{ information.title }}" style="width:300px; height:auto;">
-<p>{{ information.info_text }}</p>
-<a href="{% url 'information' %}">Orqaga qaytish</a>
+<style>
+    .crypto-info {
+    display: flex;
+    max-width: 937px;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.section-title {
+    color: #fff;
+    align-self: start;
+    font: 700 40px Poppins, sans-serif;
+}
+
+@media (max-width: 991px) {
+    .section-title {
+        max-width: 100%;
+    }
+}
+
+.title-underline {
+    border-radius: 5px;
+    background-color: #fff;
+    width: 177px;
+    height: 5px;
+}
+
+.header-container {
+    display: flex;
+    margin-top: 7px;
+    width: 100%;
+    align-items: flex-start;
+    gap: 20px;
+    color: #fff;
+    font-weight: 400;
+    white-space: nowrap;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+@media (max-width: 991px) {
+    .header-container {
+        max-width: 100%;
+        white-space: initial;
+    }
+}
+
+.recommended-container {
+    align-self: start;
+    display: flex;
+    gap: 6px;
+    text-align: center;
+    font: 30px Poppins, sans-serif;
+}
+
+@media (max-width: 991px) {
+    .recommended-container {
+        white-space: initial;
+    }
+}
+
+.recommended-text {
+    flex-grow: 1;
+}
+
+.recommended-icon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 45px;
+}
+
+.search-button {
+    border-radius: 15px;
+    background-color: #fb8b5d;
+    padding: 8px 20px;
+    font: 20px/1 Roboto, sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    color: white;
+    height: 40px;
+    width: 125px;
+}
+
+.search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #fb8b5d;
+    border-radius: 5px;
+    flex-grow: 1;
+    color: #000;
+    margin-left: 100px;
+}
+
+@media (max-width: 991px) {
+    .search-button {
+        white-space: initial;
+        padding: 0 20px;
+    }
+}
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">
+
+
+<section class="crypto-info">
+    <h1 class="section-title">Barcha narsalar haqida kerakli ma'lumotlar </h1>
+    <div class="title-underline"></div>
+    <header class="header-container">
+        <div class="recommended-container">
+            <span class="recommended-text">Recommended</span>
+            <img loading="lazy"
+                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f0d5669761e856e049189f5570778cca2ced5004760b31590751e3ffb45514e?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                 class="recommended-icon" alt=""/>
+        </div>
+        <form method="GET" action="{% url 'information' %}">
+            <input type="text" id="search-field" name="q" placeholder="Search..." class="search-input"
+                   value="{{ request.GET.q }}">
+            <button type="submit" class="search-button" onclick="toggleSearch()">Search</button>
+        </form>
+    </header>
+
+    <h1 style="margin-top: 60px; font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 25px;">{{
+        information.title }}</h1>
+    <p style="font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 25px;">{{ information.info_text }}</p>
+    <a href="{% url 'information' %}">Orqaga qaytish</a>
+
+</section>
 {% endblock %}

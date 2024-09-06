@@ -1,10 +1,120 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Maslahatlar</h1>
-<ul>
-    {% for item in advice %}
-    <li>{{ item.advice_text }}</li>
-    {% endfor %}
-</ul>
+<style>
+    .recommendations {
+      display: flex;
+      max-width: 934px;
+      flex-direction: column;
+      overflow: hidden;
+      align-items: flex-start;
+      font-family: Poppins, sans-serif;
+      color: #fff;
+    }
+
+    .recommendations__title {
+      font-size: 40px;
+      font-weight: 700;
+      font-family: Poppins;
+      font-family: bold;
+    }
+
+    .recommendations__underline {
+      border-radius: 5px;
+      background-color: #fff;
+      width: 177px;
+      height: 5px;
+    }
+
+    .recommendations__subtitle-wrapper {
+      display: flex;
+      margin-top: 7px;
+      gap: 6px;
+      font-size: 30px;
+      font-weight: 400;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .recommendations__subtitle {
+      flex-grow: 1;
+    }
+
+    .recommendations__icon {
+      aspect-ratio: 1;
+      object-fit: contain;
+      object-position: center;
+      width: 45px;
+    }
+
+    .recommendations__list {
+      align-self: stretch;
+      display: flex;
+      margin-top: 69px;
+      width: 100%;
+      padding-left: 42px;
+      flex-direction: column;
+      align-items: flex-start;
+      font: 500 20px/1 Roboto, sans-serif;
+    }
+
+    .recommendations__item {
+      display: flex;
+      gap: 19px;
+      margin-top: 20px;
+    }
+
+    .recommendations__item:first-child {
+      margin-top: 0;
+    }
+
+    .recommendations__bullet {
+      background-color: #fff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      margin: auto 0;
+    }
+
+    .recommendations__text {
+      flex-grow: 1;
+    }
+
+    @media (max-width: 991px) {
+      .recommendations__subtitle-wrapper {
+        white-space: initial;
+      }
+
+      .recommendations__list {
+        max-width: 100%;
+        padding-left: 20px;
+        margin-top: 40px;
+      }
+
+      .recommendations__text {
+        max-width: 100%;
+      }
+    }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+<section class="recommendations">
+    <h2 class="recommendations__title">Maslahatlar</h2>
+    <div class="recommendations__underline"></div>
+    <div class="recommendations__subtitle-wrapper">
+        <p class="recommendations__subtitle">Recommended</p>
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/eb65ba11352ea2bdfbe7a9f8b77a9d9430759dc26e0d51944acab142b20f2917?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+             alt="" class="recommendations__icon"/>
+    </div>
+    <ul class="recommendations__list">
+        {% for item in advice %}
+        <li class="recommendations__item">
+            <span class="recommendations__bullet"></span>
+            <p class="recommendations__text">{{ item.advice_text }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+
 {% endblock %}
