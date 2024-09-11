@@ -78,28 +78,41 @@ def news_view(request):
 
 def analysis_view(request):
     user = request.user
-    analyses = Analysis.objects.none()
+    accessible_analyses = Analysis.objects.none()
+    inaccessible_analyses = Analysis.objects.none()
 
     if user.is_authenticated:
         if hasattr(user, 'premium_user'):
             user_type = user.premium_user.premium_type
             if user_type == 'pro':
-                analyses = Analysis.objects.filter(analysis_type__in=['normal', 'standard', 'pro'])
+                accessible_analyses = Analysis.objects.filter(analysis_type__in=['normal', 'standard', 'pro'])
             else:
-                analyses = Analysis.objects.filter(analysis_type__in=['normal', 'standard'])
+                accessible_analyses = Analysis.objects.filter(analysis_type__in=['normal', 'standard'])
+                inaccessible_analyses = Analysis.objects.filter(analysis_type='pro')
         else:
-            analyses = Analysis.objects.filter(analysis_type='normal')
+            accessible_analyses = Analysis.objects.filter(analysis_type='normal')
+            inaccessible_analyses = Analysis.objects.filter(analysis_type__in=['standard', 'pro'])
     else:
-        analyses = Analysis.objects.filter(analysis_type='normal')
+        accessible_analyses = Analysis.objects.filter(analysis_type='normal')
+        inaccessible_analyses = Analysis.objects.filter(analysis_type__in=['standard', 'pro'])
 
-    grouped_analyses = defaultdict(list)
-    for analysis in analyses:
+    grouped_accessible_analyses = defaultdict(list)
+    grouped_inaccessible_analyses = defaultdict(list)
+
+    for analysis in accessible_analyses:
         date = localdate(analysis.created_at)
-        grouped_analyses[date].append(analysis)
+        grouped_accessible_analyses[date].append(analysis)
+
+    for analysis in inaccessible_analyses:
+        date = localdate(analysis.created_at)
+        grouped_inaccessible_analyses[date].append(analysis)
 
     context = {
-        'analyses': dict(grouped_analyses),
+        'accessible_analyses': dict(grouped_accessible_analyses),
+        'inaccessible_analyses': dict(grouped_inaccessible_analyses),
+        'user_type': user.premium_user.premium_type if hasattr(user, 'premium_user') else 'normal'
     }
+
     return render(request, 'main/analyses.html', context)
 
 

@@ -3,7 +3,8 @@
 {% block content %}
 <h1>Tex-Analizlar</h1>
 
-{% for date, day_analyses in analyses.items %}
+
+{% for date, day_analyses in accessible_analyses.items %}
 <h2>{{ date }}</h2>
 {% for analysis in day_analyses %}
 <div class="analysis-entry">
@@ -12,6 +13,24 @@
         <div class="image-overlay"></div>
     </div>
     <p>{{ analysis.analysis_text }}</p>
+</div>
+{% endfor %}
+{% endfor %}
+
+
+{% for date, day_analyses in inaccessible_analyses.items %}
+<h2>{{ date }}</h2>
+{% for analysis in day_analyses %}
+<div class="analysis-entry">
+    <div class="image-container">
+        <img src="/media/main/analyses/default.png" alt="Default Image" class="protected-image">
+        <div class="image-overlay"></div>
+    </div>
+    {% if analysis.analysis_type == 'pro' %}
+    <p>Pro padpiskani sotvolganinizdan so'ng ko'ra olasiz</p>
+    {% else %}
+    <p>Standard yoki Proni sotib olganingizdan so'ng bu analizlar ochiladi</p>
+    {% endif %}
 </div>
 {% endfor %}
 {% endfor %}
