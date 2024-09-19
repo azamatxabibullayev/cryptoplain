@@ -1,72 +1,152 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Tex-Analizlar</h1>
+<section class="crypto-analysis">
+    <div class="analysis-container">
+        <div class="analysis-column">
+            <header class="analysis-header">
+                <h2 class="analysis-title">Tex-Analizlar</h2>
+                <div class="title-underline"></div>
+                <div class="recommended-container">
+                    <span class="recommended-text">Recommended</span>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/25ea30afc6c86b6a01460cd488e5676cc7dd6a30a784eeda9ecaf8d86988d2be?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                         alt="Recommended" class="recommended-icon">
+                </div>
+            </header>
+
+            {% for date, analyses_group in combined_analyses.items %}
+            <h2>{{ date }}</h2>
+            <div class="analysis-row">
+                {% for analysis in analyses_group.accessible %}
+                <div class="analysis-entry">
+                    <img src="{{ analysis.analysis_photo.url }}" alt="{{ analysis.title }}" class="analysis-image">
+                    <p>{{ analysis.analysis_text }}</p>
+                </div>
+                {% endfor %}
 
 
-{% for date, day_analyses in accessible_analyses.items %}
-<h2>{{ date }}</h2>
-{% for analysis in day_analyses %}
-<div class="analysis-entry">
-    <div class="image-container">
-        <img src="{{ analysis.analysis_photo.url }}" alt="{{ analysis.title }}" class="protected-image">
-        <div class="image-overlay"></div>
+                {% for analysis in analyses_group.inaccessible %}
+                <div class="analysis-entry">
+                    <img src="/media/main/analyses/default.png" alt="Default Image" class="analysis-image">
+                    {% if analysis.analysis_type == 'pro' %}
+                    <p>Pro padpiskani sotvolganinizdan so'ng ko'ra olasiz</p>
+                    {% else %}
+                    <p>Standard yoki Proni sotib olganingizdan so'ng bu analizlar ochiladi</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
     </div>
-    <p>{{ analysis.analysis_text }}</p>
-</div>
-{% endfor %}
-{% endfor %}
+</section>
 
-
-{% for date, day_analyses in inaccessible_analyses.items %}
-<h2>{{ date }}</h2>
-{% for analysis in day_analyses %}
-<div class="analysis-entry">
-    <div class="image-container">
-        <img src="/media/main/analyses/default.png" alt="Default Image" class="protected-image">
-        <div class="image-overlay"></div>
-    </div>
-    {% if analysis.analysis_type == 'pro' %}
-    <p>Pro padpiskani sotvolganinizdan so'ng ko'ra olasiz</p>
-    {% else %}
-    <p>Standard yoki Proni sotib olganingizdan so'ng bu analizlar ochiladi</p>
-    {% endif %}
-</div>
-{% endfor %}
-{% endfor %}
-
-{% endblock %}
 
 <style>
-    .image-container {
-        position: relative;
-        display: inline-block;
+    .crypto-analysis {
+        padding: 0;
+        margin-left: -120px;
     }
 
-    img.protected-image {
-        display: block;
-        pointer-events: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+    .analysis-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0;
     }
 
-    .image-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
+    .analysis-column {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 0;
+    }
+
+    .analysis-header {
+      display: flex;
+      margin-left: 0;
+      width: 285px;
+      max-width: 100%;
+      flex-direction: column;
+      align-items: start;
+      font-family: Poppins, sans-serif;
+      color: #fff;
+      padding: 0px;
+    }
+
+    .analysis-title {
+      font-size: 40px;
+      font-weight: 700;
+    }
+
+    .title-underline {
+      border-radius: 5px;
+      background-color: #fff;
+      width: 177px;
+      height: 5px;
+    }
+
+    .recommended-container {
+      align-self: stretch;
+      display: flex;
+      margin-top: 7px;
+      gap: 6px;
+      font-size: 30px;
+      font-weight: 400;
+      white-space: nowrap;
+      text-align: center;
+      margin-left: 0px;
+    }
+
+    .recommended-text {
+      flex-grow: 1;
+      margin-left: -15px;
+      padding: 0;
+      margin-top: 5px;
+    }
+
+    .recommended-icon {
+      aspect-ratio: 1;
+      object-fit: contain;
+      object-position: center;
+      width: 45px;
+      margin-left: -25px;
+    }
+
+    .analysis-row {
+        display: flex;
+        gap: 20px;
+    }
+
+    .analysis-entry {
+        border-radius: 10px;
+        text-align: center;
+        width: 48%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 0;
+    }
+
+    .analysis-image {
         width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0); /* Transparent overlay */
-        pointer-events: none; /* Prevent interaction with the overlay */
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .analysis-entry p {
+        font-size: 16px;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .analysis-row {
+            flex-direction: column;
+        }
+
+        .analysis-entry {
+            width: 100%;
+        }
     }
 </style>
 
-<script>
-    document.addEventListener('contextmenu', function(e) {
-        if (e.target.tagName === 'IMG') {
-            e.preventDefault();
-        }
-    }, false);
-</script>
+{% endblock %}

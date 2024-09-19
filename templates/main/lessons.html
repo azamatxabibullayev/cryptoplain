@@ -1,34 +1,159 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Darsliklar va Pattern turlari</h1>
-
-{% for lesson in lessons %}
-<div class="lesson-entry">
-    <h3>{{ lesson.title }}</h3>
-    <img src="{{ lesson.lesson_photo_1.url }}" alt="{{ lesson.title }}" draggable="false" class="protected-image">
-    <img src="{{ lesson.lesson_photo_2.url }}" alt="{{ lesson.title }}" draggable="false" class="protected-image">
-    <p>{{ lesson.lesson_text|truncatewords:100 }}</p>
-    <a href="{% url 'lesson_detail' lesson.id %}">Batafsil o'qish</a>
-</div>
-{% endfor %}
-
-{% endblock %}
 
 <style>
-    img.protected-image {
-        pointer-events: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+    .lessons-container {
+      display: flex;
+      max-width: 901px;
+      flex-direction: column;
+      overflow: hidden;
+      align-items: start;
+    }
+
+    .lessons-title {
+      color: #fff;
+      font: 700 40px Poppins, sans-serif;
+    }
+
+    .title-underline {
+      border-radius: 5px;
+      background-color: #fff;
+      width: 177px;
+      height: 5px;
+      margin-top: 7px;
+    }
+
+    .recommended-section {
+      display: flex;
+      gap: 6px;
+      color: #fff;
+      text-align: center;
+      font: 400 30px Poppins, sans-serif;
+    }
+
+    .recommended-text {
+      flex-grow: 1;
+    }
+
+    .recommended-icon {
+      aspect-ratio: 1;
+      object-fit: contain;
+      object-position: center;
+      width: 45px;
+    }
+
+    .image-gallery {
+      align-self: stretch;
+      margin-top: 18px;
+      width: 100%;
+    }
+
+    .image-row {
+      gap: 20px;
+      display: flex;
+    }
+
+    .image-column {
+      display: flex;
+      flex-direction: column;
+      line-height: normal;
+      width: 50%;
+    }
+
+    .gallery-image {
+      aspect-ratio: 1.68;
+      object-fit: contain;
+      object-position: center;
+      width: 100%;
+      border-radius: 15px;
+      flex-grow: 1;
+    }
+
+    .pattern-description {
+      color: #fff;
+      align-self: stretch;
+      margin-top: 5px;
+      width: 100%;
+      font: 500 20px/30px Roboto, sans-serif;
+    }
+
+    .description-underline {
+      border-radius: 5px;
+      background-color: #fff;
+      width: 512px;
+      max-width: 100%;
+      height: 5px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 991px) {
+      .lessons-title,
+      .image-gallery,
+      .pattern-description {
+        max-width: 100%;
+      }
+
+      .recommended-section {
+        white-space: initial;
+      }
+
+      .image-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+
+      .image-column {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .gallery-image {
+        margin-top: 40px;
+      }
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 </style>
 
-<script>
-    document.addEventListener('contextmenu', function(e) {
-        if (e.target.tagName === 'IMG') {
-            e.preventDefault();
-        }
-    }, false);
-</script>
+<section class="lessons-container">
+    <h1 class="lessons-title">Darsliklar va Pattern turlari</h1>
+    <div class="title-underline"></div>
+    <div class="recommended-section">
+        <p class="recommended-text">Recommended</p>
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6d5af661ca88600ff41986651ff0f1eb195c7a9148ba750f06b294f72334eb20?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+             class="recommended-icon" alt="Recommended icon" loading="lazy">
+    </div>
+
+    {% for lesson in lessons %}
+    <div class="image-gallery">
+        <div class="image-row">
+            <div class="image-column">
+                <img src="{{ lesson.lesson_photo_1.url }}"
+                     class="gallery-image" alt="{{ lesson.title }}" loading="lazy">
+            </div>
+            <div class="image-column">
+                <img src="{{ lesson.lesson_photo_2.url }}"
+                     class="gallery-image" alt="{{ lesson.title }}" loading="lazy">
+            </div>
+        </div>
+    </div>
+    <p class="pattern-description">{{ lesson.lesson_text|truncatewords:100 }}</p>
+    <a href="{% url 'lesson_detail' lesson.id %}">Batafsil o'qish</a>
+    <div class="description-underline"></div>
+    {% endfor %}
+
+</section>
+
+{% endblock %}
