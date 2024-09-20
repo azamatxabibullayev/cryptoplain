@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Base</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Roboto, sans-serif;
+            background-color: #2C2449;
+        }
+
+        .sidebar {
+            background-color: #352e5a;
+            width: 250px;
+            color: #fff;
+            font: 500 14px Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .burger-menu {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #FB8B5D;
+        }
+
+        .nav-container {
+            border-radius: 10px;
+            background-color: #352e5a;
+            display: flex;
+            flex-direction: column;
+            padding: 8px 0 23px;
+            flex-grow: 1;
+        }
+
+        .back-button {
+            margin-bottom: 10px;
+            cursor: pointer;
+            width: 20px;
+            padding: 8px;
+            color: #fb8b5d; /* Orange color for back button */
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            padding: 0 8px;
+        }
+
+        .profile-icon {
+            aspect-ratio: 3.77;
+            object-fit: contain;
+            width: 34px;
+            align-self: center;
+        }
+
+        .home-button {
+            border-radius: 5px;
+            background-color: #181b3a;
+            display: flex;
+            margin-top: 21px;
+            gap: 3px;
+            color: #fb8b5d;
+            border: 1px solid #fb8b5d;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .home-icon {
+            width: 15px;
+        }
+
+        .nav-list {
+            display: flex;
+            margin-top: 22px;
+            width: 100%;
+            flex-direction: column;
+            padding-left: 5px;
+        }
+
+        .nav-item {
+            display: flex;
+            gap: 3px;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        .nav-icon {
+            width: 15px;
+        }
+
+        .settings-icon {
+            position: fixed;
+            right: 10px;
+            top: 10px;
+            width: 19px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5d8b49fdbfc9f82e442415ccac35eb9c001341c2e35d39a5f4598c4c02356555?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+     alt="Settings" class="settings-icon" onclick="window.open('#', '_self')"/>
+
+<div class="sidebar" id="sidebar">
+    <div class="back-button" onclick="toggleSidebar()">
+        <span>&larr;</span> <!-- Back icon -->
+        <span>Back</span>
+    </div>
+    <div class="nav-container">
+        <div class="profile-section">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/9e195ba7223e66a0093cf8aeef0565056997909db5e7cfec01ca16e66698daef?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                 alt="Profile icon" class="profile-icon"/>
+            <div class="profile-text">
+                <span>P</span>
+                <span>Profil</span>
+            </div>
+        </div>
+        <a href="#" class="home-button">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/fe81a601d76b10c98a8012a276f93943d284babdce0eb4929b1b4b0bff9ff326?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                 alt="" class="home-icon"/>
+            <span>A</span>
+            <span>Bosh sahifa</span>
+        </a>
+        <ul class="nav-list">
+            <li class="nav-item">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/4e5bc822e4498d02ec5b631281a859bcd7cdf3a133b9e5080ae8957c9f64b1ee?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                     alt="" class="nav-icon"/>
+                <span>Darsliklar</span>
+            </li>
+            <li class="nav-item">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5b520177dc1bfd20901715fb8f597adadcde3b0f9e9d471937b79a1530847939?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                     alt="" class="nav-icon"/>
+                <span>Video darslar</span>
+            </li>
+            <li class="nav-item">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/4ed94b160e66aa124f74429ccb6d23ff07d10cf8cf7282189fb995a303f8f094?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                     alt="" class="nav-icon"/>
+                <span>Tex-analizlar</span>
+            </li>
+            <li class="nav-item">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d654af5c0333637989390e709c89b49d5c0d92c2750d8d98e62bc494b4460ad2?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                     alt="" class="nav-icon"/>
+                <span>Ma'lumotlar</span>
+            </li>
+            <li class="nav-item">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/212f0291d63f6f9aaacf7f11ed497a45c97716d3e6446e5d37b5f30cfe34392a?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                     alt="" class="nav-icon"/>
+                <span>Birjalar bilan<br/>ishlash</span>
+            </li>
+            <li class="nav-item">
+                <span>T</span>
+                <span>Maslahatlar</span>
+            </li>
+            <li class="nav-item">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/63ed497fad3517501de4de0e94bf850ff63658181adcde212caf81ca1c5f2c8d?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                     alt="" class="nav-icon"/>
+                <span>Signallar</span>
+            </li>
+            <li class="nav-item">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/bae3420e7076d1d6909329aee250a777c4db1a7bf1525654715122e6c7a82b50?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                     alt="" class="nav-icon"/>
+                <span>Kitoblar</span>
+            </li>
+            <li class="nav-item">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a966bf85bd7d34731f9bc9989dcf35d6b93a725a9a09e6e771dc8f42be848a52?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                     alt="" class="nav-icon"/>
+                <span>Profil sozlamalari</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="burger-menu" onclick="toggleSidebar()">
+    &#9776; <!-- Hamburger icon -->
+</div>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('open');
+    }
+</script>
+</body>
+</html>

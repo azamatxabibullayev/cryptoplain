@@ -273,3 +273,7 @@ def book_view(request, book_id):
         'book': book,
     }
     return render(request, 'main/book_view.html', context)
+
+
+def mobile_view(request):
+    return render(request, 'base_mobile.html')

@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CryptoPlain</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.innerWidth < 768) {
+                window.location.href = 'main/mobile/';
+            }
+        });
+    </script>
+
+
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -365,4 +375,3 @@
 </main>
 </body>
 </html>
-
