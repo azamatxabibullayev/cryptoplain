@@ -21,5 +21,5 @@ urlpatterns = [
     path('indicators/<int:id>/', views.indicator_detail, name='indicator_detail'),
     path('books/', views.books_view, name='books'),
     path('books/<int:book_id>/', views.book_view, name='book_view'),
-    path('mobile/', views.mobile_view, name='mobile'),
+    path('mobile/', views.mobile_landing, name='mobile'),
 ]

@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (window.innerWidth < 768) {
+            window.location.href = '{% url "mobile" %}';
+        }
+    });
+</script>
+
+
 <style>
     .pricing-container { max-width: 920px; overflow: hidden; }
     .pricing-layout { gap: 20px; display: flex; }

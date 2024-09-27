@@ -275,5 +275,5 @@ def book_view(request, book_id):
     return render(request, 'main/book_view.html', context)
 
 
-def mobile_view(request):
-    return render(request, 'base_mobile.html')
+def mobile_landing(request):
+    return render(request, 'landing_page_mobile.html')

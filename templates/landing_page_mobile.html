@@ -1,0 +1,38 @@
+{% extends 'base_mobile.html' %}
+
+{% block content %}
+<h1 style="margin-top: -190px; margin-bottom: 190px; font-family: 'Roboto', sans-serif; text-align: center; font-weight: 300;">
+    Bosh Sahifa</h1>
+<div class="fear-greed-index-box">
+    <img src="{{ fear_greed_index_image.image.url }}" alt="Fear & Greed Index">
+</div>
+
+<!-- Link to Google Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+
+<section class="pricing-container">
+    <div class="pricing-layout">
+        <div class="pricing-column">
+            <article class="pricing-card">
+                <h3 style="display: flex; flex-direction: column; line-height: normal; margin-top: -10px; margin-left: 10px; margin-top: 47px; font-size: 30px;">
+                    Padpiska turlari</h3>
+                <a href="#" style="margin-bottom: 20px;"><img src="media/main/home/tekin_padpiska.png"
+                                                              class="pricing-image"/></a>
+                <a href="#" style="margin-bottom: 20px;"><img src="media/main/home/standart_padpiska.png"
+                                                              class="pricing-image"/></a>
+                <a href="#" style="margin-bottom: 20px;"><img src="media/main/home/pro_padpiska.png"
+                                                              class="pricing-image"/></a>
+            </article>
+        </div>
+        <div class="analysis-column">
+            <div class="analysis-content">
+                <h3 class="analysis-title">Analiz qiling</h3>
+                <img src="media/main/home/tradingview.png" class="analysis-image"/>
+                <img src="media/main/home/cryptobubles.png" class="analysis-image"/>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
