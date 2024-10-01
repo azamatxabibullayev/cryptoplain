@@ -277,3 +277,7 @@ def book_view(request, book_id):
 
 def mobile_landing(request):
     return render(request, 'landing_page_mobile.html')
+
+
+def mobile_lessons(request):
+    return render(request, 'main/lessons_mobile.html')

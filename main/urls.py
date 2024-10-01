@@ -22,4 +22,5 @@ urlpatterns = [
     path('books/', views.books_view, name='books'),
     path('books/<int:book_id>/', views.book_view, name='book_view'),
     path('mobile/', views.mobile_landing, name='mobile'),
+    path('mobile/lessons', views.mobile_lessons, name='mobile_lessons'),
 ]

@@ -9,11 +9,10 @@
     });
 </script>
 
-
 <style>
     .pricing-container { max-width: 920px; overflow: hidden; }
     .pricing-layout { gap: 20px; display: flex; }
-    .pricing-column { display: flex; flex: 0 0 32%;  flex-direction: column; line-height: normal; margin-left: 0; }
+    .pricing-column { display: flex; flex: 0 0 32%; flex-direction: column; line-height: normal; margin-left: 0; }
     .pricing-card { display: flex; margin-top: 9px; flex-grow: 1; flex-direction: column; color: #fff; font: 500 10px/1 Poppins, sans-serif; }
     .pricing-image { aspect-ratio: 1.57; object-fit: contain; object-position: center; width: 100%; border-radius: 0; }
     .pricing-details { border-radius: 15px; background-color: #3384ed; display: flex; margin-top: 20px; width: 100%; flex-direction: column; align-items: start; padding: 7px 4px 13px 32px; }
@@ -25,7 +24,7 @@
     .feature-icon { aspect-ratio: 1; object-fit: contain; object-position: center; width: 14px; margin: auto 0; }
     .feature-indicator { border-radius: 5px; background-color: #fb8b5d; display: flex; width: 6px; height: 20px; margin: auto 0; }
     .analysis-column { display: flex; flex-direction: column; line-height: normal; flex: 0 0 68%; margin-left: 20px; }
-    .analysis-content { display: flex; flex-direction: column; color: #fff; font: 400 25px Poppins, sans-serif; margin-top: 30px;}
+    .analysis-content { display: flex; flex-direction: column; color: #fff; font: 400 25px Poppins, sans-serif; margin-top: 30px; }
     .analysis-title { align-self: start; }
     .analysis-image { aspect-ratio: 2.52; object-fit: contain; object-position: center; width: 100%; border-radius: 15px; margin-top: 7px; }
 
@@ -36,7 +35,6 @@
         justify-content: flex-end;
         gap: 30px; /* Space between buttons */
         border-top: -60px;
-
     }
 
     .styled-button {
@@ -73,7 +71,6 @@
         background-color: rgba(255, 255, 255, 0.1); /* Slightly changes background on hover */
     }
 
-
     @media (max-width: 991px) {
         .pricing-layout { flex-direction: column; align-items: stretch; gap: 0; }
         .pricing-column, .analysis-column { width: 100%; }
@@ -104,13 +101,12 @@
             <span>Padpiska muddati</span>
         </a>
     </button>
-    <button class="styled-button" style="border: none; background-color: #352E5A;">
+    <button class="styled-button" style="border: none; background-color: #352E5A; margin-right: 40px;">
         <a href="#" class="button-link">
             <span>Sizning faolligingiz</span>
         </a>
     </button>
 </div>
-
 
 <section class="pricing-container">
     <div class="pricing-layout">
@@ -118,19 +114,21 @@
             <article class="pricing-card">
                 <h3 style="display: flex; flex-direction: column; line-height: normal; margin-top: -10px; margin-left: 10px; margin-top: 47px; font-size: 30px;">
                     Padpiska turlari</h3>
-                <a href="#" style="margin-bottom: 20px;"><img src="media/main/home/tekin_padpiska.png"
+                <a href="#" style="margin-bottom: 20px;"><img src="{{ MEDIA_URL }}main/home/tekin_padpiska.png"
                                                               class="pricing-image"/></a>
-                <a href="#" style="margin-bottom: 20px;"><img src="media/main/home/standart_padpiska.png"
+                <a href="#" style="margin-bottom: 20px;"><img src="{{ MEDIA_URL }}main/home/standart_padpiska.png"
                                                               class="pricing-image"/></a>
-                <a href="#" style="margin-bottom: 20px;"><img src="media/main/home/pro_padpiska.png"
+                <a href="#" style="margin-bottom: 20px;"><img src="{{ MEDIA_URL }}main/home/pro_padpiska.png"
                                                               class="pricing-image"/></a>
             </article>
         </div>
         <div class="analysis-column">
             <div class="analysis-content">
                 <h3 class="analysis-title">Analiz qiling</h3>
-                <img src="media/main/home/tradingview.png" class="analysis-image"/>
-                <img src="media/main/home/cryptobubles.png" class="analysis-image"/>
+                <a href="https://www.tradingview.com/"><img src="{{ MEDIA_URL }}main/home/tradingview.png"
+                                                            class="analysis-image"/></a>
+                <a href="https://cryptobubbles.net/"><img src="{{ MEDIA_URL }}main/home/cryptobubles.png"
+                                                          class="analysis-image"/></a>
             </div>
         </div>
     </div>

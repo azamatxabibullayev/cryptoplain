@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: url('/media/bg.png');
+            background: url('/media/bg.png') fixed;
             background-size: cover;
             color: #ffffff;
             margin: 0;
@@ -79,8 +80,8 @@
         }
 
         .logo {
-            height: 120px;
-            width: 55px;
+            height: auto;
+            max-width: 100%;
         }
 
         .title-container {
@@ -119,7 +120,7 @@
             flex-direction: column;
             align-items: center;
             border-radius: 10px;
-            margin-top: -115px;
+            margin-top: -110px;
         }
 
         .sidebar ul {
@@ -146,25 +147,24 @@
             font-size: 20px;
             width: 100%;
             transition: all 0.3s;
-            font-family: regular;
         }
 
         .sidebar ul li a:hover {
             color: #FB8B5D;
             background-color: #181B3A;
-            border : 1px solid #FB8B5D;
-            border-left : 11px solid #FB8B5D;
+            border: 1px solid #FB8B5D;
+            border-left: 11px solid #FB8B5D;
         }
 
-        .sidebar ul li.active a{
+        .sidebar ul li.active a {
             color: #FB8B5D;
             background-color: #181B3A;
-            border : 1px solid #FB8B5D;
-            border-left : 11px solid #FB8B5D;
+            border: 1px solid #FB8B5D;
+            border-left: 11px solid #FB8B5D;
         }
 
         .material-icons {
-            font-size: 20 px;
+            font-size: 20px;
             vertical-align: middle;
             margin-right: 15px;
             margin-left: 10px;
@@ -191,7 +191,6 @@
             cursor: pointer;
             margin-left: -5px;
             margin-top: -15px;
-
         }
 
         .coming-soon::after {
@@ -215,14 +214,86 @@
             visibility: visible;
         }
 
+        /* Settings dropdown styling */
+        .settings-container {
+            position: relative;
+        }
+
+        .settings-button {
+            background-color: #FB8B5D;
+            border: none;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            align-items: center;
+            margin-top: -10px;
+            margin-right: -50px;
+            width: 40px;
+            height: 38px;
+        }
+
+        .settings-button img {
+            width: 40px;
+            height: 38px;
+            border-radius: 8px;
+            margin-left: -8px;
+        }
+
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 45px;
+            right: 0;
+            background-color: #352E5A;
+            color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 40px;
+            margin-top : -15px;
+            margin-right: -39px;
+        }
+
+        .language-dropdown button {
+            background: none;
+            border: none;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .language-dropdown button:hover {
+            background-color: #FB8B5D;
+        }
+
+        .settings-container.active .language-dropdown {
+            display: block;
+        }
     </style>
+
+    <script>
+        function toggleSettings() {
+            document.querySelector('.settings-container').classList.toggle('active');
+        }
+
+        function changeLanguage(languageCode) {
+            const selectElement = document.querySelector('select[name="language"]');
+            selectElement.value = languageCode;
+            selectElement.form.submit();
+        }
+    </script>
 </head>
+
 <body>
 <header>
     <div class="header">
         <div class="logo-container">
             <a href="{% url 'landing_page' %}">
-                <img src="media/logo.png" alt="Logo" class="logo">
+                <img src="{{ MEDIA_URL }}logo.png" alt="Logo" class="logo">
             </a>
         </div>
         <div class="title-container">
@@ -238,22 +309,42 @@
             <li class="nav_img">
                 <a href="#" class="coming-soon">
                     <img src="/media/notification.png" alt="Notification"
-                         style="width: 40px; height: 40px;  border-radius: 8px;  margin-top: -5px;">
+                         style="width: 40px; height: 40px; border-radius: 8px;  margin-top: -5px;">
                 </a>
             </li>
             <li class="nav_img">
                 <a href="#" class="coming-soon">
                     <img src="/media/gift.png" alt="Gift"
-                         style="width: 40px; height: 40px; border-radius: 8px;  margin-top: -5px;">
+                         style="width: 40px; height: 40px; border-radius: 8px; margin-top: -5px;">
                 </a>
             </li>
-            <li class="nav_img">
-                <a href="#">
-                    <img src="/media/settings.png" alt="Settings"
-                         style="width: 40px; height: 38px; border-radius: 8px; margin-top: -10px; margin-right: -50px;">
-                </a>
+            <!-- Settings with Dropdown for Language -->
+            <li class="settings-container">
+                <button class="settings-button" onclick="toggleSettings()">
+                    <img src="/media/settings.png" alt="Settings"/>
+                </button>
+                <div class="language-dropdown">
+                    <button onclick="changeLanguage('uz')">UZ</button>
+                    <button onclick="changeLanguage('ru')">RU</button>
+                </div>
             </li>
         </ul>
+
+        {% load i18n %}
+        <form action="{% url 'set_language' %}" method="post" style="display: none;">
+            {% csrf_token %}
+            <select name="language">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                    {{ language.name_local }} ({{ language.code }})
+                </option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Go">
+        </form>
     </nav>
 </header>
 <main>
@@ -263,7 +354,6 @@
                 CryptoPlain<span class="material-icons"
                                  style="margin-left: 100px; margin-right: 0; padding: 0; color: #D9D9D9; width: 28px; height: 15px; margin-top: -15px;">menu</span>
             </p>
-
         </a>
         {% if user.is_authenticated %}
         {% if user.profile_pic %}
@@ -288,81 +378,81 @@
         <p><a href="{% url 'register' %}" style="color:#FFFFFF; text-decoration:none;">Registratsiya</a></p>
         {% endif %}
 
+        <!-- Sidebar Menu -->
         <ul>
-            <li class="{% if request.path == '/' %}active{% endif %}">
+            <li class="{% if request.path == '/uz/' or request.path == '/ru/' %}active{% endif %}">
                 <a href="{% url 'landing_page' %}">
                     <span class="material-icons" style="margin-top: -8px;">A</span> Bosh Sahifa
                 </a>
             </li>
-            <li class="{% if request.path == '/main/video-lessons/' %}active{% endif %}">
+            <li class="{% if request.path == '/uz/main/video-lessons/' or request.path == '/ru/main/video-lessons/' %}active{% endif %}">
                 <a href="{% url 'video_lessons' %}">
                     <span class="material-icons">play_circle</span> Video darslar
                 </a>
             </li>
-            <li class="{% if request.path == '/main/analyses/' %}active{% endif %}">
+            <li class="{% if request.path == '/uz/main/analyses/' or request.path == '/ru/main/analyses/' %}active{% endif %}">
                 <a href="{% url 'analyses' %}">
                     <span class="material-icons">analytics</span> Tex-Analizlar
                 </a>
             </li>
-            <li class="{% if request.path == '/main/informations/' %}active{% endif %}">
+            <li class="{% if request.path == '/uz/main/informations/' or request.path == '/ru/main/informations/' %}active{% endif %}">
                 <a href="{% url 'information' %}">
                     <span class="material-icons">info</span> Ma'lumotlar
                 </a>
             </li>
-            <li class="{% if request.path == '/main/birja/' %}active{% endif %}">
+            <li class="{% if request.path == '/uz/main/birja/' or request.path == '/ru/main/birja/' %}active{% endif %}">
                 <a href="{% url 'birja' %}">
                     <span class="material-icons" style="font-size: 15px;">show_chart</span> Birjalar bilan ishlash
                 </a>
             </li>
-            <li class="{% if request.path == '/main/advice/' %}active{% endif %}">
+            <li class="{% if request.path == '/uz/main/advice/' or request.path == '/ru/main/advice/' %}active{% endif %}">
                 <a href="{% url 'advice' %}">
                     <span class="material-icons" style="margin-top: -8px;">T</span> Maslahatlar
                 </a>
             </li>
-            <li class="{% if request.path == '/main/signal/' %}active{% endif %}">
+            <li class="{% if request.path == '/uz/main/signal/' or request.path == '/ru/main/signal/' %}active{% endif %}">
                 <a href="{% url 'signal' %}">
                     <span class="material-icons">lightbulb</span> Signallar
                 </a>
             </li>
-            <li class="{% if request.path == '/main/news/' %}active{% endif %}">
+            <li class="{% if request.path == '/uz/main/news/' or request.path == '/ru/main/news/' %}active{% endif %}">
                 <a href="{% url 'news' %}">
                     <span class="material-icons">article</span> Yangiliklar
                 </a>
             </li>
-            <li class="{% if request.path == '/main/lessons/' %}active{% endif %}">
+            <li class="{% if request.path == '/uz/main/lessons/' or request.path == '/ru/main/lessons/' %}active{% endif %}">
                 <a href="{% url 'lessons' %}">
                     <span class="material-icons" style="margin-top: -2px;">menu_book</span> Darsliklar
                 </a>
             </li>
-            <li class="{% if request.path == '/main/books/' %}active{% endif %}">
+            <li class="{% if request.path == '/uz/main/books/' or request.path == '/ru/main/books/' %}active{% endif %}">
                 <a href="{% url 'books' %}">
                     <span class="material-icons">book</span> Kitoblar
                 </a>
             </li>
-            <li class="{% if request.path == '/main/notes/' %}active{% endif %}">
+            <li class="{% if request.path == '/uz/main/notes/' or request.path == '/ru/main/notes/' %}active{% endif %}">
                 <a href="{% url 'note_list' %}">
                     <span class="material-icons">note</span> Zametkalar
                 </a>
             </li>
-            <li class="{% if request.path == '/main/indicators/' %}active{% endif %}">
+            <li class="{% if request.path == '/uz/main/indicators/' or request.path == '/ru/main/indicators/' %}active{% endif %}">
                 <a href="{% url 'indicators' %}">
                     <span class="material-icons">insights</span> Indikatorlar
                 </a>
             </li>
             {% if user.is_authenticated %}
-            <li class="{% if request.path == '/main/logout/' %}active{% endif %}">
+            <li class="{% if request.path == '/uz/main/logout/' or request.path == '/ru/main/logout/' %}active{% endif %}">
                 <a href="{% url 'logout' %}">
                     <span class="material-icons">logout</span> Chiqish
                 </a>
             </li>
             {% endif %}
         </ul>
-
-
     </div>
     <div class="content">
         {% block content %}{% endblock %}
     </div>
 </main>
 </body>
+
 </html>

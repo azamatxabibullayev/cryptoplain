@@ -1,0 +1,85 @@
+{% extends 'base_mobile.html' %}
+
+{% block content %}
+<style>
+    /* Container for trading patterns */
+    .trading-patterns {
+      display: flex;
+      max-width: 480px; /* Set the max-width for mobile screens */
+      width: 100%;
+      flex-direction: column;
+      overflow: visible;
+      color: #fff;
+      margin: 0 auto;
+      font: 500 15px/23px Roboto, sans-serif;
+    }
+
+    /* Description text styling */
+    .pattern-description {
+      align-self: start;
+      z-index: 10;
+      margin-top: -6px;
+    }
+
+    /* Primary image styling */
+    .pattern-image {
+      width: 100%;
+      height: auto;
+      object-fit: cover; /* Or use 'contain' for a different fit effect */
+      object-position: center; /* Center the image */
+      border-radius: 15px;
+      margin-top: 21px;
+    }
+
+    /* Secondary image styling */
+    .pattern-image-secondary {
+      margin-top: 31px;
+    }
+
+    /* Visually hidden for accessibility */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+</style>
+
+<section class="trading-patterns">
+    {% for lesson in lessons %}
+
+    <!-- Lesson description truncated to 100 words -->
+    <p class="pattern-description">{{ lesson.lesson_text|truncatewords:100 }}</p>
+
+    <!-- Link to detailed lesson view -->
+    <a href="{% url 'lesson_detail' lesson.id %}">Batafsil o'qish</a>
+
+    <!-- First image, fallback to external placeholder image if not available -->
+    {% if lesson.lesson_photo_1 %}
+    <img src="{{ lesson.lesson_photo_1.url }}"
+         alt="{{ lesson.title }}" class="pattern-image"/>
+    {% else %}
+    <!-- External fallback image URL (e.g., placeholder.com) -->
+    <img src="https://via.placeholder.com/600x400?text=No+Image+Available"
+         alt="Default image" class="pattern-image"/>
+    {% endif %}
+
+    <!-- Second image, fallback to external placeholder image if not available -->
+    {% if lesson.lesson_photo_2 %}
+    <img src="{{ lesson.lesson_photo_2.url }}"
+         alt="{{ lesson.title }}" class="pattern-image pattern-image-secondary"/>
+    {% else %}
+    <!-- External fallback image URL (e.g., placeholder.com) -->
+    <img src="https://via.placeholder.com/600x400?text=No+Image+Available"
+         alt="Default secondary image" class="pattern-image pattern-image-secondary"/>
+    {% endif %}
+
+    {% endfor %}
+</section>
+
+{% endblock %}
