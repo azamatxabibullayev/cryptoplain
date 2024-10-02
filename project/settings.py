@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from django.conf.global_settings import X_FRAME_OPTIONS
+from django.conf.global_settings import X_FRAME_OPTIONS, LOCALE_PATHS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'users',
     'main',
     'home',
-
+    'modeltranslation',
 ]
 
 MIDDLEWARE = [
@@ -105,11 +105,15 @@ LANGUAGES = [
     ('ru', _("Russian")),
 ]
 
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
+
 TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
 USE_TZ = True
+
+LOCALE_PATHS = BASE_DIR, 'locale'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

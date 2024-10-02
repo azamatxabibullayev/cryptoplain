@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load i18n %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CryptoPlain</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -172,7 +171,7 @@
 
         .content {
             flex-grow: 1;
-            padding: 20px;
+            padding: 20px;{% trans 'Books' %}
             background-color: #2C2449;
             border-radius: 10px;
             overflow-y: auto;
@@ -304,8 +303,8 @@
     <nav>
         <ul>
             <li><a href="#" class="coming-soon">Chat</a></li>
-            <li><a href="{% url 'birja' %}">Birjalar</a></li>
-            <li><a href="{% url 'news' %}">Yangiliklar</a></li>
+            <li><a href="{% url 'birja' %}">{% blocktrans %}Birjalar{% endblocktrans %}</a></li>
+            <li><a href="{% url 'news' %}">{% blocktrans %}Yangiliklar{% endblocktrans %}</a></li>
             <li class="nav_img">
                 <a href="#" class="coming-soon">
                     <img src="/media/notification.png" alt="Notification"
@@ -330,7 +329,6 @@
             </li>
         </ul>
 
-        {% load i18n %}
         <form action="{% url 'set_language' %}" method="post" style="display: none;">
             {% csrf_token %}
             <select name="language">
@@ -380,70 +378,66 @@
 
         <!-- Sidebar Menu -->
         <ul>
-            <li class="{% if request.path == '/uz/' or request.path == '/ru/' %}active{% endif %}">
-                <a href="{% url 'landing_page' %}">
-                    <span class="material-icons" style="margin-top: -8px;">A</span> Bosh Sahifa
+            <li>
+                {% url 'landing_page' as landing_page_url %}
+                <a href="{{ landing_page_url }}">
+                    <span class="material-icons" style="margin-top: -8px;">A</span>
+                    {% blocktrans %}Bosh Sahifa{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/uz/main/video-lessons/' or request.path == '/ru/main/video-lessons/' %}active{% endif %}">
-                <a href="{% url 'video_lessons' %}">
-                    <span class="material-icons">play_circle</span> Video darslar
+            <li>
+                {% url 'video_lessons' as video_lessons_url %}
+                <a href="{{ video_lessons_url }}">
+                    <span class="material-icons">play_circle</span>
+                    {% blocktrans %}Video darslar{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/uz/main/analyses/' or request.path == '/ru/main/analyses/' %}active{% endif %}">
-                <a href="{% url 'analyses' %}">
-                    <span class="material-icons">analytics</span> Tex-Analizlar
+            <li>
+                {% url 'analyses' as analyses_url %}
+                <a href="{{ analyses_url }}">
+                    <span class="material-icons">analytics</span>{% blocktrans %}Tex-Analizlar{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/uz/main/informations/' or request.path == '/ru/main/informations/' %}active{% endif %}">
-                <a href="{% url 'information' %}">
-                    <span class="material-icons">info</span> Ma'lumotlar
+            <li>
+                {% url 'information' as information_url %}
+                <a href="{{ information_url }}">
+                    <span class="material-icons">info</span>
+                    {% blocktrans %}Ma'lumotlar{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/uz/main/birja/' or request.path == '/ru/main/birja/' %}active{% endif %}">
-                <a href="{% url 'birja' %}">
-                    <span class="material-icons" style="font-size: 15px;">show_chart</span> Birjalar bilan ishlash
+            <li>
+                {% url 'lessons' as lessons_url %}
+                <a href="{{ lessons_url }}">
+                    <span class="material-icons" style="margin-top: -2px;">menu_book</span>
+                    {% blocktrans %}Darsliklar{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/uz/main/advice/' or request.path == '/ru/main/advice/' %}active{% endif %}">
-                <a href="{% url 'advice' %}">
-                    <span class="material-icons" style="margin-top: -8px;">T</span> Maslahatlar
+            <li>
+                {% url 'books' as books_url %}
+                <a href="{{ books_url }}">
+                    <span class="material-icons">book</span>
+                    {% blocktrans %}Books{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/uz/main/signal/' or request.path == '/ru/main/signal/' %}active{% endif %}">
-                <a href="{% url 'signal' %}">
-                    <span class="material-icons">lightbulb</span> Signallar
+
+            <li>
+                {% url 'note_list' as note_list_url %}
+                <a href="{{ note_list_url }}">
+                    <span class="material-icons">note</span>{% blocktrans %}Zametkalar
+                    {% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/uz/main/news/' or request.path == '/ru/main/news/' %}active{% endif %}">
-                <a href="{% url 'news' %}">
-                    <span class="material-icons">article</span> Yangiliklar
-                </a>
-            </li>
-            <li class="{% if request.path == '/uz/main/lessons/' or request.path == '/ru/main/lessons/' %}active{% endif %}">
-                <a href="{% url 'lessons' %}">
-                    <span class="material-icons" style="margin-top: -2px;">menu_book</span> Darsliklar
-                </a>
-            </li>
-            <li class="{% if request.path == '/uz/main/books/' or request.path == '/ru/main/books/' %}active{% endif %}">
-                <a href="{% url 'books' %}">
-                    <span class="material-icons">book</span> Kitoblar
-                </a>
-            </li>
-            <li class="{% if request.path == '/uz/main/notes/' or request.path == '/ru/main/notes/' %}active{% endif %}">
-                <a href="{% url 'note_list' %}">
-                    <span class="material-icons">note</span> Zametkalar
-                </a>
-            </li>
-            <li class="{% if request.path == '/uz/main/indicators/' or request.path == '/ru/main/indicators/' %}active{% endif %}">
-                <a href="{% url 'indicators' %}">
-                    <span class="material-icons">insights</span> Indikatorlar
+            <li>
+                {% url 'indicators' as indicators_url %}
+                <a href="{{ indicators_url }}">
+                    <span class="material-icons">insights</span>{% blocktrans %}Indikatorlar{% endblocktrans %}
                 </a>
             </li>
             {% if user.is_authenticated %}
-            <li class="{% if request.path == '/uz/main/logout/' or request.path == '/ru/main/logout/' %}active{% endif %}">
-                <a href="{% url 'logout' %}">
-                    <span class="material-icons">logout</span> Chiqish
+            <li>
+                {% url 'logout' as logout_url %}
+                <a href="{{ logout_url }}">
+                    <span class="material-icons">logout</span>{% blocktrans %}Chiqish{% endblocktrans %}
                 </a>
             </li>
             {% endif %}
@@ -452,7 +446,25 @@
     <div class="content">
         {% block content %}{% endblock %}
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get all the sidebar links
+            const menuItems = document.querySelectorAll('.sidebar ul li a');
+
+            // Get the current URL path
+            const currentPath = window.location.pathname;
+
+            // Loop through each menu item to check if the href matches the current path
+            menuItems.forEach(function (menuItem) {
+                if (menuItem.getAttribute('href') === currentPath) {
+                    // Add 'active' class to the matching menu item
+                    menuItem.parentElement.classList.add('active');
+                }
+            });
+        });
+    </script>
+
 </main>
 </body>
-
 </html>
