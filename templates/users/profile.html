@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}Profile{% endblock %}
 
@@ -23,5 +24,15 @@
 {% else %}
 <p>You are currently a normal user.</p>
 <p><a href="{% url 'update_profile' %}">Edit Profile</a></p>
+
+{% if user.is_authenticated %}
+<li>
+    {% url 'logout' as logout_url %}
+    <a href="{{ logout_url }}">
+        <span class="material-icons">logout</span>{% blocktrans %}Chiqish{% endblocktrans %}
+    </a>
+</li>
+{% endif %}
+
 {% endif %}
 {% endblock %}

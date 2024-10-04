@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-02 15:16+0500\n"
+"POT-Creation-Date: 2024-10-03 12:24+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
 #: project/settings.py:104
 msgid "Uzbek"
 msgstr ""
@@ -27,7 +28,7 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
-#: templates/base.html:174 templates/base.html:419
+#: templates/base.html:174
 msgid "Books"
 msgstr "Книги"
 
@@ -35,7 +36,7 @@ msgstr "Книги"
 msgid "Birjalar"
 msgstr "Бирджа"
 
-#: templates/base.html:307
+#: templates/base.html:307 templates/base.html:430
 msgid "Yangiliklar"
 msgstr "Новости"
 
@@ -56,17 +57,40 @@ msgid "Ma'lumotlar"
 msgstr "Информация"
 
 #: templates/base.html:412
+msgid "Birjalar bilan ishlash"
+msgstr ""
+
+#: templates/base.html:418
+#, fuzzy
+#| msgid "Ma'lumotlar"
+msgid "Maslahatlar"
+msgstr "Информация"
+
+#: templates/base.html:424
+msgid "Signallar"
+msgstr ""
+
+#: templates/base.html:437
 msgid "Darsliklar"
 msgstr "Учебники"
 
-#: templates/base.html:426
-msgid "Zametkalar"
-msgstr "Заметка"
+#: templates/base.html:444
+msgid "Kitoblar"
+msgstr ""
 
-#: templates/base.html:433
+#: templates/base.html:451
+msgid ""
+"Zametkalar\n"
+"                    "
+msgstr ""
+
+#: templates/base.html:458
 msgid "Indikatorlar"
 msgstr "Индикаторы"
 
-#: templates/base.html:440
+#: templates/users/profile.html:32
 msgid "Chiqish"
 msgstr "Выход"
+
+#~ msgid "Zametkalar"
+#~ msgstr "Заметка"

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoPlain</title>
+    <title>CryptoKoma</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
@@ -296,7 +296,7 @@
             </a>
         </div>
         <div class="title-container">
-            <div class="title">CryptoPlain</div>
+            <div class="title">CryptoKoma</div>
             <div class="subtitle">Your success is only with us</div>
         </div>
     </div>
@@ -406,6 +406,31 @@
                 </a>
             </li>
             <li>
+                {% url 'birja' as birja_url %}
+                <a href="{{ birja_url }}">
+                    <span class="material-icons" style="margin-right: 5px;">show_chart</span>
+                    {% blocktrans %}Birjalar bilan ishlash{% endblocktrans %}
+                </a>
+            </li>
+            <li>
+                {% url 'advice' as advice_url %}
+                <a href="{{ advice_url }}">
+                    <span class="material-icons" style="margin-right: 5px;  margin-top: -10px;">T</span>{% blocktrans %}Maslahatlar{% endblocktrans %}
+                </a>
+            </li>
+            <li>
+                {% url 'signal' as signal_url %}
+                <a href="{{ signal_url }}">
+                    <span class="material-icons" style="margin-right: 5px;">lightbulb</span> {% blocktrans %}Signallar{% endblocktrans %}
+                </a>
+            </li>
+            <li>
+                {% url 'news' as news_url %}
+                <a href="{{ news_url }}">
+                    <span class="material-icons" style="margin-right: 5px;">article</span> {% blocktrans %}Yangiliklar{% endblocktrans %}
+                </a>
+            </li>
+            <li>
                 {% url 'lessons' as lessons_url %}
                 <a href="{{ lessons_url }}">
                     <span class="material-icons" style="margin-top: -2px;">menu_book</span>
@@ -416,7 +441,7 @@
                 {% url 'books' as books_url %}
                 <a href="{{ books_url }}">
                     <span class="material-icons">book</span>
-                    {% blocktrans %}Books{% endblocktrans %}
+                    {% blocktrans %}Kitoblar{% endblocktrans %}
                 </a>
             </li>
 
@@ -433,14 +458,6 @@
                     <span class="material-icons">insights</span>{% blocktrans %}Indikatorlar{% endblocktrans %}
                 </a>
             </li>
-            {% if user.is_authenticated %}
-            <li>
-                {% url 'logout' as logout_url %}
-                <a href="{{ logout_url }}">
-                    <span class="material-icons">logout</span>{% blocktrans %}Chiqish{% endblocktrans %}
-                </a>
-            </li>
-            {% endif %}
         </ul>
     </div>
     <div class="content">
@@ -464,7 +481,6 @@
             });
         });
     </script>
-
 </main>
 </body>
 </html>
