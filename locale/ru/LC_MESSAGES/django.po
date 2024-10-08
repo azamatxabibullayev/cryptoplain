@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-03 12:24+0500\n"
+"POT-Creation-Date: 2024-10-08 11:10+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,65 +32,85 @@ msgstr ""
 msgid "Books"
 msgstr "Книги"
 
+#: templates/base.html:305
+msgid "Chat"
+msgstr "Чат"
+
 #: templates/base.html:306
 msgid "Birjalar"
 msgstr "Бирджа"
 
 #: templates/base.html:307 templates/base.html:430
+#: templates/base_mobile.html:217
 msgid "Yangiliklar"
 msgstr "Новости"
 
-#: templates/base.html:385
+#: templates/base.html:375
+msgid "Login"
+msgstr "Логин"
+
+#: templates/base.html:376
+msgid "Registratsiya"
+msgstr "Регистрация"
+
+#: templates/base.html:385 templates/base_mobile.html:182
 msgid "Bosh Sahifa"
 msgstr "Главная страница"
 
-#: templates/base.html:392
+#: templates/base.html:392 templates/base_mobile.html:187
 msgid "Video darslar"
 msgstr "Видео уроки"
 
-#: templates/base.html:398
+#: templates/base.html:398 templates/base_mobile.html:192
 msgid "Tex-Analizlar"
 msgstr "Tex-анализ"
 
-#: templates/base.html:405
+#: templates/base.html:405 templates/base_mobile.html:197
 msgid "Ma'lumotlar"
-msgstr "Информация"
+msgstr "Информации"
 
-#: templates/base.html:412
+#: templates/base.html:412 templates/base_mobile.html:202
 msgid "Birjalar bilan ishlash"
-msgstr ""
+msgstr "Работа с биржами"
 
-#: templates/base.html:418
-#, fuzzy
-#| msgid "Ma'lumotlar"
+#: templates/base.html:418 templates/base_mobile.html:207
 msgid "Maslahatlar"
-msgstr "Информация"
+msgstr "Советы"
 
-#: templates/base.html:424
+#: templates/base.html:424 templates/base_mobile.html:212
 msgid "Signallar"
-msgstr ""
+msgstr "Сигналы"
 
-#: templates/base.html:437
+#: templates/base.html:437 templates/base_mobile.html:223
 msgid "Darsliklar"
 msgstr "Учебники"
 
-#: templates/base.html:444
+#: templates/base.html:444 templates/base_mobile.html:228
 msgid "Kitoblar"
-msgstr ""
+msgstr "Книги"
 
 #: templates/base.html:451
 msgid ""
 "Zametkalar\n"
 "                    "
-msgstr ""
+msgstr "Заметки"
 
-#: templates/base.html:458
+#: templates/base.html:458 templates/base_mobile.html:238
 msgid "Indikatorlar"
 msgstr "Индикаторы"
 
-#: templates/users/profile.html:32
+#: templates/base_mobile.html:170
+msgid "Biz bilan bog'lanish"
+msgstr "Связаться с нами"
+
+#: templates/base_mobile.html:171
+msgid "Podpiska muddati"
+msgstr "Период подписки"
+
+#: templates/base_mobile.html:233
+msgid "Zametkalar"
+msgstr "Заметки"
+
+#: templates/base_mobile.html:244 templates/users/profile.html:32
 msgid "Chiqish"
 msgstr "Выход"
-
-#~ msgid "Zametkalar"
-#~ msgstr "Заметка"

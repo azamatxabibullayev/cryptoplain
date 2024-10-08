@@ -302,7 +302,7 @@
     </div>
     <nav>
         <ul>
-            <li><a href="#" class="coming-soon">Chat</a></li>
+            <li><a href="#" class="coming-soon">{% blocktrans %}Chat{% endblocktrans %}</a></li>
             <li><a href="{% url 'birja' %}">{% blocktrans %}Birjalar{% endblocktrans %}</a></li>
             <li><a href="{% url 'news' %}">{% blocktrans %}Yangiliklar{% endblocktrans %}</a></li>
             <li class="nav_img">
@@ -372,8 +372,8 @@
             <p>ID:{{ user.id }}</p>
         </a>
         {% else %}
-        <p><a href="{% url 'login' %}" style="color:#FFFFFF; text-decoration:none;">Login</a></p>
-        <p><a href="{% url 'register' %}" style="color:#FFFFFF; text-decoration:none;">Registratsiya</a></p>
+        <p><a href="{% url 'login' %}" style="color:#FFFFFF; text-decoration:none;">{% blocktrans %}Login{% endblocktrans %}</a></p>
+        <p><a href="{% url 'register' %}" style="color:#FFFFFF; text-decoration:none;">{% blocktrans %}Registratsiya{% endblocktrans %}</a></p>
         {% endif %}
 
         <!-- Sidebar Menu -->

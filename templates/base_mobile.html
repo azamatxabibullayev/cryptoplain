@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load i18n %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Base</title>
+    <title>CryptoKoma</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
@@ -166,8 +167,8 @@
     </div>
     <!-- Top Buttons -->
     <div class="top-buttons">
-        <button style="margin-right: 20px;">Biz bilan bog'lanish</button>
-        <button>Podpiska muddati</button>
+        <button style="margin-right: 20px;">{% blocktrans %}Biz bilan bog'lanish{% endblocktrans %}</button>
+        <button>{% blocktrans %}Podpiska muddati{% endblocktrans %}</button>
     </div>
     <span class="material-icons" style="color: #FB8B5D;">settings</span>
 </header>
@@ -178,69 +179,69 @@
         <ul id="navbar-list">
             <li class="{% if request.path == '/main/mobile/' %}active{% endif %}">
                 <a href="{% url 'landing_page' %}">
-                    <span class="material-icons" style="margin-right: 5px; margin-top: -10px;">A</span> Bosh Sahifa
+                    <span class="material-icons" style="margin-right: 5px; margin-top: -10px;">A</span>{% blocktrans %}Bosh Sahifa{% endblocktrans %}
                 </a>
             </li>
             <li class="{% if request.path == '/main/mobile/video-lessons/' %}active{% endif %}">
                 <a href="{% url 'video_lessons' %}">
-                    <span class="material-icons" style="margin-right: 5px;">play_circle</span> Video darslar
+                    <span class="material-icons" style="margin-right: 5px;">play_circle</span>{% blocktrans %}Video darslar{% endblocktrans %}
                 </a>
             </li>
             <li class="{% if request.path == '/main/mobile/analyses/' %}active{% endif %}">
                 <a href="{% url 'analyses' %}">
-                    <span class="material-icons" style="margin-right: 5px;">analytics</span> Tex-Analizlar
+                    <span class="material-icons" style="margin-right: 5px;">analytics</span>{% blocktrans %}Tex-Analizlar{% endblocktrans %}
                 </a>
             </li>
             <li class="{% if request.path == '/main/mobile/informations/' %}active{% endif %}">
                 <a href="{% url 'information' %}">
-                    <span class="material-icons" style="margin-right: 5px;">info</span> Ma'lumotlar
+                    <span class="material-icons" style="margin-right: 5px;">info</span>{% blocktrans %}Ma'lumotlar{% endblocktrans %}
                 </a>
             </li>
             <li class="{% if request.path == '/main/mobile/birja/' %}active{% endif %}">
                 <a href="{% url 'birja' %}">
-                    <span class="material-icons" style="margin-right: 5px;">show_chart</span> Birjalar bilan ishlash
+                    <span class="material-icons" style="margin-right: 5px;">show_chart</span>{% blocktrans %}Birjalar bilan ishlash{% endblocktrans %}
                 </a>
             </li>
             <li class="{% if request.path == '/main/mobile/advice/' %}active{% endif %}">
                 <a href="{% url 'advice' %}">
-                    <span class="material-icons" style="margin-right: 5px;  margin-top: -10px;">T</span> Maslahatlar
+                    <span class="material-icons" style="margin-right: 5px;  margin-top: -10px;">T</span>{% blocktrans %}Maslahatlar{% endblocktrans %}
                 </a>
             </li>
             <li class="{% if request.path == '/main/mobile/signal/' %}active{% endif %}">
                 <a href="{% url 'signal' %}">
-                    <span class="material-icons" style="margin-right: 5px;">lightbulb</span> Signallar
+                    <span class="material-icons" style="margin-right: 5px;">lightbulb</span>{% blocktrans %}Signallar{% endblocktrans %}
                 </a>
             </li>
             <li class="{% if request.path == '/main/mobile/news/' %}active{% endif %}">
                 <a href="{% url 'news' %}">
-                    <span class="material-icons" style="margin-right: 5px;">article</span> Yangiliklar
+                    <span class="material-icons" style="margin-right: 5px;">article</span> {% blocktrans %}Yangiliklar{% endblocktrans %}
                 </a>
             </li>
             <li class="{% if request.path == '/main/mobile/lessons/' %}active{% endif %}">
                 <a href="{% url 'lessons' %}">
                     <span class="material-icons" style="margin-right: 5px;  margin-top: -3px;">menu_book</span>
-                    Darsliklar
+                    {% blocktrans %}Darsliklar{% endblocktrans %}
                 </a>
             </li>
             <li class="{% if request.path == '/main/mobile//books/' %}active{% endif %}">
                 <a href="{% url 'books' %}">
-                    <span class="material-icons" style="margin-right: 5px;">book</span> Kitoblar
+                    <span class="material-icons" style="margin-right: 5px;">book</span>{% blocktrans %}Kitoblar{% endblocktrans %}
                 </a>
             </li>
             <li class="{% if request.path == '/main/mobile/notes/' %}active{% endif %}">
                 <a href="{% url 'note_list' %}">
-                    <span class="material-icons" style="margin-right: 5px;">note</span> Zametkalar
+                    <span class="material-icons" style="margin-right: 5px;">note</span>{% blocktrans %}Zametkalar{% endblocktrans %}
                 </a>
             </li>
             <li class="{% if request.path == '/main/mobile/indicators/' %}active{% endif %}">
                 <a href="{% url 'indicators' %}">
-                    <span class="material-icons" style="margin-right: 5px;">insights</span> Indikatorlar
+                    <span class="material-icons" style="margin-right: 5px;">insights</span>{% blocktrans %}Indikatorlar{% endblocktrans %}
                 </a>
             </li>
             {% if user.is_authenticated %}
             <li class="{% if request.path == '/main/mobile/logout/' %}active{% endif %}">
                 <a href="{% url 'logout' %}">
-                    <span class="material-icons" style="margin-right: 5px;">logout</span> Chiqish
+                    <span class="material-icons" style="margin-right: 5px;">logout</span>{% blocktrans %}Chiqish{% endblocktrans %}
                 </a>
             </li>
             {% endif %}
