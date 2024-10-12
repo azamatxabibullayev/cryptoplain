@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'main',
     'home',
     'modeltranslation',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

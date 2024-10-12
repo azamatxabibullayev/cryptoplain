@@ -1,22 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Warning</title>
-</head>
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .warning-container {
+      display: flex;
+      flex-direction: column;
+      max-width: 902px;
+      overflow: hidden;
+      color: #fff;
+      font: 400 30px Lato, sans-serif;
+    }
+
+    .warning-title {
+      align-self: start;
+    }
+
+    .warning-box {
+      border-radius: 30px;
+      margin-top: 29px;
+      width: 100%;
+      padding: 25px 17px;
+      border: 3px solid #fb8b5d;
+      box-sizing: border-box;
+    }
+
+    .warning-title-ru {
+      align-self: start;
+      margin-top: 45px;
+    }
+
+    .warning-box-ru {
+      border-radius: 30px;
+      margin-top: 41px;
+      width: 100%;
+      padding: 20px 17px;
+      border: 3px solid #fb8b5d;
+      box-sizing: border-box;
+    }
+
+    /* Style the buttons */
+    form button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px 5px;
+      border-radius: 30px;
+      border: 3px solid #fb8b5d;
+      background-color: transparent;
+      color: #fff;
+      font-family: Lato, sans-serif;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    form button:hover {
+      background-color: #fb8b5d;
+      color: #fff;
+    }
+
+    @media (max-width: 991px) {
+      .warning-box,
+      .warning-box-ru {
+        max-width: 100%;
+        padding-right: 20px;
+      }
+      .warning-title-ru {
+        margin-top: 40px;
+      }
+      .warning-box-ru {
+        margin-top: 40px;
+      }
+    }
+</style>
 <body>
-<h1>Warning</h1>
-<p>Vebsayt siz yoqotishingiz mumkun bolgan pul uchun javobgar emas, hech kim hech narsani kafolatlay olmaydi chunki
-    birjada narx qayerga ketishini oldindan bilishni ilojisi yoq.</p>
-<p>Hurmat bilan CryptoIndex jamoasi</p>
-<p>Сайт не несет ответственности за любые деньги, которые вы можете потерять, никто ничего не может гарантировать,
-    потому что невозможно заранее знать, куда пойдет цена на фондовом рынке.</p>
-<p>Команда CryptoIndex.</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit" name="accept">Accept</button>
-    <button type="submit" name="decline">Decline</button>
-</form>
+<section class="warning-container">
+    <h2 class="warning-title">Ogohlantirish</h2>
+    <p class="warning-box">
+        Siz bizning vebsayt taqdim etadigan materiallardan foydalanib <br/>
+        yo'qotishingiz mumkun bo'lgan pul uchun javobgar emasmiz, <br/>
+        narx qayerga ketishini hech kim oldindan aniq ayta olmaydi, <br/>
+        Materiallar professional traderlar portfoliolaridan olingan.
+    </p>
+    <h2 class="warning-title-ru">Предупреждение</h2>
+    <p class="warning-box-ru">
+        Вы используете материалы, которые предоставляет наш сайт Мы не несем ответственности за любые деньги, которые вы
+        можете потерять, никто не может точно предсказать, куда пойдет цена. Материалы взяты из портфелей
+        профессиональных трейдеров.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="accept">Accept</button>
+        <button type="submit" name="decline">Decline</button>
+    </form>
+</section>
 </body>
-</html>
+{% endblock %}

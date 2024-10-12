@@ -1,10 +1,128 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{% if form.instance.pk %}Edit{% else %}New{% endif %} Note</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+
+<style>
+    .notes-container {
+        display: flex;
+        max-width: 902px;
+        flex-direction: column;
+        align-items: flex-start;
+        color: #fff;
+        font-family: Poppins, sans-serif; /* Use Poppins consistently */
+    }
+
+    .notes-title {
+        font-size: 40px;
+        font-weight: 700;
+    }
+
+    .notes-divider {
+        border-radius: 5px;
+        background-color: #fff;
+        width: 177px;
+        height: 5px;
+    }
+
+    .recommendation-container {
+        display: flex;
+        align-items: center;
+        margin-top: 7px;
+        gap: 6px;
+    }
+
+    .recommended-text {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .recommendation-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+
+    /* Styling for form elements to match Builder.io output */
+    .note-name-input input {
+        width: 100%;
+        padding: 8px 21px;  /* Adjusted padding */
+        font-size: 16px;
+        border-radius: 30px;
+        border: 3px solid #fb8b5d;
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.3); /* Lighter placeholder color */
+        margin-top: 36px; /* Increased margin */
+        font-family: Krub, sans-serif; /* Use Krub for input */
+    }
+
+
+    .note-content textarea {
+        /* ... other styles ... */
+        background-image: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 28px,
+            rgba(251, 139, 93, 1) 5px
+        );
+        line-height: 32px; /* Important: Adjust if needed for your font size */
+    }
+
+
+
+    .note-divider {
+        border-radius: 15px;
+        background-color: #fb8b5d;
+        width: 100%;
+        height: 4px;
+        margin-top: 44px;
+    }
+
+    .save-button {
+        border-radius: 30px;
+        background-color: #fb8b5d;
+        color: white;
+        font-size: 18px;
+        padding: 9px 27px; /* Adjusted padding */
+        margin-top: 44px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .save-button:hover {
+        background-color: #ff9b73;
+    }
+
+
+    /* Media query adjustments */
+    @media (max-width: 991px) {
+        .note-name-input input,
+        .note-content textarea {
+            padding-left: 20px;
+        }
+        .save-button {
+            padding: 9px 20px;
+        }
+    }
+</style>
+
+<section class="notes-container">
+    <h1 class="notes-title">Zametkalar</h1>
+    <div class="notes-divider" aria-hidden="true"></div>
+    <div class="recommendation-container">
+        <p class="recommended-text">Recommended</p>
+        <img src="your-image-url-here" class="recommendation-icon" alt="Recommendation icon"/>
+    </div>
+
+    <form method="POST" action="{% url 'note_create' %}">
+        {% csrf_token %}
+        <div class="form-group note-name-input">
+            {{ form.title }}
+        </div>
+        <div class="form-group note-content">
+            {{ form.content }}
+        </div>
+        <button type="submit" class="save-button">Saqlash</button>
+    </form>
+</section>
+
 {% endblock %}

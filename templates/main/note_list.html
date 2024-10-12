@@ -1,13 +1,135 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Zametkalar</h1>
-<a href="{% url 'note_create' %}">Yangi zametka qo'shish</a>
-<ul>
-    {% for note in notes %}
-    <li>
-        <a href="{% url 'note_details' note.pk %}">{{ note.title }}</a>
-    </li>
-    {% endfor %}
-</ul>
+<style>
+    .recommended-section {
+      display: flex;
+      max-width: 575px;
+      flex-direction: column;
+      overflow: hidden;
+      align-items: start;
+    }
+    .section-title {
+      color: #fff;
+      font: 700 40px Poppins, sans-serif;
+    }
+    .title-underline {
+      border-radius: 5px;
+      background-color: #fff;
+      width: 177px;
+      height: 5px;
+    }
+    .recommended-header {
+      display: flex;
+      margin-top: 7px;
+      gap: 6px;
+      color: #fff;
+      text-align: center;
+      font: 400 30px Poppins, sans-serif;
+    }
+    .recommended-text {
+      flex-grow: 1;
+    }
+    .recommended-icon {
+      aspect-ratio: 1;
+      object-fit: contain;
+      object-position: center;
+      width: 45px;
+    }
+    .card-container {
+      align-self: stretch;
+      margin-top: 45px;
+      width: 100%;
+    }
+    .card-grid {
+      gap: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .card {
+      border-radius: 20px;
+      background-color: #fff;
+      color: #000;
+      width: calc(50% - 10px);
+      padding: 20px;
+      font: 400 20px Krub, sans-serif;
+      border: 2px solid #fb8b5d;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 150px; /* Ensure a minimum consistent height */
+    }
+    .card a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .add-card-icon {
+      font-size: 80px;
+      color: #fb8b5d;
+    }
+    @media (max-width: 991px) {
+      .recommended-header {
+        white-space: initial;
+      }
+      .card-container {
+        max-width: 100%;
+        margin-top: 40px;
+      }
+      .card-grid {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+      .card {
+        margin-top: 40px;
+        white-space: initial;
+        padding: 67px 20px;
+        width: 100%;
+      }
+      .card-content {
+        margin-top: 40px;
+        padding: 51px 20px;
+      }
+    }
+</style>
+
+<section class="recommended-section">
+    <h2 class="section-title">Zametkalar</h2>
+    <div class="title-underline"></div>
+    <header class="recommended-header">
+        <p class="recommended-text">Recommended</p>
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5e768dbbc549f811f495f158cbc87eba11b2a5cc9dc479c26af745e650ef0e17?placeholderIfAbsent=true&apiKey=2421539783f342b695fe52d7fceb6ba6"
+             alt="" class="recommended-icon"/>
+    </header>
+    <div class="card-container">
+        <div class="card-grid">
+            {% for note in notes %}
+            <article class="card">
+                <a href="{% url 'note_details' note.pk %}">
+                    {{ note.title }}
+                </a>
+            </article>
+            {% endfor %}
+            <article class="card">
+                <a href="{% url 'note_create' %}" class="card-content">
+                    <span class="add-card-icon">+</span>
+                </a>
+            </article>
+        </div>
+    </div>
+</section>
 {% endblock %}
