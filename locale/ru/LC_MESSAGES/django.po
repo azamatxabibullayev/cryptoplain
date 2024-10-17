@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-08 11:10+0500\n"
+"POT-Creation-Date: 2024-10-15 09:05+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,11 +20,21 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: project/settings.py:104
+#: main/forms.py:10
+msgid "Yangi zametka qoshish"
+msgstr ""
+
+#: main/forms.py:11
+#, fuzzy
+#| msgid "Zametkalar"
+msgid "Zametka"
+msgstr "Заметки"
+
+#: project/settings.py:105
 msgid "Uzbek"
 msgstr ""
 
-#: project/settings.py:105
+#: project/settings.py:106
 msgid "Russian"
 msgstr ""
 
@@ -114,3 +124,45 @@ msgstr "Заметки"
 #: templates/base_mobile.html:244 templates/users/profile.html:32
 msgid "Chiqish"
 msgstr "Выход"
+
+#: templates/landing_page.html:96
+#, fuzzy
+#| msgid "Biz bilan bog'lanish"
+msgid "Biz bilan bo'g'lanish"
+msgstr "Связаться с нами"
+
+#: templates/landing_page.html:102
+#, fuzzy
+#| msgid "Podpiska muddati"
+msgid "Padpiska muddati"
+msgstr "Период подписки"
+
+#: templates/landing_page.html:107
+msgid "Sizning faolligingiz"
+msgstr "Ваши активность"
+
+#: templates/landing_page.html:117 templates/landing_page_mobile.html:138
+#, fuzzy
+#| msgid "Podpiska muddati"
+msgid "Padpiska turlari"
+msgstr "Период подписки"
+
+#: templates/landing_page.html:128 templates/landing_page_mobile.html:129
+msgid "Analiz qiling"
+msgstr "Анализируйте "
+
+#: templates/landing_page_mobile.html:123
+#, fuzzy
+#| msgid "Bosh Sahifa"
+msgid ""
+"Bosh\n"
+"    sahifa"
+msgstr "Главная страница"
+
+#: templates/landing_page_mobile.html:132
+msgid "Kuzating"
+msgstr "Обращайте внимание"
+
+#: templates/landing_page_mobile.html:135
+msgid "Qo'rquv indeksi"
+msgstr "Индекс страха"

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load i18n %}
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         if (window.innerWidth < 768) {
@@ -92,18 +93,18 @@
 <div class="button-container">
     <button class="styled-button">
         <a href="#" class="button-link">
-            <span>Biz bilan bo'g'lanish</span>
+            <span>{% blocktrans %}Biz bilan bo'g'lanish{% endblocktrans %}</span>
         </a>
     </button>
     <button class="styled-button">
         <a href="#" class="button-link">
             <span class="material-icons-outlined">calendar_month</span>
-            <span>Padpiska muddati</span>
+            <span>{% blocktrans %}Padpiska muddati{% endblocktrans %}</span>
         </a>
     </button>
     <button class="styled-button" style="border: none; background-color: #352E5A; margin-right: 40px;">
         <a href="#" class="button-link">
-            <span>Sizning faolligingiz</span>
+            <span>{% blocktrans %}Sizning faolligingiz{% endblocktrans %}</span>
         </a>
     </button>
 </div>
@@ -113,7 +114,7 @@
         <div class="pricing-column">
             <article class="pricing-card">
                 <h3 style="display: flex; flex-direction: column; line-height: normal; margin-top: -10px; margin-left: 10px; margin-top: 47px; font-size: 30px;">
-                    Padpiska turlari</h3>
+                    {% blocktrans %}Padpiska turlari{% endblocktrans %}</h3>
                 <a href="#" style="margin-bottom: 20px;"><img src="{{ MEDIA_URL }}main/home/tekin_padpiska.png"
                                                               class="pricing-image"/></a>
                 <a href="#" style="margin-bottom: 20px;"><img src="{{ MEDIA_URL }}main/home/standart_padpiska.png"
@@ -124,7 +125,7 @@
         </div>
         <div class="analysis-column">
             <div class="analysis-content">
-                <h3 class="analysis-title">Analiz qiling</h3>
+                <h3 class="analysis-title">{% blocktrans %}Analiz qiling{% endblocktrans %}</h3>
                 <a href="https://www.tradingview.com/"><img src="{{ MEDIA_URL }}main/home/tradingview.png"
                                                             class="analysis-image"/></a>
                 <a href="https://cryptobubbles.net/"><img src="{{ MEDIA_URL }}main/home/cryptobubles.png"

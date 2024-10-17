@@ -153,6 +153,62 @@
             padding-bottom: 100px; /* Provide space for scrolling */
         }
 
+        /* Settings dropdown styling */
+        .settings-container {
+            position: relative;
+        }
+
+        .settings-button {
+            background-color: #FB8B5D;
+            border: none;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            align-items: center;
+            width: 40px;
+            height: 38px;
+        }
+
+        .settings-button img {
+            width: 40px;
+            height: 38px;
+            border-radius: 8px;
+            margin-left: -8px;
+        }
+
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 45px;
+            right: 0;
+            background-color: #352E5A;
+            color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 40px;
+        }
+
+        .language-dropdown button {
+            background: none;
+            border: none;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .language-dropdown button:hover {
+            background-color: #FB8B5D;
+        }
+
+        .settings-container.active .language-dropdown {
+            display: block;
+        }
+
     </style>
 </head>
 <body>
@@ -170,81 +226,104 @@
         <button style="margin-right: 20px;">{% blocktrans %}Biz bilan bog'lanish{% endblocktrans %}</button>
         <button>{% blocktrans %}Podpiska muddati{% endblocktrans %}</button>
     </div>
-    <span class="material-icons" style="color: #FB8B5D;">settings</span>
+    <div class="settings-container">
+        <button class="settings-button" onclick="toggleSettings()">
+            <img src="/media/settings.png" alt="Settings"/>
+        </button>
+        <div class="language-dropdown">
+            <button onclick="changeLanguage('uz')">UZ</button>
+            <button onclick="changeLanguage('ru')">RU</button>
+        </div>
+    </div>
 </header>
 
 <!-- Swipeable Navbar -->
 <nav class="navbar-container">
     <div class="navbar">
         <ul id="navbar-list">
-            <li class="{% if request.path == '/main/mobile/' %}active{% endif %}">
-                <a href="{% url 'landing_page' %}">
-                    <span class="material-icons" style="margin-right: 5px; margin-top: -10px;">A</span>{% blocktrans %}Bosh Sahifa{% endblocktrans %}
+            <li>
+                {% url 'landing_page' as landing_page_url %}
+                <a href="{{ landing_page_url }}">
+                    <span class="material-icons" style="margin-top: -8px;">A</span>
+                    {% blocktrans %}Bosh Sahifa{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/main/mobile/video-lessons/' %}active{% endif %}">
-                <a href="{% url 'video_lessons' %}">
-                    <span class="material-icons" style="margin-right: 5px;">play_circle</span>{% blocktrans %}Video darslar{% endblocktrans %}
+            <li>
+                {% url 'video_lessons' as video_lessons_url %}
+                <a href="{{ video_lessons_url }}">
+                    <span class="material-icons">play_circle</span>
+                    {% blocktrans %}Video darslar{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/main/mobile/analyses/' %}active{% endif %}">
-                <a href="{% url 'analyses' %}">
-                    <span class="material-icons" style="margin-right: 5px;">analytics</span>{% blocktrans %}Tex-Analizlar{% endblocktrans %}
+            <li>
+                {% url 'analyses' as analyses_url %}
+                <a href="{{ analyses_url }}">
+                    <span class="material-icons">analytics</span>{% blocktrans %}Tex-Analizlar{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/main/mobile/informations/' %}active{% endif %}">
-                <a href="{% url 'information' %}">
-                    <span class="material-icons" style="margin-right: 5px;">info</span>{% blocktrans %}Ma'lumotlar{% endblocktrans %}
+            <li>
+                {% url 'information' as information_url %}
+                <a href="{{ information_url }}">
+                    <span class="material-icons">info</span>
+                    {% blocktrans %}Ma'lumotlar{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/main/mobile/birja/' %}active{% endif %}">
-                <a href="{% url 'birja' %}">
-                    <span class="material-icons" style="margin-right: 5px;">show_chart</span>{% blocktrans %}Birjalar bilan ishlash{% endblocktrans %}
+            <li>
+                {% url 'birja' as birja_url %}
+                <a href="{{ birja_url }}">
+                    <span class="material-icons" style="margin-right: 5px;">show_chart</span>
+                    {% blocktrans %}Birjalar bilan ishlash{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/main/mobile/advice/' %}active{% endif %}">
-                <a href="{% url 'advice' %}">
-                    <span class="material-icons" style="margin-right: 5px;  margin-top: -10px;">T</span>{% blocktrans %}Maslahatlar{% endblocktrans %}
+            <li>
+                {% url 'advice' as advice_url %}
+                <a href="{{ advice_url }}">
+                    <span class="material-icons" style="margin-right: 5px; margin-top: -10px;">T</span>
+                    {% blocktrans %}Maslahatlar{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/main/mobile/signal/' %}active{% endif %}">
-                <a href="{% url 'signal' %}">
-                    <span class="material-icons" style="margin-right: 5px;">lightbulb</span>{% blocktrans %}Signallar{% endblocktrans %}
+            <li>
+                {% url 'signal' as signal_url %}
+                <a href="{{ signal_url }}">
+                    <span class="material-icons" style="margin-right: 5px;">lightbulb</span>
+                    {% blocktrans %}Signallar{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/main/mobile/news/' %}active{% endif %}">
-                <a href="{% url 'news' %}">
-                    <span class="material-icons" style="margin-right: 5px;">article</span> {% blocktrans %}Yangiliklar{% endblocktrans %}
+            <li>
+                {% url 'news' as news_url %}
+                <a href="{{ news_url }}">
+                    <span class="material-icons" style="margin-right: 5px;">article</span>
+                    {% blocktrans %}Yangiliklar{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/main/mobile/lessons/' %}active{% endif %}">
-                <a href="{% url 'lessons' %}">
-                    <span class="material-icons" style="margin-right: 5px;  margin-top: -3px;">menu_book</span>
+            <li>
+                {% url 'lessons' as lessons_url %}
+                <a href="{{ lessons_url }}">
+                    <span class="material-icons" style="margin-top: -2px;">menu_book</span>
                     {% blocktrans %}Darsliklar{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/main/mobile//books/' %}active{% endif %}">
-                <a href="{% url 'books' %}">
-                    <span class="material-icons" style="margin-right: 5px;">book</span>{% blocktrans %}Kitoblar{% endblocktrans %}
+            <li>
+                {% url 'books' as books_url %}
+                <a href="{{ books_url }}">
+                    <span class="material-icons">book</span>
+                    {% blocktrans %}Kitoblar{% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/main/mobile/notes/' %}active{% endif %}">
-                <a href="{% url 'note_list' %}">
-                    <span class="material-icons" style="margin-right: 5px;">note</span>{% blocktrans %}Zametkalar{% endblocktrans %}
+
+            <li>
+                {% url 'note_list' as note_list_url %}
+                <a href="{{ note_list_url }}">
+                    <span class="material-icons">note</span>{% blocktrans %}Zametkalar
+                    {% endblocktrans %}
                 </a>
             </li>
-            <li class="{% if request.path == '/main/mobile/indicators/' %}active{% endif %}">
-                <a href="{% url 'indicators' %}">
-                    <span class="material-icons" style="margin-right: 5px;">insights</span>{% blocktrans %}Indikatorlar{% endblocktrans %}
+            <li>
+                {% url 'indicators' as indicators_url %}
+                <a href="{{ indicators_url }}">
+                    <span class="material-icons">insights</span>{% blocktrans %}Indikatorlar{% endblocktrans %}
                 </a>
             </li>
-            {% if user.is_authenticated %}
-            <li class="{% if request.path == '/main/mobile/logout/' %}active{% endif %}">
-                <a href="{% url 'logout' %}">
-                    <span class="material-icons" style="margin-right: 5px;">logout</span>{% blocktrans %}Chiqish{% endblocktrans %}
-                </a>
-            </li>
-            {% endif %}
         </ul>
     </div>
 </nav>
@@ -255,60 +334,105 @@
 </div>
 
 <script>
-    // Toggle Profile menu
-    function toggleProfile() {
-        const profileMenu = document.getElementById('profile-menu');
-        profileMenu.classList.toggle('open');
-    }
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuItems = document.querySelectorAll('.navbar ul li a');
+        const currentPath = window.location.pathname;
 
-    // Swipe functionality for the navbar
-    let isDown = false;
-    let startX;
-    let scrollLeft;
+        // Debugging line
+        console.log("Current path:", currentPath);
 
-    const slider = document.querySelector('.navbar');
-    slider.addEventListener('mousedown', (e) => {
-        isDown = true;
-        slider.classList.add('active');
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
+        // Loop through each menu item to check if the href matches the current path
+        menuItems.forEach(function (menuItem) {
+            if (menuItem.getAttribute('href') === currentPath) {
+                // Add 'active' class to the matching menu item
+                menuItem.parentElement.classList.add('active');
+            }
+        });
     });
 
-    slider.addEventListener('mouseleave', () => {
-        isDown = false;
-        slider.classList.remove('active');
-    });
 
-    slider.addEventListener('mouseup', () => {
-        isDown = false;
-        slider.classList.remove('active');
-    });
+// Toggle Profile menu
+function toggleProfile() {
+    const profileMenu = document.getElementById('profile-menu');
+    profileMenu.classList.toggle('open');
+}
 
-    slider.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2; // Scroll speed
-        slider.scrollLeft = scrollLeft - walk;
-    });
+// Toggle Settings dropdown
+function toggleSettings() {
+    document.querySelector('.settings-container').classList.toggle('active');
+}
 
-    // Add touch event handling for swipe on mobile
-    slider.addEventListener('touchstart', (e) => {
-        isDown = true;
-        startX = e.touches[0].pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-    });
+// Change Language function
+function changeLanguage(languageCode) {
+    const selectElement = document.querySelector('select[name="language"]');
+    selectElement.value = languageCode;
+    selectElement.form.submit();
+}
 
-    slider.addEventListener('touchend', () => {
-        isDown = false;
-    });
+// Swipe functionality for the navbar
+let isDown = false;
+let startX;
+let scrollLeft;
 
-    slider.addEventListener('touchmove', (e) => {
-        if (!isDown) return;
-        const x = e.touches[0].pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2;
-        slider.scrollLeft = scrollLeft - walk;
-    });
+const slider = document.querySelector('.navbar');
+slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.classList.add('active');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+});
+
+slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('active');
+});
+
+slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('active');
+});
+
+slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2; // Scroll speed
+    slider.scrollLeft = scrollLeft - walk;
+});
+
+// Add touch event handling for swipe on mobile
+slider.addEventListener('touchstart', (e) => {
+    isDown = true;
+    startX = e.touches[0].pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+});
+
+slider.addEventListener('touchend', () => {
+    isDown = false;
+});
+
+slider.addEventListener('touchmove', (e) => {
+    if (!isDown) return;
+    const x = e.touches[0].pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2;
+    slider.scrollLeft = scrollLeft - walk;
+});
 </script>
+
+<form action="{% url 'set_language' %}" method="post" style="display: none;">
+    {% csrf_token %}
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+            {{ language.name_local }} ({{ language.code }})
+        </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Go">
+</form>
 </body>
 </html>
