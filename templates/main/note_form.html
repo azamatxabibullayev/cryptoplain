@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <style>
     .notes-container {
         display: flex;
@@ -9,7 +8,8 @@
         flex-direction: column;
         align-items: flex-start;
         color: #fff;
-        font-family: Poppins, sans-serif; /* Use Poppins consistently */
+        font-family: Poppins, sans-serif;
+        padding: 20px;
     }
 
     .notes-title {
@@ -41,33 +41,48 @@
         height: 24px;
     }
 
-
-    /* Styling for form elements to match Builder.io output */
+    /* Enlarging form elements */
     .note-name-input input {
         width: 100%;
-        padding: 8px 21px;  /* Adjusted padding */
-        font-size: 16px;
+        padding: 15px 30px;
+        font-size: 18px;
         border-radius: 30px;
-        border: 3px solid #fb8b5d;
+        border: 2px solid #fb8b5d;
         background-color: transparent;
-        color: rgba(255, 255, 255, 0.3); /* Lighter placeholder color */
-        margin-top: 36px; /* Increased margin */
-        font-family: Krub, sans-serif; /* Use Krub for input */
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 20px;
+        font-family: Krub, sans-serif;
     }
 
+    .note-name-input input::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+    }
 
     .note-content textarea {
-        /* ... other styles ... */
+        width: 100%;
+        height: 250px; /* Increased height */
+        padding: 7px 30px;
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        resize: none;
+        font-family: Krub, sans-serif;
+        font-size: 18px;
+        line-height: 40px; /* Match line-height to stripe spacing */
+        /* Stripe effect in textarea */
         background-image: repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 28px,
-            rgba(251, 139, 93, 1) 5px
+            to bottom,
+            transparent 0px,
+            transparent 38px, /* Adjust this to control the height of the gap */
+            rgba(251, 139, 93, 1) 39px
         );
-        line-height: 32px; /* Important: Adjust if needed for your font size */
+        background-size: 100% 40px; /* Match background size to line-height */
+        margin-top: 20px;
     }
 
-
+    .note-content textarea::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+    }
 
     .note-divider {
         border-radius: 15px;
@@ -81,8 +96,8 @@
         border-radius: 30px;
         background-color: #fb8b5d;
         color: white;
-        font-size: 18px;
-        padding: 9px 27px; /* Adjusted padding */
+        font-size: 20px;
+        padding: 12px 35px;
         margin-top: 44px;
         border: none;
         cursor: pointer;
@@ -92,6 +107,24 @@
         background-color: #ff9b73;
     }
 
+    /* Custom scrollbar styling for the textarea */
+    .note-content textarea::-webkit-scrollbar {
+        width: 12px; /* Scrollbar width */
+    }
+
+    .note-content textarea::-webkit-scrollbar-track {
+        background: #3e2a4d; /* Scrollbar track background color */
+    }
+
+    .note-content textarea::-webkit-scrollbar-thumb {
+        background-color: #fb8b5d; /* Scrollbar thumb color */
+        border-radius: 10px; /* Rounded corners for the scrollbar */
+        border: 3px solid #3e2a4d; /* Adds space between the thumb and the track */
+    }
+
+    .note-content textarea::-webkit-scrollbar-thumb:hover {
+        background-color: #ff9b73; /* Hover effect on scrollbar thumb */
+    }
 
     /* Media query adjustments */
     @media (max-width: 991px) {
@@ -100,7 +133,7 @@
             padding-left: 20px;
         }
         .save-button {
-            padding: 9px 20px;
+            padding: 12px 25px;
         }
     }
 </style>
@@ -115,14 +148,19 @@
 
     <form method="POST" action="{% url 'note_create' %}">
         {% csrf_token %}
+        <h2>Yangi Zametka</h2>
         <div class="form-group note-name-input">
+            <label for="id_title" style="display: none;">Title</label>
             {{ form.title }}
         </div>
+
+        <h2>Zametka</h2>
         <div class="form-group note-content">
+            <label for="id_content" style="display: none;">Content</label>
             {{ form.content }}
         </div>
+
         <button type="submit" class="save-button">Saqlash</button>
     </form>
 </section>
-
-{% endblock %}
+{% endblock content %}
