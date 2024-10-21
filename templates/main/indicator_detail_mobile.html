@@ -1,0 +1,40 @@
+{% extends 'base_mobile.html' %}
+
+{% block content %}
+{% load i18n %}
+
+<h1 class="main-title">Indikatorlar</h1>
+<h1 style="margin-top: 60px; font-family: 'Roboto', sans-serif; font-weight: semibold; font-size: 25px;">{{ indicator.title }}</h1>
+
+
+<div class="indicator-detail">
+    <p style="font-family: 'Roboto', sans-serif; font-weight: semi-bold; font-size: 20px;">{{ indicator.indicator_text }}</p>
+</div>
+
+<a href="{% url 'indicators' %}" class="btn btn-primary"> < Orqaga</a>
+
+
+
+<style>
+    .main-title {
+          font-weight: 300;
+          font-size: 28px;
+          margin-top: -195px;
+          margin-bottom: 200px;
+          text-align: center;
+    }
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #FB8B5D;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+</style>
+
+{% endblock %}

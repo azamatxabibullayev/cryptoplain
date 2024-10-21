@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load i18n %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (window.innerWidth < 768) {
+            window.location.href = '{% url "mobile_indicator_detail" id=indicator.id %}';
+        }
+    });
+</script>
+
 <h1>{{ indicator.title }}</h1>
 
 <div class="indicator-detail">
@@ -27,16 +36,12 @@
         padding: 10px 20px;
         font-size: 16px;
         color: #fff;
-        background-color: #007bff;
+        background-color: #FB8B5D;
         border: none;
         border-radius: 5px;
         text-decoration: none;
         cursor: pointer;
         margin-top: 20px;
-    }
-
-    .btn:hover {
-        background-color: #0056b3;
     }
 </style>
 

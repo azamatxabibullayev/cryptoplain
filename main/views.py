@@ -427,3 +427,12 @@ def mobile_indicator_view(request):
         'indicators': indicators,
     }
     return render(request, 'main/indicators_mobile.html', context)
+
+
+def mobile_indicator_detail(request, id):
+    indicator = Indicator.objects.get(id=id)
+    context = {
+        'indicator': indicator,
+        'id': indicator.id,
+    }
+    return render(request, 'main/indicator_detail_mobile.html', context)

@@ -33,4 +33,5 @@ urlpatterns = [
     path('mobile/books/', views.mobile_books_view, name='mobile_books'),
     path('mobile/news/', views.mobile_news_view, name='mobile_news'),
     path('mobile/indicators/', views.mobile_indicator_view, name='mobile_indicators'),
+    path('mobile/indicators/<int:id>/', views.mobile_indicator_detail, name='mobile_indicator_detail'),
 ]
