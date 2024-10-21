@@ -1,19 +1,17 @@
-{% extends 'base.html' %}
+{% extends 'base_mobile.html' %}
 
 {% block content %}
 {% load i18n %}
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        if (window.innerWidth < 768) {
-            window.location.href = '{% url "mobile_news" %}';
-        }
-    });
-</script>
 <style>
     .news-container { display: flex; max-width: 908px; flex-direction: column; overflow: hidden; }
     .news-header { align-self: start; display: flex; gap: 6px; font-family: Poppins, sans-serif; color: #fff; }
-    .news-title-wrapper { display: flex; flex-direction: column; }
-    .news-title { font-size: 40px; font-weight: 700; }
+    .news-title {
+          font-weight: 300;
+          font-size: 28px;
+          margin-top: -195px;
+          margin-bottom: 160px;
+          text-align: center;
+    }
     .news-underline { border-radius: 5px; background-color: #fff; width: 177px; height: 5px; }
     .news-subtitle { font-size: 30px; font-weight: 400; text-align: center; margin-top: 7px; }
     .news-icon { aspect-ratio: 1; object-fit: contain; object-position: center; width: 45px; align-self: end; margin-top: 75px; }
@@ -38,18 +36,9 @@
 </style>
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+<h1 class="news-title">Yangiliklar</h1>
 
 <section class="news-container">
-    <header class="news-header">
-        <div class="news-title-wrapper">
-            <h1 class="news-title">Yangiliklar</h1>
-            <div class="news-underline" aria-hidden="true"></div>
-            <span class="news-subtitle">Recommended</span>
-        </div>
-        <img loading="lazy"
-             src="https://cdn.builder.io/api/v1/image/assets/TEMP/71161e96051714ee01217a75aaa927288eadce9b6c59522a9642f6f707599828?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
-             class="news-icon" alt=""/>
-    </header>
     <article class="news-content">
         {% for item in news %}
         <div class="news-article">

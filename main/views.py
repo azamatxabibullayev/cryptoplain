@@ -1,4 +1,5 @@
 from collections import defaultdict
+from home.models import FearGreedIndex
 from .forms import NoteForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.timezone import localdate
@@ -275,9 +276,154 @@ def book_view(request, book_id):
     return render(request, 'main/book_view.html', context)
 
 
+# MOBILE MODE
+
 def mobile_landing(request):
-    return render(request, 'landing_page_mobile.html')
+    fear_greed_index_image = FearGreedIndex.objects.last()
+    context = {
+        'fear_greed_index_image': fear_greed_index_image,
+    }
+    return render(request, 'landing_page_mobile.html', context)
 
 
 def mobile_lessons(request):
-    return render(request, 'main/lessons_mobile.html')
+    user = request.user
+    lessons = Lesson.objects.none()
+
+    if user.is_authenticated:
+        if hasattr(user, 'premium_user'):
+            user_type = user.premium_user.premium_type
+            if user_type == 'pro':
+                lessons = Lesson.objects.filter(lesson_type__in=['normal', 'standard', 'pro'])
+            else:
+                lessons = Lesson.objects.filter(lesson_type__in=['normal', 'standard'])
+        else:
+            lessons = Lesson.objects.filter(lesson_type='normal')
+    else:
+        lessons = Lesson.objects.filter(lesson_type='normal')
+
+    context = {
+        'lessons': lessons,
+    }
+    return render(request, 'main/lessons_mobile.html', context)
+
+
+def mobile_lesson_detail(request, id):
+    lesson = Lesson.objects.get(id=id)
+    context = {
+        'lesson': lesson,
+    }
+    return render(request, 'main/lesson_detail_mobile.html', context)
+
+
+def mobile_video_lessons_view(request):
+    query = request.GET.get('q')
+    if query:
+        video_lessons = VideoLesson.objects.filter(
+            Q(title__icontains=query)
+        )
+    else:
+        video_lessons = VideoLesson.objects.all()
+
+    context = {
+        'video_lessons': video_lessons
+    }
+    return render(request, 'main/video_lessons_mobile.html', context)
+
+
+def mobile_advices_view(request):
+    advice = Advice.objects.all()
+    context = {
+        'advice': advice
+    }
+    return render(request, 'main/advice_mobile.html', context)
+
+
+def mobile_birja_view(request):
+    birja = Birja.objects.all()
+    context = {
+        'birja': birja
+    }
+    return render(request, 'main/birja_mobile.html', context)
+
+
+def mobile_information(request):
+    query = request.GET.get('q')
+    if query:
+        information_list = Information.objects.filter(
+            Q(title__icontains=query) | Q(info_text__icontains=query)
+        )
+    else:
+        information_list = Information.objects.all()
+
+    context = {
+        'information_list': information_list
+    }
+    return render(request, 'main/informations_mobile.html', context)
+
+
+def mobile_information_detail(request, info_id):
+    information = get_object_or_404(Information, id=info_id)
+    context = {
+        'information': information
+    }
+    return render(request, 'main/information_detail_mobile.html', context)
+
+
+def mobile_signals_view(request):
+    signal = Signal.objects.all()
+    context = {
+        'signal': signal
+    }
+    return render(request, 'main/signal_mobile.html', context)
+
+
+def mobile_books_view(request):
+    return render(request, 'main/books_mobile.html')
+
+
+def mobile_news_view(request):
+    news = News.objects.all()
+    context = {
+        'news': news
+    }
+    return render(request, 'main/news_mobile.html', context)
+
+
+def mobile_indicator_view(request):
+    query = request.GET.get('q')
+    user = request.user
+    indicators = Indicator.objects.none()
+
+    if user.is_authenticated:
+        if hasattr(user, 'premium_user'):
+            user_type = user.premium_user.premium_type
+            if user_type == 'pro':
+                indicators = Indicator.objects.filter(
+                    Q(indicator_type__in=['normal', 'standard', 'pro']) &
+                    (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
+                    Q(indicator_type__in=['normal', 'standard', 'pro'])
+                )
+            else:
+                indicators = Indicator.objects.filter(
+                    Q(indicator_type__in=['normal', 'standard']) &
+                    (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
+                    Q(indicator_type__in=['normal', 'standard'])
+                )
+        else:
+            indicators = Indicator.objects.filter(
+                Q(indicator_type='normal') &
+                (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
+                Q(indicator_type='normal')
+            )
+    else:
+        indicators = Indicator.objects.filter(
+            Q(indicator_type='normal') &
+            (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
+            Q(indicator_type='normal')
+        )
+
+    context = {
+        'indicators': indicators,
+    }
+    return render(request, 'main/indicators_mobile.html', context)

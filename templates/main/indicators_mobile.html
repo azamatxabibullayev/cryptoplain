@@ -1,13 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'base_mobile.html' %}
 {% block content %}
 {% load i18n %}
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        if (window.innerWidth < 768) {
-            window.location.href = '{% url "mobile_indicators" %}';
-        }
-    });
-</script>
 
 <style>
     .news-section {
@@ -35,8 +28,11 @@
     }
 
     .main-title {
-        font-size: 40px;
-        font-weight: 700;
+          font-weight: 300;
+          font-size: 28px;
+          margin-top: -195px;
+          margin-bottom: 200px;
+          text-align: center;
     }
 
     .indicator-bar {
@@ -188,20 +184,13 @@
       margin-left: 100px;
     }
 </style>
+<h1 class="main-title">Indikatorlar</h1>
 
 <section class="news-section">
     <header class="header-container">
-        <div class="title-container">
-            <h1 class="main-title">Indikatorlar</h1>
-            <div class="indicator-bar"></div>
-            <div class="recommended-container">
-                <span class="recommended-text">Recommended</span>
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0911efd0d0b0e9405ad74bc5132b603cad38d059da564ccc42eb6569d103f7a8?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
-                     alt="" class="recommended-icon"/>
-            </div>
-        </div>
-        <form method="GET" action="{% url 'indicators' %}">
-            <input type="text" name="q" placeholder="Indikatorlardan qidiring...." value="{{ request.GET.q }}" class="search-input">
+        <form method="GET" action="{% url 'mobile_indicators' %}">
+            <input type="text" name="q" placeholder="Indikatorlardan qidiring...." value="{{ request.GET.q }}"
+                   class="search-input">
             <button type="submit" class="search-button">Search</button>
         </form>
     </header>
@@ -219,11 +208,9 @@
             </div>
         </div>
     </article>
-
     {% endfor %}
     {% else %}
     <p>No results found.</p>
     {% endif %}
 </section>
-
 {% endblock %}

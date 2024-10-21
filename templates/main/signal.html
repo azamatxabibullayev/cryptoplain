@@ -1,8 +1,34 @@
 {% extends 'base.html' %}
-<title>Signallar</title>
-{% block content %}
 
+{% block content %}
+{% load i18n %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (window.innerWidth < 768) {
+            window.location.href = '{% url "mobile_signal" %}';
+        }
+    });
+</script>
+
+
+<style>
+    .section-title {
+        color: #fff;
+        align-self: start;
+        font: 700 40px Poppins, sans-serif;
+    }
+
+    .title-underline {
+        border-radius: 5px;
+        background-color: #fff;
+        width: 177px;
+        height: 5px;
+    }
+</style>
+
+<h1 class="section-title"> Signallar </h1>
+<div class="title-underline"></div>
 <ul>
-    <p>Coming soon...</p>
+    <p style="font-size: 30px;">Coming soon...</p>
 </ul>
 {% endblock %}

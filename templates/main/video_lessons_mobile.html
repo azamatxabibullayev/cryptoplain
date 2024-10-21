@@ -1,14 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'base_mobile.html' %}
+
 
 {% block content %}
 {% load i18n %}
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        if (window.innerWidth < 768) {
-            window.location.href = '{% url "mobile_video_lessons" %}';
-        }
-    });
-</script>
+
+
 <style>
     .video-lessons {
       display: flex;
@@ -20,15 +16,13 @@
     }
 
     .section-title {
-      font: 700 40px Poppins, sans-serif;
+      font-weight: 300;
+      font-size: 28px;
+      margin-top: -195px;
+      margin-bottom: 160px;
+      text-align: center;
     }
 
-    .title-underline {
-      border-radius: 5px;
-      background-color: #fff;
-      width: 177px;
-      height: 5px;
-    }
 
     .search-container {
       align-self: stretch;
@@ -41,16 +35,6 @@
       flex-wrap: nowrap; /* Makes sure input and button stay on the same line */
     }
 
-    .recommended-wrapper {
-      display: flex;
-      gap: 6px;
-      text-align: center;
-      font: 30px Poppins, sans-serif;
-    }
-
-    .recommended-text {
-      flex-grow: 1;
-    }
 
     .material-symbols-outlined {
        aspect-ratio: 1;
@@ -79,7 +63,8 @@
       border-radius: 5px;
       flex-grow: 1;
       color: #000;
-      margin-left: 100px;
+      margin-left: 50px;
+      height: 16px;
     }
 
     .content-wrapper {
@@ -99,11 +84,6 @@
       width: fit-content;
     }
 
-    .language-selector {
-      gap: 32px;
-      color: #FFFFFF;
-      margin-right: 30px;
-    }
 
     .lesson-title {
       font-size: 20px;
@@ -158,17 +138,10 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
 
+<h1 class="section-title">Video darslar</h1>
 <section class="video-lessons">
-    <h1 class="section-title">Video darslar</h1>
-    <div class="title-underline" aria-hidden="true"></div>
-
     <div class="search-container">
-        <div class="recommended-wrapper">
-            <p class="recommended-text">Recommended</p>
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/eb65ba11352ea2bdfbe7a9f8b77a9d9430759dc26e0d51944acab142b20f2917?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
-                 alt="" class="material-symbols-outlined"/>
-        </div>
-        <form method="GET" action="{% url 'video_lessons' %}">
+        <form method="GET" action="{% url 'mobile_video_lessons' %}">
             <input type="text" id="search-field" name="q" placeholder="Search video lessons..." class="search-input"
                    value="{{ request.GET.q }}">
             <button type="submit" class="search-button" onclick="toggleSearch()">Search</button>
@@ -177,10 +150,6 @@
 
     <div class="content-wrapper">
         <div class="content-container">
-            <nav>
-                <text class="language-selector">UZ</text>
-                <text class="language-selector">RU</text>
-            </nav>
             {% if video_lessons %}
             {% for lesson in video_lessons %}
             <h2 class="lesson-title">{{ lesson.title }}</h2>

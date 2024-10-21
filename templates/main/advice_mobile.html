@@ -1,14 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'base_mobile.html' %}
 
-{% block content %}\
+{% block content %}
 {% load i18n %}
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        if (window.innerWidth < 768) {
-            window.location.href = '{% url "mobile_advice" %}';
-        }
-    });
-</script>
 <style>
     .recommendations {
       display: flex;
@@ -21,39 +14,13 @@
     }
 
     .recommendations__title {
-      font-size: 40px;
-      font-weight: 700;
-      font-family: Poppins;
-      font-family: bold;
-    }
-
-    .recommendations__underline {
-      border-radius: 5px;
-      background-color: #fff;
-      width: 177px;
-      height: 5px;
-    }
-
-    .recommendations__subtitle-wrapper {
-      display: flex;
-      margin-top: 7px;
-      gap: 6px;
-      font-size: 30px;
-      font-weight: 400;
-      white-space: nowrap;
+      font-weight: 300;
+      font-size: 28px;
+      margin-top: -195px;
+      margin-bottom: 160px;
       text-align: center;
     }
 
-    .recommendations__subtitle {
-      flex-grow: 1;
-    }
-
-    .recommendations__icon {
-      aspect-ratio: 1;
-      object-fit: contain;
-      object-position: center;
-      width: 45px;
-    }
 
     .recommendations__list {
       align-self: stretch;
@@ -108,12 +75,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
 <h2 class="recommendations__title">Maslahatlar</h2>
 <section class="recommendations">
-    <div class="recommendations__underline"></div>
-    <div class="recommendations__subtitle-wrapper">
-        <p class="recommendations__subtitle">Recommended</p>
-        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/eb65ba11352ea2bdfbe7a9f8b77a9d9430759dc26e0d51944acab142b20f2917?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
-             alt="" class="recommendations__icon"/>
-    </div>
     <ul class="recommendations__list">
         {% for item in advice %}
         <li class="recommendations__item">

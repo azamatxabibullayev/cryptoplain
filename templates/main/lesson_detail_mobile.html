@@ -1,15 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'base_mobile.html' %}
 
 {% block content %}
 {% load i18n %}
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        if (window.innerWidth < 768) {
-            window.location.href = '{% url "mobile_lesson_detail" id=lesson.id %}';
-        }
-    });
-</script>
-<h1>{{ lesson.title }}</h1>
+<h1 class="lessons-title">Darsliklar va Pattern turlari</h1>
+
 
 <div class="lesson-detail">
     <img src="{{ lesson.lesson_photo_1.url }}" alt="{{ lesson.title }}" draggable="false" class="protected-image">
@@ -19,9 +13,16 @@
 
 <a href="{% url 'lessons' %}" class="btn btn-primary"> < Orqaga</a>
 
-{% endblock %}
 
 <style>
+    .lessons-title {
+          font-weight: 300;
+          font-size: 28px;
+          margin-top: -195px;
+          margin-bottom: 200px;
+          text-align: center;
+    }
+
     img.protected-image {
         pointer-events: none;
         -webkit-user-select: none;
@@ -55,3 +56,4 @@
         }
     }, false);
 </script>
+{% endblock %}

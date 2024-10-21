@@ -1,42 +1,96 @@
 {% extends 'base_mobile.html' %}
 
 {% block content %}
+{% load i18n %}
+
 <style>
-    /* Container for trading patterns */
-    .trading-patterns {
+    .lessons-container {
       display: flex;
-      max-width: 480px; /* Set the max-width for mobile screens */
-      width: 100%;
+      max-width: 901px;
       flex-direction: column;
-      overflow: visible;
-      color: #fff;
-      margin: 0 auto;
-      font: 500 15px/23px Roboto, sans-serif;
+      overflow: hidden;
+      align-items: start;
     }
 
-    /* Description text styling */
-    .pattern-description {
-      align-self: start;
-      z-index: 10;
-      margin-top: -6px;
-    }
+    .lessons-title {
+          font-weight: 300;
+          font-size: 28px;
+          margin-top: -195px;
+          margin-bottom: 200px;
+          text-align: center;
+          }
 
-    /* Primary image styling */
-    .pattern-image {
+    .image-gallery {
+      align-self: stretch;
+      margin-top: 18px;
       width: 100%;
-      height: auto;
-      object-fit: cover; /* Or use 'contain' for a different fit effect */
-      object-position: center; /* Center the image */
+    }
+
+    .image-row {
+      gap: 20px;
+      display: flex;
+    }
+
+    .image-column {
+      display: flex;
+      flex-direction: column;
+      line-height: normal;
+      width: 50%;
+    }
+
+    .gallery-image {
+      aspect-ratio: 1.68;
+      object-fit: contain;
+      object-position: center;
+      width: 100%;
       border-radius: 15px;
-      margin-top: 21px;
+      flex-grow: 1;
     }
 
-    /* Secondary image styling */
-    .pattern-image-secondary {
-      margin-top: 31px;
+    .pattern-description {
+      color: #fff;
+      align-self: stretch;
+      margin-top: 5px;
+      width: 100%;
+      font: 500 20px/30px Roboto, sans-serif;
     }
 
-    /* Visually hidden for accessibility */
+    .description-underline {
+      border-radius: 5px;
+      background-color: #fff;
+      width: 512px;
+      max-width: 100%;
+      height: 5px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 991px) {
+      .lessons-title,
+      .image-gallery,
+      .pattern-description {
+        max-width: 100%;
+      }
+
+      .recommended-section {
+        white-space: initial;
+      }
+
+      .image-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+
+      .image-column {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .gallery-image {
+        margin-top: 40px;
+      }
+    }
+
     .visually-hidden {
       position: absolute;
       width: 1px;
@@ -49,37 +103,24 @@
       border: 0;
     }
 </style>
+<h1 class="lessons-title">Darsliklar va Pattern turlari</h1>
 
-<section class="trading-patterns">
+<section class="lessons-container">
     {% for lesson in lessons %}
-
-    <!-- Lesson description truncated to 100 words -->
     <p class="pattern-description">{{ lesson.lesson_text|truncatewords:100 }}</p>
-
-    <!-- Link to detailed lesson view -->
     <a href="{% url 'lesson_detail' lesson.id %}">Batafsil o'qish</a>
-
-    <!-- First image, fallback to external placeholder image if not available -->
-    {% if lesson.lesson_photo_1 %}
-    <img src="{{ lesson.lesson_photo_1.url }}"
-         alt="{{ lesson.title }}" class="pattern-image"/>
-    {% else %}
-    <!-- External fallback image URL (e.g., placeholder.com) -->
-    <img src="https://via.placeholder.com/600x400?text=No+Image+Available"
-         alt="Default image" class="pattern-image"/>
-    {% endif %}
-
-    <!-- Second image, fallback to external placeholder image if not available -->
-    {% if lesson.lesson_photo_2 %}
-    <img src="{{ lesson.lesson_photo_2.url }}"
-         alt="{{ lesson.title }}" class="pattern-image pattern-image-secondary"/>
-    {% else %}
-    <!-- External fallback image URL (e.g., placeholder.com) -->
-    <img src="https://via.placeholder.com/600x400?text=No+Image+Available"
-         alt="Default secondary image" class="pattern-image pattern-image-secondary"/>
-    {% endif %}
-
+    <div class="image-gallery">
+        <div class="image-row">
+            <div class="image-column">
+                <img src="{{ lesson.lesson_photo_1.url }}"
+                     class="gallery-image" alt="{{ lesson.title }}" loading="lazy">
+            </div>
+            <div class="image-column">
+                <img src="{{ lesson.lesson_photo_2.url }}"
+                     class="gallery-image" alt="{{ lesson.title }}" loading="lazy">
+            </div>
+        </div>
+    </div>
     {% endfor %}
 </section>
-
 {% endblock %}

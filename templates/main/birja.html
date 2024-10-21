@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load i18n %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (window.innerWidth < 768) {
+            window.location.href = '{% url "mobile_birja" %}';
+        }
+    });
+</script>
 <style>
     .exchange-section { display: flex; max-width: 547px; flex-direction: column; overflow: hidden; align-items: start; }
     .section-title { color: #fff; font: 700 40px Poppins, sans-serif; }

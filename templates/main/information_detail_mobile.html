@@ -1,14 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'base_mobile.html' %}
 
 {% block content %}
 {% load i18n %}
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        if (window.innerWidth < 768) {
-            window.location.href = '{% url "mobile_information_detail" info_id=information.id %}';
-        }
-    });
-</script>
+
 <style>
     .crypto-info {
     display: flex;
@@ -18,9 +12,11 @@
 }
 
 .section-title {
-    color: #fff;
-    align-self: start;
-    font: 700 40px Poppins, sans-serif;
+      font-weight: 300;
+      font-size: 28px;
+      margin-top: -195px;
+      margin-bottom: 160px;
+      text-align: center;
 }
 
 @media (max-width: 991px) {
@@ -29,12 +25,6 @@
     }
 }
 
-.title-underline {
-    border-radius: 5px;
-    background-color: #fff;
-    width: 177px;
-    height: 5px;
-}
 
 .header-container {
     display: flex;
@@ -56,31 +46,6 @@
     }
 }
 
-.recommended-container {
-    align-self: start;
-    display: flex;
-    gap: 6px;
-    text-align: center;
-    font: 30px Poppins, sans-serif;
-}
-
-@media (max-width: 991px) {
-    .recommended-container {
-        white-space: initial;
-    }
-}
-
-.recommended-text {
-    flex-grow: 1;
-}
-
-.recommended-icon {
-    aspect-ratio: 1;
-    object-fit: contain;
-    object-position: center;
-    width: 45px;
-}
-
 .search-button {
     border-radius: 15px;
     background-color: #fb8b5d;
@@ -100,7 +65,7 @@
     border-radius: 5px;
     flex-grow: 1;
     color: #000;
-    margin-left: 100px;
+    margin-left: 50px;
 }
 
 @media (max-width: 991px) {
@@ -113,27 +78,20 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">
 
-
+<h1 class="section-title">Ma'lumotlar </h1>
 <section class="crypto-info">
-    <h1 class="section-title">Barcha narsalar haqida kerakli ma'lumotlar </h1>
-    <div class="title-underline"></div>
     <header class="header-container">
-        <div class="recommended-container">
-            <span class="recommended-text">Recommended</span>
-            <img loading="lazy"
-                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f0d5669761e856e049189f5570778cca2ced5004760b31590751e3ffb45514e?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
-                 class="recommended-icon" alt=""/>
-        </div>
-        <form method="GET" action="{% url 'information' %}">
+        <form method="GET" action="{% url 'mobile_informations' %}">
             <input type="text" id="search-field" name="q" placeholder="Search..." class="search-input"
                    value="{{ request.GET.q }}">
             <button type="submit" class="search-button" onclick="toggleSearch()">Search</button>
         </form>
     </header>
 
-    <h1 style="margin-top: 60px; font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 25px;">
+    <h1 style="margin-top: 60px; font-family: 'Roboto', sans-serif; font-weight: semibold; font-size: 25px;">
         {{ information.title }}</h1>
-    <p style="font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 25px;">{{ information.info_text }}</p>
+    <p style="font-family: 'Roboto', sans-serif; font-weight: semi-bold; font-size: 20px;">
+        {{ information.info_text }}</p>
     <a href="{% url 'information' %}">Orqaga qaytish</a>
 
 </section>

@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* Basic mobile styling */
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #2C2449;
@@ -36,32 +35,13 @@
             flex-grow: 1;
         }
 
-        /* Burger menu styles */
-        .burger-menu {
+        .account-icon {
             cursor: pointer;
-            display: inline-block;
-        }
-        .burger-menu span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            margin: 4px 0;
-            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .profile-menu {
-            display: none;
-            position: absolute;
-            left: 0;
-            top: 50px;
-            background-color: #fff;
-            width: 100%;
-            padding: 20px;
-            color: black;
-        }
-        .profile-menu.open {
-            display: block;
-        }
 
         /* Swipeable navbar styles */
         .navbar-container {
@@ -105,11 +85,11 @@
 
         .navbar li a:hover,
         .navbar li.active a {
-            color: #FB8B5D;
+            color: #FB8B5D; !important;
         }
 
         .navbar li.active {
-            color: #FB8B5D;
+            color: #FB8B5D; !important;
             border: 1px solid #FB8B5D;
         }
 
@@ -137,8 +117,22 @@
             background-color: #2C2449;
             border: 1px solid;
         }
+        .top-buttons button a:hover,
+        .top-buttons button.active a {
+            color: #FB8B5D; !important;
+        }
+
+        .top-buttons button.active {
+            color: #FB8B5D; !important;
+            border: 1px solid #FB8B5D;
+        }
+
+        .top-buttons button.active .material-icons {
+            color: #FB8B5D;
+        }
+
         .top-buttons button:hover {
-            background-color: #DD4954;
+            color: #FB8B5D;
         }
 
         /* Remove gray line */
@@ -213,13 +207,10 @@
 </head>
 <body>
 <header class="header">
-    <div class="burger-menu" onclick="toggleProfile()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <div id="profile-menu" class="profile-menu">
-        <p>User Profile</p>
+    <div class="account-icon">
+        <a href="{% url 'profile' %}">
+            <span class="material-icons" style="font-size: 36px; color: white; height: 15px;">account_circle</span>
+        </a>
     </div>
     <!-- Top Buttons -->
     <div class="top-buttons">
@@ -334,90 +325,77 @@
 </div>
 
 <script>
-    <script>
     document.addEventListener("DOMContentLoaded", function () {
         const menuItems = document.querySelectorAll('.navbar ul li a');
         const currentPath = window.location.pathname;
 
-        // Debugging line
-        console.log("Current path:", currentPath);
-
-        // Loop through each menu item to check if the href matches the current path
         menuItems.forEach(function (menuItem) {
             if (menuItem.getAttribute('href') === currentPath) {
-                // Add 'active' class to the matching menu item
                 menuItem.parentElement.classList.add('active');
             }
         });
     });
 
+        // Toggle Settings dropdown
+    function toggleSettings() {
+        document.querySelector('.settings-container').classList.toggle('active');
+    }
 
-// Toggle Profile menu
-function toggleProfile() {
-    const profileMenu = document.getElementById('profile-menu');
-    profileMenu.classList.toggle('open');
-}
+    // Change Language function
+    function changeLanguage(languageCode) {
+        const selectElement = document.querySelector('select[name="language"]');
+        selectElement.value = languageCode;
+        selectElement.form.submit();
+    }
 
-// Toggle Settings dropdown
-function toggleSettings() {
-    document.querySelector('.settings-container').classList.toggle('active');
-}
+    // Swipe functionality for the navbar
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-// Change Language function
-function changeLanguage(languageCode) {
-    const selectElement = document.querySelector('select[name="language"]');
-    selectElement.value = languageCode;
-    selectElement.form.submit();
-}
+    const slider = document.querySelector('.navbar');
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
 
-// Swipe functionality for the navbar
-let isDown = false;
-let startX;
-let scrollLeft;
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
 
-const slider = document.querySelector('.navbar');
-slider.addEventListener('mousedown', (e) => {
-    isDown = true;
-    slider.classList.add('active');
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-});
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
 
-slider.addEventListener('mouseleave', () => {
-    isDown = false;
-    slider.classList.remove('active');
-});
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.scrollLeft = scrollLeft - walk;
+    });
 
-slider.addEventListener('mouseup', () => {
-    isDown = false;
-    slider.classList.remove('active');
-});
+    // Touch support for mobile
+    slider.addEventListener('touchstart', (e) => {
+        isDown = true;
+        startX = e.touches[0].pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
 
-slider.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 2; // Scroll speed
-    slider.scrollLeft = scrollLeft - walk;
-});
+    slider.addEventListener('touchend', () => {
+        isDown = false;
+    });
 
-// Add touch event handling for swipe on mobile
-slider.addEventListener('touchstart', (e) => {
-    isDown = true;
-    startX = e.touches[0].pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-});
-
-slider.addEventListener('touchend', () => {
-    isDown = false;
-});
-
-slider.addEventListener('touchmove', (e) => {
-    if (!isDown) return;
-    const x = e.touches[0].pageX - slider.offsetLeft;
-    const walk = (x - startX) * 2;
-    slider.scrollLeft = scrollLeft - walk;
-});
+    slider.addEventListener('touchmove', (e) => {
+        if (!isDown) return;
+        const x = e.touches[0].pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.scrollLeft = scrollLeft - walk;
+    });
 </script>
 
 <form action="{% url 'set_language' %}" method="post" style="display: none;">

@@ -1,14 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'base_mobile.html' %}
 
 {% block content %}
 {% load i18n %}
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        if (window.innerWidth < 768) {
-            window.location.href = '{% url "mobile_informations" %}';
-        }
-    });
-</script>
 <style>
     .crypto-info {
         display: flex;
@@ -18,22 +11,11 @@
     }
 
     .section-title {
-        color: #fff;
-        align-self: start;
-        font: 700 40px Poppins, sans-serif;
-    }
-
-    @media (max-width: 991px) {
-        .section-title {
-            max-width: 100%;
-        }
-    }
-
-    .title-underline {
-        border-radius: 5px;
-        background-color: #fff;
-        width: 177px;
-        height: 5px;
+      font-weight: 300;
+      font-size: 28px;
+      margin-top: -195px;
+      margin-bottom: 160px;
+      text-align: center;
     }
 
     .header-container {
@@ -41,7 +23,7 @@
         margin-top: 7px;
         width: 100%;
         align-items: flex-start;
-        gap: 20px;
+        gap: 10px; /* Reduced gap */
         color: #fff;
         font-weight: 400;
         white-space: nowrap;
@@ -49,71 +31,33 @@
         justify-content: space-between;
     }
 
-    @media (max-width: 991px) {
-        .header-container {
-            max-width: 100%;
-            white-space: initial;
-        }
-    }
-
-    .recommended-container {
-        align-self: start;
-        display: flex;
-        gap: 6px;
-        text-align: center;
-        font: 30px Poppins, sans-serif;
-    }
-
-    @media (max-width: 991px) {
-        .recommended-container {
-            white-space: initial;
-        }
-    }
-
-    .recommended-text {
-        flex-grow: 1;
-    }
-
-    .recommended-icon {
-        aspect-ratio: 1;
-        object-fit: contain;
-        object-position: center;
-        width: 45px;
-    }
 
     .search-button {
         border-radius: 15px;
         background-color: #fb8b5d;
-        padding: 8px 20px;
-        font: 20px/1 Roboto, sans-serif;
+        padding: 8px 15px; /* Reduced padding */
+        font: 18px/1 Roboto, sans-serif; /* Reduced font size */
         cursor: pointer;
         white-space: nowrap;
         color: white;
-        height: 40px;
-        width: 125px;
+        height: 36px; /* Reduced height */
+        width: auto; /* Changed to auto */
     }
 
     .search-input {
-        padding: 10px;
-        font-size: 16px;
+        padding: 8px; /* Reduced padding */
+        font-size: 14px; /* Reduced font size */
         border: 2px solid #fb8b5d;
         border-radius: 5px;
         flex-grow: 1;
         color: #000;
-        margin-left: 100px;
-    }
-
-    @media (max-width: 991px) {
-        .search-button {
-            white-space: initial;
-            padding: 0 20px;
-        }
+        margin-left: 55px; /* Reduced margin */
     }
 
     .content-container {
         display: flex;
-        margin-top: 19px;
-        gap: 11px;
+        margin-top: 15px; /* Reduced margin */
+        gap: 8px; /* Reduced gap */
         flex-wrap: wrap;
     }
 
@@ -122,36 +66,28 @@
         background-color: #fff;
         box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.25);
         display: flex;
-        padding: 20px;
+        padding: 10px; /* Reduced padding */
         padding-left: 0px;
         align-items: center;
-        gap: 20px;
+        gap: 15px; /* Reduced gap */
         flex-wrap: nowrap;
         flex-grow: 1;
         flex-basis: auto;
     }
 
-    @media (max-width: 991px) {
-        .info-card {
-            max-width: 100%;
-        }
-    }
-
     .card-indicator {
         border-radius: 15px;
         background-color: #213f7b;
-        width: 43px;
+        width: 30px; /* Reduced width */
         height: 100%;
-        padding: 20px;
-        padding-left: 0px;
-        padding-right: 0px;
+        padding: 10px; /* Reduced padding */
     }
 
     .crypto-logo {
         aspect-ratio: 1;
         object-fit: contain;
         object-position: center;
-        width: 125px;
+        width: 100px; /* Reduced logo size */
         align-self: stretch;
         max-width: 100%;
         margin: 0;
@@ -164,28 +100,16 @@
         margin: 0;
     }
 
-    @media (max-width: 991px) {
-        .crypto-details {
-            max-width: 100%;
-        }
-    }
-
     .crypto-name {
         color: #213f7b;
         align-self: start;
-        font: 600 25px Poppins, sans-serif;
+        font: 600 22px Poppins, sans-serif; /* Reduced font size */
     }
 
     .crypto-description {
         color: #000;
-        margin-top: 6px;
-        font: 400 15px/23px Roboto, sans-serif;
-    }
-
-    @media (max-width: 991px) {
-        .crypto-description {
-            max-width: 100%;
-        }
+        margin-top: 4px; /* Reduced margin */
+        font: 400 14px/20px Roboto, sans-serif; /* Reduced font size */
     }
 
     .visually-hidden {
@@ -199,21 +123,21 @@
         white-space: nowrap;
         border: 0;
     }
+
+    @media (max-width: 991px) {
+        .section-title { max-width: 100%; }
+        .header-container { max-width: 100%; white-space: initial; }
+        .info-card { max-width: 100%; }
+        .crypto-details { max-width: 100%; }
+    }
 </style>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
 
+<h1 class="section-title">Ma'lumotlar </h1>
 <section class="crypto-info">
-    <h1 class="section-title">Barcha narsalar haqida kerakli ma'lumotlar </h1>
-    <div class="title-underline"></div>
     <header class="header-container">
-        <div class="recommended-container">
-            <span class="recommended-text">Recommended</span>
-            <img loading="lazy"
-                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f0d5669761e856e049189f5570778cca2ced5004760b31590751e3ffb45514e?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
-                 class="recommended-icon" alt=""/>
-        </div>
-        <form method="GET" action="{% url 'information' %}">
+        <form method="GET" action="{% url 'mobile_informations' %}">
             <input type="text" id="search-field" name="q" placeholder="Search..." class="search-input"
                    value="{{ request.GET.q }}">
             <button type="submit" class="search-button" onclick="toggleSearch()">Search</button>
@@ -241,5 +165,4 @@
         {% endif %}
     </div>
 </section>
-
 {% endblock %}
