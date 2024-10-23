@@ -436,3 +436,38 @@ def mobile_indicator_detail(request, id):
         'id': indicator.id,
     }
     return render(request, 'main/indicator_detail_mobile.html', context)
+
+
+def mobile_note_list(request):
+    notes = Note.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'main/note_list_mobile.html', {'notes': notes})
+
+
+def mobile_note_create(request):
+    if request.method == 'POST':
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.user = request.user
+            note.save()
+            return redirect('mobile_note_list')
+    else:
+        form = NoteForm()
+    return render(request, 'main/note_form_mobile.html', {'form': form})
+
+
+def mobile_note_details(request, pk):
+    note = get_object_or_404(Note, pk=pk, user=request.user)
+    return render(request, 'main/note_details_mobile.html', {'note': note, 'id': pk})
+
+
+def mobile_note_edit(request, pk):
+    note = get_object_or_404(Note, pk=pk, user=request.user)
+    if request.method == 'POST':
+        form = NoteForm(request.POST, instance=note)
+        if form.is_valid():
+            form.save()
+            return redirect('mobile_note_details')
+    else:
+        form = NoteForm(instance=note)
+    return render(request, 'main/note_form_mobile.html', {'form': form})

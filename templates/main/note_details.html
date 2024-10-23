@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load i18n %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (window.innerWidth < 768) {
+            window.location.href = '{% url "mobile_note_details" pk=note.pk %}';
+        }
+    });
+</script>
 <h1>{{ note.title }}</h1>
 <p>{{ note.content }}</p>
 <p>Yaratilgan vaqt: {{ note.created_at }}</p>

@@ -34,4 +34,8 @@ urlpatterns = [
     path('mobile/news/', views.mobile_news_view, name='mobile_news'),
     path('mobile/indicators/', views.mobile_indicator_view, name='mobile_indicators'),
     path('mobile/indicators/<int:id>/', views.mobile_indicator_detail, name='mobile_indicator_detail'),
+    path('mobile/notes/', views.mobile_note_list, name='mobile_note_list'),
+    path('mobile/notes/create/', views.mobile_note_create, name='mobile_note_create'),
+    path('mobile/notes/<int:pk>/', views.mobile_note_details, name='mobile_note_details'),
+    path('mobile/notes/<int:pk>/edit', views.mobile_note_edit, name='mobile_note_edit'),
 ]
