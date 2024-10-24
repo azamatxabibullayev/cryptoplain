@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import register, warning, profile_view, user_login, user_logout, password_reset_confirm, \
-    password_reset_request, UpdateProfileView
+    password_reset_request, UpdateProfileView, mobile_register, mobile_warning, mobile_profile_view, mobile_user_login
 from django.views.generic import TemplateView
 
 urlpatterns = [
@@ -16,4 +16,8 @@ urlpatterns = [
     path('reset/done/', TemplateView.as_view(template_name='users/password_reset_complete.html'),
          name='password_reset_complete'),
     path('update_profile/', UpdateProfileView.as_view(), name='update_profile'),
+    path('mobile/register/', mobile_register, name='mobile_register'),
+    path('mobile/warning/', mobile_warning, name='mobile_warning'),
+    path('mobile/profile/', mobile_profile_view, name='mobile_profile'),
+    path('mobile/login/', mobile_user_login, name='mobile_login'),
 ]

@@ -1,0 +1,22 @@
+{% extends 'base_mobile.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+{% load i18n %}
+<style>
+    .notes-title {
+        font-weight: 300;
+        font-size: 28px;
+        margin-top: -195px;
+        margin-bottom: 180px;
+        text-align: center;
+    }
+</style>
+<h2 class="notes-title">Registratsiya</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+{% endblock %}

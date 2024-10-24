@@ -3,6 +3,14 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
+{% load i18n %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (window.innerWidth < 768) {
+            window.location.href = '{% url "mobile_register" %}';
+        }
+    });
+</script>
 <h2>Register</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}

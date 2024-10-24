@@ -471,3 +471,11 @@ def mobile_note_edit(request, pk):
     else:
         form = NoteForm(instance=note)
     return render(request, 'main/note_form_mobile.html', {'form': form})
+
+
+def mobile_note_delete(request, pk):
+    note = get_object_or_404(Note, pk=pk, user=request.user)
+    if request.method == 'POST':
+        note.delete()
+        return redirect('mobile_note_list')
+    return render(request, 'main/note_confirm_delete_mobile.html', {'note': note})

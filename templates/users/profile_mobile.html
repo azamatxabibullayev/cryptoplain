@@ -1,16 +1,22 @@
-{% extends 'base.html' %}
+{% extends 'base_mobile.html' %}
 {% load i18n %}
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        if (window.innerWidth < 768) {
-            window.location.href = '{% url "mobile_profile" %}';
-        }
-    });
-</script>
 
 {% block title %}Profile{% endblock %}
 
 {% block content %}
+<style>
+    .notes-title {
+        font-weight: 300;
+        font-size: 28px;
+        margin-top: -195px;
+        margin-bottom: 180px;
+        text-align: center;
+    }
+</style>
+
+{% if user.is_authenticated %}
+<h2 class="notes-title">Profil</h2>
+
 <h1>{{ user.username }}'s Profile</h1>
 
 {% if user.profile_pic %}
@@ -19,6 +25,7 @@
 {% else %}
 <p>No profile picture available.</p>
 {% endif %}
+
 <p>Email: {{ user.email }}</p>
 <p>Name: {{ user.name }} {{ user.surname }}</p>
 <p>ID: {{ user_id }}</p>
@@ -30,16 +37,19 @@
 <p>Subscription End: {{ premium_user.subscription_end }}</p>
 {% else %}
 <p>You are currently a normal user.</p>
+{% endif %}
+
 <p><a href="{% url 'update_profile' %}">Edit Profile</a></p>
 
-{% if user.is_authenticated %}
 <li>
     {% url 'logout' as logout_url %}
     <a href="{{ logout_url }}">
-        <span class="material-icons">logout</span>{% blocktrans %}Chiqish{% endblocktrans %}
+        <span class="material-icons">logout</span>{% trans "Chiqish" %}
     </a>
 </li>
+
+{% else %}
+<p><a href="{% url 'mobile_login' %}" style="color:#FFFFFF; text-decoration:none;">{% trans "Login" %}</a></p>
 {% endif %}
 
-{% endif %}
 {% endblock %}

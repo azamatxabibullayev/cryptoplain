@@ -1,0 +1,25 @@
+{% extends 'base_mobile.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+{% load i18n %}
+<style>
+    .notes-title {
+        font-weight: 300;
+        font-size: 28px;
+        margin-top: -195px;
+        margin-bottom: 180px;
+        text-align: center;
+    }
+</style>
+<h2 class="notes-title">Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+<p><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
+<p><a href="{% url 'mobile_register' %}" style="color:#FFFFFF; text-decoration:none;">
+    {% blocktrans %}Registratsiya{% endblocktrans %}</a></p>
+{% endblock %}

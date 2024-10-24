@@ -122,10 +122,7 @@
     <p>{{ note.content }}</p>
     <div class="button-group">
         <a href="{% url 'mobile_note_edit' note.pk %}" class="save-button">Zametkani tahrirlash</a>
-        <form action="{% url 'note_delete' note.pk %}" method="post" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit" class="delete-button">Zametkani o'chirish</button>
-        </form>
+        <a href="{% url 'mobile_note_delete' note.pk %}" class="delete-button">Zametkani o'chirish</a>
     </div>
 </section>
 {% endblock %}

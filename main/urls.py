@@ -38,4 +38,5 @@ urlpatterns = [
     path('mobile/notes/create/', views.mobile_note_create, name='mobile_note_create'),
     path('mobile/notes/<int:pk>/', views.mobile_note_details, name='mobile_note_details'),
     path('mobile/notes/<int:pk>/edit', views.mobile_note_edit, name='mobile_note_edit'),
+    path('mobile/notes/<int:pk>/delete', views.mobile_note_delete, name='mobile_note_delete'),
 ]

@@ -161,3 +161,60 @@ class UpdateProfileView(LoginRequiredMixin, View):
                 'form': update_form
             }
             return render(request, 'users/update_profile.html', context=context)
+
+
+# MOBILE MODE
+
+def mobile_register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            request.session['user_data'] = form.cleaned_data
+            return redirect('mobile_warning')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'users/register_mobile.html', {'form': form})
+
+
+def mobile_warning(request):
+    if request.method == 'POST':
+        if 'accept' in request.POST:
+            user_data = request.session.pop('user_data', None)
+            if user_data:
+                form = CustomUserCreationForm(user_data)
+                user = form.save()
+                login(request, user)
+                return redirect('mobile_profile')
+        return redirect('mobile_register')
+    return render(request, 'users/warning_mobile.html')
+
+
+@login_required
+def mobile_profile_view(request):
+    user = request.user
+    premium_user = None
+    if hasattr(user, 'premium_user'):
+        premium_user = user.premium_user
+
+    context = {
+        'user': user,
+        'premium_user': premium_user,
+        'user_id': user.id,
+    }
+    return render(request, 'users/profile_mobile.html', context)
+
+
+def mobile_user_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('mobile_profile')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'users/login_mobile.html', {'form': form})

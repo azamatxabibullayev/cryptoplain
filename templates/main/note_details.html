@@ -14,8 +14,5 @@
 <p>Yaratilgan vaqt: {{ note.created_at }}</p>
 <p>Tahrirlangan vaqt: {{ note.updated_at }}</p>
 <a href="{% url 'note_edit' note.pk %}">Zametkani tahrirlash</a>
-<form action="{% url 'note_delete' note.pk %}" method="post" style="display:inline;">
-    {% csrf_token %}
-    <button type="submit">Zametkani o'chirish</button>
-</form>
+<a href="{% url 'note_delete' note.pk %}">Zametkani o'chirish</a>
 {% endblock %}
