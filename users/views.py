@@ -245,3 +245,23 @@ def mobile_password_reset_request(request):
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="users/password_reset_mobile.html",
                   context={"password_reset_form": password_reset_form})
+
+
+def mobile_password_reset_confirm(request, uidb64=None, token=None):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = CustomUser.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        if request.method == "POST":
+            form = SetPasswordForm(user, request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('password_reset_complete')
+        else:
+            form = SetPasswordForm(user)
+        return render(request, 'users/password_reset_confirm_mobile.html', {'form': form})
+    else:
+        return render(request, 'users/password_reset_invalid_mobile.html')
