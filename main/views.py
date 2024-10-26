@@ -479,3 +479,52 @@ def mobile_note_delete(request, pk):
         note.delete()
         return redirect('mobile_note_list')
     return render(request, 'main/note_confirm_delete_mobile.html', {'note': note})
+
+
+def mobile_analysis_view(request):
+    user = request.user
+    accessible_analyses = Analysis.objects.none()
+    inaccessible_analyses = Analysis.objects.none()
+
+    # Check user subscription type
+    if user.is_authenticated:
+        if hasattr(user, 'premium_user'):
+            user_type = user.premium_user.premium_type
+            if user_type == 'pro':
+                accessible_analyses = Analysis.objects.filter(analysis_type__in=['normal', 'standard', 'pro'])
+            elif user_type == 'standard':
+                accessible_analyses = Analysis.objects.filter(analysis_type__in=['normal', 'standard'])
+                inaccessible_analyses = Analysis.objects.filter(analysis_type='pro')
+            else:
+                accessible_analyses = Analysis.objects.filter(analysis_type='normal')
+                inaccessible_analyses = Analysis.objects.filter(analysis_type__in=['standard', 'pro'])
+        else:
+            accessible_analyses = Analysis.objects.filter(analysis_type='normal')
+            inaccessible_analyses = Analysis.objects.filter(analysis_type__in=['standard', 'pro'])
+
+    grouped_accessible_analyses = defaultdict(list)
+    grouped_inaccessible_analyses = defaultdict(list)
+
+    # Group analyses by date
+    for analysis in accessible_analyses:
+        date = localdate(analysis.created_at)
+        grouped_accessible_analyses[date].append(analysis)
+
+    for analysis in inaccessible_analyses:
+        date = localdate(analysis.created_at)
+        grouped_inaccessible_analyses[date].append(analysis)
+
+    # Combine accessible and inaccessible analyses by date
+    combined_analyses = {}
+    all_dates = set(grouped_accessible_analyses.keys()).union(set(grouped_inaccessible_analyses.keys()))
+    for date in all_dates:
+        combined_analyses[date] = {
+            'accessible': grouped_accessible_analyses.get(date, []),
+            'inaccessible': grouped_inaccessible_analyses.get(date, [])
+        }
+
+    context = {
+        'combined_analyses': combined_analyses,
+    }
+
+    return render(request, 'main/analyses_mobile.html', context)

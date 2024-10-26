@@ -1,0 +1,114 @@
+{% extends 'base_mobile.html' %}
+
+{% block content %}
+{% load i18n %}
+<h2 class="analysis-title">Tex-Analizlar</h2>
+<section class="crypto-analysis">
+    <div class="analysis-container">
+        <header class="analysis-header"></header>
+
+        {% for date, analyses_group in combined_analyses.items %}
+        <div class="analysis-date">
+            <h3>{{ date }}</h3>
+        </div>
+        <div class="analysis-row">
+            {% for analysis in analyses_group.accessible %}
+            <div class="analysis-entry">
+                <img src="{{ analysis.analysis_photo.url }}" alt="{{ analysis.title }}" class="analysis-image">
+                <p>{{ analysis.analysis_text }}</p>
+            </div>
+            {% endfor %}
+
+            {% for analysis in analyses_group.inaccessible %}
+            <div class="analysis-entry">
+                <img src="/media/main/analyses/default.png" alt="Default Image" class="analysis-image">
+                {% if analysis.analysis_type == 'pro' %}
+                <p>Pro padpiskani sotvolganinizdan so'ng ko'ra olasiz</p>
+                {% else %}
+                <p>Standard yoki Proni sotib olganingizdan so'ng bu analizlar ochiladi</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<style>
+    .crypto-analysis {
+        padding: 10px;
+        margin: 0;
+    }
+
+    .analysis-container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .analysis-header {
+        display: flex;
+        align-items: start;
+        font-family: Poppins, sans-serif;
+        color: #fff;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+
+    .analysis-title {
+          font-weight: 300;
+          font-size: 28px;
+          margin-top: -195px;
+          margin-bottom: 200px;
+          text-align: center;
+    }
+
+    .analysis-date h3 {
+        font-size: 18px;
+        color: #ccc;
+        margin-bottom: 8px;
+    }
+
+    .analysis-row {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .analysis-entry {
+        border-radius: 10px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .analysis-image {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .analysis-entry p {
+        font-size: 14px;
+        color: white;
+        margin: 0;
+    }
+
+    @media (min-width: 480px) {
+        .analysis-title {
+            font-size: 28px;
+        }
+
+        .analysis-date h3 {
+            font-size: 20px;
+        }
+
+        .analysis-entry p {
+            font-size: 16px;
+        }
+    }
+</style>
+{% endblock %}

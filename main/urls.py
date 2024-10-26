@@ -39,4 +39,5 @@ urlpatterns = [
     path('mobile/notes/<int:pk>/', views.mobile_note_details, name='mobile_note_details'),
     path('mobile/notes/<int:pk>/edit', views.mobile_note_edit, name='mobile_note_edit'),
     path('mobile/notes/<int:pk>/delete', views.mobile_note_delete, name='mobile_note_delete'),
+    path('mobile/analyses/', views.mobile_analysis_view, name='mobile_analyses'),
 ]

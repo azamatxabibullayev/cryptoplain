@@ -118,6 +118,11 @@
       white-space: nowrap;
       border: 0;
     }
+
+    .pricing-section a img {
+        display: block;
+        width: 100%;
+    }
 </style>
 
 <h1 style="margin-top: -195px; margin-bottom: 150px; text-align: center; font-weight: 300; font-size: 28px;">
@@ -127,17 +132,17 @@
     <h2 class="visually-hidden">Pricing and Features</h2>
 
     <h3 class="feature-title">{% blocktrans %}Analiz qiling{% endblocktrans %}</h3>
-    <img src="/media/main/home/tradingview_mobile.png" alt="Analiz qiling" class="feature-image"/>
+    <a href="https://www.tradingview.com/"><img src="/media/main/home/tradingview.png" alt="Analiz qiling" class="feature-image"/></a>
 
     <h3 class="feature-title">{% blocktrans %}Kuzating{% endblocktrans %}</h3>
-    <img src="/media/main/home/cryptobubles_mobile.png" alt="Kuzating" class="feature-image"/>
+    <a href="https://cryptobubbles.net/"><img src="/media/main/home/cryptobubles.png" alt="Kuzating" class="feature-image"/></a>
 
     <h3 class="feature-title">{% blocktrans %}Qo'rquv indeksi{% endblocktrans %}</h3>
     <img src="{{ fear_greed_index_image.image.url }}" alt="Fear & Greed Index" class="fear-index-image"/>
 
     <h3 class="feature-title">{% blocktrans %}Padpiska turlari{% endblocktrans %}</h3>
-    <img src="/media/main/home/tekin_padpiska.png" alt="Tekin padpiska" class="subscription-image"/>
-    <img src="/media/main/home/standart_padpiska.png" alt="Standart padpiska" class="subscription-image"/>
-    <img src="/media/main/home/pro_padpiska.png" alt="Pro padpiska" class="subscription-image"/>
+    <a href="https://t.me/Cryptoindexadmin"><img src="/media/main/home/tekin_padpiska.png" alt="Tekin padpiska" class="subscription-image"/></a>
+    <a href="https://t.me/Cryptoindexadmin"><img src="/media/main/home/standart_padpiska.png" alt="Standart padpiska" class="subscription-image"/></a>
+    <a href="https://t.me/Cryptoindexadmin"><img src="/media/main/home/pro_padpiska.png" alt="Pro padpiska" class="subscription-image"/></a>
 </section>
 {% endblock %}

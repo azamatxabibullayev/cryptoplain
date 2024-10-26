@@ -4,73 +4,77 @@
 {% load i18n %}
 <style>
     .recommendations {
-      display: flex;
-      max-width: 934px;
-      flex-direction: column;
-      overflow: hidden;
-      align-items: flex-start;
-      font-family: Poppins, sans-serif;
-      color: #fff;
+        display: flex;
+        max-width: 100%;
+        flex-direction: column;
+        overflow: hidden;
+        align-items: flex-start;
+        font-family: Poppins, sans-serif;
+        color: #fff;
+        padding: 0 15px;
     }
 
     .recommendations__title {
-      font-weight: 300;
-      font-size: 28px;
-      margin-top: -195px;
-      margin-bottom: 160px;
-      text-align: center;
+        font-weight: 300;
+        font-size: 28px;
+        margin-top: -195px;
+        margin-bottom: 160px;
+        text-align: center;
     }
 
-
     .recommendations__list {
-      align-self: stretch;
-      display: flex;
-      margin-top: 69px;
-      width: 100%;
-      padding-left: 42px;
-      flex-direction: column;
-      align-items: flex-start;
-      font: 500 20px/1 Roboto, sans-serif;
+        align-self: stretch;
+        display: flex;
+        margin-top: 30px;
+        width: 100%;
+        padding-left: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        font: 500 16px/1.4 Roboto, sans-serif;
     }
 
     .recommendations__item {
-      display: flex;
-      gap: 19px;
-      margin-top: 20px;
-    }
-
-    .recommendations__item:first-child {
-      margin-top: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 15px;
+        width: 100%;
     }
 
     .recommendations__bullet {
-      background-color: #fff;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      margin: auto 0;
+        background-color: #fff;
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        flex-shrink: 0;
     }
 
     .recommendations__text {
-      flex-grow: 1;
+        font-size: 14px;
+        line-height: 1.4;
+        word-break: break-word;
+        white-space: normal;
+        padding-right: 15px; /* Added padding for right side */
+        max-width: calc(100% - 35px); /* Ensures text stays within container, accounting for padding and bullet */
     }
 
+    /* Mobile adjustments */
     @media (max-width: 991px) {
-      .recommendations__subtitle-wrapper {
-        white-space: initial;
-      }
+        .recommendations {
+            padding: 0 10px;
+        }
 
-      .recommendations__list {
-        max-width: 100%;
-        padding-left: 20px;
-        margin-top: 40px;
-      }
+        .recommendations__list {
+            padding-left: 10px;
+            margin-top: 20px;
+        }
 
-      .recommendations__text {
-        max-width: 100%;
-      }
+        .recommendations__item {
+            gap: 10px;
+        }
     }
 </style>
+
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
 <h2 class="recommendations__title">Maslahatlar</h2>
