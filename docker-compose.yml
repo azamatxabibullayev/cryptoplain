@@ -1,12 +1,10 @@
-version: '3.8'
-
+version: '3.8'  # Optional, only if necessary for your Docker version
 services:
   web:
     build: .
     command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - .:/app
-      - ./db.sqlite3:/app/db.sqlite3
+      - .:/app  # Mount current directory to /app in the container
     ports:
       - "8000:8000"
 
