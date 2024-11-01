@@ -20,15 +20,16 @@
             {% endfor %}
 
             {% for analysis in analyses_group.inaccessible %}
-            <div class="analysis-entry">
-                <img src="/media/main/analyses/default.png" alt="Default Image" class="analysis-image">
-                {% if analysis.analysis_type == 'pro' %}
-                <p>{% blocktrans %}Pro padpiskani sotvolganinizdan so'ng ko'ra olasiz{% endblocktrans %}</p>
-                {% else %}
-                <p>{% blocktrans %}Standard yoki Proni sotib olganingizdan so'ng bu analizlar ochiladi{% endblocktrans %}</p>
-                {% endif %}
-            </div>
+                <div class="analysis-entry">
+                    <img src="/media/main/analyses/default.png" alt="Default Image" class="analysis-image">
+                    {% if analysis.analysis_type == 'pro' %}
+                        <p>{% blocktrans %}Pro padpiskani sotvolganinizdan so'ng ko'ra olasiz{% endblocktrans %}</p>
+                    {% else %}
+                        <p>{% blocktrans %}Standard yoki Proni sotib olganingizdan so'ng bu analizlar ochiladi{% endblocktrans %}</p>
+                    {% endif %}
+                </div>
             {% endfor %}
+
         </div>
         {% endfor %}
     </div>
