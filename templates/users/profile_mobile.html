@@ -15,41 +15,40 @@
 </style>
 
 {% if user.is_authenticated %}
-<h2 class="notes-title">Profil</h2>
+<h2 class="notes-title">{% blocktrans %}Profil{% endblocktrans %}</h2>
 
-<h1>{{ user.username }}'s Profile</h1>
+<h1>{{ user.username }}</h1>
 
 {% if user.profile_pic %}
 <img src="{{ user.profile_pic.url }}" alt="{{ user.username }}'s Profile Picture"
      style="max-width: 150px; max-height: 150px;">
 {% else %}
-<p>No profile picture available.</p>
+<p>{% blocktrans %}Hech qanday profil rasmi mavjud emas.{% endblocktrans %}</p>
 {% endif %}
 
-<p>Email: {{ user.email }}</p>
-<p>Name: {{ user.name }} {{ user.surname }}</p>
+<p>{%blocktrans %}Email:{% endblocktrans %} {{ user.email }}</p>
+<p>{% blocktrans %}Name:{% endblocktrans %}{{ user.name }} {{ user.surname }}</p>
 <p>ID: {{ user_id }}</p>
 
 {% if premium_user %}
-<h2>Subscription Details</h2>
-<p>Premium Type: {{ premium_user.premium_type }}</p>
-<p>Subscription Start: {{ premium_user.subscription_start }}</p>
-<p>Subscription End: {{ premium_user.subscription_end }}</p>
+<h2>{% blocktrans %}Obuna tafsilotlari{% endblocktrans %}</h2>
+<p>{% blocktrans %}Premium turi:{% endblocktrans %} {{ premium_user.premium_type }}</p>
+<p>{% blocktrans %}Obuna boshlandi:{% endblocktrans %}{{ premium_user.subscription_start }}</p>
+<p>{% blocktrans %}Obuna tugaydi:{% endblocktrans %} {{ premium_user.subscription_end }}</p>
 {% else %}
-<p>You are currently a normal user.</p>
+<p>{% blocktrans %}Siz hozir normal foydalanuvchisiz.{% endblocktrans %}</p>
 {% endif %}
 
-<p><a href="{% url 'update_profile' %}">Edit Profile</a></p>
-
+<p><a href="{% url 'update_profile' %}">{% blocktrans %}Profilni tahrirlash{% endblocktrans %}</a></p>
 <li>
     {% url 'logout' as logout_url %}
     <a href="{{ logout_url }}">
-        <span class="material-icons">logout</span>{% trans "Chiqish" %}
+        <span class="material-icons">logout</span>{% blocktrans %}Chiqish{% endblocktrans %}
     </a>
 </li>
 
 {% else %}
-<p><a href="{% url 'mobile_login' %}" style="color:#FFFFFF; text-decoration:none;">{% trans "Login" %}</a></p>
+<p><a href="{% url 'mobile_login' %}" style="color:#FFFFFF; text-decoration:none;">{% blocktrans %}Login{% endblocktrans %}</a></p>
 {% endif %}
 
 {% endblock %}

@@ -135,7 +135,7 @@
 </style>
 
 <section class="lessons-container">
-    <h1 class="lessons-title">Darsliklar va Pattern turlari</h1>
+    <h1 class="lessons-title">{% blocktrans %}Darsliklar va Pattern turlari{% endblocktrans %}</h1>
     <div class="title-underline"></div>
     <div class="recommended-section">
         <p class="recommended-text">Recommended</p>
@@ -157,7 +157,7 @@
         </div>
     </div>
     <p class="pattern-description">{{ lesson.lesson_text|truncatewords:100 }}</p>
-    <a href="{% url 'lesson_detail' lesson.id %}">Batafsil o'qish</a>
+    <a href="{% url 'lesson_detail' lesson.id %}">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
     <div class="description-underline"></div>
     {% endfor %}
 

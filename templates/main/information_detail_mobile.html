@@ -78,13 +78,13 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">
 
-<h1 class="section-title">Ma'lumotlar </h1>
+<h1 class="section-title">{% blocktrans %}Ma'lumotlar{% endblocktrans %}</h1>
 <section class="crypto-info">
     <header class="header-container">
         <form method="GET" action="{% url 'mobile_informations' %}">
-            <input type="text" id="search-field" name="q" placeholder="Search..." class="search-input"
+            <input type="text" id="search-field" name="q" placeholder="{% blocktrans %}Qidirish...{% endblocktrans %}" class="search-input"
                    value="{{ request.GET.q }}">
-            <button type="submit" class="search-button" onclick="toggleSearch()">Search</button>
+            <button type="submit" class="search-button" onclick="toggleSearch()">{% blocktrans %}Qidirish{% endblocktrans %}</button>
         </form>
     </header>
 
@@ -92,7 +92,7 @@
         {{ information.title }}</h1>
     <p style="font-family: 'Roboto', sans-serif; font-weight: semi-bold; font-size: 20px;">
         {{ information.info_text }}</p>
-    <a href="{% url 'information' %}">Orqaga qaytish</a>
+    <a href="{% url 'information' %}">{% blocktrans %}Orqaga qaytish{% endblocktrans %}</a>
 
 </section>
 {% endblock %}

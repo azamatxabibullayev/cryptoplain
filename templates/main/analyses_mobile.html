@@ -2,7 +2,7 @@
 
 {% block content %}
 {% load i18n %}
-<h2 class="analysis-title">Tex-Analizlar</h2>
+<h2 class="analysis-title">{% blocktrans %}Tex-Analizlar{% endblocktrans %}</h2>
 <section class="crypto-analysis">
     <div class="analysis-container">
         <header class="analysis-header"></header>
@@ -23,9 +23,9 @@
             <div class="analysis-entry">
                 <img src="/media/main/analyses/default.png" alt="Default Image" class="analysis-image">
                 {% if analysis.analysis_type == 'pro' %}
-                <p>Pro padpiskani sotvolganinizdan so'ng ko'ra olasiz</p>
+                <p>{% blocktrans %}Pro padpiskani sotvolganinizdan so'ng ko'ra olasiz{% endblocktrans %}</p>
                 {% else %}
-                <p>Standard yoki Proni sotib olganingizdan so'ng bu analizlar ochiladi</p>
+                <p>{% blocktrans %}Standard yoki Proni sotib olganingizdan so'ng bu analizlar ochiladi{% endblocktrans %}</p>
                 {% endif %}
             </div>
             {% endfor %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-15 09:05+0500\n"
+"POT-Creation-Date: 2024-11-02 01:10+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,11 +20,14 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: main/forms.py:10
-msgid "Yangi zametka qoshish"
-msgstr ""
-
 #: main/forms.py:11
+#, fuzzy
+#| msgid "Zametkalar"
+msgid "Zametka nomi"
+msgstr "Заметки"
+
+#: main/forms.py:12 templates/main/note_form.html:166
+#: templates/main/note_form_mobile.html:148
 #, fuzzy
 #| msgid "Zametkalar"
 msgid "Zametka"
@@ -51,79 +54,87 @@ msgid "Birjalar"
 msgstr "Бирджа"
 
 #: templates/base.html:307 templates/base.html:430
-#: templates/base_mobile.html:217
+#: templates/base_mobile.html:287 templates/main/news.html:45
+#: templates/main/news_mobile.html:39
 msgid "Yangiliklar"
 msgstr "Новости"
 
-#: templates/base.html:375
+#: templates/base.html:375 templates/users/login.html:14
+#: templates/users/login.html:18 templates/users/login_mobile.html:16
+#: templates/users/login_mobile.html:20 templates/users/profile_mobile.html:51
 msgid "Login"
 msgstr "Логин"
 
-#: templates/base.html:376
+#: templates/base.html:376 templates/users/login_mobile.html:24
+#: templates/users/register.html:18 templates/users/register_mobile.html:16
+#: templates/users/register_mobile.html:20
 msgid "Registratsiya"
 msgstr "Регистрация"
 
-#: templates/base.html:385 templates/base_mobile.html:182
+#: templates/base.html:385 templates/base_mobile.html:239
 msgid "Bosh Sahifa"
 msgstr "Главная страница"
 
-#: templates/base.html:392 templates/base_mobile.html:187
+#: templates/base.html:392 templates/base_mobile.html:246
+#: templates/main/video_lessons.html:162
+#: templates/main/video_lessons_mobile.html:141
 msgid "Video darslar"
 msgstr "Видео уроки"
 
-#: templates/base.html:398 templates/base_mobile.html:192
+#: templates/base.html:398 templates/base_mobile.html:252
+#: templates/main/analyses.html:16 templates/main/analyses_mobile.html:5
 msgid "Tex-Analizlar"
 msgstr "Tex-анализ"
 
-#: templates/base.html:405 templates/base_mobile.html:197
+#: templates/base.html:405 templates/base_mobile.html:259
+#: templates/main/information_detail_mobile.html:81
+#: templates/main/informations_mobile.html:137
 msgid "Ma'lumotlar"
 msgstr "Информации"
 
-#: templates/base.html:412 templates/base_mobile.html:202
+#: templates/base.html:412 templates/base_mobile.html:266
+#: templates/main/birja.html:39 templates/main/birja_mobile.html:81
 msgid "Birjalar bilan ishlash"
 msgstr "Работа с биржами"
 
-#: templates/base.html:418 templates/base_mobile.html:207
+#: templates/base.html:418 templates/base_mobile.html:273
+#: templates/main/advice.html:109 templates/main/advice_mobile.html:80
 msgid "Maslahatlar"
 msgstr "Советы"
 
-#: templates/base.html:424 templates/base_mobile.html:212
+#: templates/base.html:424 templates/base_mobile.html:280
+#: templates/main/signal.html:29 templates/main/signal_mobile.html:14
 msgid "Signallar"
 msgstr "Сигналы"
 
-#: templates/base.html:437 templates/base_mobile.html:223
+#: templates/base.html:437 templates/base_mobile.html:294
 msgid "Darsliklar"
 msgstr "Учебники"
 
-#: templates/base.html:444 templates/base_mobile.html:228
+#: templates/base.html:444 templates/base_mobile.html:301
+#: templates/main/books.html:29 templates/main/books_mobile.html:14
 msgid "Kitoblar"
 msgstr "Книги"
 
-#: templates/base.html:451
+#: templates/base.html:451 templates/base_mobile.html:308
 msgid ""
 "Zametkalar\n"
 "                    "
 msgstr "Заметки"
 
-#: templates/base.html:458 templates/base_mobile.html:238
+#: templates/base.html:458 templates/base_mobile.html:315
+#: templates/main/indicator_detail_mobile.html:6
+#: templates/main/indicators.html:195 templates/main/indicators_mobile.html:187
 msgid "Indikatorlar"
 msgstr "Индикаторы"
 
-#: templates/base_mobile.html:170
+#: templates/base_mobile.html:217
 msgid "Biz bilan bog'lanish"
 msgstr "Связаться с нами"
 
-#: templates/base_mobile.html:171
+#: templates/base_mobile.html:218
 msgid "Podpiska muddati"
 msgstr "Период подписки"
-
-#: templates/base_mobile.html:233
-msgid "Zametkalar"
-msgstr "Заметки"
-
-#: templates/base_mobile.html:244 templates/users/profile.html:32
-msgid "Chiqish"
-msgstr "Выход"
 
 #: templates/landing_page.html:96
 #, fuzzy
@@ -141,28 +152,305 @@ msgstr "Период подписки"
 msgid "Sizning faolligingiz"
 msgstr "Ваши активность"
 
-#: templates/landing_page.html:117 templates/landing_page_mobile.html:138
+#: templates/landing_page.html:117 templates/landing_page_mobile.html:142
 #, fuzzy
 #| msgid "Podpiska muddati"
 msgid "Padpiska turlari"
 msgstr "Период подписки"
 
-#: templates/landing_page.html:128 templates/landing_page_mobile.html:129
+#: templates/landing_page.html:131 templates/landing_page_mobile.html:133
 msgid "Analiz qiling"
 msgstr "Анализируйте "
 
-#: templates/landing_page_mobile.html:123
+#: templates/landing_page_mobile.html:128
 #, fuzzy
 #| msgid "Bosh Sahifa"
-msgid ""
-"Bosh\n"
-"    sahifa"
+msgid "Bosh sahifa"
 msgstr "Главная страница"
 
-#: templates/landing_page_mobile.html:132
+#: templates/landing_page_mobile.html:136
 msgid "Kuzating"
 msgstr "Обращайте внимание"
 
-#: templates/landing_page_mobile.html:135
+#: templates/landing_page_mobile.html:139
 msgid "Qo'rquv indeksi"
 msgstr "Индекс страха"
+
+#: templates/main/analyses.html:42 templates/main/analyses_mobile.html:28
+msgid "Standard yoki Proni sotib olganingizdan so'ng bu analizlar ochiladi"
+msgstr "Этот анализ разблокируется после покупки Standard или Pro."
+
+#: templates/main/analyses_mobile.html:26
+msgid "Pro padpiskani sotvolganinizdan so'ng ko'ra olasiz"
+msgstr "Вы сможете просмотреть его после покупки подписки Pro."
+
+#: templates/main/book_view.html:10
+#, fuzzy
+#| msgid "< Orqaga"
+msgid "< orqaga"
+msgstr "< Назад"
+
+#: templates/main/indicator_detail.html:21 templates/main/lesson_detail.html:20
+#: templates/main/lesson_detail_mobile.html:14
+#: templates/users/update_profile.html:13
+msgid "< Orqaga"
+msgstr "< Назад"
+
+#: templates/main/indicator_detail_mobile.html:14
+#, fuzzy
+#| msgid "< Orqaga"
+msgid " < Orqaga"
+msgstr "< Назад"
+
+#: templates/main/indicators.html:204 templates/main/indicators_mobile.html:192
+#, fuzzy
+#| msgid "Indikatorlar"
+msgid "Indikatorlardan qidiring...."
+msgstr "Индикаторы"
+
+#: templates/main/indicators.html:205
+msgid " Qidirish "
+msgstr "Поиск"
+
+#: templates/main/indicators.html:218 templates/main/indicators_mobile.html:207
+#: templates/main/informations.html:235
+#: templates/main/informations_mobile.html:159 templates/main/lessons.html:160
+#: templates/main/lessons_mobile.html:111
+msgid "Batafsil o'qish"
+msgstr "Читать далее"
+
+#: templates/main/indicators.html:225 templates/main/indicators_mobile.html:213
+#: templates/main/informations.html:240
+#: templates/main/informations_mobile.html:164
+#: templates/main/video_lessons.html:186
+#: templates/main/video_lessons_mobile.html:159
+msgid "Hech qanday natija topilmadi."
+msgstr "Результаты не найдены."
+
+#: templates/main/indicators_mobile.html:194
+#: templates/main/informations_mobile.html:143
+#: templates/main/video_lessons.html:172
+#: templates/main/video_lessons_mobile.html:145
+msgid "Qidiring"
+msgstr "Поиск"
+
+#: templates/main/information_detail.html:118
+#: templates/main/informations.html:207
+msgid "Barcha narsalar haqida kerakli ma'lumotlar"
+msgstr "Необходимая информация обо всем"
+
+#: templates/main/information_detail.html:128
+#: templates/main/information_detail_mobile.html:85
+#: templates/main/informations_mobile.html:141
+msgid "Qidirish..."
+msgstr "Поиск..."
+
+#: templates/main/information_detail.html:130
+#: templates/main/information_detail_mobile.html:87
+msgid "Qidirish"
+msgstr "Поиск"
+
+#: templates/main/information_detail.html:137
+#: templates/main/information_detail_mobile.html:95
+msgid "Orqaga qaytish"
+msgstr "Назад"
+
+#: templates/main/informations.html:217
+msgid "Search..."
+msgstr "Поиск..."
+
+#: templates/main/informations.html:219 templates/main/video_lessons.html:174
+#: templates/main/video_lessons_mobile.html:147
+msgid "Qidiruv"
+msgstr "Поиск"
+
+#: templates/main/lesson_detail_mobile.html:5 templates/main/lessons.html:138
+#: templates/main/lessons_mobile.html:106
+msgid "Darsliklar va Pattern turlari"
+msgstr "Учебники и типы узоров"
+
+#: templates/main/note_confirm_delete.html:30
+#: templates/main/note_confirm_delete_mobile.html:33
+msgid "O'chirishni tasdiqlash"
+msgstr "Подтвердить удаление"
+
+#: templates/main/note_confirm_delete.html:31
+#: templates/main/note_confirm_delete_mobile.html:34
+#, fuzzy
+#| msgid "Siz rostan ham  o'chirmoqchimisiz ?"
+msgid "Siz rostan ham o'chirmoqchimisiz ?"
+msgstr "Вы уверены, что хотите удалить ?"
+
+#: templates/main/note_confirm_delete.html:34
+#: templates/main/note_confirm_delete_mobile.html:37
+msgid "Ha, o'chirilsin"
+msgstr "Да, удалить"
+
+#: templates/main/note_confirm_delete.html:35
+#: templates/main/note_confirm_delete_mobile.html:38
+msgid "Orqaga"
+msgstr "Назад"
+
+#: templates/main/note_confirm_delete_mobile.html:32
+#: templates/main/note_details_mobile.html:118
+#: templates/main/note_form.html:150 templates/main/note_form_mobile.html:137
+#: templates/main/note_list.html:119 templates/main/note_list_mobile.html:87
+msgid "Zametkalar"
+msgstr "Заметки"
+
+#: templates/main/note_details.html:14
+#, fuzzy
+#| msgid "Yaratilgan vaqt:"
+msgid "Yaratilgan vaqt:"
+msgstr "Время создания:"
+
+#: templates/main/note_details.html:15
+#, fuzzy
+#| msgid "Tahrirlangan vaqt:"
+msgid "Tahrirlangan vaqt:"
+msgstr "Время обновления:"
+
+#: templates/main/note_details.html:16
+#: templates/main/note_details_mobile.html:124
+#, fuzzy
+#| msgid "Zametkalar"
+msgid "Zametkani tahrirlash"
+msgstr "Заметки"
+
+#: templates/main/note_details.html:17
+#: templates/main/note_details_mobile.html:125
+msgid "Zametkani o'chirish"
+msgstr "Удалить заметку"
+
+#: templates/main/note_form.html:160 templates/main/note_form_mobile.html:142
+#, fuzzy
+#| msgid "Zametkalar"
+msgid "Yangi Zametka"
+msgstr "Заметки"
+
+#: templates/main/note_form.html:172 templates/main/note_form_mobile.html:154
+msgid "Saqlash"
+msgstr "Сохранять"
+
+#: templates/users/login.html:20 templates/users/login_mobile.html:22
+msgid "Parolni unutdingizmi?"
+msgstr "Забыли пароль?"
+
+#: templates/users/password_reset.html:11
+#: templates/users/password_reset.html:15
+#: templates/users/password_reset_complete.html:31
+#: templates/users/password_reset_done.html:31
+#: templates/users/password_reset_invalid.html:18
+#: templates/users/password_reset_invalid_mobile.html:14
+#: templates/users/password_reset_mobile.html:13
+#: templates/users/password_reset_mobile.html:17
+msgid "Parolni tiklash"
+msgstr "Сброс пароля"
+
+#: templates/users/password_reset_complete.html:33
+msgid ""
+"Sizning parolingiz muvaffaqiyatli o'zgartirildi. Endi siz yangi parolingiz "
+"bilan tizimga kirishingiz mumkin."
+msgstr ""
+"Ваш пароль был успешно изменен. Теперь вы можете войти в систему с новым "
+"паролем."
+
+#: templates/users/password_reset_confirm.html:17
+msgid "Yangi parolni kiriting"
+msgstr "Введите новый пароль"
+
+#: templates/users/password_reset_confirm.html:21
+#: templates/users/password_reset_confirm_mobile.html:18
+msgid "Parolni o'zgartirish"
+msgstr "Изменить пароль"
+
+#: templates/users/password_reset_confirm_mobile.html:14
+#, fuzzy
+#| msgid "Yangiliklar"
+msgid "Yangi Parol"
+msgstr "Новости"
+
+#: templates/users/password_reset_done.html:33
+msgid ""
+"Sizga Email orqali parolingizni qanday tiklash kerak ekanligini yubordik. "
+"Sizga bir muddat ichida Email yetib boradi."
+msgstr ""
+"Мы отправили вам письмо по электронной почте, как сбросить пароль. Вы "
+"получите электронное письмо в ближайшее время."
+
+#: templates/users/password_reset_email.html:1
+msgid ""
+"Kimdir akkauntingiz uchun parolni tiklashni soʻradi. Agar bu siz "
+"bo'lmasangiz, bu xatni e'tiborsiz qoldirishingiz mumkin.\n"
+"\n"
+"Parolni tiklash uchun quyidagi havolani bosing:"
+msgstr ""
+"Кто-то запросил сброс пароля для вашей учетной записи. Если это не вы ,   вы "
+"можете игнорировать это письмо. Чтобы сбросить пароль, нажмите ссылку ниже:"
+
+#: templates/users/password_reset_invalid.html:19
+#: templates/users/password_reset_invalid_mobile.html:15
+msgid ""
+"Parolni tiklash havolasi yaroqsiz, ehtimol u allaqachon ishlatilgan. "
+"Iltimos, yangi parolni tiklashni so'rang."
+msgstr ""
+"Ссылка для сброса пароля недействительна, возможно, она уже использовалась. "
+"Пожалуйста, запросите сброс нового пароля."
+
+#: templates/users/profile.html:20 templates/users/profile_mobile.html:26
+msgid "Hech qanday profil rasmi mavjud emas."
+msgstr "Изображение профиля недоступно."
+
+#: templates/users/profile.html:22 templates/users/profile_mobile.html:29
+msgid "Email:"
+msgstr "Электронная почта:"
+
+#: templates/users/profile.html:23 templates/users/profile_mobile.html:30
+msgid "Name:"
+msgstr "Имя:"
+
+#: templates/users/profile.html:27 templates/users/profile_mobile.html:34
+msgid "Obuna tafsilotlari"
+msgstr "Подробности подписки"
+
+#: templates/users/profile.html:28 templates/users/profile_mobile.html:35
+msgid "Premium turi:"
+msgstr "Премиум Тип:"
+
+#: templates/users/profile.html:29 templates/users/profile_mobile.html:36
+msgid "Obuna boshlandi:"
+msgstr "Подписка началась:"
+
+#: templates/users/profile.html:30 templates/users/profile_mobile.html:37
+msgid "Obuna tugaydi:"
+msgstr "Срок подписки истекает:"
+
+#: templates/users/profile.html:32 templates/users/profile_mobile.html:39
+msgid "Siz hozir normal foydalanuvchisiz."
+msgstr "Вы сейчас обычный пользователь."
+
+#: templates/users/profile.html:33 templates/users/profile_mobile.html:42
+#, fuzzy
+#| msgid "Zametkalar"
+msgid "Profilni tahrirlash"
+msgstr "Заметки"
+
+#: templates/users/profile.html:39 templates/users/profile_mobile.html:46
+msgid "Chiqish"
+msgstr "Выход"
+
+#: templates/users/profile_mobile.html:18
+msgid "Profil"
+msgstr "Профиль"
+
+#: templates/users/update_profile.html:11
+msgid "O'zgartirish"
+msgstr "Изменять"
+
+
+#, fuzzy
+#~| msgid "Bosh Sahifa"
+#~ msgid ""
+#~ "Bosh\n"
+#~ "    sahifa"
+#~ msgstr "Главная страница"

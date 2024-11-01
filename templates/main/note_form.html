@@ -147,7 +147,7 @@
 </style>
 
 <section class="notes-container">
-    <h1 class="notes-title">Zametkalar</h1>
+    <h1 class="notes-title">{% blocktrans %}Zametkalar{% endblocktrans %}</h1>
     <div class="notes-divider" aria-hidden="true"></div>
     <div class="recommendation-container">
         <p class="recommended-text">Recommended</p>
@@ -157,19 +157,19 @@
 
     <form method="POST" action="{% url 'note_create' %}">
         {% csrf_token %}
-        <h2>Yangi Zametka</h2>
+        <h2>{% blocktrans %}Yangi Zametka{% endblocktrans %}</h2>
         <div class="form-group note-name-input">
             <label for="id_title" style="display: none;">Title</label>
             {{ form.title }}
         </div>
 
-        <h2>Zametka</h2>
+        <h2>{% blocktrans %}Zametka{% endblocktrans %}</h2>
         <div class="form-group note-content">
             <label for="id_content" style="display: none;">Content</label>
             {{ form.content }}
         </div>
 
-        <button type="submit" class="save-button">Saqlash</button>
+        <button type="submit" class="save-button">{% blocktrans %}Saqlash{% endblocktrans %}</button>
     </form>
 </section>
 {% endblock content %}

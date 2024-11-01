@@ -184,14 +184,14 @@
       margin-left: 100px;
     }
 </style>
-<h1 class="main-title">Indikatorlar</h1>
+<h1 class="main-title">{% blocktrans %}Indikatorlar{% endblocktrans %}</h1>
 
 <section class="news-section">
     <header class="header-container">
         <form method="GET" action="{% url 'mobile_indicators' %}">
-            <input type="text" name="q" placeholder="Indikatorlardan qidiring...." value="{{ request.GET.q }}"
+            <input type="text" name="q" placeholder="{% blocktrans %}Indikatorlardan qidiring....{% endblocktrans %}" value="{{ request.GET.q }}"
                    class="search-input">
-            <button type="submit" class="search-button">Search</button>
+            <button type="submit" class="search-button">{% blocktrans %}Qidiring{% endblocktrans %}</button>
         </form>
     </header>
 
@@ -204,13 +204,13 @@
                  alt="{{ indicator.title }}" class="news-image"/>
             <div class="news-text-container">
                 <p class="news-text">{{ indicator.indicator_text|truncatewords:100 }}</p>
-                <a href="{% url 'indicator_detail' indicator.id %}" class="read-more-link">Batafsil o'qish</a>
+                <a href="{% url 'indicator_detail' indicator.id %}" class="read-more-link">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
             </div>
         </div>
     </article>
     {% endfor %}
     {% else %}
-    <p>No results found.</p>
+    <p>{% blocktrans %}Hech qanday natija topilmadi.{% endblocktrans %}</p>
     {% endif %}
 </section>
 {% endblock %}

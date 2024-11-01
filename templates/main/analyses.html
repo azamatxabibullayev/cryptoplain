@@ -13,7 +13,7 @@
     <div class="analysis-container">
         <div class="analysis-column">
             <header class="analysis-header">
-                <h2 class="analysis-title">Tex-Analizlar</h2>
+                <h2 class="analysis-title">{% blocktrans %}Tex-Analizlar{% endblocktrans %}</h2>
                 <div class="title-underline"></div>
                 <div class="recommended-container">
                     <span class="recommended-text">Recommended</span>
@@ -37,9 +37,9 @@
                 <div class="analysis-entry">
                     <img src="/media/main/analyses/default.png" alt="Default Image" class="analysis-image">
                     {% if analysis.analysis_type == 'pro' %}
-                    <p>Pro padpiskani sotvolganinizdan so'ng ko'ra olasiz</p>
+                    <p>{% blockblocktrans %}Pro padpiskani sotvolganinizdan so'ng ko'ra olasiz{% endblocktrans %}</p>
                     {% else %}
-                    <p>Standard yoki Proni sotib olganingizdan so'ng bu analizlar ochiladi</p>
+                    <p>{% blocktrans %}Standard yoki Proni sotib olganingizdan so'ng bu analizlar ochiladi{% endblocktrans %}</p>
                     {% endif %}
                 </div>
                 {% endfor %}

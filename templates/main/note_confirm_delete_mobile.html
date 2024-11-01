@@ -29,12 +29,12 @@
     }
 </style>
 
-<h2 class="notes-title">Zametkalar</h2>
-<h1>O'chirishni tasdiqlash</h1>
-<p>Siz rostan ham "{{ note.title }}" ni o'chirmoqchimisiz ?</p>
+<h2 class="notes-title">{% blocktrans %}Zametkalar{% endblocktrans %}</h2>
+<h1>{% blocktrans %}O'chirishni tasdiqlash{% endblocktrans %}</h1>
+<p>{% blocktrans %}Siz rostan ham o'chirmoqchimisiz ?{% endblocktrans %}</p>
 <form method="post">
     {% csrf_token %}
-    <button type="submit" class="btn">Ha, o'chirilsin</button>
-    <a href="{% url 'mobile_note_list' %}">Orqaga</a>
+    <button type="submit" class="btn">{% blocktrans %}Ha, o'chirilsin{% endblocktrans %}</button>
+    <a href="{% url 'mobile_note_list' %}">{% blocktrans %}Orqaga{% endblocktrans %}</a>
 </form>
 {% endblock %}

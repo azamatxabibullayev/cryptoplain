@@ -115,14 +115,14 @@
     }
 </style>
 
-<h2 class="notes-title">Zametkalar</h2>
+<h2 class="notes-title">{% blocktrans %}Zametkalar{% endblocktrans %}</h2>
 
 <section class="notes-container">
     <h1>{{ note.title }}</h1>
     <p>{{ note.content }}</p>
     <div class="button-group">
-        <a href="{% url 'mobile_note_edit' note.pk %}" class="save-button">Zametkani tahrirlash</a>
-        <a href="{% url 'mobile_note_delete' note.pk %}" class="delete-button">Zametkani o'chirish</a>
+        <a href="{% url 'mobile_note_edit' note.pk %}" class="save-button">{% blocktrans %}Zametkani tahrirlash{% endblocktrans %}</a>
+        <a href="{% url 'mobile_note_delete' note.pk %}" class="delete-button">{% blocktrans %}Zametkani o'chirish{% endblocktrans %}</a>
     </div>
 </section>
 {% endblock %}

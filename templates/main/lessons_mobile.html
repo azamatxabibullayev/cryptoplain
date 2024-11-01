@@ -103,12 +103,12 @@
       border: 0;
     }
 </style>
-<h1 class="lessons-title">Darsliklar va Pattern turlari</h1>
+<h1 class="lessons-title">{% blocktrans %}Darsliklar va Pattern turlari{% endblocktrans %}</h1>
 
 <section class="lessons-container">
     {% for lesson in lessons %}
     <p class="pattern-description">{{ lesson.lesson_text|truncatewords:100 }}</p>
-    <a href="{% url 'lesson_detail' lesson.id %}">Batafsil o'qish</a>
+    <a href="{% url 'lesson_detail' lesson.id %}">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
     <div class="image-gallery">
         <div class="image-row">
             <div class="image-column">

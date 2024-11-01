@@ -23,7 +23,7 @@
         margin-top: 7px;
         width: 100%;
         align-items: flex-start;
-        gap: 10px; /* Reduced gap */
+        gap: 10px;
         color: #fff;
         font-weight: 400;
         white-space: nowrap;
@@ -35,13 +35,13 @@
     .search-button {
         border-radius: 15px;
         background-color: #fb8b5d;
-        padding: 8px 15px; /* Reduced padding */
-        font: 18px/1 Roboto, sans-serif; /* Reduced font size */
+        padding: 8px 15px;
+        font: 18px/1 Roboto, sans-serif;
         cursor: pointer;
         white-space: nowrap;
         color: white;
-        height: 36px; /* Reduced height */
-        width: auto; /* Changed to auto */
+        height: 36px;
+        width: auto;
     }
 
     .search-input {
@@ -103,13 +103,13 @@
     .crypto-name {
         color: #213f7b;
         align-self: start;
-        font: 600 22px Poppins, sans-serif; /* Reduced font size */
+        font: 600 22px Poppins, sans-serif;
     }
 
     .crypto-description {
         color: #000;
-        margin-top: 4px; /* Reduced margin */
-        font: 400 14px/20px Roboto, sans-serif; /* Reduced font size */
+        margin-top: 4px;
+        font: 400 14px/20px Roboto, sans-serif;
     }
 
     .visually-hidden {
@@ -134,13 +134,13 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
 
-<h1 class="section-title">Ma'lumotlar </h1>
+<h1 class="section-title">{% blocktrans %}Ma'lumotlar{% endblocktrans %}</h1>
 <section class="crypto-info">
     <header class="header-container">
         <form method="GET" action="{% url 'mobile_informations' %}">
-            <input type="text" id="search-field" name="q" placeholder="Search..." class="search-input"
+            <input type="text" id="search-field" name="q" placeholder="{% blocktrans %}Qidirish...{% endblocktrans %}" class="search-input"
                    value="{{ request.GET.q }}">
-            <button type="submit" class="search-button" onclick="toggleSearch()">Search</button>
+            <button type="submit" class="search-button" onclick="toggleSearch()">{% blocktrans %}Qidiring{% endblocktrans %}</button>
         </form>
     </header>
     <div class="content-container">
@@ -156,12 +156,12 @@
             <div class="crypto-details">
                 <h2 class="crypto-name">{{ info.title }}</h2>
                 <p class="crypto-description">{{ info.short_info }}</p>
-                <a href="{% url 'information_detail' info.id %}">Read more</a>
+                <a href="{% url 'information_detail' info.id %}">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
             </div>
             {% endfor %}
         </article>
         {% else %}
-        <p>No results found.</p>
+        <p>{% blocktrans %}Hech qanday natija topilmadi.{% endblocktrans %}</p>
         {% endif %}
     </div>
 </section>

@@ -192,7 +192,7 @@
 <section class="news-section">
     <header class="header-container">
         <div class="title-container">
-            <h1 class="main-title">Indikatorlar</h1>
+            <h1 class="main-title">{% blocktrans %}Indikatorlar{% endblocktrans %}</h1>
             <div class="indicator-bar"></div>
             <div class="recommended-container">
                 <span class="recommended-text">Recommended</span>
@@ -201,8 +201,8 @@
             </div>
         </div>
         <form method="GET" action="{% url 'indicators' %}">
-            <input type="text" name="q" placeholder="Indikatorlardan qidiring...." value="{{ request.GET.q }}" class="search-input">
-            <button type="submit" class="search-button">Search</button>
+            <input type="text" name="q" placeholder="{% blocktrans %}Indikatorlardan qidiring....{% endblocktrans %}" value="{{ request.GET.q }}" class="search-input">
+            <button type="submit" class="search-button">{% blocktrans %} Qidirish {% endblocktrans %}</button>
         </form>
     </header>
 
@@ -215,14 +215,14 @@
                  alt="{{ indicator.title }}" class="news-image"/>
             <div class="news-text-container">
                 <p class="news-text">{{ indicator.indicator_text|truncatewords:100 }}</p>
-                <a href="{% url 'indicator_detail' indicator.id %}" class="read-more-link">Batafsil o'qish</a>
+                <a href="{% url 'indicator_detail' indicator.id %}" class="read-more-link">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
             </div>
         </div>
     </article>
 
     {% endfor %}
     {% else %}
-    <p>No results found.</p>
+    <p>{% blocktrans %}Hech qanday natija topilmadi.{% endblocktrans %}</p>
     {% endif %}
 </section>
 

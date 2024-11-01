@@ -115,7 +115,7 @@
 
 
 <section class="crypto-info">
-    <h1 class="section-title">Barcha narsalar haqida kerakli ma'lumotlar </h1>
+    <h1 class="section-title">{% blocktrans %}Barcha narsalar haqida kerakli ma'lumotlar{% endblocktrans %}</h1>
     <div class="title-underline"></div>
     <header class="header-container">
         <div class="recommended-container">
@@ -125,16 +125,16 @@
                  class="recommended-icon" alt=""/>
         </div>
         <form method="GET" action="{% url 'information' %}">
-            <input type="text" id="search-field" name="q" placeholder="Search..." class="search-input"
+            <input type="text" id="search-field" name="q" placeholder="{% blocktrans %}Qidirish...{% endblocktrans %}" class="search-input"
                    value="{{ request.GET.q }}">
-            <button type="submit" class="search-button" onclick="toggleSearch()">Search</button>
+            <button type="submit" class="search-button" onclick="toggleSearch()">{% blocktrans %}Qidirish{% endblocktrans %}</button>
         </form>
     </header>
 
     <h1 style="margin-top: 60px; font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 25px;">
         {{ information.title }}</h1>
     <p style="font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 25px;">{{ information.info_text }}</p>
-    <a href="{% url 'information' %}">Orqaga qaytish</a>
+    <a href="{% url 'information' %}">{% blocktrans %}Orqaga qaytish{% endblocktrans %}</a>
 
 </section>
 {% endblock %}

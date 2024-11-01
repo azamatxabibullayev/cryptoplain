@@ -11,8 +11,8 @@
 </script>
 <h1>{{ note.title }}</h1>
 <p>{{ note.content }}</p>
-<p>Yaratilgan vaqt: {{ note.created_at }}</p>
-<p>Tahrirlangan vaqt: {{ note.updated_at }}</p>
-<a href="{% url 'note_edit' note.pk %}">Zametkani tahrirlash</a>
-<a href="{% url 'note_delete' note.pk %}">Zametkani o'chirish</a>
+<p>{% blocktrans %}Yaratilgan vaqt:{% endblocktrans %} {{ note.created_at }}</p>
+<p>{% blocktrans %}Tahrirlangan vaqt:{% endblocktrans %} {{ note.updated_at }}</p>
+<a href="{% url 'note_edit' note.pk %}">{% blocktrans %}Zametkani tahrirlash{% endblocktrans %}</a>
+<a href="{% url 'note_delete' note.pk %}">{% blocktrans %}Zametkani o'chirish{% endblocktrans %}</a>
 {% endblock %}

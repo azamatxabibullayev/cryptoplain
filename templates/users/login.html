@@ -11,11 +11,11 @@
         }
     });
 </script>
-<h2>Login</h2>
+<h2>{% blocktrans %}Login{% endblocktrans %}</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Login</button>
+    <button type="submit">{% blocktrans %}Login{% endblocktrans %}</button>
 </form>
-<p><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
+<p><a href="{% url 'password_reset' %}">{% blocktrans %}Parolni unutdingizmi?{% endblocktrans %}</a></p>
 {% endblock %}

@@ -13,10 +13,10 @@
         text-align: center;
     }
 </style>
-<h2 class="notes-title">Registratsiya</h2>
+<h2 class="notes-title">{% blocktrans %}Registratsiya{% endblocktrans %}</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Register</button>
+    <button type="submit">{% blocktrans %}Registratsiya{% endblocktrans %}</button>
 </form>
 {% endblock %}
