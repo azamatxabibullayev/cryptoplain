@@ -4,6 +4,7 @@
 
 {% block content %}
 {% load i18n %}
+
 <style>
     .notes-title {
         font-weight: 300;
@@ -12,11 +13,73 @@
         margin-bottom: 180px;
         text-align: center;
     }
+
+    .register-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 350px;
+        width: 90%;
+        margin: 0;
+        margin-left: 15px;
+        padding: 0;
+        color: #fff;
+        font-family: 'Lato', sans-serif;
+        text-align: left;
+    }
+
+    .register-input {
+        width: 100%;
+        padding: 10px 15px;
+        margin-top: 12px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+        background-color: transparent;
+        border: 2px solid #fb8b5d;
+        border-radius: 20px;
+    }
+
+    .register-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .register-button {
+        margin-left: 15px;
+        margin-top: 25px;
+        padding: 15px 25px;
+        font-size: 16px;
+        background-color: #fb8b5d;
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 100%;
+    }
+
+    .register-button:hover {
+        background-color: #e2794c;
+    }
 </style>
-<h2 class="notes-title">{% blocktrans %}Registratsiya{% endblocktrans %}</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% blocktrans %}Registratsiya{% endblocktrans %}</button>
-</form>
+
+<h2 class="notes-title">{% blocktrans %}Ro'yxatdan o'tish{% endblocktrans %}</h2>
+<section class="register-container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="{% blocktrans %}Foydalanuvchi nomi{% endblocktrans %}"
+               class="register-input" required>
+        <input type="email" name="email" placeholder="{% blocktrans %}Email{% endblocktrans %}" class="register-input"
+               required>
+        <input type="text" name="name" placeholder="{% blocktrans %}Ism{% endblocktrans %}" class="register-input"
+               required>
+        <input type="text" name="surname" placeholder="{% blocktrans %}Familiya{% endblocktrans %}"
+               class="register-input" required>
+        <input type="file" name="profile_pic" class="register-input">
+        <input type="password" name="password1" placeholder="{% blocktrans %}Parol{% endblocktrans %}"
+               class="register-input" required>
+        <input type="password" name="password2" placeholder="{% blocktrans %}Parolni tasdiqlang{% endblocktrans %}"
+               class="register-input" required>
+        <button type="submit" class="register-button">{% blocktrans %}Ro'yxatdan o'tish{% endblocktrans %}</button>
+    </form>
+</section>
 {% endblock %}
