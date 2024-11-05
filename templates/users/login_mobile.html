@@ -5,6 +5,71 @@
 {% block content %}
 {% load i18n %}
 <style>
+    .login-mobile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 300px;
+        width: 100%;
+        margin: 20px auto;
+        padding: 20px;
+        color: #fff;
+        font-family: 'Lato', sans-serif;
+    }
+
+    .login-mobile-input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 15px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+        background-color: transparent;
+        border: 2px solid #fb8b5d;
+        border-radius: 25px;
+    }
+
+    .login-mobile-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .login-mobile-button {
+        margin-top: 30px;
+        padding: 10px 25px;
+        font-size: 16px;
+        background-color: #fb8b5d;
+        color: #fff;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .login-mobile-button:hover {
+        background-color: #e2794c;
+    }
+
+    .forgot-password-mobile {
+        color: #fb8b5d;
+        text-decoration: none;
+        font-size: 14px;
+        margin-top: 15px;
+        display: block;
+        text-align: center;
+    }
+
+    .forgot-password-mobile:hover {
+        text-decoration: underline;
+    }
+
+    .register-link-mobile {
+        color: #FFFFFF;
+        text-decoration: none;
+        font-size: 14px;
+        margin-top: 10px;
+        display: block;
+        text-align: center;
+    }
+
     .notes-title {
         font-weight: 300;
         font-size: 28px;
@@ -13,13 +78,16 @@
         text-align: center;
     }
 </style>
+
 <h2 class="notes-title">{% blocktrans %}Login{% endblocktrans %}</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% blocktrans %}Login{% endblocktrans %}</button>
-</form>
-<p><a href="{% url 'mobile_password_reset' %}">{% blocktrans %}Parolni unutdingizmi?{% endblocktrans %}</a></p>
-<p><a href="{% url 'mobile_register' %}" style="color:#FFFFFF; text-decoration:none;">
-    {% blocktrans %}Registratsiya{% endblocktrans %}</a></p>
+<section class="login-mobile-container">
+    <form method="post">
+        {% csrf_token %}
+        <input id="username" name="username" type="text" placeholder="{% blocktrans %}Foydalanuvchi nomi{% endblocktrans %}" class="login-mobile-input" required>
+        <input id="password" name="password" type="password" placeholder="{% blocktrans %}Parol{% endblocktrans %}" class="login-mobile-input" required>
+        <button type="submit" class="login-mobile-button">{% blocktrans %}kirish{% endblocktrans %}</button>
+    </form>
+    <a href="{% url 'mobile_password_reset' %}" class="forgot-password-mobile">{% blocktrans %}Parolni unutdingizmi?{% endblocktrans %}</a>
+    <a href="{% url 'mobile_register' %}" class="forgot-password-mobile">{% blocktrans %}Registratsiya{% endblocktrans %}</a>
+</section>
 {% endblock %}

@@ -11,11 +11,81 @@
         }
     });
 </script>
-<h2>{% blocktrans %}Login{% endblocktrans %}</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% blocktrans %}Login{% endblocktrans %}</button>
-</form>
-<p><a href="{% url 'password_reset' %}">{% blocktrans %}Parolni unutdingizmi?{% endblocktrans %}</a></p>
+
+<style>
+    .login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        max-width: 437px;
+        width: 100%;
+        padding:0;
+        color: #fff;
+        font-family: 'Lato', sans-serif;
+        text-align: left;
+    }
+
+
+    .login-title {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        color: #fff;
+    }
+
+    .login-input {
+        width: 100%;
+        padding: 12px 20px;
+        margin-top: 20px;
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.8);
+        background-color: transparent;
+        border: 2px solid #fb8b5d;
+        border-radius: 30px;
+    }
+
+    .login-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .login-button {
+        margin-top: 40px;
+        padding: 12px 30px;
+        font-size: 18px;
+        background-color: #fb8b5d;
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .login-button:hover {
+        background-color: #e2794c;
+    }
+
+    .forgot-password {
+        color: #fb8b5d;
+        text-decoration: none;
+        font-size: 16px;
+        margin-top: 20px;
+        display: block;
+    }
+
+    .forgot-password:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<section class="login-container">
+    <h2 class="login-title">{% blocktrans %}Kirish{% endblocktrans %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input id="username" name="username" type="text" placeholder="{% blocktrans %}Foydalanuvchi nomi{% endblocktrans %}" class="login-input" required>
+        <input id="password" name="password" type="password" placeholder="{% blocktrans %}Parol{% endblocktrans %}" class="login-input" required>
+        <button type="submit" class="login-button">{% blocktrans %}kirish{% endblocktrans %}</button>
+    </form>
+    <a href="{% url 'password_reset' %}" class="forgot-password">{% blocktrans %} Parolni unutdingizmi ?{% endblocktrans %}</a>
+</section>
 {% endblock %}
