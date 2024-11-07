@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser, PremiumUser
+from django.utils.translation import gettext_lazy as _
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -28,7 +29,13 @@ class PremiumUserForm(forms.ModelForm):
 
 
 class PasswordResetRequestForm(forms.Form):
-    email = forms.EmailField(max_length=254)
+    email = forms.EmailField(
+        max_length=254,
+        widget=forms.EmailInput(attrs={
+            'class': 'reset-input',
+            'placeholder': _('Foydalanuvchi email'),
+        })
+    )
 
 
 class ProfileUpdateForm(forms.ModelForm):
