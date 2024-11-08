@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-u0$jm3pxj6t-4qfm8-iq__7d44)89#-su5!h!o8#7!fa!%k!%#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.36.48.194', '127.0.0.1', 'kriptoindex.com', 'www.kriptoindex.com']
+ALLOWED_HOSTS = ['3.36.48.194', '127.0.0.1', 'kriptoindex.uz', 'www.kriptoindex.uz']
 
 # Application definition
 
