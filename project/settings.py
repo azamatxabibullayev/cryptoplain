@@ -141,3 +141,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'cryptoindex07@gmail.com'
 EMAIL_HOST_PASSWORD = 'dctj zydg kldx lkqf'
+
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://kriptoindex.uz',
+    'https://www.kriptoindex.uz'
+]
