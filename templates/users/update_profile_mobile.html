@@ -1,0 +1,26 @@
+{% extends 'base_mobile.html' %}
+{% load i18n %}
+<title>
+    {% block title %} Edit Profile{% endblock %}
+</title>
+
+{% block content %}
+<style>
+    .notes-title {
+        font-weight: 300;
+        font-size: 28px;
+        margin-top: -195px;
+        margin-bottom: 180px;
+        text-align: center;
+    }
+</style>
+
+<h2 class="notes-title">{% blocktrans %}Profilni O'zgartirish{% endblocktrans %}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% blocktrans %}O'zgartirish{% endblocktrans %}</button>
+</form>
+<p><a href="{% url 'mobile_profile' %}">{% blocktrans %}< Orqaga{% endblocktrans %}</a></p>
+{% endblock %}

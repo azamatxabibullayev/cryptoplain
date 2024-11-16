@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (window.innerWidth < 768) {
+            window.location.href = '{% url "mobile_update_profile" %}';
+        }
+    });
+</script>
 
 <title>
     {% block title %} Edit Profile{% endblock %}

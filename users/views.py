@@ -190,8 +190,10 @@ def mobile_warning(request):
     return render(request, 'users/warning_mobile.html')
 
 
-@login_required
 def mobile_profile_view(request):
+    if not request.user.is_authenticated:
+        return redirect('mobile_login')
+
     user = request.user
     premium_user = None
     if hasattr(user, 'premium_user'):
@@ -265,3 +267,28 @@ def mobile_password_reset_confirm(request, uidb64=None, token=None):
         return render(request, 'users/password_reset_confirm_mobile.html', {'form': form})
     else:
         return render(request, 'users/password_reset_invalid_mobile.html')
+
+
+def mobile_user_logout(request):
+    logout(request)
+    return redirect('mobile_login')
+
+
+class MobileUpdateProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+        update_form = ProfileUpdateForm(instance=request.user)
+        context = {
+            'form': update_form
+        }
+        return render(request, 'users/update_profile_mobile.html', context=context)
+
+    def post(self, request):
+        update_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
+        if update_form.is_valid():
+            update_form.save()
+            return redirect('mobile_profile')
+        else:
+            context = {
+                'form': update_form
+            }
+            return render(request, 'users/update_profile_mobile.html', context=context)

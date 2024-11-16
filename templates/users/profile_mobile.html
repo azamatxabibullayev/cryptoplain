@@ -39,9 +39,9 @@
 <p>{% blocktrans %}Siz hozir normal foydalanuvchisiz.{% endblocktrans %}</p>
 {% endif %}
 
-<p><a href="{% url 'update_profile' %}">{% blocktrans %}Profilni tahrirlash{% endblocktrans %}</a></p>
+<p><a href="{% url 'mobile_update_profile' %}">{% blocktrans %}Profilni o'zgartirish{% endblocktrans %}</a></p>
 <li>
-    {% url 'logout' as logout_url %}
+    {% url 'mobile_logout' as logout_url %}
     <a href="{{ logout_url }}">
         <span class="material-icons">logout</span>{% blocktrans %}Chiqish{% endblocktrans %}
     </a>
