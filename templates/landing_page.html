@@ -29,12 +29,25 @@
     .analysis-title { align-self: start; }
     .analysis-image { aspect-ratio: 2.52; object-fit: contain; object-position: center; width: 100%; border-radius: 15px; margin-top: 7px; }
 
-    .fear-greed-index-box { margin-top: -20px; margin-bottom: 20px; }
+    .fear-greed-index-box {
+        display: flex;
+        width: 250px;
+        height: 150px;
+        overflow: hidden;
+        padding: 0;
+    }
+
+    .fear-greed-index-box img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
 
     .button-container {
         display: flex;
         justify-content: flex-end;
-        gap: 30px; /* Space between buttons */
+        gap: 30px;
         border-top: -60px;
     }
 
