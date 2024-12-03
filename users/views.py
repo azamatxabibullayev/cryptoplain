@@ -108,12 +108,12 @@ def password_reset_request(request):
                     email_template_name = "users/password_reset_email.html"
                     c = {
                         "email": user.email,
-                        'domain': '127.0.0.1:8000',
+                        'domain': 'kriptoindex.uz',
                         'site_name': 'Website',
                         "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                         "user": user,
                         'token': default_token_generator.make_token(user),
-                        'protocol': 'http',
+                        'protocol': 'https',
                     }
                     email = render_to_string(email_template_name, c)
                     send_mail(subject, email, settings.DEFAULT_FROM_EMAIL, [user.email], fail_silently=False)
@@ -231,19 +231,19 @@ def mobile_password_reset_request(request):
             if associated_users.exists():
                 for user in associated_users:
                     subject = "Password Reset Requested"
-                    email_template_name = "users/password_reset_email.html"
+                    email_template_name = "users/password_reset_email_mobile.html"
                     c = {
                         "email": user.email,
-                        'domain': '127.0.0.1:8000',
+                        'domain': 'kriptoindex.uz',
                         'site_name': 'Website',
                         "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                         "user": user,
                         'token': default_token_generator.make_token(user),
-                        'protocol': 'http',
+                        'protocol': 'https',
                     }
                     email = render_to_string(email_template_name, c)
                     send_mail(subject, email, settings.DEFAULT_FROM_EMAIL, [user.email], fail_silently=False)
-            return redirect("password_reset_done")
+            return redirect("password_reset_done_mobile")
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="users/password_reset_mobile.html",
                   context={"password_reset_form": password_reset_form})
@@ -261,7 +261,7 @@ def mobile_password_reset_confirm(request, uidb64=None, token=None):
             form = SetPasswordForm(user, request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('password_reset_complete')
+                return redirect('password_reset_complete_mobile')
         else:
             form = SetPasswordForm(user)
         return render(request, 'users/password_reset_confirm_mobile.html', {'form': form})
@@ -292,3 +292,4 @@ class MobileUpdateProfileView(LoginRequiredMixin, View):
                 'form': update_form
             }
             return render(request, 'users/update_profile_mobile.html', context=context)
+

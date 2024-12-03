@@ -25,4 +25,8 @@ urlpatterns = [
     path('mobile/reset/<uidb64>/<token>/', mobile_password_reset_confirm, name='mobile_password_reset_confirm'),
     path('mobile/logout/', mobile_user_logout, name='mobile_logout'),
     path('mobile/update_profile/', MobileUpdateProfileView.as_view(), name='mobile_update_profile'),
+    path('mobile/password_reset/done/', TemplateView.as_view(template_name='users/password_reset_done_mobile.html'),
+         name='password_reset_done_mobile'),
+    path('mobile/reset/done/', TemplateView.as_view(template_name='users/password_reset_complete_mobile.html'),
+         name='password_reset_complete_mobile'),
 ]
