@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
 {% load i18n %}
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -8,15 +12,89 @@
     });
 </script>
 
-<title>
-    {% block title %} Edit Profile{% endblock %}
-</title>
+<style>
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        max-width: 437px;
+        width: 100%;
+        padding: 0;
+        color: #fff;
+        font-family: 'Lato', sans-serif;
+        text-align: left;
+    }
 
-{% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% blocktrans %}O'zgartirish{% endblocktrans %}</button>
-</form>
-<p><a href="{% url 'profile' %}">{% blocktrans %}< Orqaga{% endblocktrans %}</a></p>
+    .profile-title {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        color: #fff;
+    }
+
+    .profile-input {
+        width: 100%;
+        padding: 12px 20px;
+        margin-top: 20px;
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.8);
+        background-color: transparent;
+        border: 2px solid #fb8b5d;
+        border-radius: 30px;
+    }
+
+    .profile-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .profile-button {
+        margin-top: 40px;
+        padding: 12px 30px;
+        font-size: 18px;
+        background-color: #fb8b5d;
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .profile-button:hover {
+        background-color: #e2794c;
+    }
+
+    .back-link {
+        color: #fb8b5d;
+        text-decoration: none;
+        font-size: 16px;
+        margin-top: 20px;
+        display: block;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<section class="profile-container">
+    <h2 class="profile-title">{% blocktrans %}Profilni Tahrirlash{% endblocktrans %}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+            <input
+                id="{{ field.id_for_label }}"
+                name="{{ field.html_name }}"
+                type="{{ field.field.widget.input_type }}"
+                placeholder="{{ field.label }}"
+                class="profile-input"
+                value="{{ field.value|default_if_none:'' }}">
+            {% if field.errors %}
+                <small style="color: red;">{{ field.errors|striptags }}</small>
+            {% endif %}
+        {% endfor %}
+        <button type="submit" class="profile-button">{% blocktrans %}O'zgartirish{% endblocktrans %}</button>
+    </form>
+    <a href="{% url 'profile' %}" class="back-link">{% blocktrans %}< Orqaga{% endblocktrans %}</a>
+</section>
 {% endblock %}

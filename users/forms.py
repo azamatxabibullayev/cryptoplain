@@ -41,4 +41,4 @@ class PasswordResetRequestForm(forms.Form):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'first_name', 'last_name', 'profile_pic')
+        fields = ('username', 'email', 'name', 'surname', 'profile_pic')
