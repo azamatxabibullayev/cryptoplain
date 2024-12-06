@@ -1,11 +1,69 @@
 {% extends 'base_mobile.html' %}
 {% load i18n %}
 <title>
-    {% block title %} Edit Profile{% endblock %}
+    {% block title %} Edit Profile {% endblock %}
 </title>
 
 {% block content %}
 <style>
+    .profile-container-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: center;
+        max-width: 90%;
+        margin: 30px auto 20px auto;
+        padding: 20px;
+        color: #fff;
+        font-family: 'Lato', sans-serif;
+        text-align: left;
+    }
+
+    .profile-input-mobile {
+        width: 100%;
+        max-width: 350px;
+        padding: 10px 15px;
+        margin-top: 10px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+        background-color: transparent;
+        border: 2px solid #fb8b5d;
+        border-radius: 20px;
+    }
+
+    .profile-input-mobile::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .profile-button-mobile {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #fb8b5d;
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .profile-button-mobile:hover {
+        background-color: #e2794c;
+    }
+
+    .back-link-mobile {
+        color: #fb8b5d;
+        text-decoration: none;
+        font-size: 14px;
+        margin-top: 15px;
+        display: block;
+        text-align: center;
+    }
+
+    .back-link-mobile:hover {
+        text-decoration: underline;
+    }
+
     .notes-title {
         font-weight: 300;
         font-size: 28px;
@@ -13,14 +71,34 @@
         margin-bottom: 180px;
         text-align: center;
     }
+
+    .field-container {
+        margin-bottom: 10px;
+        width: 100%;
+    }
 </style>
 
 <h2 class="notes-title">{% blocktrans %}Profilni O'zgartirish{% endblocktrans %}</h2>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% blocktrans %}O'zgartirish{% endblocktrans %}</button>
-</form>
-<p><a href="{% url 'mobile_profile' %}">{% blocktrans %}< Orqaga{% endblocktrans %}</a></p>
+<section class="profile-container-mobile">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="field-container">
+                <input
+                    id="{{ field.id_for_label }}"
+                    name="{{ field.html_name }}"
+                    type="{{ field.field.widget.input_type }}"
+                    placeholder="{% if field.label|length > 15 %}{{ field.label|truncatechars:12 }}...{% else %}{{ field.label }}{% endif %}"
+                    class="profile-input-mobile"
+                    value="{{ field.value|default_if_none:'' }}">
+                {% if field.errors %}
+                    <small style="color: red;">{{ field.errors|striptags }}</small>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="profile-button-mobile">{% blocktrans %}O'zgartirish{% endblocktrans %}</button>
+    </form>
+    <a href="{% url 'mobile_profile' %}" class="back-link-mobile">{% blocktrans %}< Orqaga{% endblocktrans %}</a>
+</section>
 {% endblock %}

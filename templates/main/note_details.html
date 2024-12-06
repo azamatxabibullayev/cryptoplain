@@ -9,10 +9,79 @@
         }
     });
 </script>
-<h1>{{ note.title }}</h1>
-<p>{{ note.content }}</p>
-<p>{% blocktrans %}Yaratilgan vaqt:{% endblocktrans %} {{ note.created_at }}</p>
-<p>{% blocktrans %}Tahrirlangan vaqt:{% endblocktrans %} {{ note.updated_at }}</p>
-<a href="{% url 'note_edit' note.pk %}">{% blocktrans %}Zametkani tahrirlash{% endblocktrans %}</a>
-<a href="{% url 'note_delete' note.pk %}">{% blocktrans %}Zametkani o'chirish{% endblocktrans %}</a>
-{% endblock %}
+
+<style>
+    .notes-container {
+        display: flex;
+        max-width: 902px;
+        flex-direction: column;
+        align-items: flex-start;
+        color: #fff;
+        font-family: Poppins, sans-serif;
+        padding: 20px;
+    }
+
+    .notes-title {
+        font-size: 40px;
+        font-weight: 700;
+    }
+
+    .notes-divider {
+        border-radius: 5px;
+        background-color: #fff;
+        width: 177px;
+        height: 5px;
+    }
+
+    .note-content {
+        width: 100%;
+        height: auto;
+        padding: 7px 30px;
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        font-family: Krub, sans-serif;
+        font-size: 18px;
+        line-height: 40px;
+        background-image: repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 38px,
+            rgba(251, 139, 93, 1) 39px
+        );
+        background-size: 100% 40px;
+        margin-top: 20px;
+    }
+
+
+    .edit-button {
+        border-radius: 30px;
+        background-color: #fb8b5d;
+        color: white;
+        font-size: 20px;
+        padding: 12px 35px;
+        margin-top: 44px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .edit-button:hover {
+        background-color: #ff9b73;
+    }
+</style>
+
+<section class="notes-container">
+    <h1 class="notes-title">{{ note.title }}</h1>
+    <div class="notes-divider" aria-hidden="true"></div>
+
+    <div class="note-content">
+        {{ note.content|linebreaksbr }}
+    </div>
+
+
+    <a href="{% url 'note_edit' note.pk %}" class="edit-button">{% blocktrans %}Zametkani tahrirlash{% endblocktrans %}</a>
+    <a href="{% url 'note_delete' note.pk %}" class="edit-button">{% blocktrans %}Zametkani o'chirish{% endblocktrans %}</a>
+</section>
+{% endblock content %}
