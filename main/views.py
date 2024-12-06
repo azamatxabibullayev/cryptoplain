@@ -150,10 +150,10 @@ def note_edit(request, pk):
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
             form.save()
-            return redirect('note_list')
+            return redirect('note_details', pk=note.pk)
     else:
         form = NoteForm(instance=note)
-    return render(request, 'main/note_form.html', {'form': form})
+    return render(request, 'main/note_edit.html', {'form': form, 'note': note})
 
 
 def note_delete(request, pk):
@@ -467,10 +467,10 @@ def mobile_note_edit(request, pk):
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
             form.save()
-            return redirect('mobile_note_details')
+            return redirect('mobile_note_details', pk=note.pk)
     else:
         form = NoteForm(instance=note)
-    return render(request, 'main/note_form_mobile.html', {'form': form})
+    return render(request, 'main/note_edit_mobile.html', {'form': form, 'note': note})
 
 
 def mobile_note_delete(request, pk):

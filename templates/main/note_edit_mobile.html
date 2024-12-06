@@ -1,0 +1,157 @@
+{% extends 'base_mobile.html' %}
+
+{% block content %}
+{% load i18n %}
+<style>
+    .notes-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        color: #fff;
+        font-family: Poppins, sans-serif;
+        padding: 15px 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .notes-title {
+        font-weight: 300;
+        font-size: 28px;
+        margin-top: -195px;
+        margin-bottom: 160px;
+        text-align: center;
+    }
+
+    .form-group {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .note-name-input input {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 20px;
+        border: 2px solid #fb8b5d;
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 10px;
+        font-family: Krub, sans-serif;
+        box-sizing: border-box;
+    }
+
+    .note-name-input input::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .note-content textarea {
+        width: 100%;
+        height: 180px;
+        padding: 7px 20px;
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        resize: none;
+        font-family: Krub, sans-serif;
+        font-size: 16px;
+        line-height: 30px;
+        background-image: repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 28px,
+            rgba(251, 139, 93, 1) 29px
+        );
+        background-size: 100% 30px;
+        margin-top: 10px;
+        box-sizing: border-box;
+    }
+
+    .note-content textarea::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .note-divider {
+        border-radius: 10px;
+        background-color: #fb8b5d;
+        width: 100%;
+        height: 4px;
+        margin-top: 30px;
+    }
+
+    .save-button {
+        width: 100%;
+        border-radius: 20px;
+        background-color: #fb8b5d;
+        color: white;
+        font-size: 18px;
+        padding: 10px 30px;
+        margin-top: 30px;
+        border: none;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .save-button:hover {
+        background-color: #ff9b73;
+    }
+
+
+    .note-content textarea::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    .note-content textarea::-webkit-scrollbar-track {
+        background: #3e2a4d;
+        border-radius: 10px;
+    }
+
+    .note-content textarea::-webkit-scrollbar-thumb {
+        background-color: #fb8b5d;
+        border-radius: 10px;
+        border: 3px solid #3e2a4d;
+    }
+
+    .note-content textarea::-webkit-scrollbar-thumb:hover {
+        background-color: #ff9b73;
+    }
+
+    .note-content textarea::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+
+    @media (max-width: 575px) {
+        .notes-container {
+            padding: 10px 5px;
+        }
+        .note-name-input input,
+        .note-content textarea {
+            padding-left: 15px;
+        }
+        .save-button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    }
+</style>
+
+<h1 class="notes-title">{% blocktrans %}Zametkalar{% endblocktrans %}</h1>
+
+<section class="notes-container">
+    <form method="POST" action="{% url 'mobile_note_edit' pk=note.pk %}">
+        {% csrf_token %}
+        <h2>{% blocktrans %}Tahrirlash{% endblocktrans %}</h2>
+        <div class="form-group note-name-input">
+            <label for="id_title" style="display: none;">Title</label>
+            {{ form.title }}
+        </div>
+
+
+        <div class="form-group note-content">
+            <label for="id_content" style="display: none;">Content</label>
+            {{ form.content }}
+        </div>
+
+        <button type="submit" class="save-button">{% blocktrans %}Saqlash{% endblocktrans %}</button>
+    </form>
+</section>
+{% endblock content %}
