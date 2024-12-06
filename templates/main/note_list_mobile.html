@@ -5,7 +5,7 @@
 <style>
     .recommended-section {
         display: flex;
-        max-width: 100%; /* Adjust max-width for mobile */
+        max-width: 100%;
         flex-direction: column;
         overflow: hidden;
         align-items: start;
@@ -33,7 +33,7 @@
         border-radius: 20px;
         background-color: #fff;
         color: #000;
-        width: calc(50% - 10px); /* Keep cards responsive */
+        width: calc(50% - 10px);
         padding: 20px;
         font: 400 20px Krub, sans-serif;
         border: 2px solid #fb8b5d;
@@ -67,25 +67,49 @@
     /* Mobile-specific styles */
     @media (max-width: 575px) {
         .card-grid {
-            flex-direction: column; /* Stack cards vertically */
+            flex-direction: column;
             gap: 10px;
         }
         .card {
-            width: 100%; /* Ensure full width on small screens */
-            margin-bottom: 10px; /* Add spacing between cards */
-            min-height: 120px; /* Reduce height slightly for mobile */
+            width: 100%;
+            margin-bottom: 10px;
+            min-height: 120px;
         }
         .add-card-icon {
-            font-size: 60px; /* Adjust icon size for mobile */
+            font-size: 60px;
         }
         .card-content {
             padding: 20px;
         }
     }
+
+    .login-prompt {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 25px;
+        color: #fff;
+        margin-top: 200px;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .login-link {
+        color: #fb8b5d;
+        text-decoration: underline;
+        font-weight: bold;
+    }
+
+    .login-link:hover {
+        color: #e2794c;
+    }
+
 </style>
 
 <h2 class="section-title">{% blocktrans %}Zametkalar{% endblocktrans %}</h2>
 
+{% if user.is_authenticated %}
 <section class="recommended-section">
     <div class="card-container">
         <div class="card-grid">
@@ -104,4 +128,10 @@
         </div>
     </div>
 </section>
+{% else %}
+<section class="login-prompt">
+    <p>{% blocktrans %}Zametkalaringizni ko'rish uchun birinchi akkauntingizga kiring. {% endblocktrans %}</p>
+    <a href="{% url 'mobile_login' %}" class="login-link">{% blocktrans %}Kirish{% endblocktrans %}</a>
+</section>
+{% endif %}
 {% endblock %}

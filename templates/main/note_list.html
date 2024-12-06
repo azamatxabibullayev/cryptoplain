@@ -113,8 +113,29 @@
         padding: 51px 20px;
       }
     }
+
+    .login-prompt {
+        text-align: left;
+        font-size: 25px;
+        color: #fff;
+        margin-top: 50px;
+        margin-left: 50px;
+    }
+
+    .login-link {
+        color: #fb8b5d;
+        text-decoration: underline;
+        font-weight: bold;
+    }
+
+    .login-link:hover {
+        color: #e2794c;
+    }
+
 </style>
 
+
+{% if user.is_authenticated %}
 <section class="recommended-section">
     <h2 class="section-title">{% blocktrans %}Zametkalar{% endblocktrans %}</h2>
     <div class="title-underline"></div>
@@ -140,4 +161,10 @@
         </div>
     </div>
 </section>
+{% else %}
+<section class="login-prompt">
+    <p>{% blocktrans %}Zametkalaringizni ko'rish uchun birinchi akkauntingizga kiring. {% endblocktrans %}
+        <a href="{% url 'login' %}" class="login-link">{% blocktrans %}Kirish{% endblocktrans %}</a></p>
+</section>
+{% endif %}
 {% endblock %}

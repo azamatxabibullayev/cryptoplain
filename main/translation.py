@@ -1,5 +1,5 @@
 from modeltranslation.translator import register, TranslationOptions
-from .models import VideoLesson, Information, Birja, Advice, Signal, News, Analysis, Note, Lesson, Indicator, Book
+from .models import VideoLesson, Information, Birja, Advice, Signal, News, Analysis, Lesson, Indicator, Book
 
 
 @register(VideoLesson)
@@ -35,11 +35,6 @@ class NewsTranslationOptions(TranslationOptions):
 @register(Analysis)
 class AnalysisTranslationOptions(TranslationOptions):
     fields = ('title', 'analysis_text')
-
-
-@register(Note)
-class NoteTranslationOptions(TranslationOptions):
-    fields = ('title', 'content')
 
 
 @register(Lesson)

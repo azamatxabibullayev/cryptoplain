@@ -7,4 +7,6 @@ __pycache__/
 .idea/
 
 project/__pycache__/
+
+
 *.pyc
