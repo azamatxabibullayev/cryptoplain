@@ -4,6 +4,9 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
 <style>
     .notes-title {
         font-weight: 300;
@@ -12,43 +15,158 @@
         margin-bottom: 180px;
         text-align: center;
     }
+
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        color: #fff;
+        font-family: 'Lato', sans-serif;
+        text-align: center;
+    }
+
+    .profile-item {
+        width: 100%;
+        padding: 10px 15px;
+        margin: 10px 0;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+        background-color: transparent;
+        border: 2px solid #fb8b5d;
+        border-radius: 20px;
+        box-sizing: border-box;
+    }
+
+    .profile-item img {
+        max-width: 100%;
+        max-height: 120px;
+        display: block;
+        margin: 10px auto;
+    }
+
+    .profile-item p {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .edit-button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 14px;
+        background-color: #fb8b5d;
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .edit-button:hover {
+        background-color: #e2794c;
+    }
+
+    .logout-link {
+        color: #fb8b5d;
+        text-decoration: none;
+        font-size: 14px;
+        margin-top: 10px;
+        display: block;
+    }
+
+    .logout-link:hover {
+        text-decoration: underline;
+    }
+
+    .social-buttons {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .social-button {
+        display: flex;
+        align-items: center;
+        padding: 8px 15px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #fb8b5d;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .social-button .material-icons {
+        margin-right: 8px;
+        font-size: 18px;
+    }
+
+    .social-button:hover {
+        background-color: #e2794c;
+    }
 </style>
 
 {% if user.is_authenticated %}
 <h2 class="notes-title">{% blocktrans %}Profil{% endblocktrans %}</h2>
 
-<h1>{{ user.username }}</h1>
+<div class="profile-container">
+    <div class="profile-item" style="border: none; border-radius: 0;">
+        <img src="{{ user.profile_pic.url }}" alt="{{ user.username }}'s Profile Picture">
+    </div>
 
-{% if user.profile_pic %}
-<img src="{{ user.profile_pic.url }}" alt="{{ user.username }}'s Profile Picture"
-     style="max-width: 150px; max-height: 150px;">
-{% else %}
-<p>{% blocktrans %}Hech qanday profil rasmi mavjud emas.{% endblocktrans %}</p>
-{% endif %}
+    <div class="profile-item">
+        <p>{{ user.username }}</p>
+    </div>
 
-<p>{%blocktrans %}Email:{% endblocktrans %} {{ user.email }}</p>
-<p>{% blocktrans %}Name:{% endblocktrans %}{{ user.name }} {{ user.surname }}</p>
-<p>ID: {{ user_id }}</p>
+    <div class="profile-item">
+        <p>{% blocktrans %}Email: {% endblocktrans %} {{ user.email }}</p>
+    </div>
 
-{% if premium_user %}
-<h2>{% blocktrans %}Obuna tafsilotlari{% endblocktrans %}</h2>
-<p>{% blocktrans %}Premium turi:{% endblocktrans %} {{ premium_user.premium_type }}</p>
-<p>{% blocktrans %}Obuna boshlandi:{% endblocktrans %}{{ premium_user.subscription_start }}</p>
-<p>{% blocktrans %}Obuna tugaydi:{% endblocktrans %} {{ premium_user.subscription_end }}</p>
-{% else %}
-<p>{% blocktrans %}Siz hozir normal foydalanuvchisiz.{% endblocktrans %}</p>
-{% endif %}
+    <div class="profile-item">
+        <p>{% blocktrans %}Ism: {% endblocktrans %} {{ user.name }} {{ user.surname }}</p>
+    </div>
 
-<p><a href="{% url 'mobile_update_profile' %}">{% blocktrans %}Profilni o'zgartirish{% endblocktrans %}</a></p>
-<li>
-    {% url 'mobile_logout' as logout_url %}
-    <a href="{{ logout_url }}">
-        <span class="material-icons">logout</span>{% blocktrans %}Chiqish{% endblocktrans %}
+    <div class="profile-item">
+        <p>ID: {{ user_id }}</p>
+    </div>
+
+    {% if premium_user %}
+    <div class="subscription-details">
+        <h3>{% blocktrans %}Obuna tafsilotlari{% endblocktrans %}</h3>
+        <p>{% blocktrans %}Premium turi:{% endblocktrans %} {{ premium_user.premium_type }}</p>
+        <p>{% blocktrans %}Obuna boshlandi:{% endblocktrans %} {{ premium_user.subscription_start }}</p>
+        <p>{% blocktrans %}Obuna tugaydi:{% endblocktrans %} {{ premium_user.subscription_end }}</p>
+    </div>
+    {% else %}
+    <div class="subscription-details">
+        <p>{% blocktrans %}Siz hozir oddiy foydalanuvchisiz.{% endblocktrans %}</p>
+    </div>
+    {% endif %}
+
+    <button class="edit-button" onclick="window.location.href='{% url 'mobile_update_profile' %}'">
+        {% blocktrans %}Profilni o'zgartirish{% endblocktrans %}
+    </button>
+
+    <a href="{% url 'mobile_logout' %}" class="logout-link">
+        {% blocktrans %}Chiqish{% endblocktrans %}
     </a>
-</li>
 
+    <div class="social-buttons">
+        <a href="https://instagram.com/kriptoindex" target="_blank" class="social-button">
+            <i class="fab fa-instagram" style="margin-right:10px; margin-left:10px"></i> Kriptoindex
+        </a>
+        <a href="https://t.me/Cryptoindexadmin" target="_blank" class="social-button">
+            <span class="material-icons">telegram</span> Kriptoindex
+        </a>
+    </div>
+</div>
 {% else %}
 <p><a href="{% url 'mobile_login' %}" style="color:#FFFFFF; text-decoration:none;">{% blocktrans %}Login{% endblocktrans %}</a></p>
 {% endif %}
-
 {% endblock %}
