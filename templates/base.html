@@ -362,7 +362,7 @@
             <img src="/media/default_img/user_image.png" alt="{{ user.name }}" class="profile-pic"></a>
         {% endif %}
         <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 8px;">
-            <h2>Salom, {{user.name}}</h2>
+            <h2>{% blocktrans %}Salom{% endblocktrans %}, {{user.name}}</h2>
         </a>
         <a href="{% url 'profile' %}" style="color:#FFFFFF; text-decoration:none; font-size: 10px; margin-bottom: 8px;">
             <p>{{ user.email }}</p>

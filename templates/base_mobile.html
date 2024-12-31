@@ -233,69 +233,69 @@
     <div class="navbar">
         <ul id="navbar-list">
             <li>
-                {% url 'landing_page' as landing_page_url %}
+                {% url 'mobile' as landing_page_url %}
                 <a href="{{ landing_page_url }}">
                     <span class="material-icons" style="margin-top: -8px;">A</span>
                     {% blocktrans %}Bosh Sahifa{% endblocktrans %}
                 </a>
             </li>
             <li>
-                {% url 'video_lessons' as video_lessons_url %}
+                {% url 'mobile_video_lessons' as video_lessons_url %}
                 <a href="{{ video_lessons_url }}">
                     <span class="material-icons">play_circle</span>
                     {% blocktrans %}Video darslar{% endblocktrans %}
                 </a>
             </li>
             <li>
-                {% url 'analyses' as analyses_url %}
+                {% url 'mobile_analyses' as analyses_url %}
                 <a href="{{ analyses_url }}">
                     <span class="material-icons">analytics</span>{% blocktrans %}Tex-Analizlar{% endblocktrans %}
                 </a>
             </li>
             <li>
-                {% url 'information' as information_url %}
+                {% url 'mobile_informations' as information_url %}
                 <a href="{{ information_url }}">
                     <span class="material-icons">info</span>
                     {% blocktrans %}Ma'lumotlar{% endblocktrans %}
                 </a>
             </li>
             <li>
-                {% url 'birja' as birja_url %}
+                {% url 'mobile_birja' as birja_url %}
                 <a href="{{ birja_url }}">
                     <span class="material-icons" style="margin-right: 5px;">show_chart</span>
                     {% blocktrans %}Birjalar bilan ishlash{% endblocktrans %}
                 </a>
             </li>
             <li>
-                {% url 'advice' as advice_url %}
+                {% url 'mobile_advice' as advice_url %}
                 <a href="{{ advice_url }}">
                     <span class="material-icons" style="margin-right: 5px; margin-top: -10px;">T</span>
                     {% blocktrans %}Maslahatlar{% endblocktrans %}
                 </a>
             </li>
             <li>
-                {% url 'signal' as signal_url %}
+                {% url 'mobile_signal' as signal_url %}
                 <a href="{{ signal_url }}">
                     <span class="material-icons" style="margin-right: 5px;">lightbulb</span>
                     {% blocktrans %}Signallar{% endblocktrans %}
                 </a>
             </li>
             <li>
-                {% url 'news' as news_url %}
+                {% url 'mobile_news' as news_url %}
                 <a href="{{ news_url }}">
                     <span class="material-icons" style="margin-right: 5px;">article</span>
                     {% blocktrans %}Yangiliklar{% endblocktrans %}
                 </a>
             </li>
             <li>
-                {% url 'lessons' as lessons_url %}
+                {% url 'mobile_lessons' as lessons_url %}
                 <a href="{{ lessons_url }}">
                     <span class="material-icons" style="margin-top: -2px;">menu_book</span>
                     {% blocktrans %}Darsliklar{% endblocktrans %}
                 </a>
             </li>
             <li>
-                {% url 'books' as books_url %}
+                {% url 'mobile_books' as books_url %}
                 <a href="{{ books_url }}">
                     <span class="material-icons">book</span>
                     {% blocktrans %}Kitoblar{% endblocktrans %}
@@ -303,14 +303,14 @@
             </li>
 
             <li>
-                {% url 'note_list' as note_list_url %}
+                {% url 'mobile_note_list' as note_list_url %}
                 <a href="{{ note_list_url }}">
                     <span class="material-icons">note</span>{% blocktrans %}Zametkalar
                     {% endblocktrans %}
                 </a>
             </li>
             <li>
-                {% url 'indicators' as indicators_url %}
+                {% url 'mobile_indicators' as indicators_url %}
                 <a href="{{ indicators_url }}">
                     <span class="material-icons">insights</span>{% blocktrans %}Indikatorlar{% endblocktrans %}
                 </a>

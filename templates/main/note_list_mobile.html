@@ -115,13 +115,13 @@
         <div class="card-grid">
             {% for note in notes %}
             <article class="card">
-                <a href="{% url 'note_details' note.pk %}">
+                <a href="{% url 'mobile_note_details' note.pk %}">
                     {{ note.title }}
                 </a>
             </article>
             {% endfor %}
             <article class="card">
-                <a href="{% url 'note_create' %}" class="card-content">
+                <a href="{% url 'mobile_note_create' %}" class="card-content">
                     <span class="add-card-icon">+</span>
                 </a>
             </article>

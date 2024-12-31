@@ -2,63 +2,60 @@
 
 {% block content %}
 {% load i18n %}
+
 <style>
     .crypto-info {
         display: flex;
-        max-width: 937px;
+        max-width: 100%;
         flex-direction: column;
         overflow: hidden;
-    }
-
-    .section-title {
-      font-weight: 300;
-      font-size: 28px;
-      margin-top: -195px;
-      margin-bottom: 160px;
-      text-align: center;
+        padding: 5px;
     }
 
     .header-container {
         display: flex;
-        margin-top: 7px;
-        width: 100%;
-        align-items: flex-start;
+        flex-direction: column;
         gap: 10px;
-        color: #fff;
-        font-weight: 400;
-        white-space: nowrap;
-        flex-wrap: wrap;
-        justify-content: space-between;
+        width: 100%;
     }
 
-
-    .search-button {
-        border-radius: 15px;
-        background-color: #fb8b5d;
-        padding: 8px 15px;
-        font: 18px/1 Roboto, sans-serif;
-        cursor: pointer;
-        white-space: nowrap;
-        color: white;
-        height: 36px;
-        width: auto;
+    .search-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px; /* Space between input and button */
+        width: 100%;
+        margin-top: 30px;
     }
 
     .search-input {
-        padding: 8px; /* Reduced padding */
-        font-size: 14px; /* Reduced font size */
+        flex: 1; /* Makes the input take up available space */
+        padding: 10px;
+        font-size: 16px;
         border: 2px solid #fb8b5d;
         border-radius: 5px;
-        flex-grow: 1;
         color: #000;
-        margin-left: 55px; /* Reduced margin */
+        box-sizing: border-box; /* Ensures proper sizing */
+    }
+
+    .search-button {
+        border-radius: 5px;
+        background-color: #fb8b5d;
+        padding: 10px 20px;
+        font: 400 16px/1 Roboto, sans-serif;
+        color: white;
+        border: none;
+        cursor: pointer;
+        white-space: nowrap; /* Prevents text wrapping */
     }
 
     .content-container {
         display: flex;
-        margin-top: 15px; /* Reduced margin */
-        gap: 8px; /* Reduced gap */
+        margin-top: 15px;
+        gap: 15px;
         flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
     }
 
     .info-card {
@@ -66,31 +63,30 @@
         background-color: #fff;
         box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.25);
         display: flex;
-        padding: 10px; /* Reduced padding */
-        padding-left: 0px;
+        padding: 10px;
         align-items: center;
-        gap: 15px; /* Reduced gap */
+        gap: 15px;
         flex-wrap: nowrap;
         flex-grow: 1;
         flex-basis: auto;
+        width: 100%; /* Ensures consistent width */
+        max-width: 400px; /* Optional: sets a max width for cards */
     }
 
     .card-indicator {
-        border-radius: 15px;
+        border-radius: 10px;
         background-color: #213f7b;
-        width: 30px; /* Reduced width */
+        width: 10px; /* Smaller width */
         height: 100%;
-        padding: 10px; /* Reduced padding */
     }
 
     .crypto-logo {
-        aspect-ratio: 1;
-        object-fit: contain;
+        aspect-ratio: 16/9; /* Ensures a consistent aspect ratio */
+        object-fit: cover; /* Ensures images fill the container properly */
         object-position: center;
-        width: 100px; /* Reduced logo size */
-        align-self: stretch;
-        max-width: 100%;
-        margin: 0;
+        width: 100px; /* Set a consistent width */
+        height: 75px; /* Set a consistent height */
+        border-radius: 5px; /* Optional: adds a rounded corner */
     }
 
     .crypto-details {
@@ -124,29 +120,44 @@
         border: 0;
     }
 
-    @media (max-width: 991px) {
-        .section-title { max-width: 100%; }
-        .header-container { max-width: 100%; white-space: initial; }
-        .info-card { max-width: 100%; }
-        .crypto-details { max-width: 100%; }
+    @media (max-width: 480px) {
+        .search-container {
+            flex-direction: row; /* Ensures horizontal alignment */
+        }
+
+        .search-button {
+            flex-shrink: 0; /* Prevents the button from shrinking */
+        }
+
+        .crypto-logo {
+            width: 80px; /* Smaller size for mobile */
+            height: 60px; /* Smaller size for mobile */
+        }
+    }
+
+    .section-title {
+        font-weight: 300;
+        font-size: 28px;
+        margin-top: -195px;
+        margin-bottom: 160px;
+        text-align: center;
     }
 </style>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-
 <h1 class="section-title">{% blocktrans %}Ma'lumotlar{% endblocktrans %}</h1>
+
 <section class="crypto-info">
     <header class="header-container">
-        <form method="GET" action="{% url 'mobile_informations' %}">
+        <form method="GET" action="{% url 'mobile_informations' %}" class="search-container">
             <input type="text" id="search-field" name="q" placeholder="{% blocktrans %}Qidirish...{% endblocktrans %}" class="search-input"
                    value="{{ request.GET.q }}">
-            <button type="submit" class="search-button" onclick="toggleSearch()">{% blocktrans %}Qidiring{% endblocktrans %}</button>
+            <button type="submit" class="search-button">{% blocktrans %}Qidiring{% endblocktrans %}</button>
         </form>
     </header>
     <div class="content-container">
         {% if information_list %}
+        {% for info in information_list %}
         <article class="info-card">
-            {% for info in information_list %}
             <div class="card-indicator"></div>
             {% if info.info_photo %}
             <img loading="lazy"
@@ -156,10 +167,10 @@
             <div class="crypto-details">
                 <h2 class="crypto-name">{{ info.title }}</h2>
                 <p class="crypto-description">{{ info.short_info }}</p>
-                <a href="{% url 'information_detail' info.id %}">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
+                <a href="{% url 'mobile_information_detail' info.id %}">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
             </div>
-            {% endfor %}
         </article>
+        {% endfor %}
         {% else %}
         <p>{% blocktrans %}Hech qanday natija topilmadi.{% endblocktrans %}</p>
         {% endif %}

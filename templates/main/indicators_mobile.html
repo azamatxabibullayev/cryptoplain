@@ -5,166 +5,77 @@
 <style>
     .news-section {
         display: flex;
-        max-width: 907px;
+        max-width: 100%;
         flex-direction: column;
         overflow: hidden;
+        padding: 5px;
     }
 
     .header-container {
         display: flex;
-        width: 100%;
-        gap: 20px;
-        color: #fff;
-        white-space: nowrap;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .title-container {
-        display: flex;
         flex-direction: column;
-        align-items: start;
-        font-family: Poppins, sans-serif;
+        gap: 10px;
+        width: 100%;
     }
 
-    .main-title {
-          font-weight: 300;
-          font-size: 28px;
-          margin-top: -195px;
-          margin-bottom: 200px;
-          text-align: center;
-    }
-
-    .indicator-bar {
-        border-radius: 5px;
-        background-color: #fff;
-        width: 177px;
-        height: 5px;
-    }
-
-    .recommended-container {
-        align-self: stretch;
+    .search-container {
         display: flex;
-        margin-top: 7px;
-        gap: 6px;
-        font-size: 30px;
-        font-weight: 400;
-        text-align: center;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px; /* Space between input and button */
+        width: 100%;
     }
 
-    .recommended-text {
-        flex-grow: 1;
-    }
-
-    .recommended-icon {
-        aspect-ratio: 1;
-        object-fit: contain;
-        object-position: center;
-        width: 45px;
+    .search-input {
+        flex: 1; /* Makes the input take up available space */
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #fb8b5d;
+        border-radius: 5px;
+        color: #000;
+        box-sizing: border-box; /* Ensures proper sizing */
     }
 
     .search-button {
-        border-radius: 15px;
+        border-radius: 5px;
         background-color: #fb8b5d;
-        align-self: end;
-        margin-top: 66px;
-        padding: 8px 48px;
-        font: 400 20px/1 Roboto, sans-serif;
+        padding: 10px 20px;
+        font: 400 16px/1 Roboto, sans-serif;
         color: white;
+        border: none;
+        cursor: pointer;
+        white-space: nowrap; /* Prevents text wrapping */
     }
 
     .news-card {
         border-radius: 10px;
         background-color: #fff;
-        margin-top: 33px;
-        width: 100%;
+        margin-top: 20px;
+        overflow: hidden;
     }
 
     .news-content {
-        gap: 20px;
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
     }
 
     .news-image {
-        width: 35%; /* Adjusted image size */
-        height: auto;
+        width: 100%;
+        height: 200px; /* Default size for images */
         border-radius: 10px;
-        object-fit: cover; /* Ensures image doesn't get stretched */
+        object-fit: cover; /* Ensures proper scaling */
         object-position: center;
     }
 
     .news-text {
-        width: 60%; /* Adjusted text size to balance with image */
         color: #000;
-        margin: auto 0;
         font: 400 15px/21px Roboto, sans-serif;
     }
 
-    .visually-hidden {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-    }
-
-    @media (max-width: 991px) {
-        .header-container {
-            max-width: 100%;
-            white-space: initial;
-        }
-
-        .title-container {
-            white-space: initial;
-        }
-
-        .recommended-container {
-            white-space: initial;
-        }
-
-        .search-button {
-            margin-top: 40px;
-            white-space: initial;
-            padding: 0 20px;
-        }
-
-        .news-card {
-            max-width: 100%;
-        }
-
-        .news-content {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 0;
-        }
-
-        .news-image {
-            width: 100%; /* Image width adapts to screen size on smaller devices */
-            margin-top: 18px;
-        }
-
-        .news-text {
-            max-width: 100%;
-            margin-top: 40px;
-        }
-    }
-
-    .news-text-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 60%; /* Adjusted text container size */
-        margin-bottom: 0;
-    }
-
     .read-more-link {
-        margin-top: 0;
-        margin-bottom: 15px;
+        margin-top: 10px;
         color: #fb8b5d; /* Matches the button color for consistency */
         font-weight: 500;
         text-decoration: none;
@@ -174,37 +85,44 @@
         text-decoration: underline;
     }
 
-    .search-input {
-      padding: 10px;
-      font-size: 16px;
-      border: 2px solid #fb8b5d;
-      border-radius: 5px;
-      flex-grow: 1;
-      color: #000;
-      margin-left: 100px;
+    .main-title {
+        font-weight: 300;
+        font-size: 28px;
+        margin-top: -195px;
+        margin-bottom: 200px;
+        text-align: center;
+    }
+
+    @media (max-width: 480px) {
+        .search-container {
+            flex-direction: row; /* Ensures horizontal alignment */
+        }
+
+        .search-button {
+            flex-shrink: 0; /* Prevents the button from shrinking */
+        }
     }
 </style>
+
 <h1 class="main-title">{% blocktrans %}Indikatorlar{% endblocktrans %}</h1>
 
 <section class="news-section">
     <header class="header-container">
-        <form method="GET" action="{% url 'mobile_indicators' %}">
-            <input type="text" name="q" placeholder="{% blocktrans %}Indikatorlardan qidiring....{% endblocktrans %}" value="{{ request.GET.q }}"
-                   class="search-input">
+        <form method="GET" action="{% url 'mobile_indicators' %}" class="search-container">
+            <input type="text" name="q" placeholder="{% blocktrans %}Indikatorlardan qidiring....{% endblocktrans %}"
+                   value="{{ request.GET.q }}" class="search-input">
             <button type="submit" class="search-button">{% blocktrans %}Qidiring{% endblocktrans %}</button>
         </form>
     </header>
-
 
     {% if indicators %}
     {% for indicator in indicators %}
     <article class="news-card">
         <div class="news-content">
-            <img src="{{ indicator.indicator_photo.url }}"
-                 alt="{{ indicator.title }}" class="news-image"/>
-            <div class="news-text-container">
-                <p class="news-text">{{ indicator.indicator_text|truncatewords:100 }}</p>
-                <a href="{% url 'indicator_detail' indicator.id %}" class="read-more-link">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
+            <img src="{{ indicator.indicator_photo.url }}" alt="{{ indicator.title }}" class="news-image"/>
+            <div>
+                <p class="news-text">{{ indicator.indicator_text|truncatewords:50 }}</p>
+                <a href="{% url 'mobile_indicator_detail' indicator.id %}" class="read-more-link">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
             </div>
         </div>
     </article>

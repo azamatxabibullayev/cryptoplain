@@ -14,7 +14,7 @@ def video_lessons_view(request):
             Q(title__icontains=query)
         )
     else:
-        video_lessons = VideoLesson.objects.all()
+        video_lessons = VideoLesson.objects.order_by('-id')
 
     context = {
         'video_lessons': video_lessons
@@ -29,7 +29,7 @@ def information(request):
             Q(title__icontains=query) | Q(info_text__icontains=query)
         )
     else:
-        information_list = Information.objects.all()
+        information_list = Information.objects.order_by('-id')
 
     context = {
         'information_list': information_list
@@ -46,7 +46,7 @@ def information_detail(request, info_id):
 
 
 def birja_view(request):
-    birja = Birja.objects.all()
+    birja = Birja.objects.order_by('-id')
     context = {
         'birja': birja
     }
@@ -54,7 +54,7 @@ def birja_view(request):
 
 
 def advices_view(request):
-    advice = Advice.objects.all()
+    advice = Advice.objects.order_by('-id')
     context = {
         'advice': advice
     }
@@ -62,7 +62,7 @@ def advices_view(request):
 
 
 def signals_view(request):
-    signal = Signal.objects.all()
+    signal = Signal.objects.order_by('-id')
     context = {
         'signal': signal
     }
@@ -70,7 +70,7 @@ def signals_view(request):
 
 
 def news_view(request):
-    news = News.objects.all()
+    news = News.objects.order_by('-id')
     context = {
         'news': news
     }
@@ -177,13 +177,13 @@ def lesson_view(request):
         if hasattr(user, 'premium_user'):
             user_type = user.premium_user.premium_type
             if user_type == 'pro':
-                lessons = Lesson.objects.filter(lesson_type__in=['normal', 'standard', 'pro'])
+                lessons = Lesson.objects.order_by('-id').filter(lesson_type__in=['normal', 'standard', 'pro'])
             else:
-                lessons = Lesson.objects.filter(lesson_type__in=['normal', 'standard'])
+                lessons = Lesson.objects.order_by('-id').filter(lesson_type__in=['normal', 'standard'])
         else:
-            lessons = Lesson.objects.filter(lesson_type='normal')
+            lessons = Lesson.objects.order_by('-id').filter(lesson_type='normal')
     else:
-        lessons = Lesson.objects.filter(lesson_type='normal')
+        lessons = Lesson.objects.order_by('-id').filter(lesson_type='normal')
 
     context = {
         'lessons': lessons,
@@ -208,25 +208,25 @@ def indicator_view(request):
         if hasattr(user, 'premium_user'):
             user_type = user.premium_user.premium_type
             if user_type == 'pro':
-                indicators = Indicator.objects.filter(
+                indicators = Indicator.objects.order_by('-id').filter(
                     Q(indicator_type__in=['normal', 'standard', 'pro']) &
                     (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
                     Q(indicator_type__in=['normal', 'standard', 'pro'])
                 )
             else:
-                indicators = Indicator.objects.filter(
+                indicators = Indicator.objects.order_by('-id').filter(
                     Q(indicator_type__in=['normal', 'standard']) &
                     (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
                     Q(indicator_type__in=['normal', 'standard'])
                 )
         else:
-            indicators = Indicator.objects.filter(
+            indicators = Indicator.objects.order_by('-id').filter(
                 Q(indicator_type='normal') &
                 (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
                 Q(indicator_type='normal')
             )
     else:
-        indicators = Indicator.objects.filter(
+        indicators = Indicator.objects.order_by('-id').filter(
             Q(indicator_type='normal') &
             (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
             Q(indicator_type='normal')
@@ -294,13 +294,13 @@ def mobile_lessons(request):
         if hasattr(user, 'premium_user'):
             user_type = user.premium_user.premium_type
             if user_type == 'pro':
-                lessons = Lesson.objects.filter(lesson_type__in=['normal', 'standard', 'pro'])
+                lessons = Lesson.objects.order_by('-id').filter(lesson_type__in=['normal', 'standard', 'pro'])
             else:
-                lessons = Lesson.objects.filter(lesson_type__in=['normal', 'standard'])
+                lessons = Lesson.objects.order_by('-id').filter(lesson_type__in=['normal', 'standard'])
         else:
-            lessons = Lesson.objects.filter(lesson_type='normal')
+            lessons = Lesson.objects.order_by('-id').filter(lesson_type='normal')
     else:
-        lessons = Lesson.objects.filter(lesson_type='normal')
+        lessons = Lesson.objects.order_by('-id').filter(lesson_type='normal')
 
     context = {
         'lessons': lessons,
@@ -323,7 +323,7 @@ def mobile_video_lessons_view(request):
             Q(title__icontains=query)
         )
     else:
-        video_lessons = VideoLesson.objects.all()
+        video_lessons = VideoLesson.objects.order_by('-id')
 
     context = {
         'video_lessons': video_lessons
@@ -332,7 +332,7 @@ def mobile_video_lessons_view(request):
 
 
 def mobile_advices_view(request):
-    advice = Advice.objects.all()
+    advice = Advice.objects.order_by('-id')
     context = {
         'advice': advice
     }
@@ -340,7 +340,7 @@ def mobile_advices_view(request):
 
 
 def mobile_birja_view(request):
-    birja = Birja.objects.all()
+    birja = Birja.objects.order_by('-id')
     context = {
         'birja': birja
     }
@@ -354,7 +354,7 @@ def mobile_information(request):
             Q(title__icontains=query) | Q(info_text__icontains=query)
         )
     else:
-        information_list = Information.objects.all()
+        information_list = Information.objects.order_by('-id')
 
     context = {
         'information_list': information_list
@@ -371,7 +371,7 @@ def mobile_information_detail(request, info_id):
 
 
 def mobile_signals_view(request):
-    signal = Signal.objects.all()
+    signal = Signal.objects.order_by('-id')
     context = {
         'signal': signal
     }
@@ -383,7 +383,7 @@ def mobile_books_view(request):
 
 
 def mobile_news_view(request):
-    news = News.objects.all()
+    news = News.objects.order_by('-id')
     context = {
         'news': news
     }
@@ -399,25 +399,25 @@ def mobile_indicator_view(request):
         if hasattr(user, 'premium_user'):
             user_type = user.premium_user.premium_type
             if user_type == 'pro':
-                indicators = Indicator.objects.filter(
+                indicators = Indicator.objects.order_by('-id').filter(
                     Q(indicator_type__in=['normal', 'standard', 'pro']) &
                     (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
                     Q(indicator_type__in=['normal', 'standard', 'pro'])
                 )
             else:
-                indicators = Indicator.objects.filter(
+                indicators = Indicator.objects.order_by('-id').filter(
                     Q(indicator_type__in=['normal', 'standard']) &
                     (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
                     Q(indicator_type__in=['normal', 'standard'])
                 )
         else:
-            indicators = Indicator.objects.filter(
+            indicators = Indicator.objects.order_by('-id').filter(
                 Q(indicator_type='normal') &
                 (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
                 Q(indicator_type='normal')
             )
     else:
-        indicators = Indicator.objects.filter(
+        indicators = Indicator.objects.order_by('-id').filter(
             Q(indicator_type='normal') &
             (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
             Q(indicator_type='normal')

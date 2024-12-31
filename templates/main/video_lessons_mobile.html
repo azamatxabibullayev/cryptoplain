@@ -1,152 +1,111 @@
 {% extends 'base_mobile.html' %}
 
-
 {% block content %}
 {% load i18n %}
 
-
 <style>
     .video-lessons {
-      display: flex;
-      max-width: 939px;
-      flex-direction: column;
-      overflow: hidden;
-      align-items: flex-start;
-      color: #fff;
+        display: flex;
+        max-width: 100%;
+        flex-direction: column;
+        overflow: hidden;
+        color: #fff;
     }
 
     .section-title {
-      font-weight: 300;
-      font-size: 28px;
-      margin-top: -195px;
-      margin-bottom: 160px;
-      text-align: center;
+        font-weight: 300;
+        font-size: 28px;
+        margin-top: -195px;
+        margin-bottom: 160px;
+        text-align: center;
     }
-
 
     .search-container {
-      align-self: stretch;
-      display: flex;
-      margin-top: 7px;
-      width: 100%;
-      align-items: center; /* Ensures the input and button align properly */
-      gap: 10px; /* Adds space between the input and button */
-      font-weight: 400;
-      flex-wrap: nowrap; /* Makes sure input and button stay on the same line */
-    }
-
-
-    .material-symbols-outlined {
-       aspect-ratio: 1;
-       object-fit: contain;
-       object-position: center;
-       width: 45px;
-    }
-
-    .search-button {
-      border-radius: 15px;
-      background-color: #fb8b5d;
-      padding: 8px 20px;
-      font: 20px/1 Roboto, sans-serif;
-      cursor: pointer;
-      white-space: nowrap;
-      color: white;
-      height: 40 px;
-      width: 125px;
-
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px; /* Space between input and button */
+        width: 100%;
+        margin-top: 30px;
     }
 
     .search-input {
-      padding: 10px;
-      font-size: 16px;
-      border: 2px solid #fb8b5d;
-      border-radius: 5px;
-      flex-grow: 1;
-      color: #000;
-      margin-left: 50px;
-      height: 16px;
+        flex: 1; /* Makes the input take up available space */
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #fb8b5d;
+        border-radius: 5px;
+        color: #000;
+        box-sizing: border-box; /* Ensures proper sizing */
+    }
+
+    .search-button {
+        border-radius: 5px;
+        background-color: #fb8b5d;
+        padding: 10px 20px;
+        font: 400 16px/1 Roboto, sans-serif;
+        color: white;
+        border: none;
+        cursor: pointer;
+        white-space: nowrap; /* Prevents text wrapping */
     }
 
     .content-wrapper {
-      display: flex;
-      margin-top: 5px;
-      align-items: flex-start;
-      gap: 17px;
-      font: 500 15px Roboto, sans-serif;
+        display: flex;
+        margin-top: 5px;
+        align-items: flex-start;
+        gap: 17px;
+        font: 500 15px Roboto, sans-serif;
     }
 
     .content-container {
-      align-self: flex-start;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      flex-grow: 1;
-      width: fit-content;
+        align-self: flex-start;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex-grow: 1;
+        width: fit-content;
     }
 
-
     .lesson-title {
-      font-size: 20px;
-      margin-top: 9px;
+        font-size: 20px;
+        margin-top: 9px;
     }
 
     .lesson-link {
-      border-radius: 5px;
-      align-self: stretch;
-      white-space: nowrap;
-      padding: 6px 14px;
-      border: 2px solid #fff;
-      text-decoration: none !important;
+        border-radius: 5px;
+        align-self: stretch;
+        white-space: nowrap;
+        padding: 6px 14px;
+        border: 2px solid #fff;
+        text-decoration: none !important;
     }
 
     .lesson-link:hover,
     .lesson-link:visited {
-      text-decoration: none !important;
+        text-decoration: none !important;
     }
 
+    @media (max-width: 480px) {
+        .search-container {
+            flex-direction: row; /* Ensures horizontal alignment */
+        }
 
-    @media (max-width: 991px) {
-      .search-container {
-        max-width: 100%;
-        white-space: initial;
-        flex-wrap: wrap; /* Allows wrapping on smaller screens */
-      }
-
-      .recommended-wrapper {
-        white-space: initial;
-      }
-
-      .search-button {
-        white-space: initial;
-        padding: 8px 20px;
-      }
-
-      .content-container {
-        max-width: 100%;
-      }
-
-      .language-selector {
-        white-space: initial;
-      }
-
-      .lesson-link {
-        max-width: 100%;
-        white-space: initial;
-      }
+        .search-button {
+            flex-shrink: 0; /* Prevents the button from shrinking */
+        }
     }
 </style>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-
 <h1 class="section-title">{% blocktrans %}Video darslar{% endblocktrans %}</h1>
 <section class="video-lessons">
-    <div class="search-container">
-        <form method="GET" action="{% url 'mobile_video_lessons' %}">
-            <input type="text" id="search-field" name="q" placeholder="{% blocktrans %}Qidiring{% endblocktrans %}" class="search-input"
-                   value="{{ request.GET.q }}">
-            <button type="submit" class="search-button" onclick="toggleSearch()">{% blocktrans %}Qidiruv{% endblocktrans %}</button>
+    <header class="header-container">
+        <form method="GET" action="{% url 'mobile_video_lessons' %}" class="search-container">
+            <input type="text" name="q" placeholder="{% blocktrans %}Qidiring{% endblocktrans %}"
+                   value="{{ request.GET.q }}" class="search-input">
+            <button type="submit" class="search-button">{% blocktrans %}Qidiring{% endblocktrans %}</button>
         </form>
-    </div>
+    </header>
 
     <div class="content-wrapper">
         <div class="content-container">

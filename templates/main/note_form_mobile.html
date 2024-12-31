@@ -137,7 +137,7 @@
 <h1 class="notes-title">{% blocktrans %}Zametkalar{% endblocktrans %}</h1>
 
 <section class="notes-container">
-    <form method="POST" action="{% url 'note_create' %}">
+    <form method="POST" action="{% url 'mobile_note_create' %}">
         {% csrf_token %}
         <h2>{% blocktrans %}Yangi Zametka{% endblocktrans %}</h2>
         <div class="form-group note-name-input">

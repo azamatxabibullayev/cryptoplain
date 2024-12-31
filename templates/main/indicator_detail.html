@@ -10,45 +10,130 @@
     });
 </script>
 
-<h1>{{ indicator.title }}</h1>
-
-<div class="indicator-detail">
-    <img src="{{ indicator.indicator_photo.url }}" alt="{{ indicator.title }}" draggable="false"
-         class="protected-image">
-    <p>{{ indicator.indicator_text }}</p>
-</div>
-
-<a href="{% url 'indicators' %}" class="btn btn-primary"> {% blocktrans %}< Orqaga{% endblocktrans %}</a>
-
-{% endblock %}
-
 <style>
-    img.protected-image {
-        pointer-events: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+    .news-section {
+        display: flex;
+        max-width: 907px;
+        flex-direction: column;
+        overflow: hidden;
     }
 
-    .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
+    .header-container {
+        display: flex;
+        width: 100%;
+        gap: 20px;
         color: #fff;
-        background-color: #FB8B5D;
-        border: none;
+        white-space: nowrap;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .title-container {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        font-family: Poppins, sans-serif;
+    }
+
+    .main-title {
+        font-size: 40px;
+        font-weight: 700;
+    }
+
+    .indicator-bar {
         border-radius: 5px;
-        text-decoration: none;
-        cursor: pointer;
-        margin-top: 20px;
+        background-color: #fff;
+        width: 177px;
+        height: 5px;
+    }
+
+    .recommended-container {
+        align-self: stretch;
+        display: flex;
+        margin-top: 7px;
+        gap: 6px;
+        font-size: 30px;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    .recommended-text {
+        flex-grow: 1;
+    }
+
+    .recommended-icon {
+        aspect-ratio: 1;
+        object-fit: contain;
+        object-position: center;
+        width: 45px;
+    }
+
+    .search-button {
+        border-radius: 15px;
+        background-color: #fb8b5d;
+        align-self: end;
+        margin-top: 66px;
+        padding: 8px 48px;
+        font: 400 20px/1 Roboto, sans-serif;
+        color: white;
+    }
+
+    @media (max-width: 991px) {
+        .header-container {
+            max-width: 100%;
+            white-space: initial;
+        }
+
+        .title-container {
+            white-space: initial;
+        }
+
+        .recommended-container {
+            white-space: initial;
+        }
+
+        .search-button {
+            margin-top: 40px;
+            white-space: initial;
+            padding: 0 20px;
+        }
+    }
+
+    .search-input {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #fb8b5d;
+      border-radius: 5px;
+      flex-grow: 1;
+      color: #000;
+      margin-left: 100px;
     }
 </style>
 
-<script>
-    document.addEventListener('contextmenu', function(e) {
-        if (e.target.tagName === 'IMG') {
-            e.preventDefault();
-        }
-    }, false);
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">
+
+
+<section class="news-section">
+    <header class="header-container">
+        <div class="title-container">
+            <h1 class="main-title">{% blocktrans %}Indikatorlar{% endblocktrans %}</h1>
+            <div class="indicator-bar"></div>
+            <div class="recommended-container">
+                <span class="recommended-text">Recommended</span>
+                <img src="{{ MEDIA_URL }}checked_logo.png"
+                     alt="" class="recommended-icon"/>
+            </div>
+        </div>
+        <form method="GET" action="{% url 'indicators' %}">
+            <input type="text" name="q" placeholder="{% blocktrans %}Indikatorlardan qidiring....{% endblocktrans %}" value="{{ request.GET.q }}" class="search-input">
+            <button type="submit" class="search-button">{% blocktrans %} Qidirish {% endblocktrans %}</button>
+        </form>
+    </header>
+
+    <h1 style="margin-top: 60px; font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 25px;">
+        {{ indicator.title }}</h1>
+    <p style="font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 25px;">{{ indicator.indicator_text }}</p>
+    <a href="{% url 'indicators' %}">{% blocktrans %}Orqaga qaytish{% endblocktrans %}</a>
+
+</section>
+{% endblock %}

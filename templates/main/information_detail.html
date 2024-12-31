@@ -121,13 +121,13 @@
         <div class="recommended-container">
             <span class="recommended-text">Recommended</span>
             <img loading="lazy"
-                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f0d5669761e856e049189f5570778cca2ced5004760b31590751e3ffb45514e?placeholderIfAbsent=true&apiKey=2395fa16af6647a6abcd24b71e593881"
+                 src="{{ MEDIA_URL }}checked_logo.png"
                  class="recommended-icon" alt=""/>
         </div>
         <form method="GET" action="{% url 'information' %}">
-            <input type="text" id="search-field" name="q" placeholder="{% blocktrans %}Qidirish...{% endblocktrans %}" class="search-input"
+            <input type="text" id="search-field" name="q" placeholder="{% blocktrans %}Search...{% endblocktrans %}" class="search-input"
                    value="{{ request.GET.q }}">
-            <button type="submit" class="search-button" onclick="toggleSearch()">{% blocktrans %}Qidirish{% endblocktrans %}</button>
+            <button type="submit" class="search-button" onclick="toggleSearch()">{% blocktrans %}Qidiruv{% endblocktrans %}</button>
         </form>
     </header>
 

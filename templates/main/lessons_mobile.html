@@ -18,7 +18,7 @@
           margin-top: -195px;
           margin-bottom: 200px;
           text-align: center;
-          }
+    }
 
     .image-gallery {
       align-self: stretch;
@@ -102,13 +102,22 @@
       white-space: nowrap;
       border: 0;
     }
+
+    .description-underline {
+      border-radius: 5px;
+      background-color: #fff;
+      width: 512px;
+      max-width: 100%;
+      height: 5px;
+      margin-top: 18px;
+    }
 </style>
 <h1 class="lessons-title">{% blocktrans %}Darsliklar va Pattern turlari{% endblocktrans %}</h1>
 
 <section class="lessons-container">
     {% for lesson in lessons %}
     <p class="pattern-description">{{ lesson.lesson_text|truncatewords:100 }}</p>
-    <a href="{% url 'lesson_detail' lesson.id %}">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
+    <a href="{% url 'mobile_lesson_detail' lesson.id %}">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
     <div class="image-gallery">
         <div class="image-row">
             <div class="image-column">
@@ -121,6 +130,7 @@
             </div>
         </div>
     </div>
+    <div class="description-underline"></div>
     {% endfor %}
 </section>
 {% endblock %}

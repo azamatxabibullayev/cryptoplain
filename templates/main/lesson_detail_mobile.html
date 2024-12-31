@@ -4,23 +4,36 @@
 {% load i18n %}
 <h1 class="lessons-title">{% blocktrans %}Darsliklar va Pattern turlari{% endblocktrans %}</h1>
 
-
 <div class="lesson-detail">
-    <img src="{{ lesson.lesson_photo_1.url }}" alt="{{ lesson.title }}" draggable="false" class="protected-image">
-    <img src="{{ lesson.lesson_photo_2.url }}" alt="{{ lesson.title }}" draggable="false" class="protected-image">
+    <img src="{{ lesson.lesson_photo_1.url }}" alt="{{ lesson.title }}" draggable="false" class="lesson-image protected-image">
+    <img src="{{ lesson.lesson_photo_2.url }}" alt="{{ lesson.title }}" draggable="false" class="lesson-image protected-image">
     <p>{{ lesson.lesson_text }}</p>
 </div>
 
-<a href="{% url 'lessons' %}" class="btn btn-primary"> {% blocktrans %}< Orqaga{% endblocktrans %}</a>
-
+<a href="{% url 'mobile_lessons' %}" class="btn btn-primary"> {% blocktrans %}< Orqaga{% endblocktrans %}</a>
 
 <style>
     .lessons-title {
-          font-weight: 300;
-          font-size: 28px;
-          margin-top: -195px;
-          margin-bottom: 200px;
-          text-align: center;
+        font-weight: 300;
+        font-size: 28px;
+        margin-top: -195px;
+        margin-bottom: 200px;
+        text-align: center;
+    }
+
+    .lesson-detail {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 20px;
+    }
+
+    img.lesson-image {
+        width: 100%;
+        max-width: 480px;
+        height: auto;
+        border-radius: 10px;
+        object-fit: cover;
     }
 
     img.protected-image {
@@ -36,7 +49,7 @@
         padding: 10px 20px;
         font-size: 16px;
         color: #fff;
-        background-color: #007bff;
+        background-color: #FB8B5D;
         border: none;
         border-radius: 5px;
         text-decoration: none;
@@ -44,16 +57,11 @@
         margin-top: 20px;
     }
 
-    .btn:hover {
-        background-color: #0056b3;
+    @media (max-width: 480px) {
+        img.lesson-image {
+            max-width: 100%;
+        }
     }
 </style>
 
-<script>
-    document.addEventListener('contextmenu', function(e) {
-        if (e.target.tagName === 'IMG') {
-            e.preventDefault();
-        }
-    }, false);
-</script>
 {% endblock %}
