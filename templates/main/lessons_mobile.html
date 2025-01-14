@@ -22,7 +22,7 @@
 
     .image-gallery {
       align-self: stretch;
-      margin-top: 18px;
+      margin-top: 0;
       width: 100%;
     }
 
@@ -87,7 +87,7 @@
       }
 
       .gallery-image {
-        margin-top: 40px;
+        margin-top: 10px;
       }
     }
 
@@ -116,9 +116,7 @@
 
 <section class="lessons-container">
     {% for lesson in lessons %}
-    <p class="pattern-description">{{ lesson.lesson_text|truncatewords:100 }}</p>
-    <a href="{% url 'mobile_lesson_detail' lesson.id %}">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
-    <div class="image-gallery">
+        <div class="image-gallery">
         <div class="image-row">
             <div class="image-column">
                 <img src="{{ lesson.lesson_photo_1.url }}"
@@ -130,6 +128,8 @@
             </div>
         </div>
     </div>
+    <p class="pattern-description">{{ lesson.lesson_text|truncatewords:20 }}</p>
+    <a href="{% url 'mobile_lesson_detail' lesson.id %}">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
     <div class="description-underline"></div>
     {% endfor %}
 </section>

@@ -3,7 +3,7 @@ from datetime import timedelta
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm, AuthenticationForm
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -14,6 +14,7 @@ from .models import CustomUser, PremiumUser
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
+from django.utils.translation import gettext_lazy as _
 
 
 def register(request):
@@ -21,7 +22,8 @@ def register(request):
         form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
-            request.session['user_data'] = form.cleaned_data
+            user.save()
+            request.session['pending_user_id'] = user.id
             return redirect('warning')
     else:
         form = CustomUserCreationForm()
@@ -31,10 +33,11 @@ def register(request):
 def warning(request):
     if request.method == 'POST':
         if 'accept' in request.POST:
-            user_data = request.session.pop('user_data', None)
-            if user_data:
-                form = CustomUserCreationForm(user_data)
-                user = form.save()
+            user_id = request.session.pop('pending_user_id', None)
+            if user_id:
+                from django.contrib.auth import get_user_model
+                User = get_user_model()
+                user = User.objects.get(id=user_id)
                 login(request, user)
                 return redirect('profile')
         return redirect('register')
@@ -59,15 +62,18 @@ def profile_view(request):
 def user_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('profile')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('profile')
+        else:
+            form.errors.clear()
+            form.add_error(None, _("Foydalanuvchi nomi yoki paroli noto'g'ri kiritildi."))
     else:
         form = AuthenticationForm()
+
     return render(request, 'users/login.html', {'form': form})
 
 
@@ -170,7 +176,8 @@ def mobile_register(request):
         form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
-            request.session['user_data'] = form.cleaned_data
+            user.save()
+            request.session['pending_user_id'] = user.id
             return redirect('mobile_warning')
     else:
         form = CustomUserCreationForm()
@@ -180,10 +187,11 @@ def mobile_register(request):
 def mobile_warning(request):
     if request.method == 'POST':
         if 'accept' in request.POST:
-            user_data = request.session.pop('user_data', None)
-            if user_data:
-                form = CustomUserCreationForm(user_data)
-                user = form.save()
+            user_id = request.session.pop('pending_user_id', None)
+            if user_id:
+                from django.contrib.auth import get_user_model
+                User = get_user_model()
+                user = User.objects.get(id=user_id)
                 login(request, user)
                 return redirect('mobile_profile')
         return redirect('mobile_register')
@@ -210,13 +218,15 @@ def mobile_profile_view(request):
 def mobile_user_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('mobile_profile')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('mobile_profile')
+        else:
+            form.errors.clear()
+            form.add_error(None, _("Foydalanuvchi nomi yoki paroli noto'g'ri kiritildi."))
     else:
         form = AuthenticationForm()
     return render(request, 'users/login_mobile.html', {'form': form})
@@ -292,4 +302,3 @@ class MobileUpdateProfileView(LoginRequiredMixin, View):
                 'form': update_form
             }
             return render(request, 'users/update_profile_mobile.html', context=context)
-

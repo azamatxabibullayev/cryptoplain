@@ -156,7 +156,7 @@
             </div>
         </div>
     </div>
-    <p class="pattern-description">{{ lesson.lesson_text|truncatewords:100 }}</p>
+    <p class="pattern-description">{{ lesson.lesson_text|truncatewords:20 }}</p>
     <a href="{% url 'lesson_detail' lesson.id %}">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
     <div class="description-underline"></div>
     {% endfor %}

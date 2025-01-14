@@ -185,7 +185,7 @@
       border-radius: 5px;
       flex-grow: 1;
       color: #000;
-      margin-left: 100px;
+      margin-left: 80px;
     }
 </style>
 
@@ -214,7 +214,7 @@
             <img src="{{ indicator.indicator_photo.url }}"
                  alt="{{ indicator.title }}" class="news-image"/>
             <div class="news-text-container">
-                <p class="news-text">{{ indicator.indicator_text|truncatewords:50 }}</p>
+                <p class="news-text">{{ indicator.indicator_text|truncatewords:20 }}</p>
                 <a href="{% url 'indicator_detail' indicator.id %}" class="read-more-link">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
             </div>
         </div>

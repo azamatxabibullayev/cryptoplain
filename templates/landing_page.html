@@ -27,15 +27,18 @@
     .analysis-column { display: flex; flex-direction: column; line-height: normal; flex: 0 0 68%; margin-left: 20px; }
     .analysis-content { display: flex; flex-direction: column; color: #fff; font: 400 25px Poppins, sans-serif; margin-top: 30px; }
     .analysis-title { align-self: start; }
-    .analysis-image { aspect-ratio: 2.52; object-fit: contain; object-position: center; width: 100%; border-radius: 15px; margin-top: 7px; }
+    .analysis-image { aspect-ratio: 2.52; object-fit: contain; object-position: center; width: 100%; border-radius: 15px; margin-top: -5px; }
 
     .fear-greed-index-box {
-        display: flex;
+        position: absolute;
+        top: 165px;
+        left: 450px;
         width: 250px;
         height: 150px;
         overflow: hidden;
         padding: 0;
-        margin-top: -15px;
+        margin: 0;
+        z-index: 100;
     }
 
     .fear-greed-index-box img {
@@ -50,21 +53,23 @@
         justify-content: flex-end;
         gap: 30px;
         border-top: -60px;
+        margin-right: -20px;
+        margin-top: 70px;
     }
 
     .styled-button {
         border: 1px solid white;
-        background-color: transparent; /* Transparent background */
+        background-color: transparent;
         padding: 10px 20px;
         cursor: pointer;
-        border-radius: 10px; /* Rounded corners */
-        font-family: inherit; /* Inherit font from parent */
+        border-radius: 10px;
+        font-family: inherit;
         display: flex;
         align-items: center;
-        text-transform: uppercase; /* Makes text uppercase */
-        letter-spacing: 1px; /* Adds spacing between letters */
+        text-transform: uppercase;
+        letter-spacing: 1px;
         height: 55px;
-        width: 240px;
+        width: 200px;
         font-size: 15px;
     }
 
@@ -97,9 +102,12 @@
     }
 </style>
 
+
+<!-- Header tarkibi -->
 <div class="fear-greed-index-box">
     <img src="{{ fear_greed_index_image.image.url }}" alt="Fear & Greed Index">
 </div>
+
 
 <!-- Link to Google Material Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
@@ -128,8 +136,8 @@
         <div class="pricing-column">
             <article class="pricing-card">
                 <h3 style="display: flex; flex-direction: column; line-height: normal; margin-top: -10px; margin-left: 10px; margin-top: 47px; font-size: 30px;">
-                    {% blocktrans %}Padpiska turlari{% endblocktrans %}</h3>
-                <a href="https://t.me/Cryptoindexadmin" style="margin-bottom: 20px;"><img
+                    {% blocktrans %}Obuna turlari{% endblocktrans %}</h3>
+                <a href="#" style="margin-bottom: 20px;"><img
                         src="{{ MEDIA_URL }}main/home/tekin_padpiska.png"
                         class="pricing-image"/></a>
                 <a href="https://t.me/Cryptoindexadmin" style="margin-bottom: 20px;"><img
@@ -146,7 +154,7 @@
                 <a href="https://www.tradingview.com/"><img src="{{ MEDIA_URL }}main/home/tradingview.png"
                                                             class="analysis-image"/></a>
                 <a href="https://cryptobubbles.net/"><img src="{{ MEDIA_URL }}main/home/cryptobubles.png"
-                                                          class="analysis-image"/></a>
+                                                          class="analysis-image" style="margin-top: 7px;"/></a>
             </div>
         </div>
     </div>

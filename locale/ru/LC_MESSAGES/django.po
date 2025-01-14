@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-31 04:37+0500\n"
+"POT-Creation-Date: 2025-01-15 03:32+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,11 +33,11 @@ msgstr "Заметки"
 msgid "Zametka"
 msgstr "Заметки"
 
-#: project/settings.py:105
+#: project/settings.py:96
 msgid "Uzbek"
 msgstr ""
 
-#: project/settings.py:106
+#: project/settings.py:97
 msgid "Russian"
 msgstr ""
 
@@ -68,7 +68,7 @@ msgstr "Привет"
 msgid "Login"
 msgstr "Логин"
 
-#: templates/base.html:376 templates/users/login_mobile.html:91
+#: templates/base.html:376 templates/users/login_mobile.html:100
 msgid "Registratsiya"
 msgstr "Регистрация"
 
@@ -126,7 +126,7 @@ msgstr "Заметки"
 #: templates/base.html:458 templates/base_mobile.html:315
 #: templates/main/indicator_detail.html:119
 #: templates/main/indicator_detail_mobile.html:6
-#: templates/main/indicators.html:195 templates/main/indicators_mobile.html:107
+#: templates/main/indicators.html:195 templates/main/indicators_mobile.html:113
 msgid "Indikatorlar"
 msgstr "Индикаторы"
 
@@ -138,24 +138,26 @@ msgstr "Связаться с нами"
 msgid "Podpiska muddati"
 msgstr "Период подписки"
 
-#: templates/landing_page.html:110
+#: templates/landing_page.html:118
 msgid "Biz bilan bo'g'lanish"
 msgstr "Связаться с нами"
 
-#: templates/landing_page.html:116
+#: templates/landing_page.html:124
 msgid "Padpiska muddati"
 msgstr "Период подписки"
 
-#: templates/landing_page.html:121
+#: templates/landing_page.html:129
 msgid "Sizning faolligingiz"
 msgstr "Ваши активность"
 
-#: templates/landing_page.html:131 templates/landing_page_mobile.html:142
-msgid "Padpiska turlari"
-msgstr "Виды падписки"
+#: templates/landing_page.html:139 templates/landing_page_mobile.html:142
+msgid "Obuna turlari"
+msgstr "Виды подписки"
 
 
-#: templates/landing_page.html:145 templates/landing_page_mobile.html:133
+
+
+#: templates/landing_page.html:153 templates/landing_page_mobile.html:133
 msgid "Analiz qiling"
 msgstr "Анализируйте "
 
@@ -196,7 +198,8 @@ msgstr "Скоро..."
 msgid "Tez kunda.."
 msgstr "Скоро..."
 
-#: templates/main/indicators_mobile.html:112
+#: templates/main/indicator_detail.html:128 templates/main/indicators.html:204
+#: templates/main/indicators_mobile.html:118
 msgid "Indikatorlardan qidiring...."
 msgstr "Ищите индикаторы...."
 
@@ -216,14 +219,14 @@ msgstr "Назад"
 msgid " < Orqaga"
 msgstr "< Назад"
 
-#: templates/main/indicators.html:218 templates/main/indicators_mobile.html:125
+#: templates/main/indicators.html:218 templates/main/indicators_mobile.html:131
 #: templates/main/informations.html:240
 #: templates/main/informations_mobile.html:170 templates/main/lessons.html:160
-#: templates/main/lessons_mobile.html:120
+#: templates/main/lessons_mobile.html:132
 msgid "Batafsil o'qish"
 msgstr "Читать далее"
 
-#: templates/main/indicators.html:225 templates/main/indicators_mobile.html:131
+#: templates/main/indicators.html:225 templates/main/indicators_mobile.html:137
 #: templates/main/informations.html:245
 #: templates/main/informations_mobile.html:175
 #: templates/main/video_lessons.html:186
@@ -231,7 +234,7 @@ msgstr "Читать далее"
 msgid "Hech qanday natija topilmadi."
 msgstr "Результаты не найдены."
 
-#: templates/main/indicators_mobile.html:114
+#: templates/main/indicators_mobile.html:120
 #: templates/main/informations_mobile.html:154
 #: templates/main/video_lessons.html:172
 #: templates/main/video_lessons_mobile.html:104
@@ -262,12 +265,12 @@ msgstr "Поиск..."
 #: templates/main/lesson_detail_mobile.html:5 templates/main/lessons.html:138
 #: templates/main/lessons_mobile.html:115
 msgid "Darsliklar va Pattern turlari"
-msgstr "Учебники и типы узоров"
+msgstr "Учебники"
 
 #: templates/main/lesson_detail.html:169
 #: templates/main/lesson_detail_mobile.html:13
 #: templates/users/update_profile.html:98
-#: templates/users/update_profile_mobile.html:102
+#: templates/users/update_profile_mobile.html:101
 msgid "< Orqaga"
 msgstr "< Назад"
 
@@ -303,21 +306,18 @@ msgstr "Заметки"
 
 #: templates/main/note_details.html:84
 #: templates/main/note_details_mobile.html:124
-#, fuzzy
-#| msgid "Zametkalar"
 msgid "Zametkani tahrirlash"
-msgstr "Заметки"
+msgstr "Редактировать заметку"
 
 #: templates/main/note_details.html:85
 #: templates/main/note_details_mobile.html:125
 msgid "Zametkani o'chirish"
 msgstr "Удалить заметку"
 
+# templates/main/note_edit_mobile.html:142
 #: templates/main/note_edit.html:156 templates/main/note_edit_mobile.html:142
-#, fuzzy
-#| msgid "Zametkalar"
 msgid "Tahrirlash"
-msgstr "Заметки"
+msgstr "Редактировать"
 
 #: templates/main/note_edit.html:168 templates/main/note_edit_mobile.html:154
 #: templates/main/note_form.html:172 templates/main/note_form_mobile.html:154
@@ -340,24 +340,25 @@ msgid "Kirish"
 msgstr "Вход"
 
 #: templates/users/login.html:85 templates/users/login_mobile.html:86
-#: templates/users/register.html:72 templates/users/register_mobile.html:69
+#: templates/users/register.html:73 templates/users/register_mobile.html:69
 msgid "Foydalanuvchi nomi"
 msgstr "Имя пользователя"
 
 #: templates/users/login.html:86 templates/users/login_mobile.html:87
-#: templates/users/register.html:81 templates/users/register_mobile.html:78
+#: templates/users/register.html:98 templates/users/register_mobile.html:94
+#: users/forms.py:10
 msgid "Parol"
 msgstr "Пароль"
 
-#: templates/users/login.html:87 templates/users/login_mobile.html:88
+#: templates/users/login.html:95 templates/users/login_mobile.html:97
 msgid "kirish"
 msgstr "вход"
 
-#: templates/users/login.html:89
+#: templates/users/login.html:97
 msgid " Parolni unutdingizmi ?"
 msgstr "Забыли пароль?"
 
-#: templates/users/login_mobile.html:90
+#: templates/users/login_mobile.html:99
 msgid "Parolni unutdingizmi?"
 msgstr "Забыли пароль?"
 
@@ -375,7 +376,7 @@ msgid "Parolni tiklash"
 msgstr "Сброс пароля"
 
 #: templates/users/password_reset.html:71
-#: templates/users/password_reset_mobile.html:55 users/forms.py:36
+#: templates/users/password_reset_mobile.html:55 users/forms.py:71
 msgid "Foydalanuvchi email"
 msgstr "Электронная почта пользователя"
 
@@ -394,10 +395,8 @@ msgstr "Введите новый пароль"
 
 #: templates/users/password_reset_confirm.html:79
 #: templates/users/password_reset_confirm_mobile.html:84
-#, fuzzy
-#| msgid "Yangiliklar"
 msgid "Yangi parol:"
-msgstr "Новости"
+msgstr "Новый пароль:"
 
 #: templates/users/password_reset_confirm.html:82
 #: templates/users/password_reset_confirm_mobile.html:87
@@ -475,49 +474,49 @@ msgstr ""
 "Ссылка для сброса пароля недействительна, возможно, она уже использовалась. "
 "Пожалуйста, запросите сброс нового пароля."
 
-#: templates/users/profile.html:182 templates/users/profile_mobile.html:116
+#: templates/users/profile.html:181 templates/users/profile_mobile.html:116
 msgid "Profil"
 msgstr "Профиль"
 
-#: templates/users/profile.html:201 templates/users/profile_mobile.html:128
+#: templates/users/profile.html:200 templates/users/profile_mobile.html:128
 #, fuzzy
 #| msgid "Email:"
 msgid "Email: "
 msgstr "Электронная почта:"
 
-#: templates/users/profile.html:205 templates/users/profile_mobile.html:132
+#: templates/users/profile.html:204 templates/users/profile_mobile.html:132
 msgid "Ism: "
 msgstr "Имя:"
 
-#: templates/users/profile.html:209
+#: templates/users/profile.html:208
 msgid "ID: "
 msgstr "ID: "
 
-#: templates/users/profile.html:214 templates/users/profile_mobile.html:141
+#: templates/users/profile.html:213 templates/users/profile_mobile.html:141
 msgid "Obuna tafsilotlari"
 msgstr "Подробности подписки"
 
-#: templates/users/profile.html:215 templates/users/profile_mobile.html:142
+#: templates/users/profile.html:214 templates/users/profile_mobile.html:142
 msgid "Premium turi:"
 msgstr "Премиум Тип:"
 
-#: templates/users/profile.html:216 templates/users/profile_mobile.html:143
+#: templates/users/profile.html:215 templates/users/profile_mobile.html:143
 msgid "Obuna boshlandi:"
 msgstr "Подписка началась:"
 
-#: templates/users/profile.html:217 templates/users/profile_mobile.html:144
+#: templates/users/profile.html:216 templates/users/profile_mobile.html:144
 msgid "Obuna tugaydi:"
 msgstr "Срок подписки истекает:"
 
-#: templates/users/profile.html:219 templates/users/profile.html:227
+#: templates/users/profile.html:218 templates/users/profile.html:226
 msgid "Profilni tahrirlash"
 msgstr "Редактировать профиль"
 
-#: templates/users/profile.html:224 templates/users/profile_mobile.html:148
+#: templates/users/profile.html:223 templates/users/profile_mobile.html:148
 msgid "Siz hozir oddiy foydalanuvchisiz."
 msgstr "Вы сейчас обычный пользователь."
 
-#: templates/users/profile.html:235 templates/users/profile_mobile.html:157
+#: templates/users/profile.html:234 templates/users/profile_mobile.html:157
 msgid "Chiqish"
 msgstr "Выход"
 
@@ -525,27 +524,28 @@ msgstr "Выход"
 msgid "Profilni o'zgartirish"
 msgstr "Редактировать профиль"
 
-#: templates/users/register.html:69 templates/users/register.html:85
-#: templates/users/register_mobile.html:65
-#: templates/users/register_mobile.html:82
+#: templates/users/register.html:69 templates/users/register.html:118
+#: templates/users/register_mobile.html:64
+#: templates/users/register_mobile.html:114
 msgid "Ro'yxatdan o'tish"
 msgstr "Зарегистрироваться"
 
-#: templates/users/register.html:74 templates/users/register_mobile.html:71
+#: templates/users/register.html:83 templates/users/register_mobile.html:79
 #, fuzzy
 #| msgid "Email:"
 msgid "Email"
 msgstr "Электронная почта:"
 
-#: templates/users/register.html:76 templates/users/register_mobile.html:73
+#: templates/users/register.html:93 templates/users/register_mobile.html:89
 msgid "Ism"
 msgstr "Имя"
 
-#: templates/users/register.html:78 templates/users/register_mobile.html:75
+#: templates/users/register.html:95 templates/users/register_mobile.html:91
 msgid "Familiya"
 msgstr "Фамилия"
 
-#: templates/users/register.html:83 templates/users/register_mobile.html:80
+#: templates/users/register.html:108 templates/users/register_mobile.html:104
+#: users/forms.py:15
 msgid "Parolni tasdiqlang"
 msgstr "Повторите пароль"
 
@@ -554,13 +554,45 @@ msgid "Profilni Tahrirlash"
 msgstr "Редактировать профиль"
 
 #: templates/users/update_profile.html:96
-#: templates/users/update_profile_mobile.html:100
+#: templates/users/update_profile_mobile.html:99
 msgid "O'zgartirish"
 msgstr "Изменять"
 
-#: templates/users/update_profile_mobile.html:81
+#: templates/users/update_profile_mobile.html:80
 msgid "Profilni O'zgartirish"
 msgstr "Редактировать профиль"
+
+#: users/forms.py:12 users/forms.py:35
+msgid "Parol uchun minimum uzunlik 8 tani tashkil qiladi."
+msgstr "Минимальная длина пароля — 8."
+
+#: users/forms.py:17
+#, fuzzy
+#| msgid "Parolingiz kamida 8 ta belgidan iborat bo'lishi kerak."
+msgid "Parollar mos bo'lishi kerak."
+msgstr "Ваш пароль должен иметь длину не менее 8 символов."
+
+#: users/forms.py:28
+msgid "Bu foydalanuvchi nomi band. Iltimos, boshqa nom tanlang."
+msgstr "Это имя пользователя занято. Пожалуйста, выберите другое имя."
+
+#: users/forms.py:31
+msgid "Bu email ro'yxatdan o'tilgan. Iltimos, boshqa email manzilini kiriting."
+msgstr ""
+"Этот адрес электронной почты зарегистрирован. Пожалуйста, введите другой "
+"адрес электронной почты."
+
+#: users/forms.py:37
+msgid "Parollar mos emas."
+msgstr "Пароли не совпадают."
+
+#: users/views.py:73 users/views.py:229
+msgid "Foydalanuvchi nomi yoki paroli noto'g'ri kiritildi."
+msgstr "Имя пользователя или пароль были введены неверно."
+
+
+
+
 
 #~ msgid "Qidirish"
 #~ msgstr "Поиск"

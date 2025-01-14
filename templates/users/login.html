@@ -84,6 +84,14 @@
         {% csrf_token %}
         <input id="username" name="username" type="text" placeholder="{% blocktrans %}Foydalanuvchi nomi{% endblocktrans %}" class="login-input" required>
         <input id="password" name="password" type="password" placeholder="{% blocktrans %}Parol{% endblocktrans %}" class="login-input" required>
+
+    {% if form.non_field_errors %}
+        <div style="color:red;">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
         <button type="submit" class="login-button">{% blocktrans %}kirish{% endblocktrans %}</button>
     </form>
     <a href="{% url 'password_reset' %}" class="forgot-password">{% blocktrans %} Parolni unutdingizmi ?{% endblocktrans %}</a>

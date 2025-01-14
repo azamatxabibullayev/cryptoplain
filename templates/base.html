@@ -43,7 +43,7 @@
             margin: 0 70px;
             border-radius: 10px 10px 0 0;
             margin-bottom: -10px;
-            max-width: 1631px;
+            max-width: 1630px;
         }
 
         header nav ul {
@@ -54,7 +54,7 @@
         }
 
         header nav ul li {
-            margin-right: 60px;
+            margin-right: 40px;
         }
 
         .nav_img {
@@ -465,6 +465,13 @@
     </div>
 
     <script>
+        document.querySelectorAll('a[href]').forEach(link => {
+            if (link.hostname !== window.location.hostname) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            }
+        });
+
         document.addEventListener("DOMContentLoaded", function () {
             // Get all the sidebar links
             const menuItems = document.querySelectorAll('.sidebar ul li a');
