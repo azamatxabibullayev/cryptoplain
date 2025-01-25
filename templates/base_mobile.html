@@ -301,18 +301,16 @@
                     {% blocktrans %}Kitoblar{% endblocktrans %}
                 </a>
             </li>
-
-            <li>
-                {% url 'mobile_note_list' as note_list_url %}
-                <a href="{{ note_list_url }}">
-                    <span class="material-icons">note</span>{% blocktrans %}Zametkalar
-                    {% endblocktrans %}
-                </a>
-            </li>
             <li>
                 {% url 'mobile_indicators' as indicators_url %}
                 <a href="{{ indicators_url }}">
                     <span class="material-icons">insights</span>{% blocktrans %}Indikatorlar{% endblocktrans %}
+                </a>
+            </li>
+            <li>
+                {% url 'mobile_note_list' as note_list_url %}
+                <a href="{{ note_list_url }}">
+                    <span class="material-icons">note</span>{% blocktrans %}Zametkalar{% endblocktrans %}
                 </a>
             </li>
         </ul>

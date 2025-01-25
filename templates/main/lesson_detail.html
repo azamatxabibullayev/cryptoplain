@@ -166,7 +166,7 @@
 
     <p class="pattern-description">{{ lesson.lesson_text }}</p>
 
-    <a href="{% url 'lessons' %}" class="btn"> {% blocktrans %}< Orqaga{% endblocktrans %}</a>
+    <a href="{% url 'lessons' %}?page={{ page_number }}" class="btn"> {% blocktrans %}< Orqaga{% endblocktrans %}</a>
 </section>
 
 <script>

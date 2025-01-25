@@ -63,6 +63,14 @@
     .register-button:hover {
         background-color: #e2794c;
     }
+
+    .optional-text {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 5px;
+        margin-left: 10px;
+        font-style: italic;
+    }
 </style>
 
 <section class="register-container">
@@ -95,6 +103,7 @@
         <input type="text" name="surname" placeholder="{% blocktrans %}Familiya{% endblocktrans %}"
                class="register-input" required>
         <input type="file" name="profile_pic" class="register-input">
+        <p class="optional-text">{% blocktrans %}Rasm talab etilmaydi{% endblocktrans %}</p>
         <input type="password" name="password1" placeholder="{% blocktrans %}Parol{% endblocktrans %}"
                class="register-input" required>
         {% if form.password1.errors %}

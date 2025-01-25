@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.timezone import localdate
 from .models import VideoLesson, Information, Birja, Advice, Signal, News, Analysis, Lesson, Note, Indicator, Book
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 def video_lessons_view(request):
@@ -15,9 +16,11 @@ def video_lessons_view(request):
         )
     else:
         video_lessons = VideoLesson.objects.order_by('-id')
-
+    paginator = Paginator(video_lessons, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        'video_lessons': video_lessons
+        'page_obj': page_obj,
     }
     return render(request, 'main/video_lessons.html', context)
 
@@ -31,32 +34,51 @@ def information(request):
     else:
         information_list = Information.objects.order_by('-id')
 
+    paginator = Paginator(information_list, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'information_list': information_list
+        'information_list': page_obj,
+        'page_obj': page_obj
     }
     return render(request, 'main/informations.html', context)
 
 
 def information_detail(request, info_id):
     information = get_object_or_404(Information, id=info_id)
+    page_number = request.GET.get('page', 1)
     context = {
-        'information': information
+        'information': information,
+        'page_number': page_number,
     }
     return render(request, 'main/information_detail.html', context)
 
 
 def birja_view(request):
     birja = Birja.objects.order_by('-id')
+
+    paginator = Paginator(birja, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'birja': birja
+        'birja': page_obj,
+        'page_obj': page_obj,
     }
     return render(request, 'main/birja.html', context)
 
 
 def advices_view(request):
     advice = Advice.objects.order_by('-id')
+
+    paginator = Paginator(advice, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'advice': advice
+        'advice': page_obj,
+        'page_obj': page_obj,
     }
     return render(request, 'main/advice.html', context)
 
@@ -71,8 +93,14 @@ def signals_view(request):
 
 def news_view(request):
     news = News.objects.order_by('-id')
+
+    paginator = Paginator(news, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'news': news
+        'news': page_obj,
+        'page_obj': page_obj,
     }
     return render(request, 'main/news.html', context)
 
@@ -185,63 +213,78 @@ def lesson_view(request):
     else:
         lessons = Lesson.objects.order_by('-id').filter(lesson_type='normal')
 
+    paginator = Paginator(lessons, 2)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'lessons': lessons,
+        'lessons': page_obj,
+        'page_obj': page_obj,
+        'is_premium': hasattr(user, 'premium_user'),
     }
     return render(request, 'main/lessons.html', context)
 
 
 def lesson_detail(request, id):
     lesson = Lesson.objects.get(id=id)
+    page_number = request.GET.get('page', 1)
     context = {
         'lesson': lesson,
+        'page_number': page_number,
     }
     return render(request, 'main/lesson_detail.html', context)
 
 
 def indicator_view(request):
-    query = request.GET.get('q')
+    query = request.GET.get('q', None)
     user = request.user
     indicators = Indicator.objects.none()
 
     if user.is_authenticated:
         if hasattr(user, 'premium_user'):
-            user_type = user.premium_user.premium_type
-            if user_type == 'pro':
+            if user.premium_user.premium_type == 'pro':
                 indicators = Indicator.objects.order_by('-id').filter(
-                    Q(indicator_type__in=['normal', 'standard', 'pro']) &
-                    (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
                     Q(indicator_type__in=['normal', 'standard', 'pro'])
                 )
             else:
                 indicators = Indicator.objects.order_by('-id').filter(
-                    Q(indicator_type__in=['normal', 'standard']) &
-                    (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
                     Q(indicator_type__in=['normal', 'standard'])
                 )
         else:
             indicators = Indicator.objects.order_by('-id').filter(
-                Q(indicator_type='normal') &
-                (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
                 Q(indicator_type='normal')
             )
     else:
         indicators = Indicator.objects.order_by('-id').filter(
-            Q(indicator_type='normal') &
-            (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
             Q(indicator_type='normal')
         )
 
+    if query:
+        indicators = indicators.filter(
+            Q(title__icontains=query) | Q(indicator_text__icontains=query)
+        )
+
+    paginator = Paginator(indicators, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'indicators': indicators,
+        'indicators': page_obj,
+        'page_obj': page_obj,
+        'user_type': getattr(user, 'user_type', 'anonymous'),
+        'is_premium': hasattr(user, 'premium_user'),
+        'query': query,
     }
     return render(request, 'main/indicators.html', context)
 
 
 def indicator_detail(request, id):
     indicator = Indicator.objects.get(id=id)
+    page_number = request.GET.get('page', 1)
+
     context = {
         'indicator': indicator,
+        'page_number': page_number,
     }
     return render(request, 'main/indicator_detail.html', context)
 
@@ -302,16 +345,25 @@ def mobile_lessons(request):
     else:
         lessons = Lesson.objects.order_by('-id').filter(lesson_type='normal')
 
+    paginator = Paginator(lessons, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'lessons': lessons,
+        'lessons': page_obj,
+        'page_obj': page_obj,
+        'is_premium': hasattr(user, 'premium_user'),
     }
     return render(request, 'main/lessons_mobile.html', context)
 
 
 def mobile_lesson_detail(request, id):
     lesson = Lesson.objects.get(id=id)
+    page_number = request.GET.get('page', 1)
+
     context = {
         'lesson': lesson,
+        'page_number': page_number,
     }
     return render(request, 'main/lesson_detail_mobile.html', context)
 
@@ -325,24 +377,40 @@ def mobile_video_lessons_view(request):
     else:
         video_lessons = VideoLesson.objects.order_by('-id')
 
+    paginator = Paginator(video_lessons, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'video_lessons': video_lessons
+        'video_lessons': page_obj,
+        'page_obj': page_obj
     }
     return render(request, 'main/video_lessons_mobile.html', context)
 
 
 def mobile_advices_view(request):
     advice = Advice.objects.order_by('-id')
+    paginator = Paginator(advice, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'advice': advice
+        'advice': page_obj,
+        'page_obj': page_obj,
     }
     return render(request, 'main/advice_mobile.html', context)
 
 
 def mobile_birja_view(request):
     birja = Birja.objects.order_by('-id')
+
+    paginator = Paginator(birja, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'birja': birja
+        'birja': page_obj,
+        'page_obj': page_obj,
     }
     return render(request, 'main/birja_mobile.html', context)
 
@@ -356,16 +424,23 @@ def mobile_information(request):
     else:
         information_list = Information.objects.order_by('-id')
 
+    paginator = Paginator(information_list, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'information_list': information_list
+        'information_list': page_obj,
+        'page_obj': page_obj
     }
     return render(request, 'main/informations_mobile.html', context)
 
 
 def mobile_information_detail(request, info_id):
     information = get_object_or_404(Information, id=info_id)
+    page_number = request.GET.get('page', 1)
     context = {
-        'information': information
+        'information': information,
+        'page_number': page_number,
     }
     return render(request, 'main/information_detail_mobile.html', context)
 
@@ -384,56 +459,70 @@ def mobile_books_view(request):
 
 def mobile_news_view(request):
     news = News.objects.order_by('-id')
+
+    paginator = Paginator(news, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'news': news
+        'news': page_obj,
+        'page_obj': page_obj,
     }
     return render(request, 'main/news_mobile.html', context)
 
 
 def mobile_indicator_view(request):
-    query = request.GET.get('q')
+    query = request.GET.get('q', None)
     user = request.user
     indicators = Indicator.objects.none()
 
     if user.is_authenticated:
         if hasattr(user, 'premium_user'):
-            user_type = user.premium_user.premium_type
-            if user_type == 'pro':
+            if user.premium_user.premium_type == 'pro':
                 indicators = Indicator.objects.order_by('-id').filter(
-                    Q(indicator_type__in=['normal', 'standard', 'pro']) &
-                    (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
                     Q(indicator_type__in=['normal', 'standard', 'pro'])
                 )
             else:
                 indicators = Indicator.objects.order_by('-id').filter(
-                    Q(indicator_type__in=['normal', 'standard']) &
-                    (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
                     Q(indicator_type__in=['normal', 'standard'])
                 )
         else:
             indicators = Indicator.objects.order_by('-id').filter(
-                Q(indicator_type='normal') &
-                (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
                 Q(indicator_type='normal')
             )
     else:
         indicators = Indicator.objects.order_by('-id').filter(
-            Q(indicator_type='normal') &
-            (Q(title__icontains=query) | Q(indicator_text__icontains=query)) if query else
             Q(indicator_type='normal')
         )
 
+    if query:
+        indicators = indicators.filter(
+            Q(title__icontains=query) | Q(indicator_text__icontains=query)
+        )
+
+    paginator = Paginator(indicators, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'indicators': indicators,
+        'indicators': page_obj,
+        'page_obj': page_obj,
+        'user_type': getattr(user, 'user_type', 'anonymous'),
+        'is_premium': hasattr(user, 'premium_user'),
+        'query': query,
     }
     return render(request, 'main/indicators_mobile.html', context)
 
 
 def mobile_indicator_detail(request, id):
     indicator = Indicator.objects.get(id=id)
+    page_number = request.GET.get('page', 1)
+
     context = {
         'indicator': indicator,
         'id': indicator.id,
+        'page_number': page_number,
+
     }
     return render(request, 'main/indicator_detail_mobile.html', context)
 

@@ -134,7 +134,7 @@
     <h1 style="margin-top: 60px; font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 25px;">
         {{ information.title }}</h1>
     <p style="font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 25px;">{{ information.info_text }}</p>
-    <a href="{% url 'information' %}">{% blocktrans %}Orqaga qaytish{% endblocktrans %}</a>
+    <a href="{% url 'information' %}?page={{ page_number }}" style="color:#FB8B5D;">{% blocktrans %}Orqaga qaytish{% endblocktrans %}</a>
 
 </section>
 {% endblock %}

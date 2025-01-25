@@ -4,15 +4,14 @@
 {% load i18n %}
 
 <h1 class="main-title">{% blocktrans %}Indikatorlar{% endblocktrans %}</h1>
-<h1 style="margin-top: 60px; font-family: 'Roboto', sans-serif; font-weight: semibold; font-size: 25px;">{{ indicator.title }}</h1>
 
 
 <div class="indicator-detail">
+    <img src="{{ indicator.indicator_photo.url }}" alt="{{ indicator.title }}" class="news-image"/>
     <p style="font-family: 'Roboto', sans-serif; font-weight: semi-bold; font-size: 20px;">{{ indicator.indicator_text }}</p>
 </div>
 
-<a href="{% url 'mobile_indicators' %}" class="btn btn-primary">{% blocktrans %} < Orqaga{% endblocktrans %}</a>
-
+<a href="{% url 'mobile_indicators' %}?page={{ page_number }}" class="btn btn-primary">{% blocktrans %} < Orqaga{% endblocktrans %}</a>
 
 
 <style>
@@ -23,6 +22,7 @@
           margin-bottom: 200px;
           text-align: center;
     }
+
     .btn {
         display: inline-block;
         padding: 10px 20px;
@@ -34,6 +34,14 @@
         text-decoration: none;
         cursor: pointer;
         margin-top: 20px;
+    }
+
+    .news-image {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+        object-fit: fill;
+        object-position: center;
     }
 </style>
 

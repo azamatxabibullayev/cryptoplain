@@ -10,7 +10,7 @@
     <p>{{ lesson.lesson_text }}</p>
 </div>
 
-<a href="{% url 'mobile_lessons' %}" class="btn btn-primary"> {% blocktrans %}< Orqaga{% endblocktrans %}</a>
+<a href="{% url 'mobile_lessons' %}?page={{ page_number }}" class="btn btn-primary"> {% blocktrans %}< Orqaga{% endblocktrans %}</a>
 
 <style>
     .lessons-title {

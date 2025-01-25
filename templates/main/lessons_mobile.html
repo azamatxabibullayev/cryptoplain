@@ -111,10 +111,61 @@
       height: 5px;
       margin-top: 18px;
     }
+
+    .p1 {
+        text-align: left;
+        font-size: 25px;
+        color: #fff;
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        gap: 5px;
+        font-family: 'Poppins', sans-serif;
+        flex-wrap: wrap;
+    }
+
+    .step-links {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .pagination-link {
+        border-radius: 5px;
+        padding: 8px 12px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #fb8b5d;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .pagination-link:hover {
+        background-color: #fb8b5d;
+        color: #ffffff;
+    }
+
+    .current-page {
+        font-size: 16px;
+        font-weight: 600;
+        color: #ffffff;
+        padding: 6px 12px;
+        background-color: #333;
+        border-radius: 5px;
+    }
+
 </style>
+
+
 <h1 class="lessons-title">{% blocktrans %}Darsliklar va Pattern turlari{% endblocktrans %}</h1>
 
 <section class="lessons-container">
+    {% if is_premium %}
     {% for lesson in lessons %}
         <div class="image-gallery">
         <div class="image-row">
@@ -129,8 +180,34 @@
         </div>
     </div>
     <p class="pattern-description">{{ lesson.lesson_text|truncatewords:20 }}</p>
-    <a href="{% url 'mobile_lesson_detail' lesson.id %}">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
+    <a href="{% url 'mobile_lesson_detail' lesson.id %}?page={{ page_obj.number }}" style="color: #fb8b5d;">{% blocktrans %}Batafsil o'qish{% endblocktrans %}</a>
     <div class="description-underline"></div>
     {% endfor %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Birinchi{% endblocktrans %}</a>
+                <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Avvalgi{% endblocktrans %}</a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                {% if num == page_obj.number %}
+                <span class="current-page">{{ num }}</span>
+                {% elif num >= page_obj.number|add:"-1" and num <= page_obj.number|add:"1" %}
+                <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{{ num }}</a>
+                {% elif num == 1 or num == page_obj.paginator.num_pages %}
+                <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{{ num }}</a>
+                {% elif num == page_obj.number|add:"-2" or num == page_obj.number|add:"2" %}
+                <span class="ellipsis">...</span>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Keyingi{% endblocktrans %}</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Ohirgi{% endblocktrans %}</a>
+                {% endif %}
+            </div>
+    {% else %}
+    <p class="p1">{% blocktrans %}Ushbu bo'lim imkoniyatlaridan foydalanish uchun obuna sotib olishingiz kerak{% endblocktrans %}</p>
+    {% endif %}
 </section>
 {% endblock %}

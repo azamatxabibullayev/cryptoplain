@@ -24,19 +24,19 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 10px; /* Space between input and button */
+        gap: 10px;
         width: 100%;
         margin-top: 30px;
     }
 
     .search-input {
-        flex: 1; /* Makes the input take up available space */
+        flex: 1;
         padding: 10px;
         font-size: 16px;
         border: 2px solid #fb8b5d;
         border-radius: 5px;
         color: #000;
-        box-sizing: border-box; /* Ensures proper sizing */
+        box-sizing: border-box;
     }
 
     .search-button {
@@ -47,7 +47,7 @@
         color: white;
         border: none;
         cursor: pointer;
-        white-space: nowrap; /* Prevents text wrapping */
+        white-space: nowrap;
     }
 
     .content-wrapper {
@@ -56,6 +56,7 @@
         align-items: flex-start;
         gap: 17px;
         font: 500 15px Roboto, sans-serif;
+        flex-wrap: wrap;
     }
 
     .content-container {
@@ -64,21 +65,28 @@
         flex-direction: column;
         align-items: flex-start;
         flex-grow: 1;
-        width: fit-content;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .lesson-title {
         font-size: 20px;
         margin-top: 9px;
+        word-wrap: break-word;
     }
 
     .lesson-link {
         border-radius: 5px;
         align-self: stretch;
         white-space: nowrap;
-        padding: 6px 14px;
-        border: 2px solid #fff;
+        padding: 10px 14px;
+        border: 2px solid #FB8B5D;
         text-decoration: none !important;
+        color: #FFFFFF;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        font-size: 14px;
     }
 
     .lesson-link:hover,
@@ -88,13 +96,63 @@
 
     @media (max-width: 480px) {
         .search-container {
-            flex-direction: row; /* Ensures horizontal alignment */
+            flex-direction: row;
         }
 
         .search-button {
-            flex-shrink: 0; /* Prevents the button from shrinking */
+            flex-shrink: 0;
+        }
+
+        .lesson-link {
+            white-space: normal;
+            padding: 8px 10px;
+            font-size: 12px;
+        }
+
+        .lesson-title {
+            font-size: 18px;
         }
     }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        gap: 5px;
+        font-family: 'Poppins', sans-serif;
+        flex-wrap: wrap;
+    }
+
+    .step-links {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .pagination-link {
+        border-radius: 5px;
+        padding: 8px 12px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #fb8b5d;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .pagination-link:hover {
+        background-color: #fb8b5d;
+        color: #ffffff;
+    }
+
+    .current-page {
+        font-size: 16px;
+        font-weight: 600;
+        color: #ffffff;
+        padding: 6px 12px;
+        background-color: #333;
+        border-radius: 5px;
+    }
+
 </style>
 
 <h1 class="section-title">{% blocktrans %}Video darslar{% endblocktrans %}</h1>
@@ -114,6 +172,29 @@
             <h2 class="lesson-title">{{ lesson.title }}</h2>
             <a href="{{ lesson.youtube_link }}" class="lesson-link">{{ lesson.youtube_link }}</a>
             {% endfor %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Birinchi{% endblocktrans %}</a>
+                <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Avvalgi{% endblocktrans %}</a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                {% if num == page_obj.number %}
+                <span class="current-page">{{ num }}</span>
+                {% elif num >= page_obj.number|add:"-1" and num <= page_obj.number|add:"1" %}
+                <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{{ num }}</a>
+                {% elif num == 1 or num == page_obj.paginator.num_pages %}
+                <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{{ num }}</a>
+                {% elif num == page_obj.number|add:"-2" or num == page_obj.number|add:"2" %}
+                <span class="ellipsis">...</span>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Keyingi{% endblocktrans %}</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Ohirgi{% endblocktrans %}</a>
+                {% endif %}
+            </div>
             {% else %}
             <p>{% blocktrans %}Hech qanday natija topilmadi.{% endblocktrans %}</p>
             {% endif %}

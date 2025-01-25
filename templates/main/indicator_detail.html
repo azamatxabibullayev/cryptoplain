@@ -97,6 +97,11 @@
             white-space: initial;
             padding: 0 20px;
         }
+
+        .news-image {
+            width: 100%;
+            margin-top: 18px;
+        }
     }
 
     .search-input {
@@ -107,6 +112,16 @@
       flex-grow: 1;
       color: #000;
       margin-left: 100px;
+    }
+
+
+    .news-image {
+        width: 35%; /* Adjusted image size */
+        height: auto;
+        border-radius: 10px;
+        object-fit: cover; /* Ensures image doesn't get stretched */
+        object-position: center;
+        margin-top: 30px;
     }
 </style>
 
@@ -130,10 +145,9 @@
         </form>
     </header>
 
-    <h1 style="margin-top: 60px; font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 25px;">
-        {{ indicator.title }}</h1>
+    <img src="{{ indicator.indicator_photo.url }}" alt="{{ indicator.title }}" class="news-image"/>
     <p style="font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 25px;">{{ indicator.indicator_text }}</p>
-    <a href="{% url 'indicators' %}">{% blocktrans %}Orqaga qaytish{% endblocktrans %}</a>
+    <a href="{% url 'indicators' %}?page={{ page_number }}" style="color: #FB8B5D;">{% blocktrans %}Orqaga qaytish{% endblocktrans %}</a>
 
 </section>
 {% endblock %}

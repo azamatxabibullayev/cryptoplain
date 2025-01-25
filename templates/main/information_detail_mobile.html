@@ -35,7 +35,7 @@
         {{ information.title }}</h1>
     <p style="font-family: 'Roboto', sans-serif; font-weight: semi-bold; font-size: 20px;">
         {{ information.info_text }}</p>
-    <a href="{% url 'mobile_informations' %}">{% blocktrans %}Orqaga qaytish{% endblocktrans %}</a>
+    <a href="{% url 'mobile_informations' %}?page={{ page_number }}" style="color:#FB8B5D;">{% blocktrans %}Orqaga qaytish{% endblocktrans %}</a>
 
 </section>
 {% endblock %}

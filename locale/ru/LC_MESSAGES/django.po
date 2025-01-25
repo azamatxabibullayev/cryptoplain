@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-15 03:32+0500\n"
+"POT-Creation-Date: 2025-01-26 03:27+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,8 +54,8 @@ msgid "Birjalar"
 msgstr "Бирджа"
 
 #: templates/base.html:307 templates/base.html:430
-#: templates/base_mobile.html:287 templates/main/news.html:57
-#: templates/main/news_mobile.html:39
+#: templates/base_mobile.html:287 templates/main/news.html:97
+#: templates/main/news_mobile.html:79
 msgid "Yangiliklar"
 msgstr "Новости"
 
@@ -77,8 +77,8 @@ msgid "Bosh Sahifa"
 msgstr "Главная страница"
 
 #: templates/base.html:392 templates/base_mobile.html:246
-#: templates/main/video_lessons.html:162
-#: templates/main/video_lessons_mobile.html:100
+#: templates/main/video_lessons.html:202
+#: templates/main/video_lessons_mobile.html:158
 msgid "Video darslar"
 msgstr "Видео уроки"
 
@@ -89,17 +89,17 @@ msgstr "Tex-анализ"
 
 #: templates/base.html:405 templates/base_mobile.html:259
 #: templates/main/information_detail_mobile.html:32
-#: templates/main/informations_mobile.html:147
+#: templates/main/informations_mobile.html:186
 msgid "Ma'lumotlar"
 msgstr "Информации"
 
 #: templates/base.html:412 templates/base_mobile.html:266
-#: templates/main/birja.html:39 templates/main/birja_mobile.html:81
+#: templates/main/birja.html:79 templates/main/birja_mobile.html:121
 msgid "Birjalar bilan ishlash"
 msgstr "Работа с биржами"
 
 #: templates/base.html:418 templates/base_mobile.html:273
-#: templates/main/advice.html:109 templates/main/advice_mobile.html:80
+#: templates/main/advice.html:149 templates/main/advice_mobile.html:120
 msgid "Maslahatlar"
 msgstr "Советы"
 
@@ -117,18 +117,18 @@ msgstr "Учебники"
 msgid "Kitoblar"
 msgstr "Книги"
 
-#: templates/base.html:451 templates/base_mobile.html:308
-msgid ""
-"Zametkalar\n"
-"                    "
-msgstr "Заметки"
-
-#: templates/base.html:458 templates/base_mobile.html:315
-#: templates/main/indicator_detail.html:119
+#: templates/base.html:450 templates/base_mobile.html:307
+#: templates/main/indicator_detail.html:134
 #: templates/main/indicator_detail_mobile.html:6
-#: templates/main/indicators.html:195 templates/main/indicators_mobile.html:113
+#: templates/main/indicators.html:245 templates/main/indicators_mobile.html:162
 msgid "Indikatorlar"
 msgstr "Индикаторы"
+
+#: templates/base.html:456
+#, fuzzy
+#| msgid "Zametkalar"
+msgid "Zametkalar "
+msgstr "Заметки"
 
 #: templates/base_mobile.html:217
 msgid "Biz bilan bog'lanish"
@@ -137,6 +137,15 @@ msgstr "Связаться с нами"
 #: templates/base_mobile.html:218
 msgid "Podpiska muddati"
 msgstr "Период подписки"
+
+#: templates/base_mobile.html:313
+#: templates/main/note_confirm_delete_mobile.html:32
+#: templates/main/note_details_mobile.html:118
+#: templates/main/note_edit.html:150 templates/main/note_edit_mobile.html:137
+#: templates/main/note_form.html:150 templates/main/note_form_mobile.html:137
+#: templates/main/note_list.html:140 templates/main/note_list_mobile.html:110
+msgid "Zametkalar"
+msgstr "Заметки"
 
 #: templates/landing_page.html:118
 msgid "Biz bilan bo'g'lanish"
@@ -153,9 +162,6 @@ msgstr "Ваши активность"
 #: templates/landing_page.html:139 templates/landing_page_mobile.html:142
 msgid "Obuna turlari"
 msgstr "Виды подписки"
-
-
-
 
 #: templates/landing_page.html:153 templates/landing_page_mobile.html:133
 msgid "Analiz qiling"
@@ -174,6 +180,50 @@ msgstr "Обращайте внимание"
 #: templates/landing_page_mobile.html:139
 msgid "Qo'rquv indeksi"
 msgstr "Индекс страха"
+
+#: templates/main/advice.html:167 templates/main/advice_mobile.html:132
+#: templates/main/birja.html:98 templates/main/birja_mobile.html:135
+#: templates/main/indicators.html:278 templates/main/indicators_mobile.html:188
+#: templates/main/informations.html:286
+#: templates/main/informations_mobile.html:215 templates/main/lessons.html:215
+#: templates/main/lessons_mobile.html:188 templates/main/news.html:119
+#: templates/main/news_mobile.html:96 templates/main/video_lessons.html:229
+#: templates/main/video_lessons_mobile.html:177
+msgid "Birinchi"
+msgstr "Первый"
+
+#: templates/main/advice.html:168 templates/main/advice_mobile.html:133
+#: templates/main/birja.html:99 templates/main/birja_mobile.html:136
+#: templates/main/indicators.html:279 templates/main/indicators_mobile.html:189
+#: templates/main/informations.html:287
+#: templates/main/informations_mobile.html:216 templates/main/lessons.html:216
+#: templates/main/lessons_mobile.html:189 templates/main/news.html:120
+#: templates/main/news_mobile.html:97 templates/main/video_lessons.html:230
+#: templates/main/video_lessons_mobile.html:178
+msgid "Avvalgi"
+msgstr "Предыдущий"
+
+#: templates/main/advice.html:184 templates/main/advice_mobile.html:149
+#: templates/main/birja.html:115 templates/main/birja_mobile.html:152
+#: templates/main/indicators.html:295 templates/main/indicators_mobile.html:205
+#: templates/main/informations.html:303
+#: templates/main/informations_mobile.html:232 templates/main/lessons.html:232
+#: templates/main/lessons_mobile.html:205 templates/main/news.html:136
+#: templates/main/news_mobile.html:113 templates/main/video_lessons.html:246
+#: templates/main/video_lessons_mobile.html:194
+msgid "Keyingi"
+msgstr "Следующий"
+
+#: templates/main/advice.html:185 templates/main/advice_mobile.html:150
+#: templates/main/birja.html:116 templates/main/birja_mobile.html:153
+#: templates/main/indicators.html:296 templates/main/indicators_mobile.html:206
+#: templates/main/informations.html:304
+#: templates/main/informations_mobile.html:233 templates/main/lessons.html:233
+#: templates/main/lessons_mobile.html:206 templates/main/news.html:137
+#: templates/main/news_mobile.html:114 templates/main/video_lessons.html:247
+#: templates/main/video_lessons_mobile.html:195
+msgid "Ohirgi"
+msgstr "Последний"
 
 #: templates/main/analyses.html:40 templates/main/analyses_mobile.html:26
 msgid "Pro padpiskani sotvolganinizdan so'ng ko'ra olasiz"
@@ -198,16 +248,16 @@ msgstr "Скоро..."
 msgid "Tez kunda.."
 msgstr "Скоро..."
 
-#: templates/main/indicator_detail.html:128 templates/main/indicators.html:204
-#: templates/main/indicators_mobile.html:118
+#: templates/main/indicator_detail.html:143 templates/main/indicators.html:255
+#: templates/main/indicators_mobile.html:168
 msgid "Indikatorlardan qidiring...."
 msgstr "Ищите индикаторы...."
 
-#: templates/main/indicator_detail.html:129 templates/main/indicators.html:205
+#: templates/main/indicator_detail.html:144 templates/main/indicators.html:256
 msgid " Qidirish "
 msgstr "Поиск"
 
-#: templates/main/indicator_detail.html:136
+#: templates/main/indicator_detail.html:150
 #: templates/main/information_detail.html:137
 #: templates/main/information_detail_mobile.html:38
 msgid "Orqaga qaytish"
@@ -219,51 +269,57 @@ msgstr "Назад"
 msgid " < Orqaga"
 msgstr "< Назад"
 
-#: templates/main/indicators.html:218 templates/main/indicators_mobile.html:131
-#: templates/main/informations.html:240
-#: templates/main/informations_mobile.html:170 templates/main/lessons.html:160
-#: templates/main/lessons_mobile.html:132
+#: templates/main/indicators.html:270 templates/main/indicators_mobile.html:181
+#: templates/main/informations.html:280
+#: templates/main/informations_mobile.html:209 templates/main/lessons.html:209
+#: templates/main/lessons_mobile.html:183
 msgid "Batafsil o'qish"
 msgstr "Читать далее"
 
-#: templates/main/indicators.html:225 templates/main/indicators_mobile.html:137
-#: templates/main/informations.html:245
-#: templates/main/informations_mobile.html:175
-#: templates/main/video_lessons.html:186
-#: templates/main/video_lessons_mobile.html:118
+#: templates/main/indicators.html:301 templates/main/indicators_mobile.html:210
+#: templates/main/informations.html:308
+#: templates/main/informations_mobile.html:237
+#: templates/main/video_lessons.html:251
+#: templates/main/video_lessons_mobile.html:199
 msgid "Hech qanday natija topilmadi."
 msgstr "Результаты не найдены."
 
-#: templates/main/indicators_mobile.html:120
-#: templates/main/informations_mobile.html:154
-#: templates/main/video_lessons.html:172
-#: templates/main/video_lessons_mobile.html:104
-#: templates/main/video_lessons_mobile.html:106
+#: templates/main/indicators.html:304 templates/main/indicators_mobile.html:214
+#: templates/main/lessons.html:238 templates/main/lessons_mobile.html:210
+msgid ""
+"Ushbu bo'lim imkoniyatlaridan foydalanish uchun obuna sotib olishingiz kerak"
+msgstr "Для использования этого раздела вам необходимо приобрести подписку."
+
+#: templates/main/indicators_mobile.html:170
+#: templates/main/informations_mobile.html:193
+#: templates/main/video_lessons.html:212
+#: templates/main/video_lessons_mobile.html:162
+#: templates/main/video_lessons_mobile.html:164
 msgid "Qidiring"
 msgstr "Поиск"
 
 #: templates/main/information_detail.html:118
-#: templates/main/informations.html:211
+#: templates/main/informations.html:251
 msgid "Barcha narsalar haqida kerakli ma'lumotlar"
 msgstr "Необходимая информация обо всем"
 
 #: templates/main/information_detail.html:128
-#: templates/main/informations.html:221
+#: templates/main/informations.html:261
 msgid "Search..."
 msgstr "Поиск..."
 
 #: templates/main/information_detail.html:130
-#: templates/main/informations.html:223 templates/main/video_lessons.html:174
+#: templates/main/informations.html:263 templates/main/video_lessons.html:215
 msgid "Qidiruv"
 msgstr "Поиск"
 
-#: templates/main/informations_mobile.html:152
+#: templates/main/informations_mobile.html:191
 msgid "Qidirish..."
 msgstr "Поиск..."
 
 #: templates/main/lesson_detail.html:148
-#: templates/main/lesson_detail_mobile.html:5 templates/main/lessons.html:138
-#: templates/main/lessons_mobile.html:115
+#: templates/main/lesson_detail_mobile.html:5 templates/main/lessons.html:187
+#: templates/main/lessons_mobile.html:165
 msgid "Darsliklar va Pattern turlari"
 msgstr "Учебники"
 
@@ -295,14 +351,6 @@ msgstr "Да, удалить"
 #: templates/main/note_confirm_delete_mobile.html:38
 msgid "Orqaga"
 msgstr "Назад"
-
-#: templates/main/note_confirm_delete_mobile.html:32
-#: templates/main/note_details_mobile.html:118
-#: templates/main/note_edit.html:150 templates/main/note_edit_mobile.html:137
-#: templates/main/note_form.html:150 templates/main/note_form_mobile.html:137
-#: templates/main/note_list.html:140 templates/main/note_list_mobile.html:110
-msgid "Zametkalar"
-msgstr "Заметки"
 
 #: templates/main/note_details.html:84
 #: templates/main/note_details_mobile.html:124
@@ -340,12 +388,12 @@ msgid "Kirish"
 msgstr "Вход"
 
 #: templates/users/login.html:85 templates/users/login_mobile.html:86
-#: templates/users/register.html:73 templates/users/register_mobile.html:69
+#: templates/users/register.html:81 templates/users/register_mobile.html:78
 msgid "Foydalanuvchi nomi"
 msgstr "Имя пользователя"
 
 #: templates/users/login.html:86 templates/users/login_mobile.html:87
-#: templates/users/register.html:98 templates/users/register_mobile.html:94
+#: templates/users/register.html:107 templates/users/register_mobile.html:104
 #: users/forms.py:10
 msgid "Parol"
 msgstr "Пароль"
@@ -524,27 +572,31 @@ msgstr "Выход"
 msgid "Profilni o'zgartirish"
 msgstr "Редактировать профиль"
 
-#: templates/users/register.html:69 templates/users/register.html:118
-#: templates/users/register_mobile.html:64
-#: templates/users/register_mobile.html:114
+#: templates/users/register.html:77 templates/users/register.html:127
+#: templates/users/register_mobile.html:73
+#: templates/users/register_mobile.html:124
 msgid "Ro'yxatdan o'tish"
 msgstr "Зарегистрироваться"
 
-#: templates/users/register.html:83 templates/users/register_mobile.html:79
+#: templates/users/register.html:91 templates/users/register_mobile.html:88
 #, fuzzy
 #| msgid "Email:"
 msgid "Email"
 msgstr "Электронная почта:"
 
-#: templates/users/register.html:93 templates/users/register_mobile.html:89
+#: templates/users/register.html:101 templates/users/register_mobile.html:98
 msgid "Ism"
 msgstr "Имя"
 
-#: templates/users/register.html:95 templates/users/register_mobile.html:91
+#: templates/users/register.html:103 templates/users/register_mobile.html:100
 msgid "Familiya"
 msgstr "Фамилия"
 
-#: templates/users/register.html:108 templates/users/register_mobile.html:104
+#: templates/users/register.html:106 templates/users/register_mobile.html:103
+msgid "Rasm talab etilmaydi"
+msgstr "Изображение не требуется"
+
+#: templates/users/register.html:117 templates/users/register_mobile.html:114
 #: users/forms.py:15
 msgid "Parolni tasdiqlang"
 msgstr "Повторите пароль"
@@ -590,9 +642,10 @@ msgstr "Пароли не совпадают."
 msgid "Foydalanuvchi nomi yoki paroli noto'g'ri kiritildi."
 msgstr "Имя пользователя или пароль были введены неверно."
 
-
-
-
+#~ msgid ""
+#~ "Zametkalar\n"
+#~ "                    "
+#~ msgstr "Заметки"
 
 #~ msgid "Qidirish"
 #~ msgstr "Поиск"

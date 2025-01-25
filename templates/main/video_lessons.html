@@ -115,13 +115,53 @@
       align-self: stretch;
       white-space: nowrap;
       padding: 6px 14px;
-      border: 2px solid #fff;
+      border: 2px solid #FB8B5D;
       text-decoration: none !important;
+      color: #FFFFFF;
     }
 
     .lesson-link:hover,
     .lesson-link:visited {
       text-decoration: none !important;
+    }
+
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        gap: 5px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .step-links {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .pagination-link {
+        border-radius: 5px;
+        padding: 8px 12px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #fb8b5d;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .pagination-link:hover {
+        background-color: #fb8b5d;
+        color: #ffffff;
+    }
+
+    .current-page {
+        font-size: 16px;
+        font-weight: 600;
+        color: #ffffff;
+        padding: 6px 12px;
+        background-color: #333;
+        border-radius: 5px;
     }
 
 
@@ -169,19 +209,44 @@
                  alt="" class="material-symbols-outlined"/>
         </div>
         <form method="GET" action="{% url 'video_lessons' %}">
-            <input type="text" id="search-field" name="q" placeholder="{% blocktrans %}Qidiring{% endblocktrans %}" class="search-input"
+            <input type="text" id="search-field" name="q" placeholder="{% blocktrans %}Qidiring{% endblocktrans %}"
+                   class="search-input"
                    value="{{ request.GET.q }}">
-            <button type="submit" class="search-button" onclick="toggleSearch()">{% blocktrans %}Qidiruv{% endblocktrans %}</button>
+            <button type="submit" class="search-button" onclick="toggleSearch()">{% blocktrans %}Qidiruv{% endblocktrans %}
+            </button>
         </form>
     </div>
 
     <div class="content-wrapper">
         <div class="content-container">
-            {% if video_lessons %}
-            {% for lesson in video_lessons %}
+            {% if page_obj %}
+            {% for lesson in page_obj %}
             <h2 class="lesson-title">{{ lesson.title }}</h2>
             <a href="{{ lesson.youtube_link }}" class="lesson-link">{{ lesson.youtube_link }}</a>
             {% endfor %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Birinchi{% endblocktrans %}</a>
+                <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Avvalgi{% endblocktrans %}</a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                {% if num == page_obj.number %}
+                <span class="current-page">{{ num }}</span>
+                {% elif num >= page_obj.number|add:"-1" and num <= page_obj.number|add:"1" %}
+                <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{{ num }}</a>
+                {% elif num == 1 or num == page_obj.paginator.num_pages %}
+                <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{{ num }}</a>
+                {% elif num == page_obj.number|add:"-2" or num == page_obj.number|add:"2" %}
+                <span class="ellipsis">...</span>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Keyingi{% endblocktrans %}</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Ohirgi{% endblocktrans %}</a>
+                {% endif %}
+            </div>
             {% else %}
             <p>{% blocktrans %}Hech qanday natija topilmadi.{% endblocktrans %}</p>
             {% endif %}
