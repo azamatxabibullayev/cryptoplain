@@ -326,13 +326,18 @@
     document.addEventListener("DOMContentLoaded", function () {
         const menuItems = document.querySelectorAll('.navbar ul li a');
         const currentPath = window.location.pathname;
-
         menuItems.forEach(function (menuItem) {
-            if (menuItem.getAttribute('href') === currentPath) {
+            const menuItemPath = new URL(menuItem.href).pathname;
+            if (menuItemPath === currentPath) {
                 menuItem.parentElement.classList.add('active');
+                menuItem.scrollIntoView({
+                    behavior: 'auto',
+                    inline: 'end',
+                });
             }
         });
     });
+
 
         // Toggle Settings dropdown
     function toggleSettings() {
