@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-26 03:27+0500\n"
+"POT-Creation-Date: 2025-02-05 02:58+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,8 +54,8 @@ msgid "Birjalar"
 msgstr "Бирджа"
 
 #: templates/base.html:307 templates/base.html:430
-#: templates/base_mobile.html:287 templates/main/news.html:97
-#: templates/main/news_mobile.html:79
+#: templates/base_mobile.html:287 templates/main/news.html:55
+#: templates/main/news_mobile.html:78
 msgid "Yangiliklar"
 msgstr "Новости"
 
@@ -83,7 +83,7 @@ msgid "Video darslar"
 msgstr "Видео уроки"
 
 #: templates/base.html:398 templates/base_mobile.html:252
-#: templates/main/analyses.html:16 templates/main/analyses_mobile.html:5
+#: templates/main/analyses.html:18 templates/main/analyses_mobile.html:7
 msgid "Tex-Analizlar"
 msgstr "Tex-анализ"
 
@@ -125,8 +125,6 @@ msgid "Indikatorlar"
 msgstr "Индикаторы"
 
 #: templates/base.html:456
-#, fuzzy
-#| msgid "Zametkalar"
 msgid "Zametkalar "
 msgstr "Заметки"
 
@@ -186,8 +184,7 @@ msgstr "Индекс страха"
 #: templates/main/indicators.html:278 templates/main/indicators_mobile.html:188
 #: templates/main/informations.html:286
 #: templates/main/informations_mobile.html:215 templates/main/lessons.html:215
-#: templates/main/lessons_mobile.html:188 templates/main/news.html:119
-#: templates/main/news_mobile.html:96 templates/main/video_lessons.html:229
+#: templates/main/lessons_mobile.html:188 templates/main/video_lessons.html:229
 #: templates/main/video_lessons_mobile.html:177
 msgid "Birinchi"
 msgstr "Первый"
@@ -197,8 +194,7 @@ msgstr "Первый"
 #: templates/main/indicators.html:279 templates/main/indicators_mobile.html:189
 #: templates/main/informations.html:287
 #: templates/main/informations_mobile.html:216 templates/main/lessons.html:216
-#: templates/main/lessons_mobile.html:189 templates/main/news.html:120
-#: templates/main/news_mobile.html:97 templates/main/video_lessons.html:230
+#: templates/main/lessons_mobile.html:189 templates/main/video_lessons.html:230
 #: templates/main/video_lessons_mobile.html:178
 msgid "Avvalgi"
 msgstr "Предыдущий"
@@ -208,8 +204,7 @@ msgstr "Предыдущий"
 #: templates/main/indicators.html:295 templates/main/indicators_mobile.html:205
 #: templates/main/informations.html:303
 #: templates/main/informations_mobile.html:232 templates/main/lessons.html:232
-#: templates/main/lessons_mobile.html:205 templates/main/news.html:136
-#: templates/main/news_mobile.html:113 templates/main/video_lessons.html:246
+#: templates/main/lessons_mobile.html:205 templates/main/video_lessons.html:246
 #: templates/main/video_lessons_mobile.html:194
 msgid "Keyingi"
 msgstr "Следующий"
@@ -219,19 +214,28 @@ msgstr "Следующий"
 #: templates/main/indicators.html:296 templates/main/indicators_mobile.html:206
 #: templates/main/informations.html:304
 #: templates/main/informations_mobile.html:233 templates/main/lessons.html:233
-#: templates/main/lessons_mobile.html:206 templates/main/news.html:137
-#: templates/main/news_mobile.html:114 templates/main/video_lessons.html:247
+#: templates/main/lessons_mobile.html:206 templates/main/video_lessons.html:247
 #: templates/main/video_lessons_mobile.html:195
 msgid "Ohirgi"
 msgstr "Последний"
 
-#: templates/main/analyses.html:40 templates/main/analyses_mobile.html:26
+#: templates/main/analyses.html:42 templates/main/analyses_mobile.html:30
 msgid "Pro padpiskani sotvolganinizdan so'ng ko'ra olasiz"
 msgstr "Вы сможете просмотреть его после покупки подписки Pro."
 
-#: templates/main/analyses.html:42 templates/main/analyses_mobile.html:28
+#: templates/main/analyses.html:44 templates/main/analyses_mobile.html:32
 msgid "Standard yoki Proni sotib olganingizdan so'ng bu analizlar ochiladi"
 msgstr "Этот анализ разблокируется после покупки Standard или Pro."
+
+#: templates/main/analyses.html:55 templates/main/analyses_mobile.html:43
+msgid "Bu bo'limni ko'rish uchun birinchi akkauntingizga kiring. "
+msgstr "Войдите в свой аккаунт, чтобы посмотреть этот раздел."
+
+#: templates/main/analyses.html:56 templates/main/analyses_mobile.html:44
+#: templates/main/note_list.html:167 templates/main/note_list_mobile.html:134
+#: templates/users/login.html:82
+msgid "Kirish"
+msgstr "Вход"
 
 #: templates/main/book_view.html:10
 #, fuzzy
@@ -381,11 +385,6 @@ msgstr "Заметки"
 #: templates/main/note_list.html:166 templates/main/note_list_mobile.html:133
 msgid "Zametkalaringizni ko'rish uchun birinchi akkauntingizga kiring. "
 msgstr "Войдите в свой аккаунт, чтобы посмотреть свои заметки."
-
-#: templates/main/note_list.html:167 templates/main/note_list_mobile.html:134
-#: templates/users/login.html:82
-msgid "Kirish"
-msgstr "Вход"
 
 #: templates/users/login.html:85 templates/users/login_mobile.html:86
 #: templates/users/register.html:81 templates/users/register_mobile.html:78

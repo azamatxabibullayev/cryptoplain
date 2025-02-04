@@ -2,7 +2,11 @@
 
 {% block content %}
 {% load i18n %}
+
+
 <h2 class="analysis-title">{% blocktrans %}Tex-Analizlar{% endblocktrans %}</h2>
+
+{% if user.is_authenticated %}
 <section class="crypto-analysis">
     <div class="analysis-container">
         <header class="analysis-header"></header>
@@ -34,6 +38,12 @@
         {% endfor %}
     </div>
 </section>
+{% else %}
+<section class="login-prompt">
+    <p>{% blocktrans %}Bu bo'limni ko'rish uchun birinchi akkauntingizga kiring. {% endblocktrans %}</p>
+    <a href="{% url 'mobile_login' %}" class="login-link">{% blocktrans %}Kirish{% endblocktrans %}</a>
+</section>
+{% endif %}
 
 <style>
     .crypto-analysis {
@@ -110,5 +120,28 @@
             font-size: 16px;
         }
     }
+
+    .login-prompt {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 25px;
+        color: #fff;
+        margin-top: 200px;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .login-link {
+        color: #fb8b5d;
+        text-decoration: underline;
+        font-weight: bold;
+    }
+
+    .login-link:hover {
+        color: #e2794c;
+    }
+
 </style>
 {% endblock %}

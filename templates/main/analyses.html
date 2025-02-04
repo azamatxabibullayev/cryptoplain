@@ -9,6 +9,8 @@
         }
     });
 </script>
+
+{% if user.is_authenticated %}
 <section class="crypto-analysis">
     <div class="analysis-container">
         <div class="analysis-column">
@@ -43,13 +45,17 @@
                     {% endif %}
                 </div>
             {% endfor %}
-
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
-
+{% else %}
+<section class="login-prompt">
+    <p>{% blocktrans %}Bu bo'limni ko'rish uchun birinchi akkauntingizga kiring. {% endblocktrans %}
+        <a href="{% url 'login' %}" class="login-link">{% blocktrans %}Kirish{% endblocktrans %}</a></p>
+</section>
+{% endif %}
 
 <style>
     .crypto-analysis {
@@ -122,7 +128,9 @@
 
     .analysis-row {
         display: flex;
+        flex-wrap: wrap;
         gap: 20px;
+        justify-content: space-between;
     }
 
     .analysis-entry {
@@ -155,6 +163,25 @@
             width: 100%;
         }
     }
+
+    .login-prompt {
+        text-align: left;
+        font-size: 25px;
+        color: #fff;
+        margin-top: 50px;
+        margin-left: 50px;
+    }
+
+    .login-link {
+        color: #fb8b5d;
+        text-decoration: underline;
+        font-weight: bold;
+    }
+
+    .login-link:hover {
+        color: #e2794c;
+    }
+
 </style>
 
 {% endblock %}

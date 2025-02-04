@@ -25,6 +25,7 @@ class PremiumUserAdmin(admin.ModelAdmin):
     list_display = ('user', 'premium_type', 'subscription_start', 'subscription_end')
     search_fields = ('user__username', 'user__id')
     fields = ('user', 'premium_type', 'subscription_start', 'subscription_end')
+    raw_id_fields = ('user',)
 
     def save_model(self, request, obj, form, change):
         if not change:

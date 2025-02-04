@@ -18,19 +18,16 @@
     .news-subtitle { font-size: 30px; font-weight: 400; text-align: center; margin-top: 7px; }
     .news-icon { aspect-ratio: 1; object-fit: contain; object-position: center; width: 45px; align-self: end; margin-top: 75px; }
     .news-content { border-radius: 10px; background-color: #fff; margin-top: 50px; }
-    .news-article { display: flex; gap: 20px; padding: 5px;}
-    .news-image-wrapper { width: 32%; }
-    .news-text-wrapper { width: 68%; }
-    .news-text { color: #000; align-self: stretch; margin: auto 0; font: 400 15px/21px Roboto, sans-serif; }
+    .news-article { display: flex; gap: 20px; padding: 20px; }
+    .news-image-wrapper { width: 40%; }
+    .news-text-wrapper { width: 60%; display: flex; align-items: center; }
+    .news-text { color: #000; font: 400 18px/24px Roboto, sans-serif; }
     .news-image {
-        width: 284px;  /* Default width */
-        height: 153px; /* Default height */
-        object-fit: contain; /* Ensures the image fits within these dimensions */
-        object-position: center; /* Keeps the image centered */
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
         border-radius: 10px;
-        aspect-ratio: 1.86;
-        margin-left: 0px;
-        padding-left: 0px;
     }
 
     @media (max-width: 991px) {
@@ -41,50 +38,11 @@
       .news-content { max-width: 100%; margin-top: 40px; }
       .news-article { flex-direction: column; align-items: stretch; gap: 0; }
       .news-image-wrapper, .news-text-wrapper { width: 100%; }
-      .news-text { max-width: 100%; margin-top: 40px; }
+      .news-text { max-width: 100%; margin-top: 20px; }
       .news-image {
-        width: 100%; /* Make image width 100% for small screens */
-        height: auto; /* Maintain aspect ratio */
+        width: 100%;
+        height: auto;
       }
-    }
-
-    .pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-        gap: 5px;
-        font-family: 'Poppins', sans-serif;
-        flex-wrap: wrap;
-    }
-
-    .step-links {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .pagination-link {
-        border-radius: 5px;
-        padding: 8px 12px;
-        font-size: 16px;
-        text-decoration: none;
-        color: #fb8b5d;
-        transition: background-color 0.3s, color 0.3s;
-    }
-
-    .pagination-link:hover {
-        background-color: #fb8b5d;
-        color: #ffffff;
-    }
-
-    .current-page {
-        font-size: 16px;
-        font-weight: 600;
-        color: #ffffff;
-        padding: 6px 12px;
-        background-color: #333;
-        border-radius: 5px;
     }
 
 </style>
@@ -114,28 +72,5 @@
         </div>
     </article>
     {% endfor %}
-    <div class="pagination">
-                {% if page_obj.has_previous %}
-                <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Birinchi{% endblocktrans %}</a>
-                <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Avvalgi{% endblocktrans %}</a>
-                {% endif %}
-
-                {% for num in page_obj.paginator.page_range %}
-                {% if num == page_obj.number %}
-                <span class="current-page">{{ num }}</span>
-                {% elif num >= page_obj.number|add:"-1" and num <= page_obj.number|add:"1" %}
-                <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{{ num }}</a>
-                {% elif num == 1 or num == page_obj.paginator.num_pages %}
-                <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{{ num }}</a>
-                {% elif num == page_obj.number|add:"-2" or num == page_obj.number|add:"2" %}
-                <span class="ellipsis">...</span>
-                {% endif %}
-                {% endfor %}
-
-                {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Keyingi{% endblocktrans %}</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-link">{% blocktrans %}Ohirgi{% endblocktrans %}</a>
-                {% endif %}
-    </div>
 </section>
 {% endblock %}

@@ -93,14 +93,8 @@ def signals_view(request):
 
 def news_view(request):
     news = News.objects.order_by('-id')
-
-    paginator = Paginator(news, 4)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
     context = {
-        'news': page_obj,
-        'page_obj': page_obj,
+        'news': news
     }
     return render(request, 'main/news.html', context)
 
@@ -459,14 +453,8 @@ def mobile_books_view(request):
 
 def mobile_news_view(request):
     news = News.objects.order_by('-id')
-
-    paginator = Paginator(news, 4)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
     context = {
-        'news': page_obj,
-        'page_obj': page_obj,
+        'news': news
     }
     return render(request, 'main/news_mobile.html', context)
 
