@@ -8,7 +8,7 @@ class Command(BaseCommand):
     help = 'Delete analyses older than 48 hours'
 
     def handle(self, *args, **kwargs):
-        time_threshold = timezone.now() - datetime.timedelta(hours=48)
+        time_threshold = timezone.now() - datetime.timedelta(hours=120)
         old_analyses = Analysis.objects.filter(created_at__lt=time_threshold)
         count, _ = old_analyses.delete()
-        self.stdout.write(f'Successfully deleted {count} analyses older than 48 hours.')
+        self.stdout.write(f'Successfully deleted {count} analyses older than 120 hours.')
