@@ -104,7 +104,6 @@ def analysis_view(request):
     accessible_analyses = Analysis.objects.none()
     inaccessible_analyses = Analysis.objects.none()
 
-    # Check user subscription type
     if user.is_authenticated:
         if hasattr(user, 'premium_user'):
             user_type = user.premium_user.premium_type
@@ -123,7 +122,7 @@ def analysis_view(request):
     grouped_accessible_analyses = defaultdict(list)
     grouped_inaccessible_analyses = defaultdict(list)
 
-    # Group analyses by date
+
     for analysis in accessible_analyses:
         date = localdate(analysis.created_at)
         grouped_accessible_analyses[date].append(analysis)
@@ -132,9 +131,12 @@ def analysis_view(request):
         date = localdate(analysis.created_at)
         grouped_inaccessible_analyses[date].append(analysis)
 
-    # Combine accessible and inaccessible analyses by date
+
     combined_analyses = {}
-    all_dates = set(grouped_accessible_analyses.keys()).union(set(grouped_inaccessible_analyses.keys()))
+    all_dates = sorted(
+        set(grouped_accessible_analyses.keys()).union(set(grouped_inaccessible_analyses.keys())),
+        reverse=True
+    )
     for date in all_dates:
         combined_analyses[date] = {
             'accessible': grouped_accessible_analyses.get(date, []),
@@ -582,7 +584,7 @@ def mobile_analysis_view(request):
     grouped_accessible_analyses = defaultdict(list)
     grouped_inaccessible_analyses = defaultdict(list)
 
-    # Group analyses by date
+
     for analysis in accessible_analyses:
         date = localdate(analysis.created_at)
         grouped_accessible_analyses[date].append(analysis)
@@ -591,9 +593,13 @@ def mobile_analysis_view(request):
         date = localdate(analysis.created_at)
         grouped_inaccessible_analyses[date].append(analysis)
 
-    # Combine accessible and inaccessible analyses by date
+
     combined_analyses = {}
-    all_dates = set(grouped_accessible_analyses.keys()).union(set(grouped_inaccessible_analyses.keys()))
+    all_dates = sorted(
+        set(grouped_accessible_analyses.keys()).union(set(grouped_inaccessible_analyses.keys())),
+        reverse=True
+    )
+
     for date in all_dates:
         combined_analyses[date] = {
             'accessible': grouped_accessible_analyses.get(date, []),
